@@ -16,11 +16,12 @@ class HierarchicalModel:
     """
     层次化上下文的模型包装类,实现逐层深入的上下文搜索和生成
     """
-    def __init__(self, model, tokenizer):
+    def __init__(self, model, lm_head, tokenizer):
         self.model = model
+        self.lm_head = lm_head
         self.tokenizer = tokenizer
         self.device = model.device
-        self.max_context_length = 2048
+        self.max_context_length = 4096
         self.max_layer = 64
         self.output_attentions = False
     
@@ -59,10 +60,11 @@ class HierarchicalModel:
                     output_attentions=self.output_attentions,
                     position_embeddings=position_embeddings,
                 )
+            hidden_states = layer_outputs[0]
             hidden_list.append(layer_outputs[0])
             key_value_cache = layer_outputs[2 if self.output_attentions else 1]
-            key_list.append(key_value_cache.key_cache[0])
-            value_list.append(key_value_cache.value_cache[0])
+            key_list.append(key_value_cache.key_cache[layer_id])
+            value_list.append(key_value_cache.value_cache[layer_id])
         return key_list, value_list, hidden_list
         
     def get_node_kv(self, node_list: list[ContextNode], layer_idx: int, now_pos):
@@ -96,25 +98,25 @@ class HierarchicalModel:
             for node in node_list:
                 self_k.append(node.vectors[layer_idx][0])
                 self_v.append(node.vectors[layer_idx][1])
-        elif 0 <= enc_layer_idx < layer_idx:
+        elif 0 < enc_layer_idx < layer_idx:
             # 如果节点已经存在向量 但是长度小于当前层索引 则基于缓存的最后层向量继续计算获取到当前层
             # 首先将所有节点enc_layer_idx层的hidden拼接为一个序列
             hidden_seq = []
             hidden_length = []
             for node in node_list:
                 hidden_seq.append(node.vectors[enc_layer_idx][-1])  # 获取每个节点最后缓存层的hidden state
-                hidden_length.append(node.vectors[enc_layer_idx][-1].shape[0]) # 获取每个节点特征的长度
-            last_hidden = torch.cat(hidden_seq, dim=0)  # 在序列维度上拼接
+                hidden_length.append(node.vectors[enc_layer_idx][-1].shape[1]) # 获取每个节点特征的长度
+            last_hidden = torch.cat(hidden_seq, dim=1)  # 在序列维度上拼接
             
             # 基于最后一层缓存的向量继续计算到当前层
-            key_list, value_list, hidden_list = self.encode_by_layer(last_hidden, enc_layer_idx, layer_idx)
+            key_list, value_list, hidden_list = self.encode_by_layer(last_hidden, enc_layer_idx+1, layer_idx)
             hidden_start = 0
             hidden_end = 0
             for i, node in enumerate(node_list):
-                hidden_end += hidden_length[j]
+                hidden_end += node.length
                 for j in range(len(node.vectors), layer_idx+1):
                     hidden_ids = j-enc_layer_idx-1
-                    node.vectors.append((key_list[hidden_ids][hidden_start:hidden_end], value_list[hidden_ids][hidden_start:hidden_end], hidden_list[hidden_ids][hidden_start:hidden_end]))
+                    node.vectors.append((key_list[hidden_ids][:,:,hidden_start:hidden_end], value_list[hidden_ids][:,:,hidden_start:hidden_end], hidden_list[hidden_ids][:,hidden_start:hidden_end]))
                 self_k.append(node.vectors[layer_idx][0])
                 self_v.append(node.vectors[layer_idx][1])
                 hidden_start = hidden_end
@@ -253,7 +255,8 @@ class HierarchicalModel:
     @staticmethod
     def remove_after_target(node_list, target_node):
         """
-        删除节点列表中的目标节点以及文件内在目标节点之后的节点
+        删除节点列表中的目标节点以及文件内在目标节点之后的节点 并且将剩余节点按文件外节点、同文件节点 进行排序
+        
         参数:
             node_list - 节点列表
             target_node - 目标节点
@@ -263,23 +266,27 @@ class HierarchicalModel:
         # 获取目标节点所在文件
         target_file = target_node.file_path
         # 过滤后的节点列表
-        filtered_nodes = []
+        out_file_nodes = []
+        in_file_nodes = []
         
         # 遍历节点列表
         for node in node_list:
             # 如果节点不在目标文件中,直接保留
             if node.file_path != target_file:
-                filtered_nodes.append(node)
+                out_file_nodes.append(node)
                 continue
                 
             # 如果节点在目标文件中且在目标节点之前,保留该节点
             if node.byte_begin < target_node.byte_begin:
-                filtered_nodes.append(node)
-                
-        return filtered_nodes
+                in_file_nodes.append(node)
+        
+        out_file_nodes.sort(key=lambda x: ((x.file_path if x.file_path else x.namespace), x.byte_begin))
+        in_file_nodes.sort(key=lambda x: x.byte_begin)
+        
+        return out_file_nodes+in_file_nodes
         
     
-    def generate_step(self, target_namespace, input_ids: torch.Tensor, context_dict: Dict, 
+    def generate_step(self, target_namespace, input_ids: torch.Tensor, past_key_values , context_dict: Dict, 
                      init_context_nodes: List[str]) -> Tuple[torch.Tensor, List[ContextNode]]:
         """
         执行一步生成,包含逐层深入的上下文搜索
@@ -311,13 +318,16 @@ class HierarchicalModel:
             context_v = torch.cat(context_v, dim=2).to(self.device)
             past_key_values:DynamicCache = DynamicCache()
             past_key_values.update(context_k, context_v, layer_idx)
+            past_key_values.update(context_k, context_v, 0)
+            
+            context_length = context_k.shape[2]
             
             # 编码当前层输入特征
             layer = self.model.layers[layer_idx]
             if layer_idx == 0:
                 hidden_states = inputs_embeds
             else:
-                hidden_states = layer_outputs[-1]
+                hidden_states = layer_outputs[0]
             
             position_ids = cache_position.unsqueeze(0)
                 
@@ -351,7 +361,7 @@ class HierarchicalModel:
             pass
             
         # 计算最终输出
-        logits = self.model.lm_head(layer_outputs[-1])
+        logits = self.model.lm_head(layer_outputs[0])
         next_token = torch.argmax(logits[:, -1], dim=-1)
         
         return next_token, curr_context, context_dict

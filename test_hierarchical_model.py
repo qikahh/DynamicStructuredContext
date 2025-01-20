@@ -23,7 +23,7 @@ model_config = {
 model, tokenizer = get_model(model_config)
 
 # 构建分层模型
-hierarchical_model = HierarchicalModel(model.model, tokenizer)
+hierarchical_model = HierarchicalModel(model.model, model.lm_head, tokenizer)
 
 # 加载数据集
 source_code_path = "/home/qikahh/projects/Structured_Code_Context/Datasets/ToolEval/Source_Code"
@@ -79,6 +79,7 @@ for data in dataset:
         next_token, curr_context, context_dict = hierarchical_model.generate_step(
                 target_namespace=target_namespace,
                 input_ids=generated,  
+                past_key_values=None,
                 context_dict=context_dict, 
                 init_context_nodes=curr_context)
         generated = torch.cat([generated, next_token.unsqueeze(0)], dim=1)
