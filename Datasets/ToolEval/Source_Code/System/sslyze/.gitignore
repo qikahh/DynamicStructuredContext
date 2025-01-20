@@ -1,0 +1,61 @@
+htmlcov/
+.mypy_cache/
+.pytest_cache/
+.vscode
+
+# Pipenv
+.venv
+.venv311
+.venvln
+
+
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+
+# Pydev
+.project
+.pydevproject
+
+#Pycharm
+.idea
+
+# OpenSSL DLLs
+*.dll
+
+# Tests
+*.xml
+
+.DS_Store
+
+
+# Sphynx
+docs/_build/*
+docs/documentation/_sources/*
+docs/documentation/.doctrees/*
+

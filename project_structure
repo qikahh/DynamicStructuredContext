@@ -1,0 +1,17 @@
+hierarchical_context/
+├── src/
+│   ├── __init__.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── hierarchical_transformer.py
+│   │   └── attention.py
+│   ├── context/
+│   │   ├── __init__.py
+│   │   ├── code_context.py
+│   │   └── context_manager.py
+│   └── utils/
+│       ├── __init__.py
+│       └── cache.py
+├── tests/
+│   └── __init__.py
+└── README.md 
