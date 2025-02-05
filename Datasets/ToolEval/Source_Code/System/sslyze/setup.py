@@ -20,7 +20,9 @@ else:
         def __init__(self, script, target_name):  # type: ignore
             pass
 
-
+def make_try():
+    ...
+    
 def get_long_description() -> str:
     path_to_readme = root_path / "README.md"
     return path_to_readme.read_text()

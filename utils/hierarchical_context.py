@@ -1,3 +1,4 @@
+import ast
 import os
 import json
 import pickle
@@ -34,6 +35,7 @@ class ContextNode(object):
         
         # 代码对应的位置
         self.file_path = None
+        self.file_ns = None
         self.byte_begin = None
         self.byte_end = None
         
@@ -41,7 +43,9 @@ class ContextNode(object):
         
         self.model = None # 编码所用的模型 
         self.length = 0 # 所占的token数量
-        self.vectors = [] # 节点向量, 元素为tensor的unit类型，分别为（key，value，hidden），不同元素对应不同模型层
+        # 节点向量, 元素为tensor的unit类型，分别为（key，value，hidden），不同元素对应不同模型层
+        # kv和hidden都是和节点的兄弟节点一起编码的
+        self.vectors = [] 
         self.vectors_pos = [] # 计算节点向量时对应的起始位置
         self.children_vectors = [] # 子节点池化后的向量 为tensor的unit类型，分别为（key，value）， 不同元素对应不同模型层
         self.children_vectors_pos = [] # 计算节点向量时对应的起始位置
@@ -79,15 +83,30 @@ def build_blocks(code, parent_node, begin_pos, cut = True):
     # 将代码按空行分割成块
     all_nodes = []
     if cut:
-        blocks = code.split('\n\n')
+        # 使用正则表达式进行分割，保留分隔符
+        import re
+        blocks = re.split(r'(\n\n+)', code)
+        # 合并相邻的块和分隔符
+        merged_blocks = []
+
+        for i in range(0, len(blocks), 2):
+            current_block = blocks[i]
+            if i + 1 < len(blocks):
+                current_block += blocks[i + 1]
+            if len(merged_blocks) != 0 and merged_blocks[-1].strip('\n') == "":
+                merged_blocks[-1] += current_block
+            else:
+                merged_blocks.append(current_block)
+        # 只有当最后一个块完全是空白字符时才删除
+        if len(merged_blocks)>1 and len(merged_blocks[-1])==0:
+            merged_blocks.pop()
+        blocks = merged_blocks
     else:
         blocks = [code]
     current_pos = begin_pos
     
-    for block in blocks:
-        if not block.strip():  # 跳过空块
-            continue
-            
+    for i, block in enumerate(blocks):
+    
         # 计算当前块的字节数
         block_size = len(block)
         
@@ -99,6 +118,7 @@ def build_blocks(code, parent_node, begin_pos, cut = True):
             content=block
         )
         block_node.file_path = parent_node.file_path
+        block_node.file_ns = parent_node.file_ns
         block_node.byte_begin = current_pos
         # 更新当前行号
         current_pos += block_size
@@ -116,15 +136,19 @@ def build_context_tree(all_code, root, parent_node):
     """
     对于tree-sitter解析器解析出的语法树 构建上下文树
     """
+    
+    if parent_node.namespace == "sslyze.sslyze.cli.command_line_parser.CommandLineParser":
+        qika = 1
     all_nodes = []
     #定义此block的开头
     indep_begin = root.start_byte
     for child in root.children:
-         # 处理类定义
+        # 处理类定义
         if child.type == "class_definition":
             # 处理类前的独立代码块
             indep_code = all_code[indep_begin:child.start_byte]
-            all_nodes += build_blocks(indep_code, parent_node, begin_pos = indep_begin)
+            if len(indep_code):
+                all_nodes += build_blocks(indep_code, parent_node, begin_pos = indep_begin)
             
             #更新上一个类和函数的结尾位置
             indep_begin = child.end_byte
@@ -138,26 +162,29 @@ def build_context_tree(all_code, root, parent_node):
                 namespace=parent_node.namespace + "." + class_name,
                 name=class_name,
                 type="class",
-                content=class_header
+                content=class_header+"..."
             )
             class_node.file_path = parent_node.file_path
+            class_node.file_ns = parent_node.file_ns
             class_node.byte_begin = child.start_byte
             class_node.byte_end = child.end_byte
             class_node.parent = parent_node.namespace
             # 将类头作为独立代码块加入类节点的子节点
-            all_nodes += build_blocks(class_header, class_node, begin_pos = child.start_byte)
+            class_head = build_blocks(class_header, class_node, begin_pos = child.start_byte, cut=False)
             # 将类体中的代码块加入类节点的子节点
             class_childs = build_class(all_code, child, class_node)
             parent_node.children.append(class_node.namespace)
             
             all_nodes.append(class_node)
+            all_nodes += class_head
             all_nodes += class_childs
             
         # 处理函数定义 
         elif child.type == "function_definition":
             #处理函数前的独立代码块
             indep_code = all_code[indep_begin:child.start_byte]
-            all_nodes += build_blocks(indep_code, parent_node, begin_pos = indep_begin)
+            if len(indep_code):
+                all_nodes += build_blocks(indep_code, parent_node, begin_pos = indep_begin)
             # 更新上一个类和函数的结尾位置
             indep_begin = child.end_byte
             
@@ -166,28 +193,99 @@ def build_context_tree(all_code, root, parent_node):
             func_header_end = child.children[-1].start_byte  # 函数体开始前的位置
             func_header = all_code[child.start_byte:func_header_end]
             
+            
             func_node = ContextNode(
                 namespace=parent_node.namespace + "." + func_name, 
                 name=func_name,
                 type="function",
-                content=func_header
+                content=func_header+"..."
             )
             func_node.file_path = parent_node.file_path
+            func_node.file_ns = parent_node.file_ns
             func_node.byte_begin = child.start_byte
             func_node.byte_end = child.end_byte
             func_node.parent = parent_node.namespace
             
             # 将函数头作为独立代码块加入函数节点的子节点
-            all_nodes += build_blocks(func_header, func_node, begin_pos = child.start_byte)
+            func_head = build_blocks(func_header, func_node, begin_pos = child.start_byte, cut=False)
             # 将函数体中的代码块加入函数节点的子节点
             func_nodes = bulid_func(all_code, child, func_node)
             parent_node.children.append(func_node.namespace)
             
             all_nodes.append(func_node)
+            all_nodes += func_head
             all_nodes += func_nodes
+        
+        # 处理'decorated_definition'
+        elif child.type == "decorated_definition":
+            # 处理函数前的独立代码块
+            indep_code = all_code[indep_begin:child.start_byte]
+            if len(indep_code):
+                all_nodes += build_blocks(indep_code, parent_node, begin_pos = indep_begin)
+            # 更新上一个类和函数的结尾位置
+            indep_begin = child.end_byte
+            
+            # 获取装饰器后的实际定义节点(函数或类)
+            definition = child.children[-1]
+            
+            if definition.type == "function_definition":
+                func_name = definition.children[1].text.decode()  # 获取函数名
+                # 获取函数头代码(包含装饰器) - 从装饰器开始到函数体之前的部分
+                func_header_end = definition.children[-1].start_byte  # 函数体开始前的位置
+                func_header = all_code[child.start_byte:func_header_end]
+                
+                func_node = ContextNode(
+                    namespace=parent_node.namespace + "." + func_name,
+                    name=func_name, 
+                    type="function",
+                    content=func_header+"..."
+                )
+                func_node.file_path = parent_node.file_path
+                func_node.file_ns = parent_node.file_ns
+                func_node.byte_begin = child.start_byte
+                func_node.byte_end = child.end_byte
+                func_node.parent = parent_node.namespace
+                
+                # 将函数头(含装饰器)作为独立代码块加入函数节点的子节点
+                func_head = build_blocks(func_header, func_node, begin_pos = child.start_byte, cut=False)
+                # 将函数体中的代码块加入函数节点的子节点
+                func_nodes = bulid_func(all_code, definition, func_node)
+                parent_node.children.append(func_node.namespace)
+                
+                all_nodes.append(func_node)
+                all_nodes += func_head
+                all_nodes += func_nodes
+                
+            elif definition.type == "class_definition":
+                class_name = definition.children[1].text.decode()  # 获取类名
+                # 获取类头代码(包含装饰器) - 从装饰器开始到类体之前的部分
+                class_header_end = definition.children[-1].start_byte  # 类体开始前的位置
+                class_header = all_code[child.start_byte:class_header_end]
+                
+                class_node = ContextNode(
+                    namespace=parent_node.namespace + "." + class_name,
+                    name=class_name,
+                    type="class", 
+                    content=class_header+"..."
+                )
+                class_node.file_path = parent_node.file_path
+                class_node.file_ns = parent_node.file_ns
+                class_node.byte_begin = child.start_byte
+                class_node.byte_end = child.end_byte
+                class_node.parent = parent_node.namespace
+                
+                # 将类头(含装饰器)作为独立代码块加入类节点的子节点
+                class_head = build_blocks(class_header, class_node, begin_pos = child.start_byte, cut=False)
+                # 将类体中的代码块加入类节点的子节点
+                class_childs = build_class(all_code, definition, class_node)
+                parent_node.children.append(class_node.namespace)
+                
+                all_nodes.append(class_node)
+                all_nodes += class_head
+                all_nodes += class_childs
             
     #处理文件尾的独立代码块
-    indep_code = all_code[indep_begin:]
+    indep_code = all_code[indep_begin:parent_node.byte_end]
     all_nodes += build_blocks(indep_code, parent_node, begin_pos = indep_begin, cut = False)
     return all_nodes
     
@@ -212,6 +310,9 @@ def build_file(file_path, file_node):
     file_path: Python文件路径
     file_node: Python文件节点
     """
+    if file_node.namespace == "sslyze.tasks":
+        qika = 1
+    
     with open(file_path, "r") as f:
         code = f.read()
         
@@ -219,6 +320,7 @@ def build_file(file_path, file_node):
     tree = parser.parse(code.encode())
     # 遍历语法树,提取类和函数定义
     root = tree.root_node
+    
     
     file_node.byte_begin = root.start_byte
     file_node.byte_end = root.end_byte
@@ -244,32 +346,49 @@ def build_folder(curr_path, curr_node):
             file_node = ContextNode(
                 namespace=curr_node.namespace + "." + item[:-3],
                 name=item[:-3], 
-                type="file"
+                type="file",
             )
+            file_node.content = "# file: " + file_node.namespace.replace(".", "/")+".py\n"
             file_node.file_path = item_path
+            file_node.file_ns = file_node.namespace
             file_node.parent = curr_node.namespace
-            file_children = build_file(item_path, file_node)
-            curr_node.children.append(file_node.namespace)
+            file_head_node = ContextNode(
+                namespace=file_node.namespace+"._head",
+                name="_head",
+                type="code",
+                content= "# file: " + file_node.namespace.replace(".", "/")+".py\n"
+            )
+            file_head_node.file_path = file_node.file_path
+            file_head_node.file_ns = file_node.namespace
+            file_head_node.parent = file_node.namespace
+            file_head_node.byte_begin = -1
+            file_head_node.byte_end = 0
             
+            file_node.children.append(file_head_node.namespace)
+            file_children = build_file(item_path, file_node)
+            
+            curr_node.children.append(file_node.namespace)
             all_nodes.append(file_node)
+            all_nodes.append(file_head_node)
             all_nodes.extend(file_children)
             
         
     for item in os.listdir(curr_path):
         item_path = os.path.join(curr_path, item)
-        if os.path.isdir(item_path) and item[0] != ".":
+        if os.path.isdir(item_path) and item[0] != "." and item != "tests":
             # 处理文件夹
-            child_node = ContextNode(
+            folder_node = ContextNode(
                 namespace=curr_node.namespace + "." + item,
                 name=item,
-                type="folder"
+                type="folder",
             )
-            child_node.parent = curr_node.namespace
-            folder_children = build_folder(item_path, child_node)
-            curr_node.children.append(child_node.namespace)
-            
-            all_nodes.append(child_node)
-            all_nodes.extend(folder_children)
+            folder_node.content = "# folder: " + folder_node.namespace.replace(".", "/")+"\n"
+            folder_node.parent = curr_node.namespace
+            folder_children = build_folder(item_path, folder_node)
+            if len(folder_children):
+                curr_node.children.append(folder_node.namespace)
+                all_nodes.append(folder_node)
+                all_nodes.extend(folder_children)
     
     return all_nodes
 def get_tooleval(data_path, source_code_path, result_path):
@@ -325,53 +444,75 @@ def get_tooleval(data_path, source_code_path, result_path):
         
     return context_trees
 
+def DFS2leaf(context_dict, node: ContextNode, cut_byte = -1, level = -1):
+    """
+    深搜找到输入节点的子节点 需要位置在cut_byte之前 level为搜索的深度
+    参数:
+        node - 待搜索的节点
+        cut_byte - 搜索的截止位置
+        level - 搜索的深度 -1表示搜索到叶子
+    """
+    all_nodes = []
+    
+    # 如果当前节点是叶子节点(没有子节点)或者是代码块节点,则加入结果列表
+    if len(node.children) == 0 or node.type == "code":
+        # 如果指定了cut_byte且当前节点有byte_end属性
+        # 则只保留完全在cut_byte之前的节点
+        if cut_byte != -1 and node.byte_end is not None:
+            if node.byte_end < cut_byte:
+                all_nodes.append(node.namespace)
+        else:
+            all_nodes.append(node.namespace)
+        return all_nodes
+        
+    # 递归处理所有子节点
+    if level == 0:
+        if node.byte_begin < cut_byte:
+            all_nodes.append(node.namespace)
+        return all_nodes
+    if level != -1:
+        level -= 1
+    for child_namespace in node.children:
+        child_node = context_dict[child_namespace]
+        all_nodes.extend(DFS2leaf(context_dict, child_node, cut_byte, level))
+        
+    return all_nodes
+
+def initial_input(context_dict, target_namespace, type = "file"):
+    """
+    根据待生成代码的目标命名空间 从完整项目中筛选输入 此部分直接进入代码token级别
+    筛选根据type确定范围 默认为同文件上文
+    
+    参数：
+        context_dict - 节点字典
+        target_namespace - 目标节点的命名空间
+    """
+    # 获取目标节点
+    target_node = context_dict[target_namespace]
+    
+    # 获取目标节点所在文件的节点
+    file_namespace = target_node.file_ns
+    file_node = context_dict[file_namespace]
+    
+    # 获取目标节点在文件中的位置
+    target_byte_begin = target_node.byte_begin
+    
+    # 获取文件中目标节点之前的所有节点
+    input_nodes = DFS2leaf(context_dict, file_node, target_byte_begin, -1)
+    
+    return input_nodes
 def initial_context(context_dict, target_namespace):
     """
     根据待生成代码的目标命名空间，从完整上下文树中筛选初始节点子集
     筛选核心为相关性 设计如下：
         1. 与目标在同一类的，直接筛选到最细节的代码节点
         2. 与目标不在同一类的但在同一文件内的，筛选到比文件低一级别的节点（如独立的类和函数、代码块）
-        3. 与目标不在同一类的，不在同一文件内的，则从最粗粒度作为初始上下文，即只保留项目根的子节点
+        3. 与目标不在同一类的，不在同一文件内的，则从下往上逐渐检索当前节点的兄弟
     
     参数：
         context_dict - 节点字典
         target_namespace - 目标节点的命名空间
     """
-    
-    def DFS2leaf(node: ContextNode, cut_byte = -1, level = -1):
-        """
-        深搜找到输入节点的子节点 需要位置在cut_byte之前 level为搜索的深度
-        参数:
-            node - 待搜索的节点
-            cut_byte - 搜索的截止位置
-            level - 搜索的深度 -1表示搜索到叶子
-        """
-        all_nodes = []
-        
-        # 如果当前节点是叶子节点(没有子节点)或者是代码块节点,则加入结果列表
-        if len(node.children) == 0 or node.type == "code":
-            # 如果指定了cut_byte且当前节点有byte_end属性
-            # 则只保留完全在cut_byte之前的节点
-            if cut_byte != -1 and node.byte_end is not None:
-                if node.byte_end < cut_byte:
-                    all_nodes.append(node.namespace)
-            else:
-                all_nodes.append(node.namespace)
-            return all_nodes
-            
-        # 递归处理所有子节点
-        if level == 0:
-            if node.byte_begin < cut_byte:
-                all_nodes.append(node.namespace)
-            return all_nodes
-        if level != -1:
-            level -= 1
-        for child_namespace in node.children:
-            child_node = context_dict[child_namespace]
-            all_nodes.extend(DFS2leaf(child_node, cut_byte, level))
-            
-        return all_nodes
-        
     
     target_node = context_dict[target_namespace]
     
@@ -392,7 +533,7 @@ def initial_context(context_dict, target_namespace):
     
     # 找到祖先中的最低类节点
     if ancestors_node.type == "class":
-        in_class_nodes.extend(DFS2leaf(ancestors_node, cut_byte))
+        in_class_nodes.extend(DFS2leaf(context_dict, ancestors_node, cut_byte))
         target_class = ancestors_node.namespace
     
     while ancestors_node and ancestors_node.type != "file":
@@ -400,14 +541,25 @@ def initial_context(context_dict, target_namespace):
     
     # 找到祖先中的文件节点
     if ancestors_node.type == "file":
-        in_file_nodes.extend(DFS2leaf(ancestors_node, cut_byte, level=1))
+        in_file_nodes.extend(DFS2leaf(context_dict, ancestors_node, cut_byte, level=1))
         target_file = ancestors_node.namespace
     
+    cross_file_nodes = []
+    # 不断向上找祖先的兄弟节点
+    while ancestors_node and ancestors_node.parent != None:
+        father = context_dict[ancestors_node.parent]
+        cross_file_nodes = father.children+cross_file_nodes
+        cross_file_nodes.remove(ancestors_node.namespace)
+        ancestors_node = father
+    
+    """
     root_namespace = context_dict['']
     root_node = context_dict[root_namespace]
     cross_file_nodes = root_node.children
+    """
+    
     if target_class and target_class in in_file_nodes:
-        cross_file_nodes.remove(target_class)
+        in_file_nodes.remove(target_class)
     if target_file and target_file in cross_file_nodes:
         cross_file_nodes.remove(target_file)
         
@@ -474,4 +626,4 @@ if __name__ == "__main__":
         print("目标类:", init_context["target_class"])
         print("目标文件:", init_context["target_file"])
         print("截断位置:", init_context["cut_byte"])
-        pass
+    pass

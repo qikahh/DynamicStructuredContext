@@ -175,10 +175,13 @@ def traversal_files(database_root, rela_path, in_code, level=-1):
     return now_database, root_namespaces
 
 
-def make_input_string(head, requirement, dataset):
+def make_input_string(prefix, instruct, head, requirement, dataset):
     if dataset == "ToolEval":
         input_string = ""
         rspace_level = len(head) - len(head.rstrip()) - 1
+        input_string += prefix
+        if instruct and len(instruct):
+            input_string += " "*rspace_level + instruct
         input_string += head
         requirement_list = requirement["Functionality"].split("\n") + requirement["Arguments"].split("\n")
         requirement_string = "\"\"\"\n" 
