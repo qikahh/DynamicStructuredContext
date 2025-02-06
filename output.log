@@ -1,0 +1,48 @@
+nohup: ignoring input
+/home/qikahh/miniconda3/lib/python3.11/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: '/home/qikahh/miniconda3/lib/python3.11/site-packages/torchvision/image.so: undefined symbol: _ZN3c1017RegisterOperatorsD1Ev'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.70it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.55it/s]
+2025-02-07 03:26:22,985 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 22 files, 117 codes
+2025-02-07 03:26:28,451 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 160 codes
+2025-02-07 03:26:32,575 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 70 codes
+2025-02-07 03:26:33,601 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 17 codes
+2025-02-07 03:26:33,934 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:34,068 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:35,819 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 22 files, 112 codes
+2025-02-07 03:26:37,405 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 141 codes
+2025-02-07 03:26:39,403 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 40 codes
+2025-02-07 03:26:40,194 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 10 codes
+2025-02-07 03:26:40,387 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:40,534 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:42,330 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 22 files, 132 codes
+2025-02-07 03:26:44,756 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 187 codes
+2025-02-07 03:26:46,948 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 72 codes
+2025-02-07 03:26:47,704 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 19 codes
+2025-02-07 03:26:47,983 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:48,127 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:49,905 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 24 files, 132 codes
+2025-02-07 03:26:52,500 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 189 codes
+2025-02-07 03:26:54,481 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 63 codes
+2025-02-07 03:26:55,357 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 17 codes
+2025-02-07 03:26:55,682 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:55,804 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:57,585 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 24 files, 152 codes
+2025-02-07 03:26:57,117 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 127 codes
+2025-02-07 03:26:58,267 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 44 codes
+2025-02-07 03:26:58,957 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 11 codes
+2025-02-07 03:26:59,082 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:26:59,135 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:27:00,164 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 24 files, 149 codes
+2025-02-07 03:27:01,562 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 120 codes
+2025-02-07 03:27:02,350 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 32 codes
+2025-02-07 03:27:02,658 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 9 codes
+2025-02-07 03:27:02,777 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:27:02,865 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:27:03,914 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 25 files, 145 codes
+2025-02-07 03:27:05,137 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 146 codes
+2025-02-07 03:27:06,105 - utils.hierarchical_model - INFO - Layer 17 get 0 folders, 0 files, 56 codes
+2025-02-07 03:27:06,556 - utils.hierarchical_model - INFO - Layer 23 get 0 folders, 0 files, 15 codes
+2025-02-07 03:27:06,709 - utils.hierarchical_model - INFO - Layer 29 get 0 folders, 0 files, 5 codes
+2025-02-07 03:27:06,782 - utils.hierarchical_model - INFO - Layer 35 get 0 folders, 0 files, 5 codes
+2025-02-07 03:27:07,779 - utils.hierarchical_model - INFO - Layer 5 get 0 folders, 22 files, 153 codes
+2025-02-07 03:27:09,005 - utils.hierarchical_model - INFO - Layer 11 get 0 folders, 0 files, 156 codes

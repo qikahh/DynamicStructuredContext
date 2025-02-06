@@ -1,7 +1,6 @@
 import logging
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-
+os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 import torch
 import torch.nn.functional as F
 from typing import List, Dict, Tuple
@@ -89,6 +88,10 @@ class HierarchicalModel:
         self.max_layer = 64
         self.output_attentions = False
         
+        # 层展开参数
+        self.past_layers = 6
+        self.max_node_length = 512
+        
         # 采样参数
         self.top_p = 0.95
         self.temperature = 0.2
@@ -131,7 +134,23 @@ class HierarchicalModel:
             key_list.append(key_value_cache.key_cache[layer_id])
             value_list.append(key_value_cache.value_cache[layer_id])
         return key_list, value_list, hidden_list
-        
+
+    def filter_ids(self, input_ids: torch.Tensor, max_length: int = 512) -> torch.Tensor:
+        """
+        过滤输入的token ids，确保长度不超过最大长度
+
+        如果输入的token ids长度超过最大长度，则裁剪到最大长度
+
+        参数:
+            input_ids: 输入的token ids
+            max_length: 最大允许的长度
+
+        返回:
+            过滤后的token ids
+        """
+        if input_ids.shape[1] > max_length:
+            return input_ids[:, :max_length]
+        return input_ids
     def get_node_kv(self, node_list: list[ContextNode], layer_idx: int):
         """
         获取节点的KV向量对 计算时将node_list的内容拼接成一个整体进行编码
@@ -192,9 +211,11 @@ class HierarchicalModel:
             # 如果节点不存在向量 则使用模型编码到当前层
             input_ids = []
             for node in node_list:
-                inputs = self.tokenizer(node.content, return_tensors="pt").to(self.device)
-                input_ids.append(inputs["input_ids"])
-                node.length = inputs["input_ids"].shape[1]
+                inputs = self.tokenizer(node.content, return_tensors="pt").to(self.device)['input_ids']
+                if inputs.shape[1] > self.max_node_length:
+                    inputs = self.filter_ids(inputs, self.max_node_length)
+                input_ids.append(inputs)
+                node.length = inputs.shape[1]
             input_ids = torch.cat(input_ids, dim=1)
             init_hidden = self.encode_init_hidden(input_ids)
             key_list, value_list, hidden_list = self.encode_by_layer(init_hidden, 0, layer_idx)
@@ -261,16 +282,16 @@ class HierarchicalModel:
             child_k, child_v, children_list = self.get_node_kv(children_list, layer_idx) # 子节点内容对应的向量
             children_length = 0
             for j, child in enumerate(children_list):
-                children_k.append(self.shift_pos(child_k[j], now_pos).mean(dim=2).unsqueeze(2))
-                children_v.append(child_v[j].mean(dim=2).unsqueeze(2))
+                children_k.append(self.shift_pos(child_k[j].to(self.device), now_pos).mean(dim=2).unsqueeze(2))
+                children_v.append(child_v[j].to(self.device).mean(dim=2).unsqueeze(2))
                 context_dict[child.namespace] = child
-            all_keys.append(torch.cat([self_k[i]]+children_k, dim=2))
-            all_values.append(torch.cat([self_v[i]]+children_v, dim=2))
+            all_keys.append(torch.cat([self_k[i].to(self.device)]+children_k, dim=2))
+            all_values.append(torch.cat([self_v[i].to(self.device)]+children_v, dim=2))
             node_size.append(all_keys[-1].shape[2])
                      
         return torch.cat(all_keys, dim=2), torch.cat(all_values, dim=2), node_size
     
-    def select_high_attention_nodes(self, nodes_ns: List[str], attn_scores: torch.Tensor, context_dict: Dict, min_num=1) -> List[ContextNode]:
+    def select_high_attention_nodes(self, nodes_ns: List[str], attn_scores: torch.Tensor, context_dict: Dict, min_num=16) -> List[ContextNode]:
         """
         根据注意力分数筛选高注意力节点
         """
@@ -283,15 +304,38 @@ class HierarchicalModel:
             now_pos += node_size[i]
             node_attn[i] = node_scores[:,-1,:].max(dim=-1)[0].max(dim=-1)[0]
         
-        # 选择前30%最高注意力的节点
-        selected_nodes = []
-        _, indices = torch.sort(node_attn, descending=True)
-        top_k = max(1, min_num, int(len(nodes) * 0.3))  # 至少选择min_num个节点
-        selected_indices = indices[:top_k]
-        for idx in selected_indices:
-            selected_nodes.append(nodes[idx])
+        # 选择前30%最高注意力的节点 此处分开寻找folder file 和 其他节点
+        folder_num = len([node for node in nodes if node.type == "folder"])
+        folder_num = max(1, int(min_num/3), int(folder_num * 0.3))  # 至少选择min_num个节点
+        file_num = len([node for node in nodes if node.type == "file"])
+        file_num = max(1, int(min_num/3), int(file_num * 0.3))
+        code_num = len([node for node in nodes if node.type == "code"])
+        code_num = max(1, int(min_num/3), int(code_num * 0.3))
         
-        return selected_nodes
+        selected_nodes = {
+            "folder": [],
+            "file": [],
+            "code": []
+        }
+        _, indices = torch.sort(node_attn, descending=True)
+        # top_k = max(1, min_num, int(len(nodes) * 0.3))  # 至少选择min_num个节点
+        # selected_indices = indices[:top_k]
+        for idx in indices:
+            idx = idx.item()
+            if nodes[idx].type == "folder":
+                if len(selected_nodes["folder"]) >= folder_num:
+                    continue
+                selected_nodes["folder"].append(nodes[idx])
+            elif nodes[idx].type == "file":
+                if len(selected_nodes["file"]) >= file_num:
+                    continue
+                selected_nodes["file"].append(nodes[idx])
+            elif nodes[idx].type not in ["folder", "file"]:
+                if len(selected_nodes["code"]) >= code_num:
+                    continue
+                selected_nodes["code"].append(nodes[idx])
+        
+        return selected_nodes["folder"]+selected_nodes["file"]+selected_nodes["code"]
         
             
     def collect_children(self, nodes: List[ContextNode], context_dict: Dict) -> List[ContextNode]:
@@ -373,6 +417,7 @@ class HierarchicalModel:
             value: torch.Tensor(batch, head_num, seq_len, head_dim)
         """
         length = key.shape[2]
+        key = key.to(self.device)
         if pos >= 0:
             # 由于是统一移动相同位置，因此position_ids值全部为pos
             position_ids = torch.full(
@@ -387,8 +432,8 @@ class HierarchicalModel:
             position_embeddings = self.model.rotary_emb(key, position_ids)
             cos, sin = position_embeddings
             sin = -sin
-        cos = cos.unsqueeze(1)
-        sin = sin.unsqueeze(1)
+        cos = cos.unsqueeze(1).to(key.device)
+        sin = sin.unsqueeze(1).to(key.device)
         k_embed = (key * cos) + (rotate_half(key) * sin)
         return k_embed
             
@@ -452,8 +497,6 @@ class HierarchicalModel:
         for layer_idx in range(len(self.model.layers)):
             # 去除无效上下文
             curr_context = [node for node in curr_context if len(node.content) > 0]
-            # 输出当前层使用的上下文namespace
-            logger.info(f"Layer {layer_idx} using context: {[node.namespace for node in curr_context]}")
             # 编码当前层上下文节点
             node_parts = self.cluster_brothers(curr_context)
             context_k = []
@@ -505,15 +548,46 @@ class HierarchicalModel:
                     position_embeddings=position_embeddings,
                 )
             
-            if layer_idx%2 == 1:
+            if layer_idx == 0:
+                # 分类输出节点数量
+                folder_num = len([node for node in curr_context if node.type == 'folder'])
+                file_num = len([node for node in curr_context if node.type == 'file'])
+                code_num = len([node for node in curr_context if node.type not in ['folder', 'file']])
+                logger.info(f"Layer {layer_idx} get {folder_num} folders, {file_num} files, {code_num} codes")
+            
+            if layer_idx%self.past_layers == self.past_layers-1:
                 # 选择高注意力节点
                 curr_context = [node.namespace for node in curr_context]
                 attn_scores = layer_outputs[1]
-                high_attn_nodes = self.select_high_attention_nodes(curr_context, attn_scores, context_dict, min_num=6)    
+                high_attn_nodes = self.select_high_attention_nodes(curr_context, attn_scores, context_dict, min_num=16)    
                 # 收集子节点作为下一层上下文
                 curr_context = self.collect_children(high_attn_nodes, context_dict)
                 # 删去目标节点以及同文件内在目标节点之后的节点
                 curr_context = self.remove_after_target(curr_context, context_dict[target_namespace])
+                
+                # 分类输出节点数量
+                folder_num = len([node for node in curr_context if node.type == 'folder'])
+                file_num = len([node for node in curr_context if node.type == 'file'])
+                code_num = len([node for node in curr_context if node.type not in ['folder', 'file']])
+                logger.info(f"Layer {layer_idx} get {folder_num} folders, {file_num} files, {code_num} codes")
+                # 根据高注意力节点的namespace排序并输出树状结构
+                sorted_nodes = sorted(curr_context, key=lambda node: node.namespace)
+                now_path = []
+                for node in sorted_nodes:
+                    """while len(now_path)>0 and not node.namespace.startswith(".".join(now_path)):
+                        now_path.pop()
+                    for i in range(len(now_path), node.namespace.count('.')):
+                        logger.info('-' * i+node.namespace.split('.')[i])
+                        now_path.append(node.namespace.split('.')[i])
+                    indent = node.namespace.count('.')
+                    logger.info('-' * indent + node.namespace.split('.')[-1] + ': ' + node.type)"""
+                    # logger.info(node.namespace + ': ' + node.type)
+                    pass
+                
+                
+            # 释放显存
+            del past_key_values 
+            torch.cuda.empty_cache()
             pass
             
         # 计算最终输出
@@ -521,8 +595,9 @@ class HierarchicalModel:
         hidden_states = self.model.norm(hidden_states)
         logits = self.lm_head(hidden_states)
         
+        
         # 使用类方法进行采样
         next_token = self.sample_next_token(logits[:, -1])
         
-        return next_token, curr_context, context_dict, past_key_values
+        return next_token, curr_context, context_dict
 

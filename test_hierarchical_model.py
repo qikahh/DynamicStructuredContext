@@ -1,7 +1,7 @@
 import logging
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 import json
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import pickle
 
 import torch
@@ -80,7 +80,7 @@ for data in dataset:
     init_context = init_context["cross_file_nodes"] + init_context["in_file_nodes"] + init_context["in_class_nodes"]
     
     for _ in range(hierarchical_model.max_length):
-        next_token, curr_context, context_dict, past_key_values = hierarchical_model.generate_step(
+        next_token, curr_context, context_dict = hierarchical_model.generate_step(
                 target_namespace=target_namespace,
                 input_ids=generated,  
                 past_key_values=None,
@@ -88,13 +88,20 @@ for data in dataset:
                 init_context_nodes=init_context)
         generated = torch.cat([generated, next_token.unsqueeze(0)], dim=1)
         
-        # 将更新后的上下文字典更新到文件中
-        print(tokenizer.decode(next_token[0]))
-        # torch.save(context_dict, context_dict_path)
+        
+        # 输出当前生成的token
+        print(f"Generated: {tokenizer.decode(generated[0])}")
+        
+        
+        # 清理显存
+        torch.cuda.empty_cache()
         
         # 如果生成了结束标记则停止
         if next_token.item() == tokenizer.eos_token_id:
             break
+        
+    # 将更新后的上下文字典更新到文件中
+    torch.save(context_dict, context_dict_path)
             
     print("生成结果:")
     print(tokenizer.decode(generated[0]))
