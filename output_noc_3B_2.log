@@ -1,0 +1,558 @@
+nohup: ignoring input
+/home/qikahh/miniconda3/lib/python3.11/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: '/home/qikahh/miniconda3/lib/python3.11/site-packages/torchvision/image.so: undefined symbol: _ZN3c1017RegisterOperatorsD1Ev'If you don't plan on using image functionality from `torchvision.io`, you can ignore this warning. Otherwise, there might be something wrong with your environment. Did you have `libjpeg` or `libpng` installed before building `torchvision` from source?
+  warn(
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.01it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.68it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.53it/s]
+INFO:root:--------data 502--------
+data 502:   0%|          | 0/1024 [00:00<?, ?it/s]data 502:   1%|          | 10/1024 [00:02<03:53,  4.34it/s]data 502:   2%|▏         | 20/1024 [00:04<03:40,  4.55it/s]data 502:   2%|▏         | 20/1024 [00:05<04:14,  3.94it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file boltons/socketutils.py, prohibit cyclic calling the current function!
+    def setmaxsize(self, maxsize):
+        """
+        Set the maximum size for receiving netstrings in the NetstringSocket instance. It updates the maxsize of the instance and calculates the maximum size for a netstring message based on the new maxsize value.
+        :param self: NetstringSocket. An instance of the NetstringSocket class.
+        :param maxsize: The maximum size for receiving netstrings.
+        :return: No return values.
+        """
+        self.maxsize = maxsize
+        self.max_netstring_size = maxsize - 4
+
+
+INFO:root:--------data 503--------
+data 503:   0%|          | 0/1024 [00:00<?, ?it/s]data 503:   1%|          | 10/1024 [00:01<01:56,  8.68it/s]data 503:   1%|          | 10/1024 [00:01<02:49,  5.97it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file boto/datapipeline/__init__.py, prohibit cyclic calling the current function!
+def connect_to_region(region_name, **kw_params):
+    """
+    Connect to a specific region in the AWS Data Pipeline service. It creates a connection to the Data Pipeline service in the specified region using the provided parameters.
+    :param region_name: String. The name of the region to connect to.
+    :param **kw_params: Additional keyword arguments that can be passed to the connection.
+    :return: DataPipelineConnection. The connection object to the Data Pipeline service in the specified region.
+    """
+    return DataPipelineConnection(region_name, **kw_params)
+
+INFO:root:--------data 504--------
+data 504:   0%|          | 0/1024 [00:00<?, ?it/s]data 504:   1%|          | 10/1024 [00:01<02:15,  7.50it/s]data 504:   2%|▏         | 20/1024 [00:02<02:14,  7.45it/s]data 504:   3%|▎         | 30/1024 [00:04<02:15,  7.34it/s]data 504:   4%|▍         | 40/1024 [00:05<02:14,  7.33it/s]data 504:   5%|▍         | 50/1024 [00:06<02:12,  7.33it/s]data 504:   6%|▌         | 60/1024 [00:08<02:10,  7.38it/s]data 504:   7%|▋         | 70/1024 [00:09<02:09,  7.38it/s]data 504:   7%|▋         | 70/1024 [00:10<02:24,  6.62it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file gunicorn/config.py, prohibit cyclic calling the current function!
+    def __str__(self):
+        """
+        This function returns a string representation of the Config instance. It iterates through the settings dictionary, format all callable values ("<{qual_name}()>"), then formats each key-value pair ("{key:{key_max_length}} = {value}"), and appends it to a list. Finally, it joins all the lines in the list with a newline character and returns the resulting string.
+        :param self: Config. An instance of the Config class.
+        :return: str. The string representation of the Config instance.
+        """
+        settings = self.settings
+        key_max_length = max(len(key) for key in settings)
+        lines = []
+        for key, value in settings.items():
+            if callable(value):
+                value = f"<{value.__qualname__}()>"
+            lines.append(f"{key:{key_max_length}} = {value}")
+        return "\n".join(lines)
+
+
+INFO:root:--------data 505--------
+data 505:   0%|          | 0/1024 [00:00<?, ?it/s]data 505:   1%|          | 10/1024 [00:01<02:19,  7.27it/s]data 505:   2%|▏         | 20/1024 [00:02<02:15,  7.40it/s]data 505:   2%|▏         | 20/1024 [00:02<02:22,  7.04it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file mongoengine/base/datastructures.py, prohibit cyclic calling the current function!
+    def get(self, key, default=None):
+        # get does not use __getitem__ by default so we must override it as well
+        """
+        This function retrieves the value associated with the given key in the BaseDict instance. If the key is not found, it returns the default value instead. It overrides the default behavior.
+        :param self: BaseDict. An instance of the BaseDict class.
+        :param key: The key to retrieve the value for.
+        :param default: The value to return if the key is not found. Defaults to None.
+        :return: The value associated with the key, or the default value if the key is not found.
+        """
+        if key in self:
+            return self[key]
+        else:
+            return default
+
+INFO:root:--------data 506--------
+data 506:   0%|          | 0/1024 [00:00<?, ?it/s]data 506:   1%|          | 10/1024 [00:01<02:02,  8.29it/s]data 506:   2%|▏         | 20/1024 [00:02<02:01,  8.25it/s]data 506:   3%|▎         | 30/1024 [00:03<02:02,  8.11it/s]data 506:   4%|▍         | 40/1024 [00:04<02:02,  8.03it/s]data 506:   5%|▍         | 50/1024 [00:06<02:01,  8.03it/s]data 506:   6%|▌         | 60/1024 [00:07<02:03,  7.79it/s]data 506:   7%|▋         | 70/1024 [00:08<02:03,  7.74it/s]data 506:   8%|▊         | 80/1024 [00:10<01:57,  8.00it/s]data 506:   8%|▊         | 80/1024 [00:10<02:05,  7.50it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file mingus/core/notes.py, prohibit cyclic calling the current function!
+def int_to_note(note_int, accidentals="#"):
+    """
+    This function converts integers in the range of 0-11 to notes in the form of C or C# or Db. It throws a RangeError exception if the note_int is not in the range 0-11. If not specified, sharps will be used.
+    
+    :param note_int: int. The integer value representing the note.
+    :param accidentals: str. The type of accidentals to be used. Defaults to "#" if not specified.
+    :return: str. The corresponding note in the form of C or C# or Db.
+    
+    """
+    if note_int < 0 or note_int > 11:
+        raise RangeError("note_int must be in the range 0-11")
+    
+    notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    return notes[note_int] + accidentals
+
+
+
+INFO:root:--------data 507--------
+data 507:   0%|          | 0/1024 [00:00<?, ?it/s]data 507:   1%|          | 10/1024 [00:01<02:08,  7.88it/s]data 507:   2%|▏         | 20/1024 [00:02<02:08,  7.84it/s]data 507:   3%|▎         | 30/1024 [00:03<02:07,  7.81it/s]data 507:   4%|▍         | 40/1024 [00:05<02:05,  7.85it/s]data 507:   5%|▍         | 50/1024 [00:06<02:09,  7.53it/s]data 507:   6%|▌         | 60/1024 [00:07<02:11,  7.31it/s]data 507:   7%|▋         | 70/1024 [00:09<02:11,  7.27it/s]data 507:   8%|▊         | 80/1024 [00:10<02:10,  7.24it/s]data 507:   9%|▉         | 90/1024 [00:12<02:08,  7.27it/s]data 507:  10%|▉         | 100/1024 [00:13<02:07,  7.23it/s]data 507:  11%|█         | 110/1024 [00:14<02:06,  7.24it/s]data 507:  12%|█▏        | 120/1024 [00:16<02:02,  7.40it/s]data 507:  13%|█▎        | 130/1024 [00:17<01:58,  7.57it/s]data 507:  13%|█▎        | 130/1024 [00:17<02:03,  7.25it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file mopidy/http/__init__.py, prohibit cyclic calling the current function!
+    def get_config_schema(self):
+        """
+        This function returns the configuration schema for the Extension class. It first calls the parent class's method to get the base schema, and then adds additional configuration options specific to the Extension class.
+        :param self: Extension. An instance of the Extension class.
+        :return: dict. The configuration schema for the Extension class, including the base schema and additional options.
+        """
+        schema = super().get_config_schema()
+        schema.update({
+            'host': {
+                'type': 'string',
+                'default': 'localhost',
+                'description': 'The host address for the Mopidy HTTP server.'
+            },
+            'port': {
+                'type': 'integer',
+                'default': 6680,
+                'description': 'The port number for the Mopidy HTTP server.'
+            },
+            'enabled': {
+                'type': 'boolean',
+                'default': True,
+                'description': 'Whether the Mopidy HTTP server is enabled.'
+            }
+        })
+        return schema
+
+
+INFO:root:--------data 508--------
+data 508:   0%|          | 0/1024 [00:00<?, ?it/s]data 508:   1%|          | 10/1024 [00:01<01:56,  8.74it/s]data 508:   2%|▏         | 20/1024 [00:02<01:54,  8.77it/s]data 508:   3%|▎         | 30/1024 [00:03<01:57,  8.44it/s]data 508:   4%|▍         | 40/1024 [00:04<01:58,  8.33it/s]data 508:   4%|▍         | 40/1024 [00:05<02:15,  7.27it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file src/jinja2/meta.py, prohibit cyclic calling the current function!
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+    """
+    This function returns all undeclared variables in the given AST.
+    :param ast: nodes.Template. The AST of a Jinja2 template.
+    :return: Set[str]. A set of all variables in the AST that will be looked up from the context at runtime.
+    """
+    variables = set()
+    for node in ast.nodes:
+        if isinstance(node, nodes.Variable):
+            variables.add(node.name)
+        elif isinstance(node, nodes.Filter):
+            variables.update(node.args)
+    return variables
+
+
+
+INFO:root:--------data 509--------
+data 509:   0%|          | 0/1024 [00:00<?, ?it/s]data 509:   1%|          | 10/1024 [00:01<01:56,  8.72it/s]data 509:   2%|▏         | 20/1024 [00:02<02:01,  8.26it/s]data 509:   3%|▎         | 30/1024 [00:03<01:58,  8.39it/s]data 509:   4%|▍         | 40/1024 [00:04<02:05,  7.81it/s]data 509:   5%|▍         | 50/1024 [00:06<02:03,  7.88it/s]data 509:   6%|▌         | 60/1024 [00:07<01:59,  8.04it/s]data 509:   7%|▋         | 70/1024 [00:08<01:58,  8.08it/s]data 509:   8%|▊         | 80/1024 [00:09<01:56,  8.12it/s]data 509:   9%|▉         | 90/1024 [00:11<01:52,  8.27it/s]data 509:  10%|▉         | 100/1024 [00:12<01:50,  8.39it/s]data 509:  10%|▉         | 100/1024 [00:13<02:03,  7.45it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file pyinfra/operations/files.py, prohibit cyclic calling the current function!
+@operation(
+    pipeline_facts={"file": "path"},
+)
+def file(
+    path,
+    present=True,
+    user=None,
+    group=None,
+    mode=None,
+    touch=False,
+    create_remote_dir=True,
+    force=False,
+    force_backup=True,
+    force_backup_dir=None,
+):
+    """
+    This function is used to add, remove, or update files. It performs different actions based on the input parameters. It can create a file, remove a file, or update the properties of an existing file.
+    :param path: String. The name or path of the remote file.
+    :param present: Bool. Whether the file should exist. If set to False, the file will be removed if it exists.
+    :param user: String. The user to own the files.
+    :param group: String. The group to own the files.
+    :param mode: Integer. The permissions of the files.
+    :param touch: Bool. Whether to touch the file.
+    :param create_remote_dir: Bool. Whether to create the remote directory if it doesn't exist.
+    :param force: Bool. If the target exists and is not a file, move or remove it and continue.
+    :param force_backup: Bool. Whether to remove any existing non-file when force=True.
+    :param force_backup_dir: String. The directory to move any backup to when force=True.
+    :return: No return values.
+    """
+    facts = inventory.get_facts("file", path=path)
+    if facts and facts["present"]:
+        if not present:
+            yield remove(path, force=force)
+        else:
+            yield update(path, present=present, user=user, group=group, mode=mode, touch=touch)
+    else:
+        if present:
+            yield create(path, user=user, group=group, mode=mode, touch=touch, create_remote_dir=create_remote_dir)
+        else:
+            yield remove(path, force=force)
+
+
+
+
+INFO:root:--------data 510--------
+data 510:   0%|          | 0/1024 [00:00<?, ?it/s]data 510:   1%|          | 10/1024 [00:01<02:01,  8.36it/s]data 510:   2%|▏         | 20/1024 [00:02<02:00,  8.34it/s]data 510:   3%|▎         | 30/1024 [00:03<01:59,  8.34it/s]data 510:   4%|▍         | 40/1024 [00:04<02:00,  8.19it/s]data 510:   5%|▍         | 50/1024 [00:06<02:00,  8.07it/s]data 510:   5%|▍         | 50/1024 [00:06<02:04,  7.84it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file litecli/packages/parseutils.py, prohibit cyclic calling the current function!
+def is_destructive(queries):
+    """
+    Check if any of the queries in the given list is considered destructive. It checks if any of the queries start with certain keywords that are commonly associated with destructive actions.
+    :param queries: List of strings. The queries to be checked.
+    :return: Bool. True if any of the queries is considered destructive, False otherwise.
+    """
+    destructive_keywords = ["DROP", "DELETE", "TRUNCATE", "RENAME", "ALTER"]
+    for query in queries:
+        if any(keyword in query.upper() for keyword in destructive_keywords):
+            return True
+    return False
+
+
+
+INFO:root:--------data 511--------
+data 511:   0%|          | 0/1024 [00:00<?, ?it/s]data 511:   1%|          | 10/1024 [00:01<02:16,  7.45it/s]data 511:   2%|▏         | 20/1024 [00:03<03:24,  4.92it/s]data 511:   3%|▎         | 30/1024 [00:05<02:53,  5.72it/s]data 511:   4%|▍         | 40/1024 [00:07<03:21,  4.89it/s]data 511:   4%|▍         | 40/1024 [00:09<03:47,  4.33it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file sacred/experiment.py, prohibit cyclic calling the current function!
+    def main(self, function):
+        """
+        This function is a decorator that is used to define the main function of an experiment. The main function is the default command that is executed when no command is specified or when calling the run() method. It captures the decorated function and sets it as the default command for the experiment.
+        :param self: Experiment. An instance of the Experiment class.
+        :param function: The function to be decorated and set as the main function.
+        :return: The captured function that is set as the default command.
+        """
+        # Capture the decorated function
+        captured_function = function
+        # Set the captured function as the default command for the experiment
+        self.default_command = captured_function
+        # Return the captured function
+        return captured_function
+
+
+INFO:root:已生成511条结果
+INFO:root:--------data 512--------
+data 512:   0%|          | 0/1024 [00:00<?, ?it/s]data 512:   1%|          | 10/1024 [00:01<02:08,  7.92it/s]data 512:   2%|▏         | 20/1024 [00:02<02:05,  7.98it/s]data 512:   3%|▎         | 30/1024 [00:03<02:04,  7.96it/s]data 512:   4%|▍         | 40/1024 [00:05<02:03,  7.96it/s]data 512:   5%|▍         | 50/1024 [00:06<02:04,  7.85it/s]data 512:   6%|▌         | 60/1024 [00:07<02:01,  7.92it/s]data 512:   6%|▌         | 60/1024 [00:07<02:03,  7.79it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file fs/path.py, prohibit cyclic calling the current function!
+def frombase(path1, path2):
+    # type: (Text, Text) -> Text
+    """
+    Take two paths - `path1` and `path2` as input. Return the part of `path2` that is not present in `path1`. If `path1` is not a parent directory of `path2`, a ValueError raised. 
+    
+    :param path1: String, a PyFileSystem path, e.g., ``'a/b/c'``.
+    :param path2: String, a PyFileSystem path, e.g., ``'a/b/c'``.
+    :return: String, the final part of path2 that is not present in path1.
+    
+    """
+    path1 = path1.rstrip('/')
+    path2 = path2.rstrip('/')
+    if not path1.endswith(path2):
+        raise ValueError("path1 is not a parent directory of path2")
+    return path2[len(path1) + 1:] if path1 else path2
+
+
+
+
+INFO:root:--------data 513--------
+data 513:   0%|          | 0/1024 [00:00<?, ?it/s]data 513:   1%|          | 10/1024 [00:01<02:07,  7.94it/s]data 513:   2%|▏         | 20/1024 [00:02<02:08,  7.84it/s]data 513:   3%|▎         | 30/1024 [00:03<02:11,  7.54it/s]data 513:   4%|▍         | 40/1024 [00:05<02:08,  7.64it/s]data 513:   5%|▍         | 50/1024 [00:06<02:04,  7.81it/s]data 513:   6%|▌         | 60/1024 [00:07<01:58,  8.12it/s]data 513:   7%|▋         | 70/1024 [00:08<01:54,  8.34it/s]data 513:   7%|▋         | 70/1024 [00:09<02:03,  7.71it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file zulipterminal/ui_tools/utils.py, prohibit cyclic calling the current function!
+def is_muted(msg: Message, model: Any) -> bool:
+    # PMs cannot be muted
+    """
+    Check if a message is muted based on the given model. It first checks if the message is a private message, in which case it is not muted. Then it checks if the message is in a topic narrow, in which case it is not muted. If neither of these conditions are met, it checks if the message's stream or topic is muted in the model.
+    :param msg: Message. The message to check for muting.
+    :param model: Any. The model object that contains information about muted streams and topics.
+    :return: bool. True if the message is muted, False otherwise.
+    """
+    if msg.is_private:
+        return False
+    if msg.narrow and msg.narrow[0].type == "private":
+        return False
+    if msg.stream_id and msg.stream_id in model.muted_streams:
+        return True
+    if msg.topic and msg.topic in model.muted_topics:
+        return True
+    return False
+
+
+INFO:root:--------data 514--------
+data 514:   0%|          | 0/1024 [00:00<?, ?it/s]data 514:   1%|          | 10/1024 [00:01<02:15,  7.50it/s]data 514:   2%|▏         | 20/1024 [00:02<02:17,  7.29it/s]data 514:   3%|▎         | 30/1024 [00:04<02:16,  7.28it/s]data 514:   4%|▍         | 40/1024 [00:05<02:14,  7.32it/s]data 514:   5%|▍         | 50/1024 [00:07<02:19,  6.99it/s]data 514:   5%|▍         | 50/1024 [00:07<02:27,  6.61it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file src/pyramid/registry.py, prohibit cyclic calling the current function!
+    def remove(self, category_name, discriminator):
+        """
+        Remove an introspection object from the Introspector instance. It first retrieves the introspection object based on the category name and discriminator. If the object is found, it removes all references to the object and deletes it from the category dictionary.
+        :param self: Introspector. An instance of the Introspector class.
+        :param category_name: str. The name of the category where the introspection object belongs.
+        :param discriminator: The discriminator of the introspection object.
+        :return: No return values.
+        """
+        introspection_obj = self.get(category_name, discriminator)
+        if introspection_obj:
+            for key in introspection_obj.keys():
+                introspection_obj[key].remove(introspection_obj)
+            del self.category_dict[category_name][discriminator]
+
+
+INFO:root:--------data 515--------
+data 515:   0%|          | 0/1024 [00:00<?, ?it/s]data 515:   1%|          | 10/1024 [00:01<02:17,  7.38it/s]data 515:   1%|          | 10/1024 [00:02<04:21,  3.88it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file mrjob/job.py, prohibit cyclic calling the current function!
+    def set_status(self, msg):
+        """
+        This function sets the job status in Hadoop streaming by printing a message to the standard error stream of the input MRJob instance. It is also used as a keepalive mechanism to prevent the job from timing out. The format of the message is "reporter:status:{message}\n".
+        :param self: MRJob. An instance of the MRJob class.
+        :param msg: String. The message to set as the job status.
+        :return: No return values.
+        """
+        print("reporter:status:{message}\n".format(message=msg))
+
+
+INFO:root:--------data 516--------
+data 516:   0%|          | 0/1024 [00:00<?, ?it/s]data 516:   1%|          | 10/1024 [00:01<02:17,  7.38it/s]data 516:   2%|▏         | 20/1024 [00:02<02:16,  7.34it/s]data 516:   3%|▎         | 30/1024 [00:04<02:17,  7.23it/s]data 516:   4%|▍         | 40/1024 [00:05<02:15,  7.27it/s]data 516:   5%|▍         | 50/1024 [00:08<03:01,  5.37it/s]data 516:   6%|▌         | 60/1024 [00:09<02:39,  6.04it/s]data 516:   7%|▋         | 70/1024 [00:10<02:25,  6.57it/s]data 516:   8%|▊         | 80/1024 [00:12<02:17,  6.87it/s]data 516:   9%|▉         | 90/1024 [00:13<02:11,  7.13it/s]data 516:   9%|▉         | 90/1024 [00:13<02:22,  6.56it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file src/pyramid/util.py, prohibit cyclic calling the current function!
+    @classmethod
+    def make_property(cls, callable, name=None, reify=False):
+        """
+        This function takes a callable object and converts it into a property suitable for adding to an instance. It returns a tuple containing the computed (name, property) pair.
+        :param cls: type. InstancePropertyHelper.
+        :param callable: Callable. The callable object to be converted into a property.
+        :param name: str. The name of the property. If not specified, it will be derived from the callable's __name__ attribute. Defaults to None.
+        :param reify: bool. Whether to use the reify decorator on the property. Defaults to False.
+        :return: Tuple. A tuple containing the computed (name, property) pair.
+        """
+        # If the name is not provided, use the callable's __name__ attribute
+        if name is None:
+            name = callable.__name__
+
+        # Create a property object using the reify decorator if reify is True
+        if reify:
+            property = property(reify(callable))
+        else:
+            property = property(callable)
+
+        # Return the computed (name, property) pair
+        return name, property
+
+
+INFO:root:--------data 517--------
+data 517:   0%|          | 0/1024 [00:00<?, ?it/s]data 517:   1%|          | 10/1024 [00:01<02:10,  7.75it/s]data 517:   2%|▏         | 20/1024 [00:02<02:17,  7.30it/s]data 517:   3%|▎         | 30/1024 [00:04<02:15,  7.34it/s]data 517:   4%|▍         | 40/1024 [00:05<02:15,  7.28it/s]data 517:   4%|▍         | 40/1024 [00:05<02:24,  6.81it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file falcon/request.py, prohibit cyclic calling the current function!
+    def client_prefers(self, media_types):
+        """
+        This function returns the client's preferred media type from a list of choices. It uses the Accept header of the client's request to determine the preferred type.
+        :param self: Request. An instance of the Request class.
+        :param media_types: Iterable of strings. One or more Internet media types from which to choose the client's preferred type.
+        :return: String. The client's preferred media type based on the Accept header. Returns None if the client does not accept any of the given types.
+        """
+        # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file falcon/request.py, prohibit cyclic calling the current function!
+        pass
+
+
+INFO:root:--------data 518--------
+data 518:   0%|          | 0/1024 [00:00<?, ?it/s]data 518:   1%|          | 10/1024 [00:01<02:10,  7.78it/s]data 518:   2%|▏         | 20/1024 [00:02<02:10,  7.68it/s]data 518:   3%|▎         | 30/1024 [00:03<02:12,  7.48it/s]data 518:   4%|▍         | 40/1024 [00:05<02:14,  7.33it/s]data 518:   5%|▍         | 50/1024 [00:06<02:12,  7.34it/s]data 518:   6%|▌         | 60/1024 [00:09<02:41,  5.98it/s]data 518:   7%|▋         | 70/1024 [00:11<03:00,  5.29it/s]data 518:   8%|▊         | 80/1024 [00:14<03:32,  4.44it/s]data 518:   8%|▊         | 80/1024 [00:15<03:04,  5.10it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file falcon/request.py, prohibit cyclic calling the current function!
+    @property
+    def content_length(self):
+        """
+        This function retrieves the value of the 'CONTENT_LENGTH' header from a Request instance. The value should be a positive integer. Otherwise, it returns None and raises a error message.
+        :param self: Request. An instance of the Request class.
+        :return: int or None. The value of the 'CONTENT_LENGTH' header as an integer, or None if the header is not present or has an invalid value.
+        """
+        content_length = self.headers.get('CONTENT_LENGTH')
+        if content_length is not None:
+            try:
+                content_length = int(content_length)
+                if content_length <= 0:
+                    raise ValueError("Content length must be a positive integer")
+                return content_length
+            except ValueError as e:
+                raise ValueError("Invalid content length value: " + str(e)) from e
+        return None
+
+
+INFO:root:--------data 519--------
+data 519:   0%|          | 0/1024 [00:00<?, ?it/s]data 519:   1%|          | 10/1024 [00:01<02:08,  7.89it/s]data 519:   1%|          | 10/1024 [00:01<02:21,  7.17it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file src/pyramid/registry.py, prohibit cyclic calling the current function!
+    @property
+    def discriminator_hash(self):
+        """
+        Calculate the hash of the discriminator of the Introspectable instance.
+        :param self: Introspectable. An instance of the Introspectable class.
+        :return: int. The hash value of the discriminator in the instance.
+        """
+        return hash(self._discriminator)
+
+
+INFO:root:--------data 520--------
+data 520:   0%|          | 0/1024 [00:00<?, ?it/s]data 520:   1%|          | 10/1024 [00:01<02:06,  7.99it/s]data 520:   2%|▏         | 20/1024 [00:02<02:06,  7.91it/s]data 520:   3%|▎         | 30/1024 [00:03<02:08,  7.76it/s]data 520:   4%|▍         | 40/1024 [00:06<02:41,  6.08it/s]data 520:   5%|▍         | 50/1024 [00:07<02:27,  6.61it/s]data 520:   6%|▌         | 60/1024 [00:08<02:17,  6.99it/s]data 520:   7%|▋         | 70/1024 [00:09<02:11,  7.24it/s]data 520:   8%|▊         | 80/1024 [00:11<02:10,  7.25it/s]data 520:   9%|▉         | 90/1024 [00:12<02:07,  7.35it/s]data 520:  10%|▉         | 100/1024 [00:13<02:00,  7.67it/s]data 520:  11%|█         | 110/1024 [00:14<01:55,  7.92it/s]data 520:  12%|█▏        | 120/1024 [00:16<01:52,  8.03it/s]data 520:  13%|█▎        | 130/1024 [00:17<01:48,  8.22it/s]data 520:  14%|█▎        | 140/1024 [00:18<01:45,  8.35it/s]data 520:  15%|█▍        | 150/1024 [00:19<01:45,  8.32it/s]data 520:  16%|█▌        | 160/1024 [00:20<01:42,  8.40it/s]data 520:  17%|█▋        | 170/1024 [00:21<01:40,  8.46it/s]data 520:  18%|█▊        | 180/1024 [00:23<01:39,  8.46it/s]data 520:  19%|█▊        | 190/1024 [00:24<01:37,  8.54it/s]data 520:  20%|█▉        | 200/1024 [00:25<01:36,  8.51it/s]data 520:  21%|██        | 210/1024 [00:26<01:36,  8.47it/s]data 520:  21%|██▏       | 220/1024 [00:27<01:34,  8.50it/s]data 520:  22%|██▏       | 230/1024 [00:28<01:32,  8.56it/s]data 520:  23%|██▎       | 240/1024 [00:30<01:33,  8.43it/s]data 520:  24%|██▍       | 250/1024 [00:31<01:32,  8.39it/s]data 520:  25%|██▌       | 260/1024 [00:32<01:31,  8.39it/s]data 520:  26%|██▋       | 270/1024 [00:33<01:29,  8.42it/s]data 520:  27%|██▋       | 280/1024 [00:34<01:27,  8.50it/s]data 520:  28%|██▊       | 290/1024 [00:37<01:58,  6.20it/s]data 520:  29%|██▉       | 300/1024 [00:38<01:47,  6.73it/s]data 520:  30%|███       | 310/1024 [00:41<02:10,  5.46it/s]data 520:  31%|███▏      | 320/1024 [00:42<01:54,  6.13it/s]data 520:  32%|███▏      | 330/1024 [00:43<01:42,  6.75it/s]data 520:  32%|███▏      | 330/1024 [00:44<01:33,  7.39it/s]
+INFO:root:生成结果:
+INFO:root:# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file zxcvbn/scoring.py, prohibit cyclic calling the current function!
+def regex_guesses(match):
+    """
+    This function calculates the number of possible guesses for a given regular expression match. It first defines a dictionary of character class bases, which represent the number of possible characters in each character class. Then, it checks the type of the regular expression match and calculates the number of possible guesses based on the match type.
+    :param match: Dictionary. The regular expression match object, which contains information about the match.
+    :return: Integer. The number of possible guesses for the given regular expression match.
+    """
+    # Define the dictionary of character class bases
+    char_class_bases = {
+        'd': 10,  # digits
+        'l': 26,  # lowercase letters
+        'u': 26,  # uppercase letters
+        's': 32,  # special characters
+        'w': 52,  # alphanumeric characters
+        '': 1,  # empty character class
+    }
+
+    # Calculate the number of possible guesses based on the match type
+    if match['type'] == 'exact':
+        return char_class_bases[match['class']] ** match['length']
+    elif match['type'] == 'range':
+        return char_class_bases[match['class']] ** (match['max'] - match['min'] + 1)
+    elif match['type'] == 'set':
+        return sum(char_class_bases[cls] for cls in match['classes'])
+    elif match['type'] == 'union':
+        return sum(char_class_bases[cls] for cls in match['classes']) - sum(char_class_bases[cls] for cls in match['classes'] if cls in match['exclusions'])
+    elif match['type'] == 'intersection':
+        return sum(char_class_bases[cls] for cls in match['classes'] if cls in match['exclusions'])
+    elif match['type'] == 'any':
+        return sum(char_class_bases[cls] for cls in match['classes'])
+    elif match['type'] == 'none':
+        return 0
+    else:
+        raise ValueError(f"Unknown match type: {match['type']}")
+
+INFO:root:--------data 521--------
+data 521:   0%|          | 0/1024 [00:00<?, ?it/s]data 521:   1%|          | 10/1024 [00:01<02:32,  6.64it/s]data 521:   2%|▏         | 20/1024 [00:02<02:18,  7.24it/s]data 521:   3%|▎         | 30/1024 [00:04<02:12,  7.48it/s]data 521:   4%|▍         | 40/1024 [00:05<02:08,  7.63it/s]data 521:   5%|▍         | 50/1024 [00:06<02:06,  7.70it/s]data 521:   6%|▌         | 60/1024 [00:07<02:05,  7.68it/s]data 521:   7%|▋         | 70/1024 [00:09<02:04,  7.69it/s]data 521:   8%|▊         | 80/1024 [00:10<02:02,  7.69it/s]data 521:   9%|▉         | 90/1024 [00:11<02:01,  7.68it/s]data 521:  10%|▉         | 100/1024 [00:13<02:18,  6.66it/s]data 521:  11%|█         | 110/1024 [00:15<02:11,  6.94it/s]data 521:  12%|█▏        | 120/1024 [00:16<02:06,  7.14it/s]data 521:  13%|█▎        | 130/1024 [00:17<02:03,  7.27it/s]data 521:  13%|█▎        | 130/1024 [00:17<02:02,  7.28it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file zulipterminal/ui_tools/boxes.py, prohibit cyclic calling the current function!
+    def stream_box_view(
+        self, stream_id: int, caption: str = "", title: str = ""
+    ) -> None:
+        """
+        This function sets up the view for a stream box. It creates a stream write box with a specified caption and title, enables autocomplete functionality, and sets up the common stream compose. It also sets a callback to set the stream marker and connects a signal to update the style of the stream write box.
+        :param self: WriteBox. An instance of the WriteBox class.
+        :param stream_id: int. The ID of the stream.
+        :param caption: str. The caption for the stream write box. Defaults to an empty string.
+        :param title: str. The title for the stream write box. Defaults to an empty string.
+        :return: No return values.
+        """
+        # Create a stream write box with a specified caption and title
+        stream_write_box = urwid.Edit(caption=caption, title=title)
+        # Enable autocomplete functionality
+        stream_write_box.set_edit_text("")
+        # Set up the common stream compose
+        stream_write_box.set_edit_text("")
+        # Set a callback to set the stream marker
+        stream_write_box.set_edit_text("")
+        # Connect a signal to update the style of the stream write box
+        stream_write_box.set_edit_text("")
+        # Add the stream write box to the stream write box view
+        self.stream_write_box_view = stream_write_box
+
+
+INFO:root:--------data 522--------
+data 522:   0%|          | 0/1024 [00:00<?, ?it/s]data 522:   1%|          | 10/1024 [00:01<02:14,  7.55it/s]data 522:   2%|▏         | 20/1024 [00:02<02:17,  7.28it/s]data 522:   3%|▎         | 30/1024 [00:04<02:18,  7.18it/s]data 522:   4%|▍         | 40/1024 [00:05<02:14,  7.29it/s]data 522:   4%|▍         | 40/1024 [00:06<02:45,  5.95it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file boltons/funcutils.py, prohibit cyclic calling the current function!
+    def get_arg_names(self, only_required=False):
+        """
+        This function returns a tuple of argument names for a function. It includes both positional arguments and keyword-only arguments. If the "only_required" parameter is set to True, it only returns the names of required arguments, excluding those with default values.
+        :param self: FunctionBuilder. An instance of the FunctionBuilder class.
+        :param only_required: bool. Whether to only return the names of required arguments. Defaults to False.
+        :return: Tuple. A tuple of argument names.
+        """
+        arg_names = []
+        for arg in self.args:
+            if arg.default is not None:
+                arg_names.append(arg.name)
+        return tuple(arg_names) if only_required else tuple(arg.name for arg in self.args)
+
+
+INFO:root:--------data 523--------
+data 523:   0%|          | 0/1024 [00:00<?, ?it/s]data 523:   1%|          | 10/1024 [00:01<02:14,  7.54it/s]data 523:   2%|▏         | 20/1024 [00:02<02:15,  7.44it/s]data 523:   3%|▎         | 30/1024 [00:04<02:17,  7.23it/s]data 523:   4%|▍         | 40/1024 [00:05<02:16,  7.19it/s]data 523:   5%|▍         | 50/1024 [00:06<02:10,  7.47it/s]data 523:   6%|▌         | 60/1024 [00:08<02:05,  7.66it/s]data 523:   7%|▋         | 70/1024 [00:09<02:02,  7.78it/s]data 523:   7%|▋         | 70/1024 [00:09<02:12,  7.18it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file mrjob/hadoop.py, prohibit cyclic calling the current function!
+    def _stream_history_log_dirs(self, output_dir=None):
+        """
+        This function yields lists of directories to search for the history log in. It first checks if logs should be read, and then iterates over unique log directories obtained from the hadoop log directories. If the directory exists, it logs an info message: 'Looking for history log in {directory}...'. It then yields a list containing the directory.
+        :param self: HadoopJobRunner. An instance of the HadoopJobRunner class.
+        :param output_dir: str. The output directory to search for the history log. Defaults to None.
+        :return: Generator. Yields lists of directories to search for the history log in.
+        """
+        if self._should_read_logs():
+            log_dirs = self._get_unique_log_dirs()
+            for directory in log_dirs:
+                if os.path.exists(directory):
+                    self._log.info(f"Looking for history log in {directory}...")
+                yield [directory]
+        else:
+            self._log.info("No logs to read.")
+            yield []
+
+
+INFO:root:--------data 524--------
+data 524:   0%|          | 0/1024 [00:00<?, ?it/s]data 524:   1%|          | 10/1024 [00:01<02:29,  6.80it/s]data 524:   2%|▏         | 20/1024 [00:02<02:21,  7.07it/s]data 524:   3%|▎         | 30/1024 [00:04<02:19,  7.11it/s]data 524:   4%|▍         | 40/1024 [00:05<02:13,  7.37it/s]data 524:   5%|▍         | 50/1024 [00:06<02:07,  7.64it/s]data 524:   6%|▌         | 60/1024 [00:08<02:04,  7.74it/s]data 524:   7%|▋         | 70/1024 [00:09<02:04,  7.67it/s]data 524:   8%|▊         | 80/1024 [00:10<02:02,  7.71it/s]data 524:   9%|▉         | 90/1024 [00:12<02:23,  6.50it/s]data 524:  10%|▉         | 100/1024 [00:13<02:14,  6.85it/s]data 524:  11%|█         | 110/1024 [00:15<02:07,  7.15it/s]data 524:  12%|█▏        | 120/1024 [00:16<02:04,  7.25it/s]data 524:  13%|█▎        | 130/1024 [00:17<02:01,  7.38it/s]data 524:  14%|█▎        | 140/1024 [00:19<01:58,  7.48it/s]data 524:  15%|█▍        | 150/1024 [00:20<01:55,  7.58it/s]data 524:  16%|█▌        | 160/1024 [00:21<01:53,  7.60it/s]data 524:  17%|█▋        | 170/1024 [00:23<01:50,  7.69it/s]data 524:  18%|█▊        | 180/1024 [00:24<01:48,  7.76it/s]data 524:  19%|█▊        | 190/1024 [00:25<01:46,  7.82it/s]data 524:  20%|█▉        | 200/1024 [00:26<01:45,  7.83it/s]data 524:  21%|██        | 210/1024 [00:28<01:44,  7.76it/s]data 524:  21%|██▏       | 220/1024 [00:29<01:42,  7.81it/s]data 524:  22%|██▏       | 230/1024 [00:30<01:43,  7.70it/s]data 524:  23%|██▎       | 240/1024 [00:32<01:42,  7.68it/s]data 524:  24%|██▍       | 250/1024 [00:33<01:40,  7.72it/s]data 524:  25%|██▌       | 260/1024 [00:34<01:38,  7.75it/s]data 524:  26%|██▋       | 270/1024 [00:35<01:36,  7.78it/s]data 524:  27%|██▋       | 280/1024 [00:37<01:36,  7.69it/s]data 524:  28%|██▊       | 290/1024 [00:38<01:35,  7.72it/s]data 524:  29%|██▉       | 300/1024 [00:39<01:36,  7.47it/s]data 524:  30%|███       | 310/1024 [00:41<01:36,  7.43it/s]data 524:  31%|███▏      | 320/1024 [00:42<01:35,  7.40it/s]data 524:  32%|███▏      | 330/1024 [00:44<01:34,  7.32it/s]data 524:  33%|███▎      | 340/1024 [00:45<01:35,  7.20it/s]data 524:  34%|███▍      | 350/1024 [00:46<01:32,  7.31it/s]data 524:  35%|███▌      | 360/1024 [00:48<01:30,  7.38it/s]data 524:  36%|███▌      | 370/1024 [00:49<01:28,  7.39it/s]data 524:  37%|███▋      | 380/1024 [00:50<01:26,  7.43it/s]data 524:  38%|███▊      | 390/1024 [00:52<01:25,  7.45it/s]data 524:  39%|███▉      | 400/1024 [00:53<01:26,  7.18it/s]data 524:  40%|████      | 410/1024 [00:55<01:26,  7.13it/s]data 524:  41%|████      | 420/1024 [00:56<01:23,  7.24it/s]data 524:  42%|████▏     | 430/1024 [00:57<01:22,  7.23it/s]data 524:  43%|████▎     | 440/1024 [00:59<01:19,  7.31it/s]data 524:  44%|████▍     | 450/1024 [01:00<01:18,  7.32it/s]data 524:  45%|████▍     | 460/1024 [01:01<01:17,  7.24it/s]data 524:  46%|████▌     | 470/1024 [01:03<01:15,  7.29it/s]data 524:  47%|████▋     | 480/1024 [01:04<01:14,  7.26it/s]data 524:  48%|████▊     | 490/1024 [01:05<01:13,  7.31it/s]data 524:  49%|████▉     | 500/1024 [01:07<01:11,  7.31it/s]data 524:  50%|████▉     | 510/1024 [01:08<01:12,  7.11it/s]data 524:  51%|█████     | 520/1024 [01:10<01:10,  7.15it/s]data 524:  52%|█████▏    | 530/1024 [01:11<01:08,  7.22it/s]data 524:  53%|█████▎    | 540/1024 [01:12<01:06,  7.27it/s]data 524:  54%|█████▎    | 550/1024 [01:14<01:04,  7.33it/s]data 524:  55%|█████▍    | 560/1024 [01:15<01:04,  7.19it/s]data 524:  56%|█████▌    | 570/1024 [01:17<01:04,  7.04it/s]data 524:  57%|█████▋    | 580/1024 [01:18<01:01,  7.16it/s]data 524:  58%|█████▊    | 590/1024 [01:19<01:00,  7.22it/s]data 524:  59%|█████▊    | 600/1024 [01:21<00:58,  7.30it/s]data 524:  60%|█████▉    | 610/1024 [01:22<00:55,  7.42it/s]data 524:  61%|██████    | 620/1024 [01:23<00:54,  7.43it/s]data 524:  62%|██████▏   | 630/1024 [01:25<00:52,  7.47it/s]data 524:  62%|██████▎   | 640/1024 [01:26<00:51,  7.48it/s]data 524:  63%|██████▎   | 650/1024 [01:27<00:50,  7.48it/s]data 524:  64%|██████▍   | 660/1024 [01:29<00:48,  7.49it/s]data 524:  65%|██████▌   | 670/1024 [01:30<00:47,  7.46it/s]data 524:  66%|██████▋   | 680/1024 [01:31<00:45,  7.49it/s]data 524:  67%|██████▋   | 690/1024 [01:33<00:44,  7.47it/s]data 524:  68%|██████▊   | 700/1024 [01:34<00:43,  7.47it/s]data 524:  69%|██████▉   | 710/1024 [01:35<00:42,  7.47it/s]data 524:  70%|███████   | 720/1024 [01:37<00:40,  7.46it/s]data 524:  71%|███████▏  | 730/1024 [01:38<00:39,  7.50it/s]data 524:  72%|███████▏  | 740/1024 [01:39<00:37,  7.51it/s]data 524:  73%|███████▎  | 750/1024 [01:41<00:36,  7.50it/s]data 524:  74%|███████▍  | 760/1024 [01:42<00:35,  7.49it/s]data 524:  75%|███████▌  | 770/1024 [01:43<00:34,  7.46it/s]data 524:  76%|███████▌  | 780/1024 [01:45<00:32,  7.46it/s]data 524:  77%|███████▋  | 790/1024 [01:46<00:31,  7.44it/s]data 524:  78%|███████▊  | 800/1024 [01:48<00:30,  7.40it/s]data 524:  79%|███████▉  | 810/1024 [01:49<00:28,  7.39it/s]data 524:  80%|████████  | 820/1024 [01:50<00:27,  7.33it/s]data 524:  81%|████████  | 830/1024 [01:52<00:26,  7.34it/s]data 524:  82%|████████▏ | 840/1024 [01:53<00:25,  7.27it/s]data 524:  83%|████████▎ | 850/1024 [01:54<00:24,  7.25it/s]data 524:  84%|████████▍ | 860/1024 [01:56<00:22,  7.23it/s]data 524:  85%|████████▍ | 870/1024 [01:57<00:21,  7.24it/s]data 524:  86%|████████▌ | 880/1024 [01:59<00:19,  7.27it/s]data 524:  87%|████████▋ | 890/1024 [02:00<00:18,  7.23it/s]data 524:  88%|████████▊ | 900/1024 [02:01<00:17,  7.23it/s]data 524:  89%|████████▉ | 910/1024 [02:03<00:15,  7.24it/s]data 524:  90%|████████▉ | 920/1024 [02:04<00:14,  7.28it/s]data 524:  91%|█████████ | 930/1024 [02:05<00:13,  7.22it/s]data 524:  92%|█████████▏| 940/1024 [02:07<00:11,  7.24it/s]data 524:  93%|█████████▎| 950/1024 [02:08<00:10,  7.22it/s]data 524:  94%|█████████▍| 960/1024 [02:10<00:08,  7.18it/s]data 524:  95%|█████████▍| 970/1024 [02:11<00:07,  7.21it/s]data 524:  96%|█████████▌| 980/1024 [02:12<00:06,  7.28it/s]data 524:  97%|█████████▋| 990/1024 [02:14<00:04,  7.29it/s]data 524:  98%|█████████▊| 1000/1024 [02:15<00:03,  7.33it/s]data 524:  99%|█████████▊| 1010/1024 [02:17<00:01,  7.20it/s]data 524: 100%|█████████▉| 1020/1024 [02:18<00:00,  7.14it/s]data 524: 100%|█████████▉| 1020/1024 [02:19<00:00,  7.33it/s]
+INFO:root:生成结果:
+INFO:root:    # Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file sslyze/plugins/session_renegotiation_plugin.py, prohibit cyclic calling the current function!
+    @classmethod
+    def result_to_console_output(cls, result: SessionRenegotiationScanResult) -> List[str]:
+        """
+        This function takes a SessionRenegotiationScanResult object as input and converts the result into a list of strings that represent the output to be displayed on the console. It formats the different fields of the result and appends them to the result_txt list.
+        :param cls: The class object of _SessionRenegotiationCliConnector.
+        :param result: SessionRenegotiationScanResult. The result of a session renegotiation scan.
+        :return: List of strings. The formatted output to be displayed on the console.
+        """
+        result_txt = []
+        result_txt.append(f"Session Renegotiation Test Result for {result.target_uri}:")
+        result_txt.append(f"Supported Versions: {', '.join(result.supported_versions)}")
+        result_txt.append(f"Supported Cipher Suites: {', '.join(result.supported_cipher_suites)}")
+        result_txt.append(f"Supported Compression Methods: {', '.join(result.supported_compression_methods)}")
+        result_txt.append(f"Supported Extensions: {', '.join(result.supported_extensions)}")
+        result_txt.append(f"Supported Signature Algorithms: {', '.join(result.supported_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result.supported_tls_features)}")
+        result_txt.append(f"Supported TLS Protocols: {', '.join(result.supported_tls_protocols)}")
+        result_txt.append(f"Supported TLS Versions: {', '.join(result.supported_tls_versions)}")
+        result_txt.append(f"Supported TLS Extensions: {', '.join(result.supported_tls_extensions)}")
+        result_txt.append(f"Supported TLS Signature Algorithms: {', '.join(result.supported_tls_signature_algorithms)}")
+        result_txt.append(f"Supported TLS Features: {', '.join(result
+
+INFO:root:--------data 525--------
+data 525:   0%|          | 0/1024 [00:00<?, ?it/s]data 525:   1%|          | 10/1024 [00:01<02:07,  7.98it/s]data 525:   2%|▏         | 20/1024 [00:02<02:09,  7.76it/s]

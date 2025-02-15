@@ -1,14 +1,18 @@
 
+import logging
 import os
 import json
 import jsonlines
 
+import torch
 import tree_sitter_python as tspython
 from tree_sitter import Language, Parser
+
 
 PY_LANGUAGE = Language(tspython.language())
 parser = Parser(PY_LANGUAGE)
 
+logging.basicConfig(level=logging.INFO)
 def load_from_jsonl(file_name):
     with open(file_name, 'r') as f:
         data = jsonlines.Reader(f)
@@ -176,18 +180,19 @@ def traversal_files(database_root, rela_path, in_code, level=-1):
 
 
 def make_input_string(prefix, instruct, head, requirement, dataset):
-    if dataset == "ToolEval":
+    if dataset in ["ToolEval", "DevEval"]:
         input_string = ""
         rspace_level = len(head) - len(head.rstrip()) - 1
+        lspace_level = len(head) - len(head.lstrip())
         input_string += prefix
         if instruct and len(instruct):
-            input_string += " "*rspace_level + instruct
+            input_string += " "*lspace_level + instruct
         input_string += head
         requirement_list = requirement["Functionality"].split("\n") + requirement["Arguments"].split("\n")
-        requirement_string = "\"\"\"\n" 
+        requirement_string = " "*lspace_level+"    "+"\"\"\"\n" 
         for requirement in requirement_list:
-            requirement_string += " "*rspace_level+f"{requirement}\n"
-        requirement_string += " "*rspace_level+"\"\"\"\n" + " "*rspace_level
+            requirement_string += " "*lspace_level+"    "+f"{requirement}\n"
+        requirement_string += " "*lspace_level+"    "+"\"\"\"\n"
         
         input_string += requirement_string
     
@@ -195,6 +200,3 @@ def make_input_string(prefix, instruct, head, requirement, dataset):
         
 
 
-if __name__ == "__main__":
-    full_database, root_namespaces = traversal_files("/home/qikahh/projects/Structured_Code_Context","RepoCoder", in_code = False, level=-1)
-    qika = 1
