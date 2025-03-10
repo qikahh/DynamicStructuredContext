@@ -4,11 +4,13 @@ import os
 import json
 import pickle
 import random
+import numpy as np
 import torch
 
 import re
 
 from tqdm import tqdm
+from rank_bm25 import BM25Okapi
 
 
 import tree_sitter_python as tspython
@@ -35,6 +37,7 @@ class ContextNode(object):
         self.type = type  # 节点类型
         self.children = []  # 子节点namespace列表
         self.parent = None  # 父节点namespace
+        self.previous = None # 前一个节点namespace
         
         # 代码对应的位置
         self.file_path = None
@@ -74,9 +77,33 @@ class ContextNode(object):
         
     def __setitem__(self, key, value):
         setattr(self, key, value)
-    
-    
 
+    def dfs_heads(self, context_dict):
+        """
+        获取此节点下所有head节点，如果为file或folder则不深入搜索
+        """
+        def dfs(namespace):
+            heads = []
+            for child_ns in context_dict[namespace].children:
+                child_node = context_dict[child_ns]
+                if child_node.name == "_head":
+                    heads.append(child_node)
+                elif child_node.type not in ["file", "folder", "code"]:
+                    heads.extend(dfs(child_ns))
+            return heads
+        if self.type in ["file", "folder"]:
+            return context_dict[self.children[0]]
+        else:
+            return dfs(self.namespace)
+    
+def is_all_comment_block(current_block):
+    if len(current_block.strip()) == 0:
+        return False
+    for line in current_block.splitlines():
+        stripped_line = line.strip()
+        if stripped_line and not stripped_line.startswith('#'):
+            return False
+    return True
 def build_blocks(code, parent_node, begin_line, cut = True):
     """
     将一段代码按空行分割成多个代码块,每个代码块创建一个ContextNode节点
@@ -98,6 +125,9 @@ def build_blocks(code, parent_node, begin_line, cut = True):
 
         for i in range(0, len(blocks), 2):
             current_block = blocks[i]
+            # 如果当前代码片段全部由#作为开头，则跳过
+            if is_all_comment_block(current_block):
+                continue
             if i + 1 < len(blocks):
                 current_block += blocks[i + 1]
             if len(merged_blocks) != 0 and merged_blocks[-1].strip('\n') == "":
@@ -105,7 +135,7 @@ def build_blocks(code, parent_node, begin_line, cut = True):
             else:
                 merged_blocks.append(current_block)
         # 只有当最后一个块完全是空白字符时才删除
-        if len(merged_blocks)>1 and len(merged_blocks[-1])==0:
+        if len(merged_blocks)>=1 and len(merged_blocks[-1])==0:
             merged_blocks.pop()
         blocks = merged_blocks
     else:
@@ -136,6 +166,7 @@ def build_blocks(code, parent_node, begin_line, cut = True):
         
         # 设置父子关系
         block_node.parent = parent_node.namespace
+        block_node.previous = parent_node.children[-1] if len(parent_node.children)>0 else None
         parent_node.children.append(block_node.namespace)
         
         all_nodes.append(block_node)
@@ -177,7 +208,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
                 namespace=parent_node.namespace + "." + class_name,
                 name=class_name,
                 type="class",
-                content=class_header+" "*(len(class_header)-len(class_header.lstrip())+4)+"...\n"
+                content=class_header+" "*(len(class_header)-len(class_header.lstrip())+4)+"# Omit body code\n"
             )
             class_node.namespace += "<class>"
             class_node.file_path = parent_node.file_path
@@ -186,10 +217,12 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
             class_node.begin_line = child.start_point[0]
             class_node.end_line = child.end_point[0]+1
             class_node.parent = parent_node.namespace
+            
             # 将类头作为独立代码块加入类节点的子节点
             class_head = build_blocks(class_header, class_node, begin_line = child.start_point[0], cut=False)
             # 将类体中的代码块加入类节点的子节点
             class_childs = build_class(all_code, child, class_node)
+            class_node.previous = parent_node.children[-1] if len(parent_node.children)>0 else None
             parent_node.children.append(class_node.namespace)
             
             all_nodes.append(class_node)
@@ -219,7 +252,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
                 namespace=parent_node.namespace + "." + func_name, 
                 name=func_name,
                 type="function",
-                content=func_header+" "*(len(func_header)-len(func_header.lstrip())+4)+"...\n"
+                content=func_header+" "*(len(func_header)-len(func_header.lstrip())+4)+"# Omit body code\n"
             )
             func_node.namespace += "<func>"
             func_node.file_path = parent_node.file_path
@@ -233,6 +266,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
             func_head = build_blocks(func_header, func_node, begin_line = child.start_point[0], cut=False)
             # 将函数体中的代码块加入函数节点的子节点
             func_nodes = bulid_func(all_code, child, func_node)
+            func_node.previous = parent_node.children[-1] if len(parent_node.children)>0 else None
             parent_node.children.append(func_node.namespace)
             
             all_nodes.append(func_node)
@@ -265,7 +299,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
                     namespace=parent_node.namespace + "." + func_name,
                     name=func_name, 
                     type="function",
-                    content=func_header+" "*(len(func_header)-len(func_header.lstrip())+4)+"...\n"
+                    content=func_header+" "*(len(func_header)-len(func_header.lstrip())+4)+"# Omit body code\n"
                 )
                 func_node.namespace += "<func>"
                 func_node.file_path = parent_node.file_path
@@ -279,6 +313,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
                 func_head = build_blocks(func_header, func_node, begin_line = child.start_point[0], cut=False)
                 # 将函数体中的代码块加入函数节点的子节点
                 func_nodes = bulid_func(all_code, definition, func_node)
+                func_node.previous = parent_node.children[-1] if len(parent_node.children)>0 else None
                 parent_node.children.append(func_node.namespace)
                 
                 all_nodes.append(func_node)
@@ -307,7 +342,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
                     namespace=parent_node.namespace + "." + class_name,
                     name=class_name,
                     type="class", 
-                    content=class_header+" "*(len(class_header)-len(class_header.lstrip())+4)+"...\n"
+                    content=class_header+" "*(len(class_header)-len(class_header.lstrip())+4)+"# Omit body code\n"
                 )
                 class_node.namespace += "<class>"
                 class_node.file_path = parent_node.file_path
@@ -321,6 +356,7 @@ def build_context_tree(all_code, root, parent_node, begin_line=None):
                 class_head = build_blocks(class_header, class_node, begin_line = child.start_point[0], cut=False)
                 # 将类体中的代码块加入类节点的子节点
                 class_childs = build_class(all_code, definition, class_node)
+                class_node.previous = parent_node.children[-1] if len(parent_node.children)>0 else None
                 parent_node.children.append(class_node.namespace)
                 
                 all_nodes.append(class_node)
@@ -409,9 +445,11 @@ def build_folder(curr_path, curr_node):
             file_head_node.begin_line = -1
             file_head_node.end_line = 0
             
+            file_head_node.previous = file_node.children[-1] if len(file_node.children)>0 else None
             file_node.children.append(file_head_node.namespace)
             file_children = build_file(item_path, file_node)
             
+            file_node.previous = curr_node.children[-1] if len(curr_node.children)>0 else None
             curr_node.children.append(file_node.namespace)
             all_nodes.append(file_node)
             all_nodes.append(file_head_node)
@@ -431,12 +469,44 @@ def build_folder(curr_path, curr_node):
             folder_node.namespace += "<folder>"
             folder_node.parent = curr_node.namespace
             folder_children = build_folder(item_path, folder_node)
+            folder_node.previous = curr_node.children[-1] if len(curr_node.children)>0 else None
             if len(folder_children):
                 curr_node.children.append(folder_node.namespace)
                 all_nodes.append(folder_node)
                 all_nodes.extend(folder_children)
     
     return all_nodes
+
+def get_namespace(raw_ns, context_dict):
+    root = context_dict[context_dict['']]
+    
+    target_name_list = raw_ns.split(".")
+
+    suffix_list = ["<file>", "<folder>", "<class>", "<func>"]
+    def dfs_ns(i, try_namespace):
+        if i == len(target_name_list):
+            return try_namespace
+        else:
+            target_name = target_name_list[i]
+            for suffix in suffix_list:
+                new_try_namespace = try_namespace+'.'+target_name+suffix
+                if new_try_namespace in context_dict[try_namespace].children:
+                    new_try_namespace = dfs_ns(i+1, new_try_namespace)
+                    if new_try_namespace is not None:
+                        return new_try_namespace
+        for suffix in ["src<folder>", "__init__<file>", "install<folder>", "utils<folder>"]:
+            new_try_namespace = try_namespace+'.'+suffix
+            if new_try_namespace in context_dict[try_namespace].children:
+                new_try_namespace = dfs_ns(i, new_try_namespace)
+                if new_try_namespace is not None:
+                    return new_try_namespace
+        
+        return None
+    
+    
+    target_namespace = dfs_ns(0, root.name)
+    return target_namespace
+
 def get_tooleval(data_path, source_code_path, result_path):
     """
     将ToolEval中的单条Python数据的上下文组织成字典形式
@@ -610,7 +680,7 @@ def initial_context(context_dict, target_namespace):
         in_file_nodes.remove(target_class)
     if target_file and target_file in cross_file_nodes:
         cross_file_nodes.remove(target_file)
-        
+    
     return {
         "in_class_nodes": in_class_nodes,
         "in_file_nodes": in_file_nodes,
@@ -621,7 +691,86 @@ def initial_context(context_dict, target_namespace):
         "cut_line": cut_line,
     }
         
+
+def initial_bm25(context_dict, target_namespace, query, tokenizer="cut", init_context=[], top_k=10, max_cross_num = 128, max_infile_num = 32):
+    """
+    根据query从context_dict中筛选最相关的函数节点
+    参数：
+        context_dict - 节点字典
+        target_namespace - 目标节点的命名空间，筛选时需要去除
+        query - 查询字符串
+        tokenizer - 分词器 默认为cut即按空格切分
+        init_context - 已有的初始上下文，默认为空
+        top_k - 返回的节点数量
+        max_length - 最大长度 默认为4096
+    返回：
+        top_k个相关性最高的函数节点对应的代码子节点命名空间列表
+    """
+    all_file = [node for node in context_dict.values() if isinstance(node, ContextNode) and node.type == "file" and node.name[:4] != "test"]
+    all_file_content = ["".join([context_dict[child].content for child in node.children]) for node in all_file]
     
+    if tokenizer == "cut":
+        query_tokens = query.split()
+        tokenized_corpus = [content.split() for content in all_file_content]
+    else:
+        query_tokens = tokenizer.tokenize(query)
+        tokenized_corpus = [tokenizer.tokenize(content) for content in all_file_content]
+    
+    BM25_model = BM25Okapi(tokenized_corpus)
+    scores = BM25_model.get_scores(query_tokens)
+    top_index = np.argsort(scores)[::-1]
+    
+    target_node = context_dict[target_namespace]
+    target_file = target_node.file_path
+    
+    def dfs2leaves(node):
+        select_list = []
+        if len(node.children):
+            for child in node.children:
+                select_list += dfs2leaves(context_dict[child])
+        else:
+            select_list.append(node)
+        return select_list
+    
+    cross_list = [context_dict[node_ns] for node_ns in init_context if context_dict[node_ns].file_path != target_file]
+    infile_list = [context_dict[node_ns] for node_ns in init_context if context_dict[node_ns].file_path == target_file]
+    cross_num = len(cross_list)
+    infile_num = len(infile_list)
+    flag = False
+    for idx in top_index:
+        if flag:
+            break
+        file = context_dict[all_file[idx].namespace]
+        if file.file_path != target_file:
+            node_list = dfs2leaves(file)
+            file_length = 0
+            for node in node_list:
+                if node not in cross_list:
+                    cross_num += 1
+                    file_length += len(tokenizer.tokenize(node.content))
+                    if cross_num > max_cross_num:
+                        flag = True
+                        break
+                    elif file_length > 2048:
+                        break
+                    cross_list.append(node)
+        else:
+            node_list = dfs2leaves(file)
+            for node in node_list:
+                if node not in infile_list:
+                    infile_num += 1
+                    if infile_num > max_infile_num:
+                        break
+                    infile_list.append(node)
+            
+    cross_list.sort(key=lambda x: ((x.file_path if x.file_path else x.namespace), x.begin_line))
+    infile_list.sort(key=lambda x: ((x.file_path if x.file_path else x.namespace), x.begin_line))
+    
+    cross_list = [node.namespace for node in cross_list]
+    infile_list = [node.namespace for node in infile_list]
+    
+    return cross_list, infile_list
+
 
 if __name__ == "__main__":
     # 测试get_tooleval函数

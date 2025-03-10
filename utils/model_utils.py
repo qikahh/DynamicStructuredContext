@@ -27,6 +27,12 @@ def get_model(model_config, model_root=MODELSCOPE_PATH, device=None):
         model = model.to(device)
     return model, tokenizer
 
+def get_tokenizer(model_config, model_root=MODELSCOPE_PATH):
+    model_path = os.path.join(model_root, model_config['path'])
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    return tokenizer
+
+
 def seed_everything(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)

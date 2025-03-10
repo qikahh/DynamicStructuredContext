@@ -1,0 +1,1541 @@
+INFO:root:time: 2025年 03月 05日 星期三 00:03:06 CST
+
+INFO:root:pid: 2198165
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: BM25
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_bm_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.34s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.29it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.16it/s]
+INFO:root:--------data 0--------
+data 0:   0%|          | 0/512 [00:00<?, ?it/s]data 0:   2%|▏         | 10/512 [00:02<01:48,  4.61it/s]data 0:   4%|▍         | 20/512 [00:04<01:38,  4.98it/s]data 0:   6%|▌         | 30/512 [00:06<01:37,  4.93it/s]data 0:   8%|▊         | 40/512 [00:08<01:37,  4.83it/s]data 0:  10%|▉         | 50/512 [00:10<01:32,  5.00it/s]data 0:  12%|█▏        | 60/512 [00:11<01:27,  5.15it/s]data 0:  14%|█▎        | 70/512 [00:13<01:24,  5.24it/s]data 0:  16%|█▌        | 80/512 [00:15<01:25,  5.03it/s]data 0:  18%|█▊        | 90/512 [00:17<01:22,  5.14it/s]data 0:  20%|█▉        | 100/512 [00:19<01:17,  5.29it/s]data 0:  21%|██▏       | 110/512 [00:21<01:15,  5.33it/s]data 0:  23%|██▎       | 120/512 [00:23<01:14,  5.27it/s]data 0:  25%|██▌       | 130/512 [00:25<01:12,  5.29it/s]data 0:  25%|██▌       | 130/512 [00:27<01:20,  4.76it/s]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: python-benedict/benedict/utils/type_util.py. We simplified the code by removing some code blocks.
+
+import pathlib
+import re
+from datetime import datetime
+from decimal import Decimal
+
+regex = re.compile("").__class__
+uuid_re = re.compile(
+    "^([0-9a-f]{32}){1}$|^([0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}){1}$",
+    flags=re.IGNORECASE,
+)
+
+
+def is_bool(val):
+    return isinstance(val, bool)
+
+
+def is_collection(val):
+    return isinstance(val, (dict, list, set, tuple))
+
+
+def is_datetime(val):
+    return isinstance(val, datetime)
+
+
+def is_decimal(val):
+    return isinstance(val, Decimal)
+
+
+def is_dict(val):
+    return isinstance(val, dict)
+
+
+def is_dict_or_list(val):
+    return isinstance(val, (dict, list))
+
+
+def is_dict_or_list_or_tuple(val):
+    return isinstance(val, (dict, list, tuple))
+
+
+def is_float(val):
+    return isinstance(val, float)
+
+
+def is_function(val):
+    return callable(val)
+
+
+def is_integer(val):
+    return isinstance(val, int)
+
+
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file benedict/utils/type_util.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def is_json_serializable(val):
+    """
+    Check if the input value is JSON serializable. It checks if the input value is of the JSON serializable types.
+    :param val: Any. The input value to be checked for JSON serializability.
+    :return: Bool. True if the input value is JSON serializable, False otherwise.
+    """
+
+INFO:root:生成结果: 
+    if val is None:
+        return True
+    if isinstance(val, (dict, list, tuple)):
+        return True
+    if isinstance(val, str):
+        try:
+            json.dumps(val)
+            return True
+        except Exception:
+            return False
+    if isinstance(val, int):
+        return True
+    if isinstance(val, float):
+        return True
+    if isinstance(val, bool):
+        return True
+    if isinstance(val, datetime):
+        return True
+    if isinstance(val, Decimal):
+        return True
+    if isinstance(val, pathlib.Path):
+        return True
+    if isinstance(val, uuid_re.match):
+        return True
+    return False
+
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 3184
+INFO:root:max position: 3184
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:--------data 1--------
+data 1:   0%|          | 0/512 [00:00<?, ?it/s]data 1:   2%|▏         | 10/512 [00:03<02:56,  2.84it/s]data 1:   4%|▍         | 20/512 [00:05<02:02,  4.02it/s]data 1:   6%|▌         | 30/512 [00:07<01:44,  4.63it/s]data 1:   8%|▊         | 40/512 [00:08<01:36,  4.88it/s]data 1:  10%|▉         | 50/512 [00:10<01:30,  5.10it/s]data 1:  12%|█▏        | 60/512 [00:12<01:26,  5.24it/s]data 1:  14%|█▎        | 70/512 [00:14<01:22,  5.34it/s]data 1:  16%|█▌        | 80/512 [00:16<01:19,  5.45it/s]data 1:  18%|█▊        | 90/512 [00:17<01:15,  5.56it/s]data 1:  20%|█▉        | 100/512 [00:19<01:12,  5.65it/s]data 1:  21%|██▏       | 110/512 [00:21<01:10,  5.66it/s]data 1:  23%|██▎       | 120/512 [00:23<01:08,  5.70it/s]data 1:  25%|██▌       | 130/512 [00:24<01:07,  5.68it/s]data 1:  27%|██▋       | 140/512 [00:26<01:05,  5.67it/s]data 1:  27%|██▋       | 140/512 [00:28<01:15,  4.95it/s]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: feedparser/feedparser/urls.py. We simplified the code by removing some code blocks.
+
+import re
+import urllib.parse
+
+from .html import _BaseHTMLProcessor
+
+# If you want feedparser to allow all URL schemes, set this to ()
+# List culled from Python's urlparse documentation at:
+#   http://docs.python.org/library/urlparse.html
+# as well as from "URI scheme" at Wikipedia:
+#   https://secure.wikimedia.org/wikipedia/en/wiki/URI_scheme
+# Many more will likely need to be added!
+ACCEPTABLE_URI_SCHEMES = (
+    'file', 'ftp', 'gopher', 'h323', 'hdl', 'http', 'https', 'imap', 'magnet',
+    'mailto', 'mms', 'news', 'nntp', 'prospero', 'rsync', 'rtsp', 'rtspu',
+    'sftp', 'shttp', 'sip', 'sips', 'snews', 'svn', 'svn+ssh', 'telnet',
+    'wais',
+    # Additional common-but-unofficial schemes
+    'aim', 'callto', 'cvs', 'facetime', 'feed', 'git', 'gtalk', 'irc', 'ircs',
+    'irc6', 'itms', 'mms', 'msnim', 'skype', 'ssh', 'smb', 'svn', 'ymsg',
+)
+
+_urifixer = re.compile('^([A-Za-z][A-Za-z0-9+-.]*://)(/*)(.*?)')
+
+
+def _urljoin(base, uri):
+    uri = _urifixer.sub(r'\1\3', uri)
+    try:
+        uri = urllib.parse.urljoin(base, uri)
+    except ValueError:
+        uri = ''
+    return uri
+
+
+def convert_to_idn(url):
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+
+def make_safe_absolute_uri(base, rel=None):
+    # bail if ACCEPTABLE_URI_SCHEMES is empty
+    if not ACCEPTABLE_URI_SCHEMES:
+        return _urljoin(base, rel or '')
+    if not base:
+        return rel or ''
+    if not rel:
+        try:
+            scheme = urllib.parse.urlparse(base)[0]
+        except ValueError:
+            return ''
+        if not scheme or scheme in ACCEPTABLE_URI_SCHEMES:
+            return base
+        return ''
+    uri = _urljoin(base, rel)
+    if uri.strip().split(':', 1)[0] not in ACCEPTABLE_URI_SCHEMES:
+        return ''
+    return uri
+
+
+class RelativeURIResolver(_BaseHTMLProcessor):
+    relative_uris = {
+        ('a', 'href'),
+        ('applet', 'codebase'),
+        ('area', 'href'),
+        ('audio', 'src'),
+        ('blockquote', 'cite'),
+        ('body', 'background'),
+        ('del', 'cite'),
+        ('form', 'action'),
+        ('frame', 'longdesc'),
+        ('frame', 'src'),
+        ('iframe', 'longdesc'),
+        ('iframe', 'src'),
+        ('head', 'profile'),
+        ('img', 'longdesc'),
+        ('img', 'src'),
+        ('img', 'usemap'),
+        ('input', 'src'),
+        ('input', 'usemap'),
+        ('ins', 'cite'),
+        ('link', 'href'),
+        ('object', 'classid'),
+        ('object', 'codebase'),
+        ('object', 'data'),
+        ('object', 'usemap'),
+        ('q', 'cite'),
+        ('script', 'src'),
+        ('source', 'src'),
+        ('video', 'poster'),
+        ('video', 'src'),
+    }
+
+    def __init__(self, baseuri, encoding, _type):
+        _BaseHTMLProcessor.__init__(self, encoding, _type)
+        self.baseuri = baseuri
+    def resolve_uri(self, uri):
+        return make_safe_absolute_uri(self.baseuri, uri.strip())
+    def unknown_starttag(self, tag, attrs):
+        attrs = self.normalize_attrs(attrs)
+        attrs = [(key, ((tag, key) in self.relative_uris) and self.resolve_uri(value) or value) for key, value in attrs]
+        super(RelativeURIResolver, self).unknown_starttag(tag, attrs)
+
+
+def resolve_relative_uris(html_source, base_uri, encoding, type_):
+    p = RelativeURIResolver(base_uri, encoding, type_)
+    p.feed(html_source)
+    return p.output()
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file feedparser/urls.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def convert_to_idn(url):
+    """
+    Convert a URL to IDN notation. It checks if the host can be encoded in ASCII. If not, it converts the host to IDN form.
+    :param url: String. The URL to be converted to IDN notation.
+    :return: String. The URL in IDN notation.
+    """
+
+INFO:root:生成结果: 
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 9407
+INFO:root:max position: 9407
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:--------data 2--------
+data 2:   0%|          | 0/512 [00:00<?, ?it/s]data 2:   2%|▏         | 10/512 [00:01<01:37,  5.14it/s]data 2:   4%|▍         | 20/512 [00:03<01:33,  5.28it/s]data 2:   6%|▌         | 30/512 [00:05<01:28,  5.46it/s]data 2:   8%|▊         | 40/512 [00:07<01:25,  5.51it/s]data 2:  10%|▉         | 50/512 [00:09<01:24,  5.49it/s]data 2:  12%|█▏        | 60/512 [00:11<01:22,  5.46it/s]data 2:  14%|█▎        | 70/512 [00:12<01:20,  5.48it/s]data 2:  16%|█▌        | 80/512 [00:14<01:16,  5.61it/s]data 2:  18%|█▊        | 90/512 [00:16<01:14,  5.68it/s]data 2:  20%|█▉        | 100/512 [00:18<01:12,  5.66it/s]data 2:  21%|██▏       | 110/512 [00:19<01:10,  5.66it/s]data 2:  23%|██▎       | 120/512 [00:21<01:08,  5.75it/s]data 2:  25%|██▌       | 130/512 [00:23<01:06,  5.70it/s]data 2:  27%|██▋       | 140/512 [00:24<01:04,  5.74it/s]data 2:  29%|██▉       | 150/512 [00:26<01:03,  5.74it/s]data 2:  29%|██▉       | 150/512 [00:27<01:05,  5.53it/s]
+INFO:root:函数头: 
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: mistune/src/mistune/toc.py. We simplified the code by removing some code blocks.
+
+from .util import striptags
+
+
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+    
+    if heading_id is None:
+        def heading_id(token, index):
+            return 'toc_' + str(index + 1)
+
+    def toc_hook(md, state):
+        headings = []
+
+        for tok in state.tokens:
+            if tok['type'] == 'heading':
+                level = tok['attrs']['level']
+                if min_level <= level <= max_level:
+                    headings.append(tok)
+
+        toc_items = []
+        for i, tok in enumerate(headings):
+            tok['attrs']['id'] = heading_id(tok, i)
+            toc_items.append(normalize_toc_item(md, tok))
+
+        # save items into state
+        state.env['toc_items'] = toc_items
+
+    md.before_render_hooks.append(toc_hook)
+
+
+def normalize_toc_item(md, token):
+    text = token['text']
+    tokens = md.inline(text, {})
+    html = md.renderer(tokens, {})
+    text = striptags(html)
+    attrs = token['attrs']
+    return attrs['level'], attrs['id'], text
+
+
+def render_toc_ul(toc):
+    
+    if not toc:
+        return ''
+
+    s = '<ul>\n'
+    levels = []
+    for level, k, text in toc:
+        item = '<a href="#{}">{}</a>'.format(k, text)
+        if not levels:
+            s += '<li>' + item
+            levels.append(level)
+        elif level == levels[-1]:
+            s += '</li>\n<li>' + item
+        elif level > levels[-1]:
+            s += '\n<ul>\n<li>' + item
+            levels.append(level)
+        else:
+            levels.pop()
+            while levels:
+                last_level = levels.pop()
+                if level == last_level:
+                    s += '</li>\n</ul>\n</li>\n<li>' + item
+                    levels.append(level)
+                    break
+                elif level > last_level:
+                    s += '</li>\n<li>' + item
+                    levels.append(last_level)
+                    levels.append(level)
+                    break
+                else:
+                    s += '</li>\n</ul>\n'
+            else:
+                levels.append(level)
+                s += '</li>\n<li>' + item
+
+    while len(levels) > 1:
+        s += '</li>\n</ul>\n'
+        levels.pop()
+
+    return s + '</li>\n</ul>\n'
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file src/mistune/toc.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+    """
+    This function adds a hook to save table of contents (TOC) items into the state.env. It is usually helpful for doc generator.
+    :param md: Markdown instance. The instance of the Markdown class.
+    :param min_level: Integer. The minimum heading level to include in the TOC.
+    :param max_level: Integer. The maximum heading level to include in the TOC.
+    :param heading_id: Function. A function to generate heading_id.
+    :return: No return values.
+    """
+
+INFO:root:生成结果: 
+    if heading_id is None:
+        def heading_id(token, index):
+            return 'toc_' + str(index + 1)
+
+    def toc_hook(md, state):
+        headings = []
+
+        for tok in state.tokens:
+            if tok['type'] == 'heading':
+                level = tok['attrs']['level']
+                if min_level <= level <= max_level:
+                    headings.append(tok)
+
+        toc_items = []
+        for i, tok in enumerate(headings):
+            tok['attrs']['id'] = heading_id(tok, i)
+            toc_items.append(normalize_toc_item(md, tok))
+
+        # save items into state
+        state.env['toc_items'] = toc_items
+
+    md.before_render_hooks.append(toc_hook)
+
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 5277
+INFO:root:max position: 5277
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.toc<file>.add_toc_hook<func>
+INFO:root:--------data 3--------
+data 3:   0%|          | 0/512 [00:00<?, ?it/s]data 3:   2%|▏         | 10/512 [00:02<02:02,  4.09it/s]data 3:   4%|▍         | 20/512 [00:04<01:38,  4.99it/s]data 3:   6%|▌         | 30/512 [00:05<01:31,  5.28it/s]data 3:   6%|▌         | 30/512 [00:07<01:59,  4.04it/s]
+INFO:root:函数头: 
+def table_in_quote(md):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: mistune/src/mistune/plugins/table.py. We simplified the code by removing some code blocks.
+
+import re
+from ..helpers import PREVENT_BACKSLASH
+
+__all__ = ['table', 'table_in_quote', 'table_in_list']
+
+
+TABLE_PATTERN = (
+  r'^ {0,3}\|(?P<table_head>.+)\|[ \t]*\n'
+  r' {0,3}\|(?P<table_align> *[-:]+[-| :]*)\|[ \t]*\n'
+  r'(?P<table_body>(?: {0,3}\|.*\|[ \t]*(?:\n|$))*)\n*'
+)
+NP_TABLE_PATTERN = (
+  r'^ {0,3}(?P<nptable_head>\S.*\|.*)\n'
+  r' {0,3}(?P<nptable_align>[-:]+ *\|[-| :]*)\n'
+  r'(?P<nptable_body>(?:.*\|.*(?:\n|$))*)\n*'
+)
+
+TABLE_CELL = re.compile(r'^ {0,3}\|(.+)\|[ \t]*$')
+CELL_SPLIT = re.compile(r' *' + PREVENT_BACKSLASH + r'\| *')
+ALIGN_CENTER = re.compile(r'^ *:-+: *$')
+ALIGN_LEFT = re.compile(r'^ *:-+ *$')
+ALIGN_RIGHT = re.compile(r'^ *-+: *$')
+
+
+def parse_table(block, m, state):
+    pos = m.end()
+    header = m.group('table_head')
+    align = m.group('table_align')
+    thead, aligns = _process_thead(header, align)
+    if not thead:
+        return
+
+    rows = []
+    body = m.group('table_body')
+    for text in body.splitlines():
+        m = TABLE_CELL.match(text)
+        if not m:  # pragma: no cover
+            return
+        row = _process_row(m.group(1), aligns)
+        if not row:
+            return
+        rows.append(row)
+
+    children = [thead, {'type': 'table_body', 'children': rows}]
+    state.append_token({'type': 'table', 'children': children})
+    return pos
+
+
+def parse_nptable(block, m, state):
+    header = m.group('nptable_head')
+    align = m.group('nptable_align')
+    thead, aligns = _process_thead(header, align)
+    if not thead:
+        return
+
+    rows = []
+    body = m.group('nptable_body')
+    for text in body.splitlines():
+        row = _process_row(text, aligns)
+        if not row:
+            return
+        rows.append(row)
+
+    children = [thead, {'type': 'table_body', 'children': rows}]
+    state.append_token({'type': 'table', 'children': children})
+    return m.end()
+
+
+def _process_thead(header, align):
+    headers = CELL_SPLIT.split(header)
+    aligns = CELL_SPLIT.split(align)
+    if len(headers) != len(aligns):
+      return None, None
+
+    for i, v in enumerate(aligns):
+        if ALIGN_CENTER.match(v):
+            aligns[i] = 'center'
+        elif ALIGN_LEFT.match(v):
+            aligns[i] = 'left'
+        elif ALIGN_RIGHT.match(v):
+            aligns[i] = 'right'
+        else:
+            aligns[i] = None
+
+    children = [
+        {
+            'type': 'table_cell',
+            'text': text.strip(),
+            'attrs': {'align': aligns[i], 'head': True}
+        }
+        for i, text in enumerate(headers)
+    ]
+    thead = {'type': 'table_head', 'children': children}
+    return thead, aligns
+
+
+def _process_row(text, aligns):
+    cells = CELL_SPLIT.split(text)
+    if len(cells) != len(aligns):
+        return None
+
+    children = [
+        {
+            'type': 'table_cell',
+            'text': text.strip(),
+            'attrs': {'align': aligns[i], 'head': False}
+        }
+        for i, text in enumerate(cells)
+    ]
+    return {'type': 'table_row', 'children': children}
+
+
+def render_table(renderer, text):
+    return '<table>\n' + text + '</table>\n'
+
+
+def render_table_head(renderer, text):
+    return '<thead>\n<tr>\n' + text + '</tr>\n</thead>\n'
+
+
+def render_table_body(renderer, text):
+    return '<tbody>\n' + text + '</tbody>\n'
+
+
+def render_table_row(renderer, text):
+    return '<tr>\n' + text + '</tr>\n'
+
+
+def render_table_cell(renderer, text, align=None, head=False):
+    if head:
+        tag = 'th'
+    else:
+        tag = 'td'
+
+    html = '  <' + tag
+    if align:
+        html += ' style="text-align:' + align + '"'
+
+    return html + '>' + text + '</' + tag + '>\n'
+
+
+def table(md):
+    
+    md.block.register('table', TABLE_PATTERN, parse_table, before='paragraph')
+    md.block.register('nptable', NP_TABLE_PATTERN, parse_nptable, before='paragraph')
+
+    if md.renderer and md.renderer.NAME == 'html':
+        md.renderer.register('table', render_table)
+        md.renderer.register('table_head', render_table_head)
+        md.renderer.register('table_body', render_table_body)
+        md.renderer.register('table_row', render_table_row)
+        md.renderer.register('table_cell', render_table_cell)
+
+
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file src/mistune/plugins/table.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def table_in_quote(md):
+    """
+    This function enables the table plugin in block quotes by inserting rules for table and nptable before the paragraph in the block quote rules.
+    :param md: Markdown. The Markdown instance.
+    :return: No return values.
+    """
+
+INFO:root:生成结果: 
+    md.block.insert_rule(md.block.block_quote_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.block_quote_rules, 'nptable', before='paragraph')
+
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 5404
+INFO:root:max position: 5404
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_quote<func>
+INFO:root:--------data 4--------
+data 4:   0%|          | 0/512 [00:00<?, ?it/s]data 4:   2%|▏         | 10/512 [00:02<02:07,  3.93it/s]data 4:   4%|▍         | 20/512 [00:04<01:41,  4.87it/s]data 4:   6%|▌         | 30/512 [00:06<01:32,  5.22it/s]data 4:   6%|▌         | 30/512 [00:07<02:01,  3.96it/s]
+INFO:root:函数头: 
+def table_in_list(md):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: mistune/src/mistune/plugins/table.py. We simplified the code by removing some code blocks.
+
+import re
+from ..helpers import PREVENT_BACKSLASH
+
+__all__ = ['table', 'table_in_quote', 'table_in_list']
+
+
+TABLE_PATTERN = (
+  r'^ {0,3}\|(?P<table_head>.+)\|[ \t]*\n'
+  r' {0,3}\|(?P<table_align> *[-:]+[-| :]*)\|[ \t]*\n'
+  r'(?P<table_body>(?: {0,3}\|.*\|[ \t]*(?:\n|$))*)\n*'
+)
+NP_TABLE_PATTERN = (
+  r'^ {0,3}(?P<nptable_head>\S.*\|.*)\n'
+  r' {0,3}(?P<nptable_align>[-:]+ *\|[-| :]*)\n'
+  r'(?P<nptable_body>(?:.*\|.*(?:\n|$))*)\n*'
+)
+
+TABLE_CELL = re.compile(r'^ {0,3}\|(.+)\|[ \t]*$')
+CELL_SPLIT = re.compile(r' *' + PREVENT_BACKSLASH + r'\| *')
+ALIGN_CENTER = re.compile(r'^ *:-+: *$')
+ALIGN_LEFT = re.compile(r'^ *:-+ *$')
+ALIGN_RIGHT = re.compile(r'^ *-+: *$')
+
+
+def parse_table(block, m, state):
+    pos = m.end()
+    header = m.group('table_head')
+    align = m.group('table_align')
+    thead, aligns = _process_thead(header, align)
+    if not thead:
+        return
+
+    rows = []
+    body = m.group('table_body')
+    for text in body.splitlines():
+        m = TABLE_CELL.match(text)
+        if not m:  # pragma: no cover
+            return
+        row = _process_row(m.group(1), aligns)
+        if not row:
+            return
+        rows.append(row)
+
+    children = [thead, {'type': 'table_body', 'children': rows}]
+    state.append_token({'type': 'table', 'children': children})
+    return pos
+
+
+def parse_nptable(block, m, state):
+    header = m.group('nptable_head')
+    align = m.group('nptable_align')
+    thead, aligns = _process_thead(header, align)
+    if not thead:
+        return
+
+    rows = []
+    body = m.group('nptable_body')
+    for text in body.splitlines():
+        row = _process_row(text, aligns)
+        if not row:
+            return
+        rows.append(row)
+
+    children = [thead, {'type': 'table_body', 'children': rows}]
+    state.append_token({'type': 'table', 'children': children})
+    return m.end()
+
+
+def _process_thead(header, align):
+    headers = CELL_SPLIT.split(header)
+    aligns = CELL_SPLIT.split(align)
+    if len(headers) != len(aligns):
+      return None, None
+
+    for i, v in enumerate(aligns):
+        if ALIGN_CENTER.match(v):
+            aligns[i] = 'center'
+        elif ALIGN_LEFT.match(v):
+            aligns[i] = 'left'
+        elif ALIGN_RIGHT.match(v):
+            aligns[i] = 'right'
+        else:
+            aligns[i] = None
+
+    children = [
+        {
+            'type': 'table_cell',
+            'text': text.strip(),
+            'attrs': {'align': aligns[i], 'head': True}
+        }
+        for i, text in enumerate(headers)
+    ]
+    thead = {'type': 'table_head', 'children': children}
+    return thead, aligns
+
+
+def _process_row(text, aligns):
+    cells = CELL_SPLIT.split(text)
+    if len(cells) != len(aligns):
+        return None
+
+    children = [
+        {
+            'type': 'table_cell',
+            'text': text.strip(),
+            'attrs': {'align': aligns[i], 'head': False}
+        }
+        for i, text in enumerate(cells)
+    ]
+    return {'type': 'table_row', 'children': children}
+
+
+def render_table(renderer, text):
+    return '<table>\n' + text + '</table>\n'
+
+
+def render_table_head(renderer, text):
+    return '<thead>\n<tr>\n' + text + '</tr>\n</thead>\n'
+
+
+def render_table_body(renderer, text):
+    return '<tbody>\n' + text + '</tbody>\n'
+
+
+def render_table_row(renderer, text):
+    return '<tr>\n' + text + '</tr>\n'
+
+
+def render_table_cell(renderer, text, align=None, head=False):
+    if head:
+        tag = 'th'
+    else:
+        tag = 'td'
+
+    html = '  <' + tag
+    if align:
+        html += ' style="text-align:' + align + '"'
+
+    return html + '>' + text + '</' + tag + '>\n'
+
+
+def table(md):
+    
+    md.block.register('table', TABLE_PATTERN, parse_table, before='paragraph')
+    md.block.register('nptable', NP_TABLE_PATTERN, parse_nptable, before='paragraph')
+
+    if md.renderer and md.renderer.NAME == 'html':
+        md.renderer.register('table', render_table)
+        md.renderer.register('table_head', render_table_head)
+        md.renderer.register('table_body', render_table_body)
+        md.renderer.register('table_row', render_table_row)
+        md.renderer.register('table_cell', render_table_cell)
+
+
+def table_in_quote(md):
+    
+    md.block.insert_rule(md.block.block_quote_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.block_quote_rules, 'nptable', before='paragraph')
+
+
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file src/mistune/plugins/table.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def table_in_list(md):
+    """
+    This function enables the table plugin in the list. It inserts the table and nptable rules before the paragraph rule in the list.
+    :param md: Markdown. The Markdown instance to enable the table plugin in the list.
+    :return: No return values.
+    """
+
+INFO:root:生成结果: 
+    
+    md.block.insert_rule(md.block.list_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.list_rules, 'nptable', before='paragraph')
+
+INFO:root:****************************************
+INFO:root:max length: 5469
+INFO:root:max position: 5469
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_list<func>
+INFO:root:--------data 5--------
+data 5:   0%|          | 0/512 [00:00<?, ?it/s]data 5:   2%|▏         | 10/512 [00:01<01:25,  5.86it/s]data 5:   4%|▍         | 20/512 [00:02<01:08,  7.23it/s]data 5:   6%|▌         | 30/512 [00:04<01:01,  7.80it/s]data 5:   8%|▊         | 40/512 [00:05<00:58,  8.08it/s]data 5:  10%|▉         | 50/512 [00:06<00:56,  8.18it/s]data 5:  12%|█▏        | 60/512 [00:07<00:54,  8.30it/s]data 5:  12%|█▏        | 60/512 [00:08<01:00,  7.48it/s]
+INFO:root:函数头: 
+def parallel_handler(callback: Callable, texts: List[str], n_jobs: int = 2, **kwargs) -> Generator[
+    List[Any], None, None
+]:
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: xmnlp/xmnlp/utils/__init__.py. We simplified the code by removing some code blocks.
+
+import os
+import re
+import concurrent.futures as futures
+from functools import partial
+from typing import Any, Callable, List, Generator
+
+import numpy as np
+
+
+re_line_skip = re.compile('[\r\n]')
+re_delimiter = re.compile('[，。？！；]')
+
+
+def split_text(doc: str) -> List[str]:
+    sents = []
+    for line in re_line_skip.split(doc):
+        line = line.strip()
+        if not line:
+            continue
+        for sent in re_delimiter.split(line):
+            sent = sent.strip()
+            if not sent:
+                continue
+            sents.append(sent)
+    return sents
+
+
+def filelist(path: str) -> Generator[str, None, None]:
+    if os.path.isdir(path):
+        for root, dirs, files in os.walk(path):
+            if not dirs:
+                for f in files:
+                    yield os.sep.join([root, f])
+    else:
+        yield path
+
+
+def load_stopword(fpath: str) -> List[str]:
+    
+    stopwords = set()
+    for fname in filelist(fpath):
+        with open(fname, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                stopwords.add(line)
+    return stopwords
+
+
+def rematch(offsets):
+    
+    mapping = []
+    for offset in offsets:
+        if offset[0] == 0 and offset[1] == 0:
+            mapping.append([])
+        else:
+            mapping.append([i for i in range(offset[0], offset[1])])
+    return mapping
+
+
+def topK(matrix, K, axis=1):
+    
+    if axis == 0:
+        row_index = np.arange(matrix.shape[1 - axis])
+        topk_index = np.argpartition(-matrix, K, axis=axis)[0:K, :]
+        topk_data = matrix[topk_index, row_index]
+        topk_index_sort = np.argsort(-topk_data, axis=axis)
+        topk_data_sort = topk_data[topk_index_sort, row_index]
+        topk_index_sort = topk_index[0:K, :][topk_index_sort, row_index]
+    else:
+        column_index = np.arange(matrix.shape[1 - axis])[:, None]
+        topk_index = np.argpartition(-matrix, K, axis=axis)[:, 0:K]
+        topk_data = matrix[column_index, topk_index]
+        topk_index_sort = np.argsort(-topk_data, axis=axis)
+        topk_data_sort = topk_data[column_index, topk_index_sort]
+        topk_index_sort = topk_index[:, 0:K][column_index, topk_index_sort]
+    return topk_data_sort, topk_index_sort
+
+
+def parallel_handler(callback: Callable, texts: List[str], n_jobs: int = 2, **kwargs) -> Generator[
+    List[Any], None, None
+]:
+    
+    if not isinstance(texts, list):
+        raise ValueError("You should pass a list of texts")
+    if kwargs:
+        callback = partial(callback, **kwargs)
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        for ret in executor.map(callback, texts):
+            yield ret
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file xmnlp/utils/__init__.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def parallel_handler(callback: Callable, texts: List[str], n_jobs: int = 2, **kwargs) -> Generator[
+    List[Any], None, None
+]:
+    """
+    This function is a parallel handler that takes a callback function and a list of texts as input. It then processes the texts using the callback function in parallel using a thread pool executor. If the input `texts` is not a list, raise a ValueError("You should pass a list of texts").
+    :param callback: Callable. The callback function to be applied to the list of texts.
+    :param texts: List[str]. The list of texts to be processed.
+    :param n_jobs: int. The pool size of threads. Defaults to 2.
+    :param kwargs: Any additional keyword arguments to be passed to the callback function.
+    :return: Generator[List[Any], None, None]. A generator that yields the results of applying the callback function to the texts in parallel.
+    """
+
+INFO:root:生成结果: 
+    if not isinstance(texts, list):
+        raise ValueError("You should pass a list of texts")
+    if kwargs:
+        callback = partial(callback, **kwargs)
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        for ret in executor.map(callback, texts):
+            yield ret
+
+
+INFO:root:****************************************
+INFO:root:max length: 4999
+INFO:root:max position: 4999
+INFO:root:target_namespace: xmnlp.xmnlp<folder>.utils<folder>.__init__<file>.parallel_handler<func>
+INFO:root:--------data 6--------
+data 6:   0%|          | 0/512 [00:00<?, ?it/s]data 6:   2%|▏         | 10/512 [00:02<01:41,  4.97it/s]data 6:   4%|▍         | 20/512 [00:03<01:35,  5.16it/s]data 6:   6%|▌         | 30/512 [00:05<01:30,  5.32it/s]data 6:   8%|▊         | 40/512 [00:07<01:28,  5.36it/s]data 6:  10%|▉         | 50/512 [00:09<01:25,  5.38it/s]data 6:  12%|█▏        | 60/512 [00:11<01:26,  5.24it/s]data 6:  12%|█▏        | 60/512 [00:12<01:32,  4.90it/s]
+INFO:root:函数头: 
+def shorten(text: str, width: int, suffix: str = "...") -> str:
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: parsel/parsel/utils.py. We simplified the code by removing some code blocks.
+
+import re
+from typing import Any, Iterable, Iterator, List, Match, Pattern, Union, cast
+from w3lib.html import replace_entities as w3lib_replace_entities
+
+
+def flatten(x: Iterable[Any]) -> List[Any]:
+    
+    return list(iflatten(x))
+
+
+def iflatten(x: Iterable[Any]) -> Iterator[Any]:
+    
+    for el in x:
+        if _is_listlike(el):
+            yield from flatten(el)
+        else:
+            yield el
+
+
+def _is_listlike(x: Any) -> bool:
+    
+    return hasattr(x, "__iter__") and not isinstance(x, (str, bytes))
+
+
+def extract_regex(
+    regex: Union[str, Pattern[str]], text: str, replace_entities: bool = True
+) -> List[str]:
+    
+    if isinstance(regex, str):
+        regex = re.compile(regex, re.UNICODE)
+
+    if "extract" in regex.groupindex:
+        # named group
+        try:
+            extracted = cast(Match[str], regex.search(text)).group("extract")
+        except AttributeError:
+            strings = []
+        else:
+            strings = [extracted] if extracted is not None else []
+    else:
+        # full regex or numbered groups
+        strings = regex.findall(text)
+
+    strings = flatten(strings)
+    if not replace_entities:
+        return strings
+    return [w3lib_replace_entities(s, keep=["lt", "amp"]) for s in strings]
+
+
+def shorten(text: str, width: int, suffix: str = "...") -> str:
+    
+    if len(text) <= width:
+        return text
+    if width > len(suffix):
+        return text[: width - len(suffix)] + suffix
+    if width >= 0:
+        return suffix[len(suffix) - width :]
+    raise ValueError("width must be equal or greater than 0")
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file parsel/utils.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def shorten(text: str, width: int, suffix: str = "...") -> str:
+    """
+    Shorten the given text to fit in the given width. If the length of the text is less than or equal to the width, the original text is returned. If the width is greater than the length of the suffix, the text is truncated to fit the width and the suffix is added. If the width is greater than or equal to 0, the suffix is returned based on the width. Otherwise, a ValueError("width must be equal or greater than 0") is raised.
+    :param text: String. The input text to be shortened.
+    :param width: Integer. The width to which the text should be shortened.
+    :param suffix: String. The suffix to be added at the end of the shortened text. Defaults to "...".
+    :return: String. The shortened text.
+    """
+
+INFO:root:生成结果: 
+    if len(text) <= width:
+        return text
+    if width > len(suffix):
+        return text[: width - len(suffix)] + suffix
+    if width >= 0:
+        return suffix[len(suffix) - width :]
+    raise ValueError("width must be equal or greater than 0")
+
+INFO:root:****************************************
+INFO:root:max length: 4756
+INFO:root:max position: 4756
+INFO:root:target_namespace: parsel.parsel<folder>.utils<file>.shorten<func>
+INFO:root:--------data 7--------
+data 7:   0%|          | 0/512 [00:00<?, ?it/s]data 7:   2%|▏         | 10/512 [00:01<01:33,  5.37it/s]data 7:   4%|▍         | 20/512 [00:03<01:25,  5.77it/s]data 7:   6%|▌         | 30/512 [00:05<01:21,  5.95it/s]data 7:   8%|▊         | 40/512 [00:06<01:19,  5.94it/s]data 7:   8%|▊         | 40/512 [00:08<01:36,  4.91it/s]
+INFO:root:函数头: 
+def set_xpathfunc(fname: str, func: Optional[Callable]) -> None:  # type: ignore[type-arg]
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: parsel/parsel/xpathfuncs.py. We simplified the code by removing some code blocks.
+
+import re
+from typing import Any, Callable, Optional
+
+from lxml import etree
+
+from w3lib.html import HTML5_WHITESPACE
+
+
+regex = f"[{HTML5_WHITESPACE}]+"
+replace_html5_whitespaces = re.compile(regex).sub
+
+
+def set_xpathfunc(fname: str, func: Optional[Callable]) -> None:  # type: ignore[type-arg]
+    
+    ns_fns = etree.FunctionNamespace(None)  # type: ignore[attr-defined]
+    if func is not None:
+        ns_fns[fname] = func
+    else:
+        del ns_fns[fname]
+
+
+def setup() -> None:
+    set_xpathfunc("has-class", has_class)
+
+
+def has_class(context: Any, *classes: str) -> bool:
+    
+    if not context.eval_context.get("args_checked"):
+        if not classes:
+            raise ValueError(
+                "XPath error: has-class must have at least 1 argument"
+            )
+        for c in classes:
+            if not isinstance(c, str):
+                raise ValueError(
+                    "XPath error: has-class arguments must be strings"
+                )
+        context.eval_context["args_checked"] = True
+
+    node_cls = context.context_node.get("class")
+    if node_cls is None:
+        return False
+    node_cls = " " + node_cls + " "
+    node_cls = replace_html5_whitespaces(" ", node_cls)
+    for cls in classes:
+        if " " + cls + " " not in node_cls:
+            return False
+    return True
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file parsel/xpathfuncs.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def set_xpathfunc(fname: str, func: Optional[Callable]) -> None:  # type: ignore[type-arg]
+    """
+    This function registers a custom extension function to use in XPath expressions. The function registered under the fname identifier will be called for every matching node, being passed a context parameter as well as any parameters passed from the corresponding XPath expression.
+    :param fname: String. The identifier under which the function will be registered.
+    :param func: Callable. The function to be registered. If None, the extension function will be removed.
+    :return: No return values.
+    """
+
+INFO:root:生成结果: 
+    ns_fns = etree.FunctionNamespace(None)  # type: ignore[attr-defined]
+    if func is not None:
+        ns_fns[fname] = func
+    else:
+        del ns_fns[fname]
+
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 4530
+INFO:root:max position: 4530
+INFO:root:target_namespace: parsel.parsel<folder>.xpathfuncs<file>.set_xpathfunc<func>
+INFO:root:--------data 8--------
+data 8:   0%|          | 0/512 [00:00<?, ?it/s]data 8:   2%|▏         | 10/512 [00:02<01:51,  4.52it/s]data 8:   4%|▍         | 20/512 [00:04<01:38,  5.00it/s]data 8:   6%|▌         | 30/512 [00:05<01:33,  5.13it/s]data 8:   6%|▌         | 30/512 [00:06<01:41,  4.75it/s]
+INFO:root:函数头: 
+def _get_thread_context():
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: dominate/dominate/dom_tag.py. We simplified the code by removing some code blocks.
+
+__license__ = '''
+This file is part of Dominate.
+
+Dominate is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+Dominate is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General
+Public License along with Dominate.  If not, see
+<http://www.gnu.org/licenses/>.
+'''
+
+import copy
+import numbers
+from collections import defaultdict, namedtuple
+from functools import wraps
+import threading
+
+try:
+  # Python 3
+  from collections.abc import Callable
+except ImportError: # pragma: no cover
+  # Python 2.7
+  from collections import Callable
+
+try:
+  basestring = basestring
+except NameError: # py3 # pragma: no cover
+  basestring = str
+  unicode = str
+
+
+try:
+  import greenlet
+except ImportError:
+  greenlet = None
+
+
+def _get_thread_context():
+  context = [threading.current_thread()]
+  if greenlet:
+    context.append(greenlet.getcurrent())
+  return hash(tuple(context))
+
+
+class dom_tag(object):
+  is_single = False  # Tag does not require matching end tag (ex. <hr/>)
+  is_pretty = True   # Text inside the tag should be left as-is (ex. <pre>)
+                     # otherwise, text will be escaped() and whitespace may be
+                     # modified
+  is_inline = False
+
+
+  def __new__(_cls, *args, **kwargs):
+    '''
+    Check if bare tag is being used a a decorator
+    (called with a single function arg).
+    decorate the function and return
+    '''
+    if len(args) == 1 and isinstance(args[0], Callable) \
+        and not isinstance(args[0], dom_tag) and not kwargs:
+      wrapped = args[0]
+
+      @wraps(wrapped)
+      def f(*args, **kwargs):
+        with _cls() as _tag:
+          return wrapped(*args, **kwargs) or _tag
+      return f
+    return object.__new__(_cls)
+
+
+  def __init__(self, *args, **kwargs):
+    '''
+    Creates a new tag. Child tags should be passed as arguments and attributes
+    should be passed as keyword arguments.
+
+    There is a non-rendering attribute which controls how the tag renders:
+
+    * `__inline` - Boolean value. If True renders all children tags on the same
+                   line.
+    '''
+
+    self.attributes = {}
+    self.children   = []
+    self.parent     = None
+
+    # Does not insert newlines on all children if True (recursive attribute)
+    self.is_inline = kwargs.pop('__inline', self.is_inline)
+    self.is_pretty = kwargs.pop('__pretty', self.is_pretty)
+
+    #Add child elements
+    if args:
+      self.add(*args)
+
+    for attr, value in kwargs.items():
+      self.set_attribute(*type(self).clean_pair(attr, value))
+
+    self._ctx = None
+    self._add_to_ctx()
+
+
+  # context manager
+  frame = namedtuple('frame', ['tag', 'items', 'used'])
+  # stack of frames
+  _with_contexts = defaultdict(list)
+
+  def _add_to_ctx(self):
+    stack = dom_tag._with_contexts.get(_get_thread_context())
+    if stack:
+      self._ctx = stack[-1]
+      stack[-1].items.append(self)
+
+
+  def __enter__(self):
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file dominate/dom_tag.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def _get_thread_context():
+    """
+    This function returns the hash value of the current thread context. It first creates a list of the current thread and greenlet (if available) and then returns the hash value of the tuple of the context list.
+    :param: No input parameters.
+    :return: Integer. The hash value of the current thread context.
+    """
+
+INFO:root:生成结果: 
+    context = [threading.current_thread()]
+    if greenlet:
+        context.append(greenlet.getcurrent())
+    return hash(tuple(context))
+
+
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 4659
+INFO:root:max position: 4659
+INFO:root:target_namespace: dominate.dominate<folder>.dom_tag<file>._get_thread_context<func>
+INFO:root:--------data 9--------
+data 9:   0%|          | 0/512 [00:00<?, ?it/s]data 9:   2%|▏         | 10/512 [00:01<01:31,  5.51it/s]data 9:   4%|▍         | 20/512 [00:03<01:20,  6.12it/s]data 9:   6%|▌         | 30/512 [00:04<01:13,  6.53it/s]data 9:   8%|▊         | 40/512 [00:06<01:10,  6.73it/s]data 9:   8%|▊         | 40/512 [00:06<01:17,  6.11it/s]
+INFO:root:函数头: 
+def system(cmd, data=None):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: dominate/dominate/util.py. We simplified the code by removing some code blocks.
+
+'''
+Utility classes for creating dynamic html documents
+'''
+
+__license__ = '''
+This file is part of Dominate.
+
+Dominate is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+Dominate is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General
+Public License along with Dominate.  If not, see
+<http://www.gnu.org/licenses/>.
+'''
+
+import re
+
+from .dom_tag import dom_tag
+
+try:
+  basestring = basestring
+except NameError:
+  basestring = str
+  unichr = chr
+
+
+def include(f):
+  '''
+  includes the contents of a file on disk.
+  takes a filename
+  '''
+  fl = open(f, 'r')
+  data = fl.read()
+  fl.close()
+  return raw(data)
+
+
+def system(cmd, data=None):
+  '''
+  pipes the output of a program
+  '''
+  import subprocess
+  s = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+  out, err = s.communicate(data)
+  return out.decode('utf8')
+
+
+def escape(data, quote=True):  # stolen from std lib cgi
+  '''
+  Escapes special characters into their html entities
+  Replace special characters "&", "<" and ">" to HTML-safe sequences.
+  If the optional flag quote is true, the quotation mark character (")
+  is also translated.
+
+  This is used to escape content that appears in the body of an HTML document
+  '''
+  data = data.replace("&", "&amp;")  # Must be done first!
+  data = data.replace("<", "&lt;")
+  data = data.replace(">", "&gt;")
+  if quote:
+    data = data.replace('"', "&quot;")
+  return data
+
+
+_unescape = {
+  'quot': 34,
+  'amp':  38,
+  'lt':   60,
+  'gt':   62,
+  'nbsp': 32,
+  # more here
+  # http://www.w3.org/TR/html4/sgml/entities.html
+  'yuml': 255,
+}
+str_escape = escape
+
+
+def unescape(data):
+  '''
+  unescapes html entities. the opposite of escape.
+  '''
+  cc = re.compile(r'&(?:(?:#(\d+))|([^;]+));')
+
+  result = []
+  m = cc.search(data)
+  while m:
+    result.append(data[0:m.start()])
+    d = m.group(1)
+    if d:
+      d = int(d)
+      result.append(unichr(d))
+    else:
+      d = _unescape.get(m.group(2), ord('?'))
+      result.append(unichr(d))
+
+    data = data[m.end():]
+    m = cc.search(data)
+
+  result.append(data)
+  return ''.join(result)
+
+
+_reserved = ";/?:@&=+$, "
+_replace_map = dict((c, '%%%2X' % ord(c)) for c in _reserved)
+
+
+def url_escape(data):
+  return ''.join(_replace_map.get(c, c) for c in data)
+
+
+def url_unescape(data):
+  return re.sub('%([0-9a-fA-F]{2})',
+    lambda m: unichr(int(m.group(1), 16)), data)
+
+
+class container(dom_tag):
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file dominate/util.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def system(cmd, data=None):
+    """
+    This function runs a system command and returns the output as a string. It uses the subprocess module to run the command and capture the output.
+    :param cmd: String. The system command to be executed.
+    :param data: Bytes. Optional input data to be passed to the command.
+    :return: String. The output of the system command as a decoded string.
+    """
+
+INFO:root:生成结果: 
+    import subprocess
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+    output, _ = process.communicate(data)
+    return output.decode('utf-8')
+
+INFO:root:****************************************
+INFO:root:max length: 4059
+INFO:root:max position: 4059
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.system<func>
+INFO:root:--------data 10--------
+data 10:   0%|          | 0/512 [00:00<?, ?it/s]data 10:   2%|▏         | 10/512 [00:01<01:22,  6.12it/s]data 10:   4%|▍         | 20/512 [00:02<01:04,  7.62it/s]data 10:   6%|▌         | 30/512 [00:03<00:58,  8.20it/s]data 10:   6%|▌         | 30/512 [00:04<01:15,  6.37it/s]
+INFO:root:函数头: 
+def url_unescape(data):
+
+INFO:root:目标函数体: 
+
+## Here are in-file contents from file: dominate/dominate/util.py. We simplified the code by removing some code blocks.
+
+'''
+Utility classes for creating dynamic html documents
+'''
+
+__license__ = '''
+This file is part of Dominate.
+
+Dominate is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation, either version 3 of
+the License, or (at your option) any later version.
+
+Dominate is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General
+Public License along with Dominate.  If not, see
+<http://www.gnu.org/licenses/>.
+'''
+
+import re
+
+from .dom_tag import dom_tag
+
+try:
+  basestring = basestring
+except NameError:
+  basestring = str
+  unichr = chr
+
+
+def include(f):
+  '''
+  includes the contents of a file on disk.
+  takes a filename
+  '''
+  fl = open(f, 'r')
+  data = fl.read()
+  fl.close()
+  return raw(data)
+
+
+def system(cmd, data=None):
+  '''
+  pipes the output of a program
+  '''
+  import subprocess
+  s = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+  out, err = s.communicate(data)
+  return out.decode('utf8')
+
+
+def escape(data, quote=True):  # stolen from std lib cgi
+  '''
+  Escapes special characters into their html entities
+  Replace special characters "&", "<" and ">" to HTML-safe sequences.
+  If the optional flag quote is true, the quotation mark character (")
+  is also translated.
+
+  This is used to escape content that appears in the body of an HTML document
+  '''
+  data = data.replace("&", "&amp;")  # Must be done first!
+  data = data.replace("<", "&lt;")
+  data = data.replace(">", "&gt;")
+  if quote:
+    data = data.replace('"', "&quot;")
+  return data
+
+
+_unescape = {
+  'quot': 34,
+  'amp':  38,
+  'lt':   60,
+  'gt':   62,
+  'nbsp': 32,
+  # more here
+  # http://www.w3.org/TR/html4/sgml/entities.html
+  'yuml': 255,
+}
+str_escape = escape
+
+
+def unescape(data):
+  '''
+  unescapes html entities. the opposite of escape.
+  '''
+  cc = re.compile(r'&(?:(?:#(\d+))|([^;]+));')
+
+  result = []
+  m = cc.search(data)
+  while m:
+    result.append(data[0:m.start()])
+    d = m.group(1)
+    if d:
+      d = int(d)
+      result.append(unichr(d))
+    else:
+      d = _unescape.get(m.group(2), ord('?'))
+      result.append(unichr(d))
+
+    data = data[m.end():]
+    m = cc.search(data)
+
+  result.append(data)
+  return ''.join(result)
+
+
+_reserved = ";/?:@&=+$, "
+_replace_map = dict((c, '%%%2X' % ord(c)) for c in _reserved)
+
+
+def url_escape(data):
+  return ''.join(_replace_map.get(c, c) for c in data)
+
+
+def url_unescape(data):
+  return re.sub('%([0-9a-fA-F]{2})',
+    lambda m: unichr(int(m.group(1), 16)), data)
+
+
+class container(dom_tag):
+
+# Implement the function body based on the provided code prefix and reference contents, without generating any additional content! The current function is located in file dominate/util.py, you can use resources from other files and implement corresponding import statements. Prohibit cyclic calling the current function!
+def url_unescape(data):
+    """
+    This function takes a string as input and unescapes any URL-encoded characters in the string.
+    :param data: String. The URL-encoded string to be unescaped.
+    :return: String. The unescaped string.
+    """
+
+INFO:root:生成结果: 
+    return re.sub('%([0-9a-fA-F]{2})',
+        lambda m: unichr(int(m.group(1), 16)), data)
+
+
+
+INFO:root:****************************************
+INFO:root:max length: 4134
+INFO:root:max position: 4134
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.url_unescape<func>
+INFO:root:--------data 11--------

@@ -2,12 +2,13 @@
 import os
 os.environ['CUDA_VISIBLE_DEVICES'] = '2'
 
-
+import numpy as np
 import logging
 logging.basicConfig(level=logging.INFO)
 import json
 import pickle
 from tqdm import tqdm
+from argparse import ArgumentParser
 import torch
 import torch.nn.functional as F
 from typing import List, Dict, Tuple
@@ -15,18 +16,38 @@ from transformers import AutoTokenizer, Qwen2ForCausalLM
 
 from utils.model_utils import get_model, seed_everything
 from utils.dataset_utils import make_input_string
-from utils.hierarchical_context import get_tooleval, initial_context, initial_input
+from utils.hierarchical_context import get_tooleval, initial_context, initial_input, initial_bm25, get_namespace
 from utils.hierarchical_context import ContextNode
 from utils.hierarchical_model import HierarchicalModel
+from utils.visualize import visualize_line
+
+def get_parser():
+    parser = ArgumentParser()
+    parser.add_argument('--context', type=str, default="Structure")
+    parser.add_argument('--data_id', type=str, default="1")
+    parser.add_argument('--gen_num', type=int, default=5)
+    parser.add_argument('--data_start', type=int, default=147)
+    parser.add_argument('--data_end', type=int, default=None)
+    return parser.parse_args()
 
 if __name__ == "__main__":
 
-    # 初始化
-    seed_everything(42)
+    # 用随机数初始化
+    random_seed = np.random.randint(0, 512)
+    seed_everything(random_seed)
+    args = get_parser()
     config = {
         "path": "Qwen2.5-Coder-3B-Instruct",
-        "context": "File", # None or Structure or File
+        "context": args.context, # None or Structure or File or Oracle or BM25
     }
+
+    # 输出当前信息 时间 pid 生成方式
+    pid = os.getpid()
+    logging.info("time: {}".format(os.popen("date").read()))
+    logging.info("pid: {}".format(pid))
+    logging.info("seed: {}".format(random_seed))
+    logging.info("model: {}".format(config["path"]))
+    logging.info("generate: {}".format(config["context"]))
 
 
     # 加载数据集
@@ -43,8 +64,9 @@ if __name__ == "__main__":
             dataset.append(data)
     
     # qika 第502个样本开始有上下文依赖
-    begin_idx = 502
-    end_idx = None
+    # begin_idx = 629
+    begin_idx = args.data_start
+    end_idx = args.data_end
 
     if end_idx is None:
         end_idx = len(dataset)
@@ -52,7 +74,7 @@ if __name__ == "__main__":
 
     # 打开输出文件夹
     if config["context"] == "None":
-        result_file = os.path.join(result_path, config["path"], "result_noc_2.json")
+        result_file = os.path.join(result_path, config["path"], "result_noc_{}.json".format(args.data_id))
         if not os.path.exists(result_file):
             os.makedirs(os.path.dirname(result_file), exist_ok=True)
             # 创建json文件
@@ -61,7 +83,7 @@ if __name__ == "__main__":
                 json.dump({}, f)
 
     elif config["context"] == "Structure":
-        result_file = os.path.join(result_path, config["path"], "result_st.json")
+        result_file = os.path.join(result_path, config["path"], "result_st_{}.json".format(args.data_id))
         if not os.path.exists(result_file):
             os.makedirs(os.path.dirname(result_file), exist_ok=True)
             # 创建json文件
@@ -70,7 +92,25 @@ if __name__ == "__main__":
                 json.dump({}, f)
 
     elif config["context"] == "File":
-        result_file = os.path.join(result_path, config["path"], "result_fi_2.json")
+        result_file = os.path.join(result_path, config["path"], "result_fi_{}.json".format(args.data_id))
+        if not os.path.exists(result_file):
+            os.makedirs(os.path.dirname(result_file), exist_ok=True)
+            # 创建json文件
+            
+            with open(result_file, "w") as f:
+                json.dump({}, f)
+                
+    elif config["context"] == "BM25":
+        result_file = os.path.join(result_path, config["path"], "result_bm_{}.json".format(args.data_id))
+        if not os.path.exists(result_file):
+            os.makedirs(os.path.dirname(result_file), exist_ok=True)
+            # 创建json文件
+            
+            with open(result_file, "w") as f:
+                json.dump({}, f)
+    
+    elif config["context"] == "Oracle":
+        result_file = os.path.join(result_path, config["path"], "result_oc_{}.json".format(args.data_id))
         if not os.path.exists(result_file):
             os.makedirs(os.path.dirname(result_file), exist_ok=True)
             # 创建json文件
@@ -78,13 +118,15 @@ if __name__ == "__main__":
             with open(result_file, "w") as f:
                 json.dump({}, f)
 
-    generation_result = json.load(open(result_file, "r"))
+    logging.info("result_path: {}".format(result_file))
+    generation_result = {} # json.load(open(result_file, "r"))
 
+    
     model, tokenizer = get_model(config)
 
     # 构建分层模型
     hierarchical_model = HierarchicalModel(model.model, model.lm_head, tokenizer)
-
+    data_type_attn = []
 
     for idx, data in enumerate(dataset):
         idx += begin_idx
@@ -104,143 +146,264 @@ if __name__ == "__main__":
         input_head = ""
         try:
             data_dict:ContextNode = context_dict[target_namespace]
-            if config["context"] == "File":
-                init_context = initial_input(context_dict, target_namespace)
-                cut_pos = len(init_context)-1
-                all_length = 0
-                while cut_pos >= 0:
-                    node_length = min(hierarchical_model.max_node_length, len(tokenizer.encode(context_dict[init_context[cut_pos]].content)))
-                    all_length += node_length
-                    if all_length > hierarchical_model.max_context_length:
-                        logging.info("file too long {}, cut {}/{} nodes".format(target_namespace, cut_pos, len(init_context)))
-                        init_context = init_context[cut_pos+1:]
-                        break
-                    cut_pos -= 1
-                pass
-            elif config["context"] == "Structure":
-                init_context = initial_context(context_dict, target_namespace)
-                init_context = init_context["cross_file_nodes"] + init_context["in_file_nodes"] + init_context["in_class_nodes"]
-            else:
-                init_context = []
-            input_head = context_dict[data_dict.children[0]].content
         except:
             logging.info(f"字典不存在: {target_namespace}")
             continue
         
+        input_head = context_dict[data_dict.children[0]].content
+        input_body = "".join([context_dict[node].content for node in data_dict.children[1:]])
+        
         if config["context"] in ["Structure"]:
             init_input = ""
-            init_instruct = """# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file {}, prohibit cyclic calling the current function!\n""".format(data["completion_path"][len(data["project_path"])+1:])
+            init_instruct = """# Implement the function body based on the provided code prefix and other resources in the current project, without generating any additional content! The current function is located in file {}, prohibit cyclic calling the current function! You can use resources in the current project, and you MUST write import statements FIRST to call the corresponding resource.\n""".format(data["completion_path"][len(data["project_path"])+1:])
+            input_string = make_input_string(init_input, init_instruct, input_head, data["requirement"], "DevEval")
+            init_context = initial_context(context_dict, target_namespace)
+            file_head = init_context["in_file_nodes"][0]
+            context_dict[file_head].content = "\n## Here are in-file contents from {}. We simplified the code by removing some code blocks.\n\n".format(context_dict[file_head].content[2:-1])
+            init_context = init_context["cross_file_nodes"] + init_context["in_file_nodes"] + init_context["in_class_nodes"]
+            ini_prefix_kv = None
+            
         elif config["context"] in ["File"]:
             init_input = ""
             init_instruct = """# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file {}, prohibit cyclic calling the current function!\n""".format(data["completion_path"][len(data["project_path"])+1:])
-            hierarchical_model.past_layers = 128
+            input_string = make_input_string(init_input, init_instruct, input_head, data["requirement"], "DevEval")
+            hierarchical_model.begin_layer = 128
+            hierarchical_model.end_layer = 128
+            init_context = initial_input(context_dict, target_namespace)
+            cut_pos = len(init_context)-1
+            all_length = 0
+            while cut_pos >= 0:
+                node_length = min(hierarchical_model.max_node_length, len(tokenizer.encode(context_dict[init_context[cut_pos]].content)))
+                all_length += node_length
+                if all_length > hierarchical_model.max_context_length:
+                    logging.info("file too long {}, cut {}/{} nodes".format(target_namespace, cut_pos, len(init_context)))
+                    init_context = init_context[cut_pos+1:]
+                    break
+                cut_pos -= 1
+            ini_prefix_kv = None
+            pass
+            
         elif config["context"] == "None":
             init_input = ""
             init_instruct = """# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file {}, prohibit cyclic calling the current function!\n""".format(data["completion_path"][len(data["project_path"])+1:])
-        
-        input_string = make_input_string(init_input, init_instruct, input_head, data["requirement"], "DevEval")
+            input_string = make_input_string(init_input, init_instruct, input_head, data["requirement"], "DevEval")
+            hierarchical_model.begin_layer = 128
+            hierarchical_model.end_layer = 128
+            ini_prefix_kv = None
+            
+        elif config["context"] == "BM25":
+            init_input = ""
+            init_instruct = """# Implement the function body based on the provided code prefix and other resources in the current project, without generating any additional content! The current function is located in file {}, prohibit cyclic calling the current function! You can use resources in the current project, and you MUST write import statements FIRST to call the corresponding resource.\n""".format(data["completion_path"][len(data["project_path"])+1:])
+            input_string = make_input_string(init_input, init_instruct, input_head, data["requirement"], "DevEval")
+            hierarchical_model.begin_layer = 128
+            hierarchical_model.end_layer = 128
+            init_context = initial_input(context_dict, target_namespace)
+            cross_list, infile_list = initial_bm25(context_dict, target_namespace, input_string, tokenizer=tokenizer, init_context=init_context, max_cross_num=hierarchical_model.max_crossfile_node_num, max_infile_num=hierarchical_model.max_infile_node_num)
+            cross_parts = hierarchical_model.cluster_brothers([context_dict[ns] for ns in cross_list], context_dict[target_namespace], context_dict)
+            infile_parts = hierarchical_model.cluster_brothers([context_dict[ns] for ns in infile_list], context_dict[target_namespace], context_dict)
+            infile_str = ""
+            for part in infile_parts:
+                infile_str += "".join([node.content for node in part[1:]])
+            input_string = infile_str + input_string
+            input_tokens = tokenizer.tokenize(input_string, add_special_tokens=False)
+            input_tokens = input_tokens[-hierarchical_model.max_context_length:]
+            input_string = tokenizer.convert_tokens_to_string(input_tokens)
+            input_string = "\n## Here are in-file contents from {}. We simplified the code by removing some code blocks.\n\n".format(infile_parts[0][0].content[2:-1])+input_string
+                
+            prefix_kv = None
+            for part in cross_parts[:-1]:
+                cross_str = ""
+                cross_str += "\n## Here are cross-file contents from {}. We simplified the code by removing some code blocks.\n\n".format(part[0].content[2:-1])
+                cross_str += "".join([node.content for node in part[1:]])
+                cross_ids = tokenizer.encode(cross_str, add_special_tokens=False, return_tensors="pt")
+                cross_ids = hierarchical_model.filter_ids(cross_ids, max_length=hierarchical_model.max_context_length)
+                cross_ids = cross_ids.to(hierarchical_model.device)
+                prefix_dict = hierarchical_model.generate_step(
+                    target_namespace=target_namespace,
+                    input_ids=cross_ids,  
+                    prefix_kv=prefix_kv,
+                    context_dict=context_dict, 
+                    init_context_nodes=[]
+                )
+                ini_prefix_kv = prefix_dict["prefix_kv"]
+                del cross_ids
+            init_context = []
+            
+            
+        elif config["context"] == "Oracle":
+            init_input = ""
+            init_instruct = """# Implement the function body based on the provided code prefix, without generating any additional content! The current function is located in file {}, prohibit cyclic calling the current function!\n""".format(data["completion_path"][len(data["project_path"])+1:])
+            input_string = make_input_string(init_input, init_instruct, input_head, data["requirement"], "DevEval")
+            init_context = []
+            depen_list = data["dependency"]["cross_file"] + data["dependency"]["intra_file"] + data["dependency"]["intra_class"]
+            for depen in depen_list:
+                depen_ns = get_namespace(depen, context_dict)
+                if depen_ns is None:
+                    depen = depen.rsplit(".", 1)[0]
+                    depen_ns = get_namespace(depen, context_dict)
+                if depen_ns is not None and depen_ns not in init_context:
+                    init_context.append(depen_ns)
+            ini_prefix_kv = None
+            
+            
+            
         init_input_ids = tokenizer.encode(input_string, add_special_tokens=False, return_tensors="pt")
         init_input_ids = init_input_ids.to(model.device)
         
-        # 逐token生成
-        next_token = ""
-        generated = ""
-        new_line = ""
-        input_ids = init_input_ids
-        prefix_kv = None
-        result_context = []
-        newline_flag = False
-        lspace_level = len(input_head) - len(input_head.lstrip())
-        
-        with tqdm(total=hierarchical_model.max_length, desc="data {}".format(idx)) as pbar:
-            for step in range(hierarchical_model.max_length):
-                logging.debug("*** step {} ***".format(step))
-                if (step+1)%10 == 0:
-                    pbar.update(10)
-                
-                next_idx, seen_context, context_dict, prefix_kv = hierarchical_model.generate_step(
-                        target_namespace=target_namespace,
-                        input_ids=input_ids,  
-                        prefix_kv=prefix_kv,
-                        context_dict=context_dict, 
-                        init_context_nodes=init_context)
-                
-                next_token = tokenizer.decode(next_idx[0])
-                # 输出当前生成的token
-                logging.debug(f"Generated: {next_token}")
-                
-                
-                # 统计用到的上下文节点
-                for node in seen_context:
-                    if node.type == "code":
-                        node = context_dict[node.parent]
-                    if node.type in ["function", "class"] and node not in result_context:
-                        result_context.append(node.namespace)
-                
-                # 清理显存
-                torch.cuda.empty_cache()
-                
-                # 如果生成了结束标记则停止
-                if next_idx.item() == tokenizer.eos_token_id or next_token == "<|endoftext|>":
-                    break
-                elif newline_flag and next_token[0] not in [" ", "\n"]:
-                    break
-                if next_token[-1] == '\n':
-                    newline_flag = True
-                else:
-                    newline_flag = False
+        # 逐token生成, 生成次数为gen_num, 并重新设置随机种子
+        for time in range(args.gen_num):
+            seed_everything(random_seed+time)
+            next_token = ""
+            generated = ""
+            new_line = input_string.split("\n")[-1]
+            input_ids = init_input_ids
+            prefix_kv = ini_prefix_kv
+            result_context = []
+            newline_flag = False
+            lspace_level = len(input_head) - len(input_head.lstrip())
+            max_position = 0
+            max_length = 0
+            
+            with tqdm(total=hierarchical_model.max_length, desc="data {}".format(idx)) as pbar:
+                for step in range(hierarchical_model.max_length):
+                    logging.debug("*** step {} ***".format(step))
+                    if (step+1)%10 == 0:
+                        pbar.update(10)
                     
-                generated += next_token
-                if next_token[-1] == '\n':
-                    new_line = ""
-                else:
-                    new_line += next_token
-                if len(new_line.lstrip()) and (len(new_line) - len(new_line.lstrip()) <= lspace_level):
+                    info_dict = hierarchical_model.generate_step(
+                            target_namespace=target_namespace,
+                            input_ids=input_ids,  
+                            prefix_kv=prefix_kv,
+                            context_dict=context_dict, 
+                            init_context_nodes=init_context
+                        )
+                    
+                    next_idx = info_dict["next_token"]
+                    seen_context = info_dict["seen_context"]
+                    curr_context = info_dict["curr_context"]
+                    context_dict = info_dict["context_dict"]
+                    prefix_kv = info_dict["prefix_kv"]
+                    max_position = max(max_position, info_dict["position"])
+                    max_length = max(max_length, info_dict["length"])
+                    
+                    step_type_attn = info_dict["type_attn_by_layer"]
+                    data_type_attn.append(step_type_attn)
+                    
+                    next_token = tokenizer.decode(next_idx[0])
+                    
+                    # 输出当前生成的token
+                    logging.debug(f"Generated: {next_token}")
+                    
+                    
+                    # 统计用到的上下文节点
+                    seen_context = [node for node in curr_context]
+                    for node in seen_context:
+                        if node.type == "code":
+                            node = context_dict[node.parent]
+                        if node.type in ["function", "class"] and node.namespace not in result_context:
+                            result_context.append(node.namespace)
+                    
+                    # 清理显存
+                    torch.cuda.empty_cache()
+                    
+                    # 如果生成了结束标记则停止
+                    if next_idx.item() == tokenizer.eos_token_id or next_token == "<|endoftext|>":
+                        break
+                    elif newline_flag and next_token[0] not in [" ", "\n"]:
+                        break
+                    if next_token[-1] == '\n':
+                        newline_flag = True
+                    else:
+                        newline_flag = False
+                        
+                    generated += next_token
+                    if next_token[-1] == '\n':
+                        new_line = ""
+                    else:
+                        new_line += next_token
+                    if len(new_line.lstrip()) and (len(new_line) - len(new_line.lstrip()) <= lspace_level):
+                        break
+                    
+                    input_ids = next_idx.unsqueeze(0)
+                    # init_context = [node.namespace for node in seen_context]
+                    
+                    # input_ids = generated
+                    # prefix_kv = None
+                    pass
+                
+            # 将更新后的上下文字典更新到文件中
+            # torch.save(context_dict, context_dict_path)
+            
+            result = generated.split("|endoftext|")[0]
+            
+            result = result.split("\n")
+            real_result = []
+            for line in result:
+                if len(line) and (len(line) - len(line.lstrip()) <= lspace_level):
                     break
-                
-                input_ids = next_idx.unsqueeze(0)
-                # init_context = [node.namespace for node in seen_context]
-                
-                # input_ids = generated
-                # prefix_kv = None
-                pass
-                
-        # 将更新后的上下文字典更新到文件中
-        # torch.save(context_dict, context_dict_path)
-        
-        result = generated.split("|endoftext|")[0]
-        
-        result = result.split("\n")
-        real_result = []
-        for line in result:
-            if len(line) and (len(line) - len(line.lstrip()) <= lspace_level):
-                break
-            real_result.append(line)
-        result = "\n".join(real_result) + '\n'
-        
-        # 将生成的结果保存到文件中
-        if str(idx) not in generation_result:
-            generation_result[str(idx)] = []
+                real_result.append(line)
+            result = "\n".join(real_result) + '\n'
             
-        generation_result[str(idx)].append({
-            "result": result,
-            "context": sorted(result_context),
-        })
+            # 将生成的结果保存到文件中
+            if str(idx) not in generation_result:
+                generation_result[str(idx)] = []
+            
+            if time == 0:
+                generation_result[str(idx)].append({
+                    "result": result,
+                    "context": sorted(result_context),
+                })
+            else:
+                generation_result[str(idx)].append({
+                    "result": result,
+                })
+            
+            logging.info("函数头: \n{}".format(input_head))
+            logging.info("目标函数体: \n{}".format(input_body))
+            logging.info("生成结果: \n{}".format(result))
+            logging.info("-"*40)
+            logging.info("max length: {}".format(max_length))
+            logging.info("max position: {}".format(max_position))
+            logging.info("context_num: {}".format(len(result_context)))
+            logging.info("target_namespace: {}".format(target_namespace))
+            logging.info("*"*40)
+            
+            if False and len(result_context):
+                logging.info("上下文:")
+                logging.info(result_context)
+                
+            # 为attn绘制折线图，包含均值和标准差
+            """attn_value = torch.stack(data_type_attn, dim=0)
+            # 交换
+            attn_value = attn_value.permute(2, 0, 1)
+            attn_value[1:,:,:] /= attn_value[:1,:,:]
+            visualize_line(attn_value[1:,:,:], label=["in_file", "cross_file"])
+            data_type_attn = []"""
+            
+            pass
         
-        logging.info("生成结果:")
-        logging.info(input_string[len(init_input):]+result)
-        
-        if False and len(result_context):
-            logging.info("上下文:")
-            logging.info(result_context)
-        
-        pass
-        
-        if (idx+1)%16 == 0:
+        if (idx+1)%2 == 0:
             logging.info(f"已生成{idx}条结果")
-            # 在生成16条结果后，按key为generation_result字典排序并保存结果
-            generation_result = dict(sorted(generation_result.items(), key=lambda x: int(x[0])))
-            json.dump(generation_result, open(result_file, "w"), indent=4)
             
-    generation_result = dict(sorted(generation_result.items(), key=lambda x: x[0]))
+            # 在生成足够结果后，按key为generation_result字典排序并保存结果
+            old_gen_result = json.load(open(result_file, "r"))
+            # 合并两个dict
+            for key in generation_result:
+                if key in old_gen_result:
+                    old_gen_result[key] += generation_result[key]
+                else:
+                    old_gen_result[key] = generation_result[key]
+            all_result = dict(sorted(old_gen_result.items(), key=lambda x: int(x[0])))
+            json.dump(all_result, open(result_file, "w"), indent=4)
+            generation_result = {}
+    
+    
+    old_gen_result = json.load(open(result_file, "r"))
+    # 合并两个dict
+    for key in generation_result:
+        if key in old_gen_result:
+            old_gen_result[key] += generation_result[key]
+        else:
+            old_gen_result[key] = generation_result[key]
+    generation_result = dict(sorted(old_gen_result.items(), key=lambda x: int(x[0])))
     json.dump(generation_result, open(result_file, "w"), indent=4)

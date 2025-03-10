@@ -185,6 +185,7 @@ def make_input_string(prefix, instruct, head, requirement, dataset):
         rspace_level = len(head) - len(head.rstrip()) - 1
         lspace_level = len(head) - len(head.lstrip())
         input_string += prefix
+        input_string += " "*lspace_level + "\n"
         if instruct and len(instruct):
             input_string += " "*lspace_level + instruct
         input_string += head
@@ -195,6 +196,8 @@ def make_input_string(prefix, instruct, head, requirement, dataset):
         requirement_string += " "*lspace_level+"    "+"\"\"\"\n"
         
         input_string += requirement_string
+        
+        # input_string += " "*lspace_level + "    " + "import"
     
     return input_string
         

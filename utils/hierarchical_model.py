@@ -1,7 +1,7 @@
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-# import os
+import os
 # os.environ['CUDA_VISIBLE_DEVICES'] = '4'
 
 from typing import List, Dict, Tuple
@@ -35,7 +35,10 @@ def visualize_tensor(tensor, title="Tensor Visualization", save_path="/home/qika
     # 如果是1D张量,显示折线图
     if len(data.shape) == 1:
         plt.plot(data)
-        plt.colorbar()
+        plt.xlabel("node")
+        plt.ylabel("Value")
+        plt.title(title)
+        plt.show()
     
     # 如果是2D或更高维张量,显示最后两维的热力图
     else:
@@ -78,14 +81,14 @@ class HierarchicalModel:
         self.tokenizer = tokenizer
         self.device = model.device
         self.max_context_length = 2048
-        self.max_length = 1024
+        self.max_length = 512
         self.max_layer = 64
         self.output_attentions = False
         
         # 层展开参数
-        self.past_layers = 4
-        self.max_node_length = 128
-        self.max_crossfile_node_num = 256
+        self.spread_layer = 8
+        self.max_node_length = 256
+        self.max_crossfile_node_num = 128
         self.max_infile_node_num = 32
         
         # 采样参数
@@ -103,7 +106,22 @@ class HierarchicalModel:
         return inputs_embeds
     
     def encode_by_layer(self, hidden_states, start_layer, end_layer, begin_pos = 0):
-        key_list, value_list, hidden_list = [], [], []
+        """
+        将hidden_states从第start_layer层到第end_layer层进行编码
+        参数:
+            hidden_states: 输入hidden [seq_len, hidden_dim]
+            start_layer: 起始层索引 int
+            end_layer: 结束层索引 int
+            begin_pos: 起始位置索引 int
+        返回:
+            all_key: key向量 [layer_num, head_num, seq_len, dim]
+            all_value: value向量 [layer_num, head_num, seq_len, dim]
+            all_hidden: hidden向量 [layer_num, seq_len, hidden_dim]
+        """
+        assert len(hidden_states.shape) == 2, "hidden_states must be [seq_len, hidden_dim]"
+        seq_len = hidden_states.shape[0]
+        hidden_list = []
+        hidden_states = hidden_states.unsqueeze(0).to(self.device)
         # create position embeddings to be shared across the decoder layers
         position_ids = torch.arange(
                 begin_pos, begin_pos+hidden_states.shape[1], device=hidden_states.device
@@ -115,7 +133,6 @@ class HierarchicalModel:
         past_key_value = DynamicCache()
         for layer_id in range(start_layer, end_layer+1):
             decoder_layer =  self.model.layers[layer_id]
-            
             layer_outputs = decoder_layer(
                     hidden_states,
                     attention_mask=causal_mask,
@@ -126,13 +143,16 @@ class HierarchicalModel:
                     position_embeddings=position_embeddings,
                 )
             hidden_states = layer_outputs[0]
-            hidden_list.append(layer_outputs[0])
-            
-        key_list = [key.detach().cpu() for key in past_key_value.key_cache[start_layer:end_layer+1]]
-        value_list = [value.detach().cpu() for value in past_key_value.value_cache[start_layer:end_layer+1]]
+            hidden_list.append(layer_outputs[0].squeeze(0).detach().cpu())
+
+        all_key = torch.stack(past_key_value.key_cache[start_layer:end_layer+1], dim=1).squeeze(0).detach().cpu()
+        all_value = torch.stack(past_key_value.value_cache[start_layer:end_layer+1], dim=1).squeeze(0).detach().cpu()
+        all_hidden = torch.stack(hidden_list, dim=0).detach().cpu()
         
-        del past_key_value, position_ids, position_embeddings, causal_mask
-        return key_list, value_list, hidden_list
+        del hidden_states, past_key_value, position_ids, position_embeddings, causal_mask
+        assert all_key.shape[0] == all_value.shape[0] == all_hidden.shape[0] == end_layer - start_layer + 1, "layer num error"
+        assert all_key.shape[-2] == all_value.shape[-2] == all_hidden.shape[-2] == seq_len, "seq_len error"
+        return all_key, all_value, all_hidden
 
     def filter_ids(self, input_ids: torch.Tensor, max_length: int = 512) -> torch.Tensor:
         """
@@ -150,80 +170,72 @@ class HierarchicalModel:
         if input_ids.shape[1] > max_length:
             return input_ids[:, :max_length]
         return input_ids
-    def get_node_kv(self, node_list: list[ContextNode], layer_idx: int, begin_pos: int = 0):
+    def get_node_kv(self, node_list: list[ContextNode], begin_layer: int, end_layer:int, begin_pos: int = 0):
         """
-        获取节点的KV向量对 计算时将node_list的内容拼接成一个整体进行编码
+        获取节点从begin_layer到end_layer的KV向量对 计算时将node_list的内容拼接成一个整体进行编码
         
         如果节点已有向量缓存且层数足够,直接返回缓存的向量
         如果节点已有向量缓存但层数不足,基于最后一层缓存继续计算到目标层
         如果节点没有向量缓存,使用模型从头计算到目标层
         
         参数:
-            node_list: 上下文节点列表
-            layer_idx: 目标模型层索引
-            
+            node_list: 上下文节点列表 list[ContextNode]
+            begin_layer: 起始层索引 int
+            end_layer: 结束层索引 int
+            begin_pos: 起始位置索引 int
         返回:
-            self_k: 节点key向量列表
-            self_v: 节点value向量列表
-            node_list: 原始节点列表
+            all_key: key向量 [layer_num, head_num, seq_len, dim]
+            all_value: value向量 [layer_num, head_num, seq_len, dim]
+            node_list: 编码节点列表 list[ContextNode]
         """
-        self_k, self_v = [], []
-        now_length = 0
-        real_list = []
-        for node in node_list:
-            if now_length >= self.max_context_length:
-                break
-            if len(node.content)>0:
-                real_list.append(node)
-                now_length += node.length
-        node_list = real_list
+        all_key, all_value = [], []
         
         # 获取所有节点都已经编码的最深层
-        enc_layer_idx = self.max_layer
-        for node in node_list:
-            if node.vectors is not None:
-                enc_layer_idx = min(enc_layer_idx, len(node.vectors)-1)
-            else:
-                enc_layer_idx = -1
+        enc_layer_idx = min([self.max_layer]+[node.vectors[0].shape[0]-1 if (node.vectors is not None and len(node.vectors)) else -1 for node in node_list])
         # 构建节点向量
-        if enc_layer_idx >= layer_idx:
+        if enc_layer_idx >= end_layer:
             # 使用缓存的向量
             now_pos = 0
             for node in node_list:
-                self_k.append(self.shift_pos(node.vectors[layer_idx][0], now_pos+begin_pos-node.vectors_pos[layer_idx]))
-                self_v.append(node.vectors[layer_idx][1])
+                node_key_by_layer = []
+                for layer_idx in range(begin_layer, end_layer+1):
+                    node_key_by_layer.append(self.shift_pos(node.vectors[0][layer_idx], now_pos+begin_pos-node.vectors_pos[layer_idx]))
+                node_value_by_layer = node.vectors[1][begin_layer:end_layer+1]
+                all_key.append(torch.stack(node_key_by_layer, dim=0))
+                all_value.append(node_value_by_layer)
                 now_pos += node.length
+            all_key = torch.cat(all_key, dim=2)
+            all_value = torch.cat(all_value, dim=2)
             pass
-        elif 0 <= enc_layer_idx < layer_idx:
+        elif 0 <= enc_layer_idx < end_layer:
             # 如果节点已经存在向量 但是长度小于当前层索引 则基于缓存的最后层向量继续计算获取到当前层
             # 首先将所有节点enc_layer_idx层的hidden拼接为一个序列
             hidden_seq = []
             hidden_length = []
             now_pos = 0
             for node in node_list:
-                hidden_seq.append(node.vectors[enc_layer_idx][-1])  # 获取每个节点最后缓存层的hidden state
-                hidden_length.append(node.vectors[enc_layer_idx][-1].shape[1]) # 获取每个节点特征的长度
+                hidden_seq.append(node.vectors[-1][enc_layer_idx])  # 获取每个节点最后缓存层的hidden state
+                hidden_length.append(node.vectors[-1][enc_layer_idx].shape[1]) # 获取每个节点特征的长度
                 now_pos += node.length
                 if now_pos >= self.max_context_length:
                     break
             node_list = node_list[:len(hidden_length)]
-            last_hidden = torch.cat(hidden_seq, dim=1).to(self.device)  # 在序列维度上拼接
+            last_hidden = torch.cat(hidden_seq, dim=-2).to(self.device)  # 在序列维度上拼接
             
             # 基于最后一层缓存的向量继续计算到当前层
-            key_list, value_list, hidden_list = self.encode_by_layer(last_hidden, enc_layer_idx+1, layer_idx, begin_pos)
+            all_key, all_value, all_hidden = self.encode_by_layer(last_hidden, enc_layer_idx+1, end_layer, begin_pos)
             
             hidden_start = 0
             hidden_end = 0
+            layer_start = enc_layer_idx+1
             for i, node in enumerate(node_list):
                 hidden_end += node.length
-                for j in range(len(node.vectors), layer_idx+1):
-                    hidden_ids = j-enc_layer_idx-1
-                    node.vectors.append((key_list[hidden_ids][:,:,hidden_start:hidden_end].detach().cpu(), value_list[hidden_ids][:,:,hidden_start:hidden_end].detach().cpu(), hidden_list[hidden_ids][:,hidden_start:hidden_end].detach().cpu()))
-                    node.vectors_pos.append(hidden_start)
-                self_k.append(node.vectors[layer_idx][0])
-                self_v.append(node.vectors[layer_idx][1])
-                
+                node.vectors[0] = torch.cat([node.vectors[0][:layer_start], all_key[:,:,hidden_start:hidden_end].detach().cpu()], dim=0)
+                node.vectors[1] = torch.cat([node.vectors[1][:layer_start], all_value[:,:,hidden_start:hidden_end].detach().cpu()], dim=0)
+                node.vectors[2] = torch.cat([node.vectors[2][:layer_start], all_hidden[:,hidden_start:hidden_end].detach().cpu()], dim=0)
+                node.vectors_pos = torch.cat([node.vectors_pos[:layer_start], torch.tensor([hidden_start]).repeat(end_layer-enc_layer_idx).detach().cpu()])
                 hidden_start = hidden_end
+                node_list[i] = node
             pass
         else:
             # 如果节点不存在向量 则使用模型编码到当前层
@@ -231,36 +243,86 @@ class HierarchicalModel:
             now_pos = 0
             for node in node_list:
                 inputs = self.tokenizer(node.content, return_tensors="pt").to(self.device)['input_ids']
-                if inputs.shape[1] > self.max_node_length:
-                    inputs = self.filter_ids(inputs, self.max_node_length)
-                input_ids.append(inputs)
+                inputs = inputs[:,-self.max_node_length:]
                 node.length = inputs.shape[1]
                 now_pos += node.length
                 if now_pos >= self.max_context_length:
                     break
+                input_ids.append(inputs)
             node_num = len(input_ids)
             node_list = node_list[:node_num]
             input_ids = torch.cat(input_ids, dim=1)
-            init_hidden = self.encode_init_hidden(input_ids)
-            key_list, value_list, hidden_list = self.encode_by_layer(init_hidden, 0, layer_idx, begin_pos)
+            init_hidden = self.encode_init_hidden(input_ids).squeeze(0)
+            all_key, all_value, all_hidden = self.encode_by_layer(init_hidden, 0, end_layer, begin_pos)
             
             # 将新计算的向量按层添加到缓存中
             hidden_start = 0
             hidden_end = 0
             for i, node in enumerate(node_list):
                 hidden_end += node.length
-                node.vectors = []
-                node.vectors_pos = [hidden_start] * (layer_idx+1)
-                for j in range(0, layer_idx+1):
-                    node.vectors.append((key_list[j][:,:,hidden_start:hidden_end].detach().cpu(), value_list[j][:,:,hidden_start:hidden_end].detach().cpu(), hidden_list[j][:,hidden_start:hidden_end].detach().cpu()))
-                self_k.append(node.vectors[layer_idx][0])
-                self_v.append(node.vectors[layer_idx][1])
+                node.vectors = [[],[],[]]
+                node.vectors_pos = torch.tensor([hidden_start]).repeat(end_layer+1).detach().cpu()
+                node.vectors[0] = all_key[:,:,hidden_start:hidden_end].detach().cpu()
+                node.vectors[1] = all_value[:,:,hidden_start:hidden_end].detach().cpu()
+                node.vectors[2] = all_hidden[:,hidden_start:hidden_end].detach().cpu()
                 hidden_start = hidden_end
+                node_list[i] = node
             pass
-            
-        return self_k, self_v, node_list
+
+        assert all_key.shape[0] == all_value.shape[0] == end_layer-begin_layer+1, "all_key/all_value/layer_num不匹配"
+        assert all_key.shape[2] == all_value.shape[2] == sum([node.length for node in node_list]), "all_key/all_value/node_length不匹配"
+        return all_key, all_value, node_list
+    
+    def extend_nodeseq(self, node_list: List[ContextNode], context_dict) -> Tuple[torch.Tensor, torch.Tensor]:
+        # 如果当前在处理代码节点序列，则为了整合上下文信息，将节点的前序节点拼接直到填满上下文窗口
+        if len(node_list) == 0:
+            return []
+
+        if node_list[0].type in ["file", "folder"]:
+            return node_list
         
-    def encode_nodeseq(self, nodes: List[str], layer_idx: int, context_dict, now_pos) -> Tuple[torch.Tensor, torch.Tensor]:
+        file_ns = node_list[0].file_ns
+        node_parts = [[node_list[0]]]
+        for pos in range(1, len(node_list)):
+            assert node_list[pos].file_ns == file_ns, "节点文件命名空间不匹配"
+            if node_list[pos].begin_line == node_parts[-1][-1].end_line:
+                node_parts[-1].append(node_list[pos])
+            else:
+                node_parts.append([node_list[pos]])
+            
+        extend_node_list = node_parts
+        now_length = sum([max(node.length, min(len(self.tokenizer(node.content)['input_ids']), self.max_node_length)) for node in node_list])
+        unfinished_ids = [i for i in range(len(extend_node_list))]
+        now_part = 0
+        while (now_length < self.max_context_length) and len(unfinished_ids):
+            now_part = now_part%len(unfinished_ids)
+            now_ids = unfinished_ids[now_part]
+            now_node = extend_node_list[now_ids][0]
+
+            while now_node.type not in ["file", "folder", "repository"] and now_node.previous is None:
+                now_node = context_dict[now_node.parent]
+
+            if now_node.type in ["file", "folder"] or now_node.previous is None:
+                unfinished_ids.remove(now_ids)
+            else:
+                previous_node = context_dict[now_node.previous]
+                while len(previous_node.children):
+                    previous_node = context_dict[previous_node.children[-1]]
+                #判断前序是不是已经接触到上一个节点
+                if now_ids > 0 and previous_node.begin_line < extend_node_list[now_ids-1][-1].end_line:
+                    unfinished_ids.remove(now_ids)
+                elif now_length + max(previous_node.length, min(len(self.tokenizer(previous_node.content)['input_ids']), self.max_node_length)) > self.max_context_length:
+                    unfinished_ids.remove(now_ids)
+                else:
+                    extend_node_list[now_ids] = [previous_node]+extend_node_list[now_ids]
+                    now_part += 1
+                    now_length += max(previous_node.length, min(len(self.tokenizer(previous_node.content)['input_ids']), self.max_node_length))
+        
+        extend_node_list = [node for part in extend_node_list for node in part]
+        return extend_node_list
+    
+
+    def encode_nodeseq(self, nodes: List[str], begin_layer: int, end_layer: int, context_dict, now_pos) -> Tuple[torch.Tensor, torch.Tensor]:
         """
         将上下文节点序列编码为KV对 此函数主要用于编码一个父节点下的兄弟节点序列 将它们拼接成一个整体进行kv计算
         一个节点的KV对由两部分组成 分别是其本身内容的向量 self_k, self_v 以及其子节点分别的内容平均向量 children_k, children_v
@@ -271,13 +333,12 @@ class HierarchicalModel:
             nodes: 上下文节点列表, 元素为namespace
             layer_idx: 目标模型层索引
             context_dict: 上下文节点字典
-        """
-        all_keys = []
-        all_values = []
-        node_size = []
-        
+        """        
         node_list = []
+        now_length = 0
         for node_ns in nodes:
+            if now_length >= self.max_context_length:
+                break
             if node_ns not in context_dict:
                 logging.warning(f"节点{node_ns}不存在, 将使用空字符串代替")
             else:
@@ -287,19 +348,33 @@ class HierarchicalModel:
                     node.content = "# "+ node.type + ":"+ node.namespace.split('.', 1)[1].replace(".", os.sep) + "\n"
                     context_dict[node_ns] = node
                 if node.type in ["folder", "file"] and node.length == 0:
-                    for child_ns in node.children:
-                        if context_dict[child_ns].type in ["folder", "file", "function", "class"]:
+                    instruct = "\n## Here are cross-file contents from {}.".format(node.content[2:-1])
+                    if node.type == "file":
+                        instruct += " We simplified the code by removing some code blocks."
+                    instruct += "\n\n"
+                    node.content = instruct
+                    for idx, child_ns in enumerate(node.children):
+                        if idx == 0 and node.type == "file":
+                            context_dict[child_ns].content = node.content
+                        elif context_dict[child_ns].type in ["folder", "file"]:
                             node.content += context_dict[child_ns].content
+                        elif context_dict[child_ns].type in ["function", "class"]:
+                            heads = context_dict[child_ns].dfs_heads(context_dict)
+                            node.content += "".join([context_dict[head].content for head in heads])
+                    node.content += "\n"
                     pass
+                now_length += node.length
                 node_list.append(node)
-        self_k, self_v, node_list = self.get_node_kv(node_list, layer_idx) # 节点本身内容对应的向量
+        
+        all_key, all_value, node_list = self.get_node_kv(node_list, begin_layer, end_layer) # 节点本身内容对应的向量
         now_pos = sum([node.length for node in node_list])
+        """
         for i, node in enumerate(node_list):
             context_dict[node.namespace] = node
 
             # 构建子节点向量
             children_k, children_v = [], [] # 子节点内容平均向量
-            """children_list = []
+            children_list = []
             for child_ns in node.children:
                 if child_ns not in context_dict:
                     logging.warning(f"节点{child_ns}不存在, 将使用空字符串代替")
@@ -320,16 +395,15 @@ class HierarchicalModel:
             for j, child in enumerate(children_list):
                 children_k.append(self.shift_pos(child_k[j].to(self.device), now_pos).mean(dim=2).unsqueeze(2))
                 children_v.append(child_v[j].to(self.device).mean(dim=2).unsqueeze(2))
-                context_dict[child.namespace] = child"""
+                context_dict[child.namespace] = child
             all_keys.append(torch.cat([self_k[i].to(self.device)]+children_k, dim=2))
             all_values.append(torch.cat([self_v[i].to(self.device)]+children_v, dim=2))
-            node.length = all_keys[-1].shape[2]
+        """
                      
-        return torch.cat(all_keys, dim=2), torch.cat(all_values, dim=2), node_list 
-        
-            
+        return all_key, all_value, node_list 
     def collect_children(self, nodes: List[ContextNode], context_dict: Dict) -> List[ContextNode]:
         """收集节点的所有子节点 如果不存在子节点则继续保留当前节点 按文件名以及父节点内子节点列表顺序排序"""
+        nodes = [node for node in nodes if isinstance(node, ContextNode)]
         nodes.sort(key=lambda x: ((x.file_path if x.file_path else x.namespace), x.begin_line))
         children = []
         keep_nodes = []
@@ -349,6 +423,7 @@ class HierarchicalModel:
         node_parts = []
         now_part = []
         father_list = {}
+        nodes.sort(key=lambda x: ((x.file_path if x.file_path else x.namespace), x.begin_line))
         for node in nodes+[target_node]:
             file_ns = node.file_ns if node.type not in ['file', 'folder'] else node.namespace
             if file_ns not in father_list:
@@ -384,8 +459,26 @@ class HierarchicalModel:
                             node_parts[father_list[file_ns]].append(now_part_node)
                 else:
                     qika = 1
+        # 排序
+        for i in range(len(node_parts)):
+            node_parts[i].sort(key=lambda x: (x.begin_line, x.end_line))
         
-        node_parts[father_list[target_node.file_ns]].remove(target_node)
+        infile_id = father_list[target_node.file_ns]
+        infile_part = node_parts[infile_id]
+        infile_part.remove(target_node)
+        node_parts = node_parts[:infile_id] + node_parts[infile_id+1:]
+        # 按照part文件路径与target_node文件路径的区别大小排序
+        def sort_key(node_ns, target_ns):
+            node_ns = node_ns.split(".")
+            target_ns = target_ns.split(".")
+            diff_pos = 0
+            while diff_pos < len(node_ns) and diff_pos < len(target_ns):
+                if node_ns[diff_pos] != target_ns[diff_pos]:
+                    break
+                diff_pos += 1
+            return diff_pos
+        node_parts.sort(key=lambda x: (sort_key(x[0].file_ns if x[0].file_ns else x[0].namespace, target_node.file_ns), len((x[0].file_ns if x[0].file_ns else x[0].namespace).split("."))))
+        node_parts.append(infile_part)
         return node_parts
     @staticmethod
     def remove_after_target(node_list, target_node):
@@ -424,17 +517,21 @@ class HierarchicalModel:
         """
         基于ROPE位置编码对输入向量进行平移
         输入:
-            key: torch.Tensor(batch, head_num, seq_len, head_dim)
-            value: torch.Tensor(batch, head_num, seq_len, head_dim)
+            key: torch.Tensor((num), head_num, seq_len, head_dim)
             pos: int
         输出:
-            key: torch.Tensor(batch, head_num, seq_len, head_dim)
-            value: torch.Tensor(batch, head_num, seq_len, head_dim)
+            key: torch.Tensor((num), head_num, seq_len, head_dim)
         """
-        length = key.shape[2]
+        length = key.shape[-2]
         key = key.to(self.device)
+        dim_num = len(key.shape)
+        if dim_num == 3:
+            key = key.unsqueeze(0)
         if pos == 0:
-            return key
+            k_embed = key
+            if dim_num == 3:
+                k_embed = k_embed.squeeze(0)
+            return k_embed
         elif pos > 0:
             # 由于是统一移动相同位置，因此position_ids值全部为pos
             position_ids = torch.full(
@@ -452,6 +549,8 @@ class HierarchicalModel:
         cos = cos.unsqueeze(1).to(key.device)
         sin = sin.unsqueeze(1).to(key.device)
         k_embed = (key * cos) + (rotate_half(key) * sin)
+        if dim_num == 3:
+            k_embed = k_embed.squeeze(0)
         return k_embed
             
     def sample_next_token(self, logits: torch.Tensor):
@@ -494,11 +593,57 @@ class HierarchicalModel:
         
         return next_token
 
+    def visualize_attention(self, target_node, nodes, attn_scores: torch.Tensor, layer_id=0):
+        target_file = target_node.file_path
+        node_size = [node.length for node in nodes]
+        node_attn = torch.zeros(len(nodes)+1, dtype=torch.float32)
+        type_attn = torch.zeros(3, dtype=torch.float32)
+        type_length = torch.zeros(3, dtype=torch.float32)
+        now_pos = 0
+        attn_scores = attn_scores[0, :, -1, :].detach().cpu()
+        for i, node in enumerate(nodes):
+            node_scores = attn_scores[:, now_pos:now_pos+node_size[i]]
+            now_pos += node_size[i]
+            try:
+                node_attn[i] = node_scores[:,:].mean(dim=0).sum(dim=-1)
+            except:
+                node_attn[i] = 0
+            if node.file_path and node.file_path == target_file:
+                type_attn[1] += node_attn[i]
+                type_length[1] += node_size[i]
+            else:
+                type_attn[2] += node_attn[i]
+                type_length[2] += node_size[i]
+        node_attn[-1] = attn_scores[:, now_pos:-1].mean(dim=0).sum(dim=-1)
+        type_attn[0] = node_attn[-1]
+        type_length[0] = attn_scores[:, now_pos:-1].shape[-1]
+        
+        mean_type_attn = type_attn/type_length
+        # visualize_tensor(node_attn, layer_id)
+        
+        return mean_type_attn
 
-    def select_high_attention_nodes(self, target_node, nodes_ns: List[str], attn_scores: torch.Tensor, context_dict: Dict, min_num=16) -> List[ContextNode]:
+    def select_high_attention_nodes(self, target_node, nodes_ns: List[str], attn_scores: torch.Tensor, context_dict: Dict, min_num=8) -> List[ContextNode]:
         """
         根据注意力分数筛选高注意力节点
         """
+        
+        def weight_sum(attn_scores):
+            """
+            对注意力分数矩阵沿输入（即倒数第二维）进行加权求和，并返回加权后的结果。
+            权重设计为最后一步为1，倒数第二步为0.5，倒数第三步为0.25，以此类推。
+            """
+            weights = torch.tensor([1, 0.5, 0.25, 0.125, 0.0625, 0.03125]).bfloat16()
+            # 因为越靠后的步骤权重越大，因此需要倒序
+            weights = torch.flip(weights, dims=[0])
+            weights = weights.to(attn_scores.device)
+            # 截断多余的部分
+            attn_scores = attn_scores[:,:,-weights.shape[0]:,:]
+            weights = weights[-attn_scores.shape[3]:]
+            weighted_sum = torch.einsum('...ij,...i->...', attn_scores, weights, type='BFloat16')
+            return weighted_sum
+        
+        
         def filter_file(node):
             if node.name != "__init__":
                 return True
@@ -518,9 +663,12 @@ class HierarchicalModel:
         
         # 如果没有任何筛选 则直接返回所有节点
         if len(infile_codes)<=min_num and len(cross_codes) <= min_num and len(file_nodes) <= 2 and len(folder_nodes) <= 2:
-            cross_context = self.collect_children([context_dict[node] for node in (folder_nodes + file_nodes + cross_codes)], context_dict)
+            new_cross_context = self.collect_children([context_dict[node] for node in (folder_nodes + file_nodes)], context_dict)
+            old_cross_code_context = self.collect_children(cross_codes, context_dict)
             infile_context = self.collect_children([context_dict[node] for node in infile_codes], context_dict)
             inclass_context = self.collect_children([context_dict[node] for node in inclass_codes], context_dict)
+            
+            min_cross_num = min_num 
             
         else:
             cross_num = len(cross_codes)
@@ -536,21 +684,26 @@ class HierarchicalModel:
             跨文件节点选择前33%最高注意力的节点 
             另外 每类代码节点 至少选择min_num个节点 每类文件节点至少选择2个节点
             """
-            infile_num = max(1, int(min_num), int(infile_num * 0.66)) 
-            cross_num = max(1, int(min_num), int(cross_num * 0.33)) 
-            file_num = max(2, int(file_num * 0.33))
-            folder_num = max(2, int(folder_num * 0.33))
-            max_cross_num = self.max_crossfile_node_num
+            infile_num = self.max_infile_node_num 
+            file_num = max(4, int(file_num * 0.5))
+            folder_num = max(4, int(folder_num * 0.5))
+            # 之前的跨文件代码节点保留至少min_cross_num(1/2)，max_corss_num的其余位置如果有剩余则继续保留直到到顶
+            min_cross_num = max(1, int(min_num), int(cross_num * 0.5)) 
+            max_cross_num = 4*self.max_crossfile_node_num
             max_infile_num = self.max_infile_node_num 
             
             node_size = [node.length for node in nodes]
             node_attn = torch.zeros(len(nodes), dtype=torch.float32)
             now_pos = 0
+            attn_scores =  attn_scores[0,:,-1,:] # weight_sum(attn_scores)
             for i, node in enumerate(nodes):
-                node_scores = attn_scores[0, :, :, now_pos:now_pos+node_size[i]]
+                node_scores = attn_scores[:, now_pos:now_pos+node_size[i]]
                 now_pos += node_size[i]
                 try:
-                    node_attn[i] = node_scores[:,:,:].mean(dim=-1).max(dim=-1)[0].max(dim=-1)[0]
+                    # 对节点的注意力为其20%最高注意力的平均
+                    # 先找到20%最高注意力
+                    node_scores = node_scores[:,:].topk(int(1 + node_size[i]*0.2), dim=-1).values
+                    node_attn[i] = node_scores[:,:].mean(dim=-1).mean(dim=0)
                 except:
                     node_attn[i] = 0
             
@@ -569,6 +722,7 @@ class HierarchicalModel:
                 "file": False,
                 "folder": False,
             }
+            now_cross_num = 0
             
             _, indices = torch.sort(node_attn, descending=True)
             # top_k = max(1, min_num, int(len(nodes) * 0.3))  # 至少选择min_num个节点
@@ -576,35 +730,28 @@ class HierarchicalModel:
             for idx in indices:
                 idx = idx.item()
                 node = nodes[idx]
-                if node_attn[idx] < filter_value:
-                    break
                 if not flag_type["inclass"] and node.namespace in inclass_codes:
                     if len(selected_nodes["inclass"]) >= class_num:
                         flag_type["inclass"] = True
                         continue
                     selected_nodes["inclass"].append(node)
-                    if node.type in ["class", "function"]:
-                        max_infile_num -= max(1, len(node.children))
-                        max_cross_num -= max(1, len(node.children))
+                    max_infile_num -= max(1, len(node.children))
                     
-                elif not flag_type["infile"] and node.namespace in infile_codes:
-                    if len(selected_nodes["infile"]) >= min(infile_num, max_infile_num):
+                elif not flag_type["infile"] and node.namespace in infile_codes and node.name != "_head":
+                    selected_nodes["infile"].append(node)
+                    max_infile_num -= max(1, len(node.children))
+                    if max_infile_num <= 0:
                         flag_type["infile"] = True
                         continue
-                    selected_nodes["infile"].append(node)
-                    if node.type in ["class", "function"]:
-                        max_infile_num -= max(1, len(node.children))
-                        max_cross_num -= max(1, len(node.children))
                     
-                elif not flag_type["cross"] and node.namespace in cross_codes:
-                    if len(selected_nodes["cross"]) >= min(cross_num, max_cross_num):
+                elif not flag_type["cross"] and node.namespace in cross_codes and node.name != "_head":
+                    selected_nodes["cross"].append(node)
+                    max_cross_num -= max(1, len(node.children))
+                    if len(selected_nodes["cross"]) >= min_cross_num and max_cross_num<=0: # or node_attn[idx] < filter_value:
                         flag_type["cross"] = True
                         continue
-                    selected_nodes["cross"].append(node)
-                    if node.type in ["class", "function"]:
-                        max_cross_num -= max(1, len(node.children))
                         
-                elif not flag_type["file"] and node.namespace in file_nodes:
+                elif not flag_type["file"] and node.namespace in file_nodes and filter_file(node):
                     if len(selected_nodes["file"]) >= file_num:
                         flag_high = True
                         continue
@@ -622,18 +769,18 @@ class HierarchicalModel:
             
             
             # 收集子节点作为下一层上下文
-            cross_context = self.collect_children(selected_nodes["folder"]+selected_nodes["file"]+selected_nodes["cross"], context_dict)
+            new_cross_context = self.collect_children(selected_nodes["folder"]+selected_nodes["file"], context_dict)
+            old_cross_code_context = self.collect_children(selected_nodes["cross"], context_dict)
             infile_context = self.collect_children(selected_nodes["infile"], context_dict)
             inclass_context = self.collect_children(selected_nodes["inclass"], context_dict)
         
 
         # 删去目标节点以及同文件内在目标节点之后的节点
-        cross_context = self.remove_after_target(cross_context, target_node)
         infile_context = self.remove_after_target(infile_context, target_node)
         inclass_context = self.remove_after_target(inclass_context, target_node)
         
-        file_context = [node for node in cross_context if node.type in ['file', 'folder']]
-        code_context = [node for node in cross_context if node.type not in ['folder', 'file']]
+        file_context = [node for node in new_cross_context if node.type in ['file', 'folder']]
+        new_cross_code_context = [node for node in new_cross_context if node.type not in ['folder', 'file']]
         
         if (len(infile_context)+len(inclass_context)) > self.max_infile_node_num:
             # 随机删除多的file内节点
@@ -645,25 +792,42 @@ class HierarchicalModel:
                 logging.debug(f"infile remove {len(infile_context)-code_num} nodes")
                 infile_context = random.sample(infile_context, code_num)
         
-        if len(code_context) + len(infile_context) + len(inclass_context) > self.max_crossfile_node_num:
-            # 随机删除多的crossfile节点
-            code_num = self.max_crossfile_node_num - len(infile_context) - len(inclass_context)
-            if code_num<=0:
-                logging.debug(f"crossfile remove all nodes")
-                code_context = []
-            elif code_num<len(code_context):
-                logging.debug(f"crossfile remove {len(code_context)-code_num} nodes")
-                code_context = random.sample(code_context, code_num)
+        if len(new_cross_code_context):
+            old_corss_num = max(min_cross_num, 4*self.max_crossfile_node_num-len(new_cross_code_context))
+        else:
+            old_corss_num = max(min_cross_num, self.max_crossfile_node_num)
+        if len(old_cross_code_context) > old_corss_num:
+            # 随机删除多的旧crossfile节点
+            if old_corss_num<=0:
+                logging.debug(f"old crossfile remove all nodes")
+                old_cross_code_context = []
+            else:
+                logging.debug(f"crossfile old code remove {len(old_cross_code_context)-old_corss_num} nodes")
+                old_cross_code_context = random.sample(old_cross_code_context, old_corss_num)
         
-        all_context = file_context + code_context + infile_context + inclass_context
+        if len(old_cross_code_context) + len(new_cross_code_context) > 4*self.max_crossfile_node_num:
+            # 随机删除多的新crossfile节点
+            code_num = 4*self.max_crossfile_node_num - len(old_cross_code_context)
+            if code_num<=0:
+                logging.debug(f"new crossfile remove all nodes")
+                new_cross_code_context = []
+                
+            elif code_num<len(new_cross_code_context):
+                logging.debug(f"crossfile new code remove {len(new_cross_code_context)-code_num} nodes")
+                new_cross_code_context = random.sample(new_cross_code_context, code_num)
+        
+        cross_code_context = new_cross_code_context+old_cross_code_context
+        
+        all_context = file_context + cross_code_context + infile_context + inclass_context
         
         change = False
         for node in all_context:
-            if node.namespace not in nodes_ns:
+            if node.type not in ["code"]:
                 change = True
                 break
         
         return all_context, change        
+
     def generate_step(self, 
                         target_namespace, 
                         input_ids: torch.Tensor, 
@@ -676,12 +840,17 @@ class HierarchicalModel:
         返回生成的token_id和使用的上下文节点
         """
         curr_context = [context_dict[ns] for ns in init_context_nodes]
-        layer_outputs = []
+        layer_output_hidden = [None for _ in self.model.layers]
+        attn_scores = None
+        position = 0
+        length = 0
         seen_context = []
         input_k = [None]*len(self.model.layers)
         input_v = [None]*len(self.model.layers)
         node_parts = None
+        extend_parts = None
         change_flag = True
+        type_attn_by_layer = []
         
         inputs_embeds = self.model.embed_tokens(input_ids)
         begin_pos = 0
@@ -690,131 +859,144 @@ class HierarchicalModel:
         
         
         # 逐层处理
-        for layer_idx in range(len(self.model.layers)):
+        start_layer_idx = 0
+        end_layer_idx = 0
+        while start_layer_idx < len(self.model.layers):
+            end_layer_idx = min(start_layer_idx+9, len(self.model.layers))
             # 去除无效上下文
             if not node_parts:
                 curr_context = [node for node in curr_context if len(node.content) > 0]
                 node_parts = self.cluster_brothers(curr_context, context_dict[target_namespace], context_dict)
-            
-            context_k = []
-            context_v = []
-            now_pos = 0
-            for part_idx, node_list in enumerate(node_parts[-1::-1]):
-                node_list = [node.namespace for node in node_list]
-                k, v, node_list = self.encode_nodeseq(node_list, layer_idx, context_dict, 0)\
-                # 从位置0开始向右延伸
-                k = self.shift_pos(k, now_pos)
-                now_pos += sum([node.length for node in node_list])
+                extend_parts = []
+                for part in node_parts:
+                    extend_parts.append(self.extend_nodeseq(part, context_dict))
                 
-                context_k = [k]+context_k
-                context_v = [v]+context_v
+            # 收集上下文kv
+            now_pos = 0
+            past_key_values:DynamicCache = DynamicCache()
+            for part_idx, node_list in enumerate(node_parts):
+                extend_list = [node.namespace for node in extend_parts[part_idx]]
+                node_list = [node.namespace for node in node_list]
+                key_tensor, value_tensor, extend_list = self.encode_nodeseq(extend_list, begin_layer=start_layer_idx, end_layer=end_layer_idx-1, context_dict=context_dict, now_pos=0)
+                
+                part_key, part_value, new_node_list = [], [], []
+                for idx, node in enumerate(extend_list):
+                    context_dict[node.namespace] = node
+                    if node.namespace in node_list:
+                        part_key.append(node.vectors[0][start_layer_idx: end_layer_idx])
+                        part_value.append(node.vectors[1][start_layer_idx: end_layer_idx])
+                        new_node_list.append(node)
+                part_key = torch.cat(part_key, dim=2)
+                part_value = torch.cat(part_value, dim=2)
+                node_list = new_node_list
+                
+                # 从位置0开始向右延伸
+                part_key = self.shift_pos(part_key, now_pos)
+                now_pos += key_tensor.shape[2]
+                
+                for layer_idx in range(start_layer_idx, end_layer_idx):
+                    past_key_values.update(part_key[layer_idx-start_layer_idx].unsqueeze(0).to(self.device), part_value[layer_idx-start_layer_idx].unsqueeze(0).to(self.device), layer_idx)
                 node_parts[part_idx] = node_list
-                del k, v
+                extend_parts[part_idx] = extend_list
+                del key_tensor, value_tensor, part_key, part_value
             
             curr_context = [node for lst in node_parts for node in lst]
-            past_key_values:DynamicCache = DynamicCache()
-            prefix_length = 0
-            if prefix_kv is not None and len(prefix_kv.key_cache) > layer_idx:
-                prefix_length = prefix_kv.key_cache[layer_idx].shape[2]
-                prefix_k = self.shift_pos(prefix_kv.key_cache[layer_idx], now_pos)
-                context_k.append(prefix_k.to(self.device))
-                context_v.append(prefix_kv.value_cache[layer_idx].to(self.device))
-                
-            if len(context_k):
-                context_k = torch.cat(context_k, dim=2).to(self.device)
-                context_v = torch.cat(context_v, dim=2).to(self.device)
-
-                """max_length = self.max_context_length+prefix_length
-                if context_k.shape[2] > max_length:
-                    context_k = context_k[:, :, -max_length:]
-                    context_v = context_v[:, :, -max_length:]"""
-                
-                past_key_values.update(context_k, context_v, layer_idx)
-                if layer_idx != 0:
-                    past_key_values.update(context_k, context_v, 0)
+           
+            if prefix_kv is not None and len(prefix_kv.key_cache) >= end_layer_idx:
+                for layer_idx in range(start_layer_idx, end_layer_idx):
+                    prefix_k = self.shift_pos(prefix_kv.key_cache[layer_idx], now_pos)
+                    prefix_v = prefix_kv.value_cache[layer_idx]
+                    past_key_values.update(prefix_k.to(self.device), prefix_v.to(self.device), layer_idx)
             
-            del context_k, context_v
-            
-            # 编码当前层输入特征
-            layer = self.model.layers[layer_idx]
-            if layer_idx == 0:
-                hidden_states = inputs_embeds
-            else:
-                hidden_states = layer_outputs[0]
-
+            if start_layer_idx > 0:
+                past_key_values.update(
+                    past_key_values.key_cache[start_layer_idx],
+                    past_key_values.value_cache[start_layer_idx],
+                    0
+                )
             # 编码位置信息和掩码 输入的起始位置为上下文总长度+缓存输入的长度
             cache_position = torch.arange(
                 now_pos+begin_pos, now_pos+begin_pos+inputs_embeds.shape[1], device=inputs_embeds.device
             )
             position_ids = cache_position.unsqueeze(0)
-            # create position embeddings to be shared across the decoder layers
-            position_embeddings = self.model.rotary_emb(hidden_states, position_ids)
+            position = cache_position[0]
+            length = past_key_values._seen_tokens
             causal_mask = self.model._update_causal_mask(
                     None, inputs_embeds, cache_position, past_key_values, output_attentions=True
                 )
+            
+            # 从start_layer_idx到end_layer_idx-1层运算
+            for layer_idx in range(start_layer_idx, end_layer_idx):
+            
+                # 编码当前层输入特征
+                layer = self.model.layers[layer_idx]
+                if layer_idx == 0:
+                    hidden_states = inputs_embeds.to(self.device)
+                else:
+                    hidden_states = layer_output_hidden[layer_idx-1].to(self.device)
 
-            if layer_idx in [0, 35]:
-                qika = 1
-            
-            layer_outputs = layer(
-                    hidden_states,
-                    attention_mask=causal_mask,
-                    position_ids=position_ids,
-                    past_key_value=past_key_values,
-                    output_attentions=True,
-                    use_cache=True,
-                    cache_position=cache_position,
-                    position_embeddings=position_embeddings,
-                )
-            
-            # 将当前输入的kv加入prefix_kv:
-            input_k[layer_idx] = self.shift_pos(layer_outputs[2].key_cache[layer_idx][:,:,-hidden_states.shape[1]:], -now_pos).detach().to("cpu")
-            input_v[layer_idx] = layer_outputs[2].value_cache[layer_idx][:,:,-hidden_states.shape[1]:].detach().to("cpu")
-            
-            if layer_idx in [0, 35]:
-                qika = 1
-            
-            if layer_idx == 0:
-                # 分类输出节点数量
-                folder_num = len([node for node in curr_context if node.type == 'folder'])
-                file_num = len([node for node in curr_context if node.type == 'file'])
-                code_num = len([node for node in curr_context if node.type not in ['folder', 'file']])
-                logging.debug(f"Layer {layer_idx} get {folder_num} folders, {file_num} files, {code_num} codes")
+                # create position embeddings to be shared across the decoder layers
+                position_embeddings = self.model.rotary_emb(hidden_states, position_ids)
+
+                layer_outputs = layer(
+                        hidden_states,
+                        attention_mask=causal_mask,
+                        position_ids=position_ids,
+                        past_key_value=past_key_values,
+                        output_attentions=True,
+                        use_cache=True,
+                        cache_position=cache_position,
+                        position_embeddings=position_embeddings,
+                    )
                 
-                for node in curr_context:
-                    if node.type == "code":
-                        node = context_dict[node.parent]
-                    if node.type in ['function', 'class'] and node.namespace not in seen_context:
-                        seen_context.append(node.namespace)
+                # layer_attn = self.visualize_attention(context_dict[target_namespace], curr_context, layer_outputs[1].detach().to("cpu"), layer_idx)
+                # type_attn_by_layer.append(layer_attn)
+                layer_output_hidden[layer_idx] = layer_outputs[0].detach().to("cpu")
                 
+                # 记录当前输入的kv:
+                input_k[layer_idx] = self.shift_pos(layer_outputs[2].key_cache[layer_idx][:,:,-hidden_states.shape[1]:], -now_pos).detach().to("cpu")
+                input_v[layer_idx] = layer_outputs[2].value_cache[layer_idx][:,:,-hidden_states.shape[1]:].detach().to("cpu")
+                
+                if change_flag and layer_idx <= self.spread_layer:
+                    if attn_scores == None:
+                        attn_scores = layer_outputs[1].detach().to("cpu")
+                    else:
+                        attn_scores = torch.cat([attn_scores, layer_outputs[1].detach().to("cpu")], dim=1)
+                
+                # 释放显存
+                del layer_outputs
+                
+                if layer_idx in [0, 35]:
+                    qika = 1
             
-            if change_flag and layer_idx%self.past_layers == self.past_layers-1:
-                # 选择高注意力节点
-                curr_context = [node.namespace for node in curr_context]
-                attn_scores = layer_outputs[1]
-                high_attn_nodes, change_flag = self.select_high_attention_nodes(context_dict[target_namespace], curr_context, attn_scores, context_dict, min_num=16)    
-                
-                for node in high_attn_nodes:
-                    if node.type in ['function', 'class'] and node.namespace not in seen_context:
-                        seen_context.append(node.namespace)
-                
-                node_parts = self.cluster_brothers(high_attn_nodes, context_dict[target_namespace], context_dict)
-                curr_context = [node for node_part in node_parts for node in node_part]
-                
-                # 分类输出节点数量
-                if change_flag:
+                if change_flag and layer_idx in [self.spread_layer]:  # layer_idx%self.past_layers == self.past_layers-1:
+                    # 选择高注意力节点
+                    curr_context = [node.namespace for node in curr_context]
+                    high_attn_nodes, change_flag = self.select_high_attention_nodes(context_dict[target_namespace], curr_context, attn_scores, context_dict, min_num=16)    
+                    
+                    node_parts = self.cluster_brothers(high_attn_nodes, context_dict[target_namespace], context_dict)
+                    curr_context = [node for node_part in node_parts for node in node_part]
+                    extend_parts = [self.extend_nodeseq(part, context_dict) for part in node_parts]
+                    
+                    # 分类输出节点数量
                     folder_num = len([node for node in curr_context if node.type == 'folder'])
                     file_num = len([node for node in curr_context if node.type == 'file'])
                     code_num = len([node for node in curr_context if node.type not in ['file', "folder"]])
-                    logging.debug(f"Layer {layer_idx} get {folder_num} folders, {file_num} files, {code_num} codes")
+                    logging.debug(f"get {folder_num} folders, {file_num} files, {code_num} codes")
+                    
+                    # type_attn_by_layer = type_attn_by_layer[:self.begin_layer]
+                    attn_scores = None
+                    end_layer_idx = 0
+                    break
                 
                 pass
+            
                 
-            # 释放显存
             del past_key_values, causal_mask
             del cache_position, position_embeddings, position_ids
             torch.cuda.empty_cache()
             
+            start_layer_idx = end_layer_idx
             pass
             
         # 保存当前步kv
@@ -822,15 +1004,36 @@ class HierarchicalModel:
             prefix_kv = DynamicCache()
 
         for layer_idx in range(len(self.model.layers)):
-            prefix_kv.update(input_k[layer_idx], input_v[layer_idx], layer_idx)
+            prefix_kv.update(input_k[layer_idx].to(self.device), input_v[layer_idx].to(self.device), layer_idx)
+        del input_k, input_v
         
         # 计算最终输出
-        hidden_states = layer_outputs[0]
+        hidden_states = layer_output_hidden[layer_idx-1].to(self.device)
         hidden_states = self.model.norm(hidden_states)
         logits = self.lm_head(hidden_states)
         
         # 使用类方法进行采样
         next_token = self.sample_next_token(logits[:, -1])
         
-        return next_token, curr_context, context_dict, prefix_kv
+        # type_attn_by_layer = torch.stack(type_attn_by_layer, dim=0)
+        
+        seen_context = []
+        for node in curr_context:
+            if node.type == "code":
+                node = context_dict[node.parent]
+            if node.type in ['function', 'class'] and node.namespace not in seen_context:
+                seen_context.append(node.namespace)
+        info_dict = {
+            "logits": logits[:, -1],
+            "next_token": next_token,
+            "curr_context": curr_context,
+            "seen_context": seen_context,
+            "context_dict": context_dict,
+            "prefix_kv": prefix_kv,
+            "type_attn_by_layer": type_attn_by_layer,
+            "position": position,
+            "length": length,
+        }
+        
+        return info_dict
 
