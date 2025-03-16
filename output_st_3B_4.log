@@ -1,0 +1,7 @@
+INFO:root:time: 2025年 03月 15日 星期六 07:22:47 CST
+
+INFO:root:pid: 2809906
+INFO:root:seed: 255
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json

@@ -1,0 +1,998 @@
+INFO:root:time: 2025年 03月 16日 星期日 21:29:10 CST
+
+INFO:root:pid: 2204621
+INFO:root:seed: 115
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.20s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.46it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.31it/s]
+INFO:root:--------data 82--------
+INFO:root:file too long datasette.datasette<folder>.utils<folder>.__init__<file>.truncate_url<func>, cut 7/144 nodes
+data 82:   0%|          | 0/190 [00:00<?, ?it/s]data 82:   5%|▌         | 10/190 [00:38<11:31,  3.84s/it]data 82:  11%|█         | 20/190 [01:16<10:48,  3.81s/it]data 82:  16%|█▌        | 30/190 [01:52<09:52,  3.71s/it]data 82:  21%|██        | 40/190 [02:31<09:31,  3.81s/it]data 82:  26%|██▋       | 50/190 [03:10<08:55,  3.83s/it]data 82:  32%|███▏      | 60/190 [03:49<08:21,  3.86s/it]data 82:  37%|███▋      | 70/190 [04:27<07:39,  3.83s/it]data 82:  42%|████▏     | 80/190 [05:08<07:11,  3.93s/it]data 82:  47%|████▋     | 90/190 [05:49<06:38,  3.98s/it]data 82:  53%|█████▎    | 100/190 [06:28<05:55,  3.95s/it]data 82:  58%|█████▊    | 110/190 [07:06<05:11,  3.89s/it]data 82:  63%|██████▎   | 120/190 [07:44<04:31,  3.88s/it]data 82:  68%|██████▊   | 130/190 [08:24<03:54,  3.91s/it]data 82:  74%|███████▎  | 140/190 [09:03<03:16,  3.92s/it]data 82:  74%|███████▎  | 140/190 [09:27<03:22,  4.06s/it]
+INFO:root:函数头: 
+def truncate_url(url, length):
+
+INFO:root:目标函数体: 
+    if (not length) or (len(url) <= length):
+        return url
+    bits = url.rsplit(".", 1)
+    if len(bits) == 2 and 1 <= len(bits[1]) <= 4 and "/" not in bits[1]:
+        rest, ext = bits
+        return rest[: length - 1 - len(ext)] + "…." + ext
+    return url[: length - 1] + "…"
+
+INFO:root:生成结果: 
+    if len(url) <= length:
+        return url
+
+    # Remove trailing slashes
+    url = url.rstrip("/")
+
+    # Check if URL ends with a file extension
+    if url.endswith(".html"):
+        # Get the file extension length
+        ext_length = len(url) - len(url.rstrip(".html"))
+        # If the file extension length is between 1 and 4 characters without a slash, truncate the URL
+        if ext_length >= 1 and ext_length <= 4 and url.count("/") == 0:
+            return url[:length - ext_length] + "...html"
+
+    # Truncate URL to specified length and add ellipsis
+    return url[:length] + "..."
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9978
+INFO:root:max position: 15084
+INFO:root:context_num: 431
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.truncate_url<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:38:49 CST
+
+INFO:root:****************************************
+data 82:   0%|          | 0/190 [00:00<?, ?it/s]data 82:   5%|▌         | 10/190 [00:38<11:25,  3.81s/it]data 82:  11%|█         | 20/190 [01:13<10:17,  3.63s/it]data 82:  16%|█▌        | 30/190 [01:50<09:49,  3.69s/it]data 82:  21%|██        | 40/190 [02:26<09:05,  3.64s/it]data 82:  26%|██▋       | 50/190 [03:03<08:31,  3.66s/it]data 82:  32%|███▏      | 60/190 [03:40<07:57,  3.67s/it]data 82:  37%|███▋      | 70/190 [04:17<07:23,  3.69s/it]data 82:  42%|████▏     | 80/190 [04:54<06:46,  3.69s/it]data 82:  47%|████▋     | 90/190 [05:32<06:12,  3.73s/it]data 82:  53%|█████▎    | 100/190 [06:09<05:34,  3.72s/it]data 82:  58%|█████▊    | 110/190 [06:45<04:54,  3.68s/it]data 82:  63%|██████▎   | 120/190 [07:23<04:20,  3.72s/it]data 82:  68%|██████▊   | 130/190 [08:00<03:42,  3.71s/it]data 82:  74%|███████▎  | 140/190 [08:40<03:09,  3.79s/it]data 82:  79%|███████▉  | 150/190 [09:19<02:33,  3.83s/it]data 82:  84%|████████▍ | 160/190 [09:59<01:56,  3.89s/it]data 82:  89%|████████▉ | 170/190 [10:40<01:18,  3.94s/it]data 82:  95%|█████████▍| 180/190 [11:18<00:39,  3.91s/it]data 82: 100%|██████████| 190/190 [12:01<00:00,  4.01s/it]data 82: 100%|██████████| 190/190 [12:06<00:00,  3.82s/it]
+INFO:root:函数头: 
+def truncate_url(url, length):
+
+INFO:root:目标函数体: 
+    if (not length) or (len(url) <= length):
+        return url
+    bits = url.rsplit(".", 1)
+    if len(bits) == 2 and 1 <= len(bits[1]) <= 4 and "/" not in bits[1]:
+        rest, ext = bits
+        return rest[: length - 1 - len(ext)] + "…." + ext
+    return url[: length - 1] + "…"
+
+INFO:root:生成结果: 
+    if len(url) <= length:
+        return url
+    if url.endswith("."):
+        return url[:-1] + "..."
+    if url.endswith("/"):
+        return url[:-1] + "..."
+    if url.endswith(".html"):
+        url = url[:-5]
+    if url.endswith(".css"):
+        url = url[:-4]
+    if url.endswith(".js"):
+        url = url[:-3]
+    if url.endswith(".png"):
+        url = url[:-4]
+    if url.endswith(".jpg"):
+        url = url[:-4]
+    if url.endswith(".jpeg"):
+        url = url[:-4]
+    if url.endswith(".gif"):
+        url = url[:-4]
+    if url.endswith(".svg"):
+        url = url[:-4]
+    if url.endswith(".pdf"):
+        url = url[:-4]
+    if url.endswith(".txt"):
+        url = url[:-4]
+    if url.endswith(".xml"):
+       
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10019
+INFO:root:max position: 14591
+INFO:root:context_num: 425
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.truncate_url<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:50:56 CST
+
+INFO:root:****************************************
+data 82:   0%|          | 0/190 [00:00<?, ?it/s]data 82:   5%|▌         | 10/190 [00:37<11:15,  3.75s/it]data 82:  11%|█         | 20/190 [01:12<10:17,  3.63s/it]data 82:  16%|█▌        | 30/190 [01:52<10:01,  3.76s/it]data 82:  21%|██        | 40/190 [02:30<09:31,  3.81s/it]data 82:  26%|██▋       | 50/190 [03:09<08:57,  3.84s/it]data 82:  32%|███▏      | 60/190 [03:46<08:11,  3.78s/it]data 82:  37%|███▋      | 70/190 [04:24<07:33,  3.78s/it]data 82:  42%|████▏     | 80/190 [05:01<06:54,  3.77s/it]data 82:  47%|████▋     | 90/190 [05:37<06:10,  3.71s/it]data 82:  47%|████▋     | 90/190 [05:50<06:29,  3.90s/it]
+INFO:root:函数头: 
+def truncate_url(url, length):
+
+INFO:root:目标函数体: 
+    if (not length) or (len(url) <= length):
+        return url
+    bits = url.rsplit(".", 1)
+    if len(bits) == 2 and 1 <= len(bits[1]) <= 4 and "/" not in bits[1]:
+        rest, ext = bits
+        return rest[: length - 1 - len(ext)] + "…." + ext
+    return url[: length - 1] + "…"
+
+INFO:root:生成结果: 
+    if len(url) <= length:
+        return url
+
+    if url.endswith((".html", ".css", ".js")) and len(url.split("/")[-1]) >= 1 and len(url.split("/")[-1]) <= 4 and url.count("/") == 1:
+        return url[:length - len(url.split("/")[-1]) - 1] + "..." + url.split("/")[-1]
+
+    return url[:length] + "..."
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9586
+INFO:root:max position: 15094
+INFO:root:context_num: 399
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.truncate_url<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:56:47 CST
+
+INFO:root:****************************************
+INFO:root:--------data 83--------
+data 83:   0%|          | 0/272 [00:00<?, ?it/s]data 83:   4%|▎         | 10/272 [00:37<16:31,  3.78s/it]data 83:   7%|▋         | 20/272 [01:19<16:57,  4.04s/it]data 83:  11%|█         | 30/272 [02:01<16:28,  4.08s/it]data 83:  15%|█▍        | 40/272 [02:42<15:53,  4.11s/it]data 83:  18%|█▊        | 50/272 [03:24<15:18,  4.14s/it]data 83:  22%|██▏       | 60/272 [04:36<18:14,  5.16s/it]data 83:  26%|██▌       | 70/272 [05:49<19:47,  5.88s/it]data 83:  29%|██▉       | 80/272 [06:38<17:45,  5.55s/it]data 83:  33%|███▎      | 90/272 [07:22<15:44,  5.19s/it]data 83:  37%|███▋      | 100/272 [08:15<15:02,  5.25s/it]data 83:  40%|████      | 110/272 [09:05<13:56,  5.16s/it]data 83:  44%|████▍     | 120/272 [09:59<13:16,  5.24s/it]data 83:  48%|████▊     | 130/272 [10:35<11:11,  4.73s/it]data 83:  51%|█████▏    | 140/272 [11:11<09:38,  4.38s/it]data 83:  51%|█████▏    | 140/272 [11:25<10:46,  4.90s/it]
+INFO:root:函数头: 
+def groupfinder(userid, request):
+
+INFO:root:目标函数体: 
+    
+    backend = getattr(request.registry, "permission", None)
+    # Permission backend not configured. Ignore.
+    if not backend:
+        return []
+
+    # Safety check when Kinto-Core is used without pyramid_multiauth.
+    if request.prefixed_userid:
+        userid = request.prefixed_userid
+
+    # Query the permission backend only once per request (e.g. batch).
+    reify_key = userid + "_principals"
+    if reify_key not in request.bound_data:
+        principals = backend.get_user_principals(userid)
+        request.bound_data[reify_key] = principals
+
+    return request.bound_data[reify_key]
+
+INFO:root:生成结果: 
+    # Import necessary modules from kinto/core/storage and kinto/core/utils
+    from kinto.core.storage import get_backend
+    from kinto.core.utils import strip_uri
+
+    # Get the backend configuration from the request registry settings
+    backend_config = request.registry.settings.get("backend")
+
+    # Check if the backend configuration is present
+    if backend_config:
+        # Get the backend instance
+        backend = get_backend(backend_config)
+
+        # Fetch principals for the specified userid from the backend
+        principals = backend.get principals(userid=strip_uri(userid))
+
+        # Return the fetched principals
+        return principals
+
+    # If backend configuration is not present, return an empty list
+    return []
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6884
+INFO:root:max position: 20038
+INFO:root:context_num: 504
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.authorization<file>.groupfinder<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:08:13 CST
+
+INFO:root:****************************************
+data 83:   0%|          | 0/272 [00:00<?, ?it/s]data 83:   4%|▎         | 10/272 [00:35<15:33,  3.56s/it]data 83:   7%|▋         | 20/272 [01:22<17:40,  4.21s/it]data 83:  11%|█         | 30/272 [02:09<17:58,  4.46s/it]data 83:  15%|█▍        | 40/272 [03:16<20:32,  5.31s/it]data 83:  18%|█▊        | 50/272 [04:18<20:52,  5.64s/it]data 83:  22%|██▏       | 60/272 [05:30<21:53,  6.20s/it]data 83:  26%|██▌       | 70/272 [07:37<27:56,  8.30s/it]data 83:  29%|██▉       | 80/272 [08:21<22:37,  7.07s/it]data 83:  33%|███▎      | 90/272 [09:36<21:51,  7.21s/it]data 83:  37%|███▋      | 100/272 [14:20<39:25, 13.75s/it]data 83:  40%|████      | 110/272 [15:03<29:19, 10.86s/it]data 83:  44%|████▍     | 120/272 [15:46<22:25,  8.85s/it]data 83:  48%|████▊     | 130/272 [16:30<17:47,  7.52s/it]data 83:  48%|████▊     | 130/272 [17:03<18:38,  7.88s/it]
+INFO:root:函数头: 
+def groupfinder(userid, request):
+
+INFO:root:目标函数体: 
+    
+    backend = getattr(request.registry, "permission", None)
+    # Permission backend not configured. Ignore.
+    if not backend:
+        return []
+
+    # Safety check when Kinto-Core is used without pyramid_multiauth.
+    if request.prefixed_userid:
+        userid = request.prefixed_userid
+
+    # Query the permission backend only once per request (e.g. batch).
+    reify_key = userid + "_principals"
+    if reify_key not in request.bound_data:
+        principals = backend.get_user_principals(userid)
+        request.bound_data[reify_key] = principals
+
+    return request.bound_data[reify_key]
+
+INFO:root:生成结果: 
+    # Import necessary modules from kinto.core.storage and kinto.core.utils
+    from kinto.core.storage import PermissionBackend
+    from kinto.core.utils import strip_whitespace
+
+    # Get the permission backend from the request registry
+    permission_backend = request.registry.permission_backend
+
+    # If the permission backend is configured, fetch the principals for the specified userid
+    if permission_backend:
+        # Strip whitespace from the userid
+        userid = strip_whitespace(userid)
+        # Fetch the principals from the permission backend
+        principals = permission_backend.get principals(userid)
+        return principals
+
+    # If the permission backend is not configured, return an empty list
+    return []
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6562
+INFO:root:max position: 19433
+INFO:root:context_num: 521
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.authorization<file>.groupfinder<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:25:17 CST
+
+INFO:root:****************************************
+data 83:   0%|          | 0/272 [00:00<?, ?it/s]data 83:   4%|▎         | 10/272 [01:33<40:47,  9.34s/it]data 83:   7%|▋         | 20/272 [02:49<34:57,  8.32s/it]data 83:  11%|█         | 30/272 [03:31<25:54,  6.42s/it]data 83:  15%|█▍        | 40/272 [04:19<22:22,  5.79s/it]data 83:  18%|█▊        | 50/272 [05:02<19:28,  5.26s/it]data 83:  22%|██▏       | 60/272 [05:46<17:33,  4.97s/it]data 83:  26%|██▌       | 70/272 [06:32<16:22,  4.86s/it]data 83:  29%|██▉       | 80/272 [07:19<15:20,  4.79s/it]data 83:  33%|███▎      | 90/272 [08:12<14:59,  4.94s/it]data 83:  37%|███▋      | 100/272 [08:57<13:50,  4.83s/it]data 83:  40%|████      | 110/272 [09:45<12:59,  4.81s/it]data 83:  44%|████▍     | 120/272 [10:31<12:00,  4.74s/it]data 83:  48%|████▊     | 130/272 [11:19<11:14,  4.75s/it]data 83:  51%|█████▏    | 140/272 [12:02<10:09,  4.62s/it]data 83:  51%|█████▏    | 140/272 [12:21<11:39,  5.30s/it]
+INFO:root:函数头: 
+def groupfinder(userid, request):
+
+INFO:root:目标函数体: 
+    
+    backend = getattr(request.registry, "permission", None)
+    # Permission backend not configured. Ignore.
+    if not backend:
+        return []
+
+    # Safety check when Kinto-Core is used without pyramid_multiauth.
+    if request.prefixed_userid:
+        userid = request.prefixed_userid
+
+    # Query the permission backend only once per request (e.g. batch).
+    reify_key = userid + "_principals"
+    if reify_key not in request.bound_data:
+        principals = backend.get_user_principals(userid)
+        request.bound_data[reify_key] = principals
+
+    return request.bound_data[reify_key]
+
+INFO:root:生成结果: 
+    # Import necessary modules from the project
+    from kinto.core import storage
+    from kinto.core.storage.exceptions import StorageError
+    from kinto.core.utils import strip_uri
+
+    # Check if the permission backend is configured
+    settings = request.registry.settings
+    permission_backend = settings.get("permission_backend")
+    if not permission_backend:
+        return []
+
+    try:
+        # Fetch principals from the permission backend for the specified userid
+        principals = storage.get principals(userid=strip_uri(userid))
+        return list(principals)
+
+    except StorageError as e:
+        # Handle storage errors gracefully
+        logger.error(f"Error fetching principals for user {userid}: {e}")
+        return []
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6882
+INFO:root:max position: 19927
+INFO:root:context_num: 464
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.authorization<file>.groupfinder<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:37:38 CST
+
+INFO:root:****************************************
+INFO:root:已生成83条结果
+INFO:root:--------data 84--------
+data 84:   0%|          | 0/128 [00:00<?, ?it/s]data 84:   8%|▊         | 10/128 [00:29<05:52,  2.99s/it]data 84:  16%|█▌        | 20/128 [01:02<05:42,  3.17s/it]data 84:  16%|█▌        | 20/128 [01:16<06:53,  3.83s/it]
+INFO:root:函数头: 
+    def dumps(v, **kw):
+
+INFO:root:目标函数体: 
+        kw.setdefault("bytes_mode", rapidjson.BM_NONE)
+        return rapidjson.dumps(v, **kw)
+
+INFO:root:生成结果: 
+        kw.setdefault('bytes_mode', rapidjson.BM_NONE)
+        return rapidjson.dumps(v, **kw)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6375
+INFO:root:max position: 13330
+INFO:root:context_num: 354
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.json<class>.dumps<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:38:55 CST
+
+INFO:root:****************************************
+data 84:   0%|          | 0/128 [00:00<?, ?it/s]data 84:   8%|▊         | 10/128 [00:28<05:35,  2.84s/it]data 84:   8%|▊         | 10/128 [00:34<06:44,  3.43s/it]
+INFO:root:函数头: 
+    def dumps(v, **kw):
+
+INFO:root:目标函数体: 
+        kw.setdefault("bytes_mode", rapidjson.BM_NONE)
+        return rapidjson.dumps(v, **kw)
+
+INFO:root:生成结果: 
+        return rapidjson.dumps(v, **kw)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6097
+INFO:root:max position: 16681
+INFO:root:context_num: 243
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.json<class>.dumps<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:39:29 CST
+
+INFO:root:****************************************
+data 84:   0%|          | 0/128 [00:00<?, ?it/s]data 84:   8%|▊         | 10/128 [00:29<05:53,  3.00s/it]data 84:   8%|▊         | 10/128 [00:35<07:02,  3.58s/it]
+INFO:root:函数头: 
+    def dumps(v, **kw):
+
+INFO:root:目标函数体: 
+        kw.setdefault("bytes_mode", rapidjson.BM_NONE)
+        return rapidjson.dumps(v, **kw)
+
+INFO:root:生成结果: 
+        return rapidjson.dumps(v, **kw)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5796
+INFO:root:max position: 16656
+INFO:root:context_num: 236
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.json<class>.dumps<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:40:05 CST
+
+INFO:root:****************************************
+INFO:root:--------data 85--------
+data 85:   0%|          | 0/128 [00:00<?, ?it/s]data 85:   8%|▊         | 10/128 [00:28<05:33,  2.83s/it]data 85:  16%|█▌        | 20/128 [00:56<05:04,  2.82s/it]data 85:  16%|█▌        | 20/128 [01:10<06:21,  3.53s/it]
+INFO:root:函数头: 
+    def loads(v, **kw):
+
+INFO:root:目标函数体: 
+        kw.setdefault("number_mode", rapidjson.NM_NATIVE)
+        return rapidjson.loads(v, **kw)
+
+INFO:root:生成结果: 
+        kw.setdefault("number_mode", rapidjson.NM_NATIVE)
+        return rapidjson.loads(v, **kw)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5884
+INFO:root:max position: 12435
+INFO:root:context_num: 373
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.json<class>.loads<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:41:16 CST
+
+INFO:root:****************************************
+data 85:   0%|          | 0/128 [00:00<?, ?it/s]data 85:   8%|▊         | 10/128 [00:24<04:47,  2.43s/it]data 85:   8%|▊         | 10/128 [00:27<05:22,  2.73s/it]
+INFO:root:函数头: 
+    def loads(v, **kw):
+
+INFO:root:目标函数体: 
+        kw.setdefault("number_mode", rapidjson.NM_NATIVE)
+        return rapidjson.loads(v, **kw)
+
+INFO:root:生成结果: 
+        return json.loads(v, **kw)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4751
+INFO:root:max position: 12258
+INFO:root:context_num: 296
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.json<class>.loads<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:41:43 CST
+
+INFO:root:****************************************
+data 85:   0%|          | 0/128 [00:00<?, ?it/s]data 85:   8%|▊         | 10/128 [00:27<05:20,  2.72s/it]data 85:  16%|█▌        | 20/128 [00:54<04:54,  2.73s/it]data 85:  16%|█▌        | 20/128 [01:08<06:08,  3.41s/it]
+INFO:root:函数头: 
+    def loads(v, **kw):
+
+INFO:root:目标函数体: 
+        kw.setdefault("number_mode", rapidjson.NM_NATIVE)
+        return rapidjson.loads(v, **kw)
+
+INFO:root:生成结果: 
+        kw.setdefault("number_mode", rapidjson.NM_NATIVE)
+        return rapidjson.loads(v, **kw)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5872
+INFO:root:max position: 12617
+INFO:root:context_num: 376
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.json<class>.loads<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:42:51 CST
+
+INFO:root:****************************************
+INFO:root:已生成85条结果
+INFO:root:--------data 86--------
+data 86:   0%|          | 0/128 [00:00<?, ?it/s]data 86:   8%|▊         | 10/128 [01:23<16:29,  8.38s/it]data 86:  16%|█▌        | 20/128 [01:57<09:45,  5.42s/it]data 86:  23%|██▎       | 30/128 [02:32<07:24,  4.53s/it]data 86:  31%|███▏      | 40/128 [03:06<05:59,  4.09s/it]data 86:  39%|███▉      | 50/128 [03:38<04:53,  3.77s/it]data 86:  39%|███▉      | 50/128 [03:46<05:52,  4.52s/it]
+INFO:root:函数头: 
+def hmac_digest(secret, message, encoding="utf-8"):
+
+INFO:root:目标函数体: 
+    
+    if isinstance(secret, str):
+        secret = secret.encode(encoding)
+    return hmac.new(secret, message.encode(encoding), hashlib.sha256).hexdigest()
+
+INFO:root:生成结果: 
+    secret_bytes = secret.encode(encoding) if isinstance(secret, str) else secret
+    message_bytes = message.encode(encoding)
+    digest = hmac.digest(secret_bytes, message_bytes, hashlib.sha256)
+    return digest.hex() ``` ```python
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6823
+INFO:root:max position: 18484
+INFO:root:context_num: 352
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.hmac_digest<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:46:38 CST
+
+INFO:root:****************************************
+data 86:   0%|          | 0/128 [00:00<?, ?it/s]data 86:   8%|▊         | 10/128 [00:31<06:11,  3.15s/it]data 86:  16%|█▌        | 20/128 [01:08<06:14,  3.47s/it]data 86:  23%|██▎       | 30/128 [01:41<05:32,  3.39s/it]data 86:  31%|███▏      | 40/128 [02:16<05:03,  3.45s/it]data 86:  31%|███▏      | 40/128 [02:33<05:37,  3.84s/it]
+INFO:root:函数头: 
+def hmac_digest(secret, message, encoding="utf-8"):
+
+INFO:root:目标函数体: 
+    
+    if isinstance(secret, str):
+        secret = secret.encode(encoding)
+    return hmac.new(secret, message.encode(encoding), hashlib.sha256).hexdigest()
+
+INFO:root:生成结果: 
+    if isinstance(secret, str):
+        secret = secret.encode(encoding)
+    message = message.encode(encoding)
+    digest = hmac.new(secret, message, hashlib.sha256).digest()
+    return digest.hex()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7017
+INFO:root:max position: 18396
+INFO:root:context_num: 326
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.hmac_digest<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:49:11 CST
+
+INFO:root:****************************************
+data 86:   0%|          | 0/128 [00:00<?, ?it/s]data 86:   8%|▊         | 10/128 [00:34<06:48,  3.46s/it]data 86:  16%|█▌        | 20/128 [01:08<06:07,  3.40s/it]data 86:  23%|██▎       | 30/128 [01:41<05:28,  3.36s/it]data 86:  31%|███▏      | 40/128 [02:14<04:54,  3.34s/it]data 86:  39%|███▉      | 50/128 [02:48<04:23,  3.37s/it]data 86:  39%|███▉      | 50/128 [03:11<04:58,  3.83s/it]
+INFO:root:函数头: 
+def hmac_digest(secret, message, encoding="utf-8"):
+
+INFO:root:目标函数体: 
+    
+    if isinstance(secret, str):
+        secret = secret.encode(encoding)
+    return hmac.new(secret, message.encode(encoding), hashlib.sha256).hexdigest()
+
+INFO:root:生成结果: 
+    import hmac
+    import hashlib
+
+    secret_bytes = secret.encode(encoding) if isinstance(secret, str) else secret
+    message_bytes = message.encode(encoding)
+
+    digest = hmac.digest(secret_bytes, message_bytes, hashlib.sha256)
+    return digest.hex()
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6798
+INFO:root:max position: 13609
+INFO:root:context_num: 356
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.hmac_digest<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:52:23 CST
+
+INFO:root:****************************************
+INFO:root:--------data 87--------
+data 87:   0%|          | 0/128 [00:00<?, ?it/s]data 87:   8%|▊         | 10/128 [00:52<10:16,  5.22s/it]data 87:  16%|█▌        | 20/128 [01:40<09:01,  5.01s/it]data 87:  23%|██▎       | 30/128 [02:28<07:58,  4.88s/it]data 87:  31%|███▏      | 40/128 [03:15<07:04,  4.83s/it]data 87:  31%|███▏      | 40/128 [03:40<08:05,  5.51s/it]
+INFO:root:函数头: 
+def current_service(request):
+
+INFO:root:目标函数体: 
+    
+    if request.matched_route:
+        services = request.registry.cornice_services
+        pattern = request.matched_route.pattern
+        try:
+            service = services[pattern]
+        except KeyError:
+            return None
+        else:
+            return service
+
+INFO:root:生成结果: 
+    registry = request.registry
+    route_pattern = request.matched_route.pattern if request.matched_route else None
+    services = registry services.get(route_pattern)
+    return services[0] if services else None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7640
+INFO:root:max position: 20138
+INFO:root:context_num: 351
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.current_service<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:56:03 CST
+
+INFO:root:****************************************
+data 87:   0%|          | 0/128 [00:00<?, ?it/s]data 87:   8%|▊         | 10/128 [00:39<07:41,  3.91s/it]data 87:  16%|█▌        | 20/128 [01:37<09:07,  5.07s/it]data 87:  23%|██▎       | 30/128 [02:42<09:17,  5.69s/it]data 87:  23%|██▎       | 30/128 [02:50<09:15,  5.67s/it]
+INFO:root:函数头: 
+def current_service(request):
+
+INFO:root:目标函数体: 
+    
+    if request.matched_route:
+        services = request.registry.cornice_services
+        pattern = request.matched_route.pattern
+        try:
+            service = services[pattern]
+        except KeyError:
+            return None
+        else:
+            return service
+
+INFO:root:生成结果: 
+    service = request.registry.service(request.matchdict.get("service"))
+    if service:
+        request.info["service"] = service
+    return service
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6844
+INFO:root:max position: 21035
+INFO:root:context_num: 335
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.current_service<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:58:53 CST
+
+INFO:root:****************************************
+data 87:   0%|          | 0/128 [00:00<?, ?it/s]data 87:   8%|▊         | 10/128 [02:23<28:17, 14.38s/it]data 87:  16%|█▌        | 20/128 [03:09<15:28,  8.60s/it]data 87:  23%|██▎       | 30/128 [03:56<11:07,  6.81s/it]data 87:  31%|███▏      | 40/128 [04:44<08:50,  6.03s/it]data 87:  39%|███▉      | 50/128 [05:33<07:17,  5.61s/it]data 87:  39%|███▉      | 50/128 [06:10<09:38,  7.42s/it]
+INFO:root:函数头: 
+def current_service(request):
+
+INFO:root:目标函数体: 
+    
+    if request.matched_route:
+        services = request.registry.cornice_services
+        pattern = request.matched_route.pattern
+        try:
+            service = services[pattern]
+        except KeyError:
+            return None
+        else:
+            return service
+
+INFO:root:生成结果: 
+    registry = request.registry
+    services = registry.services
+    matchdict = request.matchdict
+    route_pattern = request.route_pattern
+
+    for service_name, service in services.items():
+        if service.match(route_pattern, matchdict):
+            return service
+
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7029
+INFO:root:max position: 20411
+INFO:root:context_num: 384
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.current_service<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:05:04 CST
+
+INFO:root:****************************************
+INFO:root:已生成87条结果
+INFO:root:--------data 88--------
+data 88:   0%|          | 0/218 [00:00<?, ?it/s]data 88:   5%|▍         | 10/218 [00:42<14:54,  4.30s/it]data 88:   9%|▉         | 20/218 [01:34<15:48,  4.79s/it]data 88:  14%|█▍        | 30/218 [02:14<13:53,  4.43s/it]data 88:  18%|█▊        | 40/218 [02:56<12:56,  4.36s/it]data 88:  23%|██▎       | 50/218 [03:41<12:20,  4.41s/it]data 88:  28%|██▊       | 60/218 [04:20<11:06,  4.22s/it]data 88:  32%|███▏      | 70/218 [04:55<09:52,  4.00s/it]data 88:  37%|███▋      | 80/218 [05:34<09:06,  3.96s/it]data 88:  37%|███▋      | 80/218 [05:37<09:42,  4.22s/it]
+INFO:root:函数头: 
+def prefixed_principals(request):
+
+INFO:root:目标函数体: 
+    
+    principals = request.effective_principals
+    if Authenticated not in principals:
+        return principals
+
+    # Remove unprefixed user id on effective_principals to avoid conflicts.
+    # (it is added via Pyramid Authn policy effective principals)
+    prefix, userid = request.prefixed_userid.split(":", 1)
+    principals = [p for p in principals if p != userid]
+
+    if request.prefixed_userid not in principals:
+        principals = [request.prefixed_userid] + principals
+
+    return principals
+
+INFO:root:生成结果: 
+    principals = request.object principals
+    if "Authenticated" not in principals:
+        return principals
+    # Remove the unprefix user id from the principals list to avoid conflicts
+    principals.remove(request.object principals["Authenticated"].id)
+    # Add the prefixed user id to the beginning of the list
+    principals.insert(0, request.object principals["Authenticated"].id)
+    return principals
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7699
+INFO:root:max position: 19916
+INFO:root:context_num: 574
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.prefixed_principals<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:10:42 CST
+
+INFO:root:****************************************
+data 88:   0%|          | 0/218 [00:00<?, ?it/s]data 88:   5%|▍         | 10/218 [00:44<15:24,  4.45s/it]data 88:   9%|▉         | 20/218 [01:34<15:47,  4.79s/it]data 88:  14%|█▍        | 30/218 [02:19<14:37,  4.67s/it]data 88:  18%|█▊        | 40/218 [03:01<13:13,  4.46s/it]data 88:  23%|██▎       | 50/218 [03:47<12:37,  4.51s/it]data 88:  28%|██▊       | 60/218 [04:29<11:35,  4.40s/it]data 88:  32%|███▏      | 70/218 [05:03<10:03,  4.08s/it]data 88:  37%|███▋      | 80/218 [05:58<10:27,  4.55s/it]data 88:  37%|███▋      | 80/218 [06:01<10:23,  4.52s/it]
+INFO:root:函数头: 
+def prefixed_principals(request):
+
+INFO:root:目标函数体: 
+    
+    principals = request.effective_principals
+    if Authenticated not in principals:
+        return principals
+
+    # Remove unprefixed user id on effective_principals to avoid conflicts.
+    # (it is added via Pyramid Authn policy effective principals)
+    prefix, userid = request.prefixed_userid.split(":", 1)
+    principals = [p for p in principals if p != userid]
+
+    if request.prefixed_userid not in principals:
+        principals = [request.prefixed_userid] + principals
+
+    return principals
+
+INFO:root:生成结果: 
+    principals = request.object.get(" principals", [])
+    authenticated_principal = request.object.get(" authenticated", None)
+    if authenticated_principal and authenticated_principal not in principals:
+        return principals
+    prefixed_user_id = request.object.get(" prefixed_user_id", None)
+    if prefixed_user_id:
+        principals.remove(authenticated_principal)
+        principals.insert(0, prefixed_user_id)
+    return principals
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7302
+INFO:root:max position: 21030
+INFO:root:context_num: 530
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.prefixed_principals<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:16:44 CST
+
+INFO:root:****************************************
+data 88:   0%|          | 0/218 [00:00<?, ?it/s]data 88:   5%|▍         | 10/218 [02:44<57:11, 16.50s/it]data 88:   9%|▉         | 20/218 [03:32<31:38,  9.59s/it]data 88:  14%|█▍        | 30/218 [04:15<22:33,  7.20s/it]data 88:  18%|█▊        | 40/218 [04:52<17:10,  5.79s/it]data 88:  23%|██▎       | 50/218 [05:32<14:24,  5.14s/it]data 88:  28%|██▊       | 60/218 [06:09<12:18,  4.67s/it]data 88:  32%|███▏      | 70/218 [06:44<10:34,  4.29s/it]data 88:  37%|███▋      | 80/218 [07:24<09:38,  4.19s/it]data 88:  41%|████▏     | 90/218 [08:02<08:38,  4.05s/it]data 88:  46%|████▌     | 100/218 [08:35<07:33,  3.84s/it]data 88:  46%|████▌     | 100/218 [09:02<10:40,  5.42s/it]
+INFO:root:函数头: 
+def prefixed_principals(request):
+
+INFO:root:目标函数体: 
+    
+    principals = request.effective_principals
+    if Authenticated not in principals:
+        return principals
+
+    # Remove unprefixed user id on effective_principals to avoid conflicts.
+    # (it is added via Pyramid Authn policy effective principals)
+    prefix, userid = request.prefixed_userid.split(":", 1)
+    principals = [p for p in principals if p != userid]
+
+    if request.prefixed_userid not in principals:
+        principals = [request.prefixed_userid] + principals
+
+    return principals
+
+INFO:root:生成结果: 
+    principals = request.object.get(" principals", [])
+    authenticated_principal = next((principal for principal in principals if principal == "Authenticated"), None)
+    if authenticated_principal is None:
+        return principals
+    # Remove the unp prefixed user id from the principals list to avoid conflicts
+    principals = [principal for principal in principals if principal != request.object.get("user_id")]
+    # Add the prefixed user id to the beginning of the list
+    principals.insert(0, request.object.get("user_id"))
+    return principals
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7550
+INFO:root:max position: 19726
+INFO:root:context_num: 583
+INFO:root:target_namespace: kinto.kinto<folder>.core<folder>.utils<file>.prefixed_principals<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:25:46 CST
+
+INFO:root:****************************************
+INFO:root:--------data 89--------
+data 89:   0%|          | 0/212 [00:00<?, ?it/s]data 89:   5%|▍         | 10/212 [00:23<07:55,  2.35s/it]data 89:   9%|▉         | 20/212 [00:47<07:37,  2.38s/it]data 89:  14%|█▍        | 30/212 [01:14<07:43,  2.55s/it]data 89:  19%|█▉        | 40/212 [01:41<07:24,  2.59s/it]data 89:  24%|██▎       | 50/212 [02:15<07:45,  2.88s/it]data 89:  28%|██▊       | 60/212 [02:44<07:21,  2.90s/it]data 89:  33%|███▎      | 70/212 [03:17<07:06,  3.00s/it]data 89:  38%|███▊      | 80/212 [03:53<07:04,  3.22s/it]data 89:  42%|████▏     | 90/212 [04:23<06:22,  3.13s/it]data 89:  47%|████▋     | 100/212 [04:56<05:56,  3.18s/it]data 89:  52%|█████▏    | 110/212 [05:24<05:12,  3.07s/it]data 89:  57%|█████▋    | 120/212 [05:50<04:28,  2.92s/it]data 89:  57%|█████▋    | 120/212 [05:57<04:34,  2.98s/it]
+INFO:root:函数头: 
+@subscriber(ResourceChanged, for_resources=("account",), for_actions=(ACTIONS.CREATE,))
+def on_account_created(event):
+
+INFO:root:目标函数体: 
+    request = event.request
+    settings = request.registry.settings
+    if not settings.get("account_validation", False):
+        return
+
+    for impacted_object in event.impacted_objects:
+        account = impacted_object["new"]
+        user_email = account["id"]
+        activation_key = get_cached_validation_key(user_email, request.registry)
+        if activation_key is None:
+            continue
+
+        # Send an email to the user with the link to activate their account.
+        Emailer(request, account).send_activation(activation_key)
+
+INFO:root:生成结果: 
+    request = event.request
+    settings = request.registry.settings
+
+    # Check if validation validation is enabled in settings
+    if settings.get("account_validation", False):
+        for obj in event.imp impacted_objects:
+            # Retrieve account information
+            account_info = obj["old"]
+            user_email = account_info.get("id")
+            activation_key = account_info.get("activation_key")
+
+            # Skip if activation key is None
+            if activation_key is None:
+                continue
+
+            # Send email to user with activation link
+            Emailer(request, account_info).send_activation(activation_key)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7549
+INFO:root:max position: 17337
+INFO:root:context_num: 517
+INFO:root:target_namespace: kinto.kinto<folder>.plugins<folder>.accounts<folder>.views<folder>.__init__<file>.on_account_created<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:31:44 CST
+
+INFO:root:****************************************
+data 89:   0%|          | 0/212 [00:00<?, ?it/s]data 89:   5%|▍         | 10/212 [00:23<07:54,  2.35s/it]data 89:   9%|▉         | 20/212 [00:48<07:42,  2.41s/it]data 89:  14%|█▍        | 30/212 [01:13<07:28,  2.46s/it]data 89:  19%|█▉        | 40/212 [01:40<07:20,  2.56s/it]data 89:  24%|██▎       | 50/212 [02:11<07:27,  2.77s/it]data 89:  28%|██▊       | 60/212 [02:40<07:06,  2.81s/it]data 89:  33%|███▎      | 70/212 [03:11<06:53,  2.92s/it]data 89:  38%|███▊      | 80/212 [03:45<06:43,  3.06s/it]data 89:  42%|████▏     | 90/212 [04:16<06:15,  3.08s/it]data 89:  47%|████▋     | 100/212 [04:47<05:42,  3.06s/it]data 89:  52%|█████▏    | 110/212 [05:14<05:03,  2.98s/it]data 89:  52%|█████▏    | 110/212 [05:39<05:14,  3.09s/it]
+INFO:root:函数头: 
+@subscriber(ResourceChanged, for_resources=("account",), for_actions=(ACTIONS.CREATE,))
+def on_account_created(event):
+
+INFO:root:目标函数体: 
+    request = event.request
+    settings = request.registry.settings
+    if not settings.get("account_validation", False):
+        return
+
+    for impacted_object in event.impacted_objects:
+        account = impacted_object["new"]
+        user_email = account["id"]
+        activation_key = get_cached_validation_key(user_email, request.registry)
+        if activation_key is None:
+            continue
+
+        # Send an email to the user with the link to activate their account.
+        Emailer(request, account).send_activation(activation_key)
+
+INFO:root:生成结果: 
+    request = event.request
+    settings = request.registry.settings
+    validation_enabled = settings.get("account_validation", False)
+
+    if not validation_enabled:
+        return
+
+    for impacted_object in event.impacted_objects:
+        obj = impacted_object["old"]
+        account_info = {
+            "user_email": obj.get("user_email"),
+            "activation_key": obj.get("activation_key")
+        }
+
+        if account_info["activation_key"] is None:
+            continue
+
+        Emailer(request, account_info).send activation(account_info["user_email"], account_info["activation_key"])
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7385
+INFO:root:max position: 17747
+INFO:root:context_num: 524
+INFO:root:target_namespace: kinto.kinto<folder>.plugins<folder>.accounts<folder>.views<folder>.__init__<file>.on_account_created<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:37:24 CST
+
+INFO:root:****************************************
+data 89:   0%|          | 0/212 [00:00<?, ?it/s]data 89:   5%|▍         | 10/212 [00:23<07:54,  2.35s/it]data 89:   9%|▉         | 20/212 [00:51<08:16,  2.59s/it]data 89:  14%|█▍        | 30/212 [01:16<07:49,  2.58s/it]data 89:  19%|█▉        | 40/212 [01:46<07:49,  2.73s/it]data 89:  24%|██▎       | 50/212 [02:13<07:19,  2.72s/it]data 89:  28%|██▊       | 60/212 [02:40<06:55,  2.73s/it]data 89:  33%|███▎      | 70/212 [03:12<06:47,  2.87s/it]data 89:  38%|███▊      | 80/212 [03:43<06:28,  2.94s/it]data 89:  42%|████▏     | 90/212 [04:14<06:04,  2.99s/it]data 89:  47%|████▋     | 100/212 [04:45<05:40,  3.04s/it]data 89:  52%|█████▏    | 110/212 [05:18<05:15,  3.10s/it]data 89:  57%|█████▋    | 120/212 [05:44<04:31,  2.95s/it]data 89:  57%|█████▋    | 120/212 [05:49<04:27,  2.91s/it]
+INFO:root:函数头: 
+@subscriber(ResourceChanged, for_resources=("account",), for_actions=(ACTIONS.CREATE,))
+def on_account_created(event):
+
+INFO:root:目标函数体: 
+    request = event.request
+    settings = request.registry.settings
+    if not settings.get("account_validation", False):
+        return
+
+    for impacted_object in event.impacted_objects:
+        account = impacted_object["new"]
+        user_email = account["id"]
+        activation_key = get_cached_validation_key(user_email, request.registry)
+        if activation_key is None:
+            continue
+
+        # Send an email to the user with the link to activate their account.
+        Emailer(request, account).send_activation(activation_key)
+
+INFO:root:生成结果: 
+    request = event.request
+    settings = request.registry.settings
+    if not settings.get("account_validation", False):
+        return
+
+    for impacted_object in event.impacted_objects:
+        obj = impacted_object["old"]
+        if obj.get("validated", False):
+            continue
+
+        username = obj["id"]
+        activation_key = obj.get("activation_key")
+        if activation_key is None:
+            continue
+
+        account_info = {
+            "user_email": obj["user_email"],
+            "activation_key": activation_key,
+        }
+
+        Emailer.send_activation_email(request, account_info)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7481
+INFO:root:max position: 17760
+INFO:root:context_num: 505
+INFO:root:target_namespace: kinto.kinto<folder>.plugins<folder>.accounts<folder>.views<folder>.__init__<file>.on_account_created<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:43:13 CST
+
+INFO:root:****************************************
+INFO:root:已生成89条结果
+INFO:root:--------data 90--------
+data 90:   0%|          | 0/128 [00:00<?, ?it/s]data 90:   8%|▊         | 10/128 [00:19<03:53,  1.98s/it]data 90:  16%|█▌        | 20/128 [00:41<03:47,  2.11s/it]data 90:  23%|██▎       | 30/128 [01:03<03:29,  2.14s/it]data 90:  23%|██▎       | 30/128 [01:15<04:07,  2.53s/it]
+INFO:root:函数头: 
+def hash_password(password):
+    # Store password safely in database as str
+    # (bcrypt.hashpw returns base64 bytes).
+
+INFO:root:目标函数体: 
+    pwd_str = password.encode(encoding="utf-8")
+    hashed = bcrypt.hashpw(pwd_str, bcrypt.gensalt())
+    return hashed.decode(encoding="utf-8")
+
+INFO:root:生成结果: 
+    salt = bcrypt.ggen salt()
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_password.decode('utf-8')
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5945
+INFO:root:max position: 9532
+INFO:root:context_num: 64
+INFO:root:target_namespace: kinto.kinto<folder>.plugins<folder>.accounts<folder>.utils<file>.hash_password<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:44:29 CST
+
+INFO:root:****************************************
+data 90:   0%|          | 0/128 [00:00<?, ?it/s]data 90:   8%|▊         | 10/128 [00:19<03:53,  1.98s/it]data 90:  16%|█▌        | 20/128 [00:42<03:53,  2.16s/it]data 90:  23%|██▎       | 30/128 [01:03<03:28,  2.13s/it]data 90:  23%|██▎       | 30/128 [01:25<04:40,  2.86s/it]
+INFO:root:函数头: 
+def hash_password(password):
+    # Store password safely in database as str
+    # (bcrypt.hashpw returns base64 bytes).
+
+INFO:root:目标函数体: 
+    pwd_str = password.encode(encoding="utf-8")
+    hashed = bcrypt.hashpw(pwd_str, bcrypt.gensalt())
+    return hashed.decode(encoding="utf-8")
+
+INFO:root:生成结果: 
+    salt = bcrypt.g GenSalt rounds=12)
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_password.decode('utf-8')
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6286
+INFO:root:max position: 9789
+INFO:root:context_num: 80
+INFO:root:target_namespace: kinto.kinto<folder>.plugins<folder>.accounts<folder>.utils<file>.hash_password<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:45:55 CST
+
+INFO:root:****************************************
+data 90:   0%|          | 0/128 [00:00<?, ?it/s]data 90:   8%|▊         | 10/128 [00:19<03:52,  1.97s/it]data 90:   8%|▊         | 10/128 [00:39<07:44,  3.94s/it]
+INFO:root:函数头: 
+def hash_password(password):
+    # Store password safely in database as str
+    # (bcrypt.hashpw returns base64 bytes).
+
+INFO:root:目标函数体: 
+    pwd_str = password.encode(encoding="utf-8")
+    hashed = bcrypt.hashpw(pwd_str, bcrypt.gensalt())
+    return hashed.decode(encoding="utf-8")
+
+INFO:root:生成结果: 
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.g gen_salt())
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5512
+INFO:root:max position: 9515
+INFO:root:context_num: 63
+INFO:root:target_namespace: kinto.kinto<folder>.plugins<folder>.accounts<folder>.utils<file>.hash_password<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:46:34 CST
+
+INFO:root:****************************************
+INFO:root:--------data 91--------
+data 91:   0%|          | 0/130 [00:00<?, ?it/s]data 91:   8%|▊         | 10/130 [00:29<05:58,  2.99s/it]data 91:  15%|█▌        | 20/130 [01:00<05:30,  3.01s/it]data 91:  23%|██▎       | 30/130 [01:29<04:59,  2.99s/it]data 91:  31%|███       | 40/130 [01:57<04:20,  2.89s/it]data 91:  31%|███       | 40/130 [02:21<05:19,  3.55s/it]
+INFO:root:函数头: 
+def get_parent_uri(object_uri):
+
+INFO:root:目标函数体: 
+    
+    path = object_uri.rsplit("/", 2)
+    # len(path) == 1: no '/', probably a broken URL?
+    # len(path) == 2: one '/', doesn't conform to our URL scheme
+    if len(path) < 3:
+        return ""
+
+    return path[0]
+
+INFO:root:生成结果: 
+    if not object_uri.startswith("http"):
+        return ""
+
+    parts = object_uri.split("/")
+    if len(parts) < 3:
+        return ""
+
+    return parts[0] + "/" + parts[1] + "/"
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6946
+INFO:root:max position: 15897
+INFO:root:context_num: 264
+INFO:root:target_namespace: kinto.kinto<folder>.views<folder>.admin<file>.get_parent_uri<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:48:56 CST
+
+INFO:root:****************************************
+data 91:   0%|          | 0/130 [00:00<?, ?it/s]

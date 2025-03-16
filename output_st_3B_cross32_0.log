@@ -1,0 +1,347 @@
+INFO:root:time: 2025年 03月 16日 星期日 21:09:18 CST
+
+INFO:root:pid: 1123416
+INFO:root:seed: 65
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_cross32_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.36s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.27it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.15it/s]
+INFO:root:--------data 0--------
+data 0:   0%|          | 0/128 [00:00<?, ?it/s]data 0:   8%|▊         | 10/128 [00:19<03:53,  1.98s/it]data 0:  16%|█▌        | 20/128 [00:37<03:21,  1.87s/it]data 0:  23%|██▎       | 30/128 [00:54<02:55,  1.79s/it]data 0:  23%|██▎       | 30/128 [00:59<03:14,  1.99s/it]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+    json_types = (type(None), bool, dict, float, int, list, str, tuple)
+    return isinstance(val, json_types)
+
+INFO:root:生成结果: 
+    serializable_types = (dict, list, tuple, str, int, float, bool, None)
+    return isinstance(val, serializable_types)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 1509
+INFO:root:max position: 4564
+INFO:root:context_num: 135
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:10:31 CST
+
+INFO:root:****************************************
+data 0:   0%|          | 0/128 [00:00<?, ?it/s]data 0:   8%|▊         | 10/128 [00:16<03:11,  1.63s/it]data 0:  16%|█▌        | 20/128 [00:34<03:05,  1.72s/it]data 0:  16%|█▌        | 20/128 [00:48<04:21,  2.42s/it]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+    json_types = (type(None), bool, dict, float, int, list, str, tuple)
+    return isinstance(val, json_types)
+
+INFO:root:生成结果: 
+    try:
+        import json
+
+        json.dumps(val)
+        return True
+    except (TypeError, OverflowError):
+        return False
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 1457
+INFO:root:max position: 4579
+INFO:root:context_num: 112
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:11:19 CST
+
+INFO:root:****************************************
+data 0:   0%|          | 0/128 [00:00<?, ?it/s]data 0:   8%|▊         | 10/128 [00:17<03:22,  1.71s/it]data 0:  16%|█▌        | 20/128 [00:28<02:30,  1.39s/it]data 0:  23%|██▎       | 30/128 [00:37<01:53,  1.15s/it]data 0:  31%|███▏      | 40/128 [00:46<01:31,  1.04s/it]data 0:  39%|███▉      | 50/128 [00:55<01:16,  1.02it/s]data 0:  47%|████▋     | 60/128 [01:03<01:03,  1.07it/s]data 0:  55%|█████▍    | 70/128 [01:12<00:53,  1.08it/s]data 0:  62%|██████▎   | 80/128 [01:21<00:43,  1.10it/s]data 0:  70%|███████   | 90/128 [01:29<00:33,  1.12it/s]data 0:  78%|███████▊  | 100/128 [01:38<00:24,  1.14it/s]data 0:  86%|████████▌ | 110/128 [01:46<00:15,  1.16it/s]data 0:  94%|█████████▍| 120/128 [01:54<00:06,  1.18it/s]data 0:  94%|█████████▍| 120/128 [02:02<00:08,  1.02s/it]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+    json_types = (type(None), bool, dict, float, int, list, str, tuple)
+    return isinstance(val, json_types)
+
+INFO:root:生成结果: 
+    # Import necessary modules from other files
+    from benedict.serializers.base64 import Base64Serializer
+    from benedict.serializers.json import JSONSerializer
+    from benedict.serializers.toml import TOMLSerializer
+    from benedict.serializers.xml import XMLSerializer
+    from benedict.serializers.pickle import PickleSerializer
+
+    # Check if the input value is JSON serializable by attempting to serialize it using each serializer
+    serializers = [
+        Base64Serializer(),
+        JSONSerializer(),
+        TOMLSerializer(),
+        XMLSerializer(),
+        PickleSerializer(),
+    ]
+
+   
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 1686
+INFO:root:max position: 4605
+INFO:root:context_num: 172
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:13:22 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1--------
+data 1:   0%|          | 0/382 [00:00<?, ?it/s]data 1:   3%|▎         | 10/382 [00:12<07:51,  1.27s/it]data 1:   5%|▌         | 20/382 [00:28<08:40,  1.44s/it]data 1:   8%|▊         | 30/382 [00:43<08:44,  1.49s/it]data 1:  10%|█         | 40/382 [00:58<08:32,  1.50s/it]data 1:  13%|█▎        | 50/382 [01:14<08:23,  1.52s/it]data 1:  16%|█▌        | 60/382 [01:29<08:08,  1.52s/it]data 1:  18%|█▊        | 70/382 [01:43<07:45,  1.49s/it]data 1:  21%|██        | 80/382 [01:58<07:27,  1.48s/it]data 1:  24%|██▎       | 90/382 [02:12<07:09,  1.47s/it]data 1:  26%|██▌       | 100/382 [02:28<07:01,  1.50s/it]data 1:  29%|██▉       | 110/382 [02:43<06:49,  1.51s/it]data 1:  29%|██▉       | 110/382 [02:58<07:20,  1.62s/it]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+INFO:root:生成结果: 
+    import urllib.parse
+    import idna
+
+    parsed_url = urllib.parse.urlparse(url)
+    if parsed_url.hostname.encode('ascii').decode('ascii') == parsed_url.hostname:
+        return url
+    try:
+        idn_hostname = idna.encode(parsed_url.hostname).decode('ascii')
+    except idna.InvalidLabel:
+        idn_hostname = parsed_url.hostname
+    return urllib.parse.urlunparse((
+        parsed_url.scheme,
+        idn_hostname,
+        parsed_url.path,
+        parsed_url.params,
+        parsed_url.query,
+        parsed_url.fragment
+    ))
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 2855
+INFO:root:max position: 8283
+INFO:root:context_num: 154
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:16:20 CST
+
+INFO:root:****************************************
+data 1:   0%|          | 0/382 [00:00<?, ?it/s]data 1:   3%|▎         | 10/382 [00:13<08:27,  1.36s/it]data 1:   5%|▌         | 20/382 [00:29<09:01,  1.50s/it]data 1:   8%|▊         | 30/382 [00:44<08:44,  1.49s/it]data 1:  10%|█         | 40/382 [00:59<08:29,  1.49s/it]data 1:  13%|█▎        | 50/382 [01:14<08:22,  1.51s/it]data 1:  16%|█▌        | 60/382 [01:30<08:08,  1.52s/it]data 1:  18%|█▊        | 70/382 [01:44<07:43,  1.48s/it]data 1:  21%|██        | 80/382 [01:59<07:34,  1.51s/it]data 1:  24%|██▎       | 90/382 [02:14<07:18,  1.50s/it]data 1:  26%|██▌       | 100/382 [02:29<06:59,  1.49s/it]data 1:  29%|██▉       | 110/382 [02:43<06:42,  1.48s/it]data 1:  31%|███▏      | 120/382 [02:59<06:31,  1.49s/it]data 1:  31%|███▏      | 120/382 [03:02<06:37,  1.52s/it]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+INFO:root:生成结果: 
+    parsed_url = urllib.parse.urlparse(url)
+    if parsed_url.scheme == 'https':
+        # HTTPS URLs always use IDN notation
+        return url
+    try:
+        # Attempt to encode the host in ASCII
+        parsed_url.hostname.encode('ascii')
+        return url
+    except UnicodeEncodeError:
+        # If encoding fails, convert the host to IDN form
+        idn_host = parsed_url.hostname.encode('idna').decode('ascii')
+        return parsed_url.scheme + '://' + idn_host + parsed_url.path + parsed_url.query + parsed_url.fragment
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 2773
+INFO:root:max position: 8845
+INFO:root:context_num: 166
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:19:22 CST
+
+INFO:root:****************************************
+data 1:   0%|          | 0/382 [00:00<?, ?it/s]data 1:   3%|▎         | 10/382 [00:13<08:18,  1.34s/it]data 1:   5%|▌         | 20/382 [00:28<08:51,  1.47s/it]data 1:   8%|▊         | 30/382 [00:43<08:34,  1.46s/it]data 1:  10%|█         | 40/382 [00:58<08:27,  1.48s/it]data 1:  13%|█▎        | 50/382 [01:13<08:08,  1.47s/it]data 1:  16%|█▌        | 60/382 [01:28<07:58,  1.49s/it]data 1:  18%|█▊        | 70/382 [01:44<07:53,  1.52s/it]data 1:  21%|██        | 80/382 [01:58<07:25,  1.48s/it]data 1:  24%|██▎       | 90/382 [02:11<07:02,  1.45s/it]data 1:  26%|██▌       | 100/382 [02:27<06:56,  1.48s/it]data 1:  26%|██▌       | 100/382 [02:37<07:23,  1.57s/it]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+INFO:root:生成结果: 
+    parsed_url = urlparse(url)
+    if parsed_url.scheme == 'https':
+        parsed_url.scheme = 'http'
+    try:
+        idn_host = idna.encode(parsed_url.hostname).decode('ascii')
+    except idna.IDNDecodeError:
+        idn_host = idna.encode(parsed_url.hostname).decode('utf-8')
+    parsed_url.hostname = idn_host
+    return parsed_url.scheme + '://' + parsed_url.netloc + parsed_url.path + parsed_url.query + parsed_url.fragment
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 2620
+INFO:root:max position: 8068
+INFO:root:context_num: 139
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:21:59 CST
+
+INFO:root:****************************************
+INFO:root:已生成1条结果
+INFO:root:--------data 2--------
+data 2:   0%|          | 0/302 [00:00<?, ?it/s]data 2:   3%|▎         | 10/302 [00:08<04:18,  1.13it/s]data 2:   7%|▋         | 20/302 [00:18<04:17,  1.09it/s]data 2:  10%|▉         | 30/302 [00:28<04:23,  1.03it/s]data 2:  13%|█▎        | 40/302 [00:38<04:16,  1.02it/s]data 2:  17%|█▋        | 50/302 [00:48<04:09,  1.01it/s]data 2:  20%|█▉        | 60/302 [00:58<04:02,  1.00s/it]data 2:  23%|██▎       | 70/302 [01:08<03:49,  1.01it/s]data 2:  26%|██▋       | 80/302 [01:18<03:40,  1.01it/s]data 2:  30%|██▉       | 90/302 [01:28<03:34,  1.01s/it]data 2:  33%|███▎      | 100/302 [01:38<03:22,  1.00s/it]data 2:  36%|███▋      | 110/302 [01:48<03:11,  1.00it/s]data 2:  40%|███▉      | 120/302 [01:59<03:05,  1.02s/it]data 2:  43%|████▎     | 130/302 [02:09<02:56,  1.03s/it]data 2:  46%|████▋     | 140/302 [02:19<02:45,  1.02s/it]data 2:  50%|████▉     | 150/302 [02:29<02:31,  1.00it/s]data 2:  53%|█████▎    | 160/302 [02:39<02:24,  1.01s/it]data 2:  56%|█████▋    | 170/302 [02:49<02:12,  1.00s/it]data 2:  60%|█████▉    | 180/302 [02:59<02:01,  1.00it/s]data 2:  63%|██████▎   | 190/302 [03:09<01:52,  1.01s/it]data 2:  66%|██████▌   | 200/302 [03:20<01:43,  1.02s/it]data 2:  70%|██████▉   | 210/302 [03:29<01:31,  1.01it/s]data 2:  73%|███████▎  | 220/302 [03:39<01:21,  1.00it/s]data 2:  76%|███████▌  | 230/302 [03:49<01:11,  1.01it/s]data 2:  79%|███████▉  | 240/302 [03:58<00:59,  1.04it/s]data 2:  83%|████████▎ | 250/302 [04:08<00:50,  1.03it/s]data 2:  86%|████████▌ | 260/302 [04:17<00:39,  1.05it/s]data 2:  89%|████████▉ | 270/302 [04:26<00:30,  1.04it/s]data 2:  93%|█████████▎| 280/302 [04:36<00:20,  1.06it/s]data 2:  96%|█████████▌| 290/302 [04:45<00:11,  1.06it/s]data 2:  99%|█████████▉| 300/302 [04:53<00:01,  1.09it/s]data 2:  99%|█████████▉| 300/302 [04:56<00:01,  1.01it/s]
+INFO:root:函数头: 
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+
+INFO:root:目标函数体: 
+    
+    if heading_id is None:
+        def heading_id(token, index):
+            return 'toc_' + str(index + 1)
+
+    def toc_hook(md, state):
+        headings = []
+
+        for tok in state.tokens:
+            if tok['type'] == 'heading':
+                level = tok['attrs']['level']
+                if min_level <= level <= max_level:
+                    headings.append(tok)
+
+        toc_items = []
+        for i, tok in enumerate(headings):
+            tok['attrs']['id'] = heading_id(tok, i)
+            toc_items.append(normalize_toc_item(md, tok))
+
+        # save items into state
+        state.env['toc_items'] = toc_items
+
+    md.before_render_hooks.append(toc_hook)
+
+INFO:root:生成结果: 
+    def toc_hook(state):
+        toc_items = []
+        for block in state blocks:
+            if block['type'] == 'heading':
+                level = block['attrs']['level']
+                if level >= min_level and level <= max_level:
+                    text = block['text']
+                    id = heading_id(text) if heading_id else None
+                    toc_items.append({'level': level, 'text': text, 'id': id})
+        state.env['toc'] = toc_items
+        state.tokens.append({
+            'type': 'toc',
+            'children': [
+                {
+                    'type': 'text',
+                    'text': '<!-- TOC -->',
+                },
+                {
+                    'type': 'toc_items',
+                    'children': [
+                        {
+                            'type': 'toc_item',
+                            'children': [
+                                {
+                                    'type': 'text',
+                                    'text': '<ul>',
+                                },
+                                {
+                                    'type': 'toc_item',
+                                    'children': [
+                                        {
+                                            'type': 'text',
+                                            'text': '<li>',
+                                        },
+                                        {
+                                            'type': 'text',
+                                            'text': '<a href="#{}">{}</a>'.format(item['id'], item['text']),
+                                        },
+                                        {
+                                            'type': 'text',
+                                            'text': '</li>',
+                                        },
+                                    ],
+                                },
+                                {
+                                    'type': 'text',
+                                    'text': '</ul>',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    '
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 2032
+INFO:root:max position: 7488
+INFO:root:context_num: 218
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.toc<file>.add_toc_hook<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:26:55 CST
+
+INFO:root:****************************************
+data 2:   0%|          | 0/302 [00:00<?, ?it/s]data 2:   3%|▎         | 10/302 [00:08<04:05,  1.19it/s]data 2:   7%|▋         | 20/302 [00:17<04:08,  1.13it/s]data 2:  10%|▉         | 30/302 [00:26<04:06,  1.10it/s]data 2:  13%|█▎        | 40/302 [00:36<04:06,  1.06it/s]data 2:  17%|█▋        | 50/302 [00:46<04:01,  1.04it/s]

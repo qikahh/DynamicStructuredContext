@@ -1,0 +1,579 @@
+INFO:root:time: 2025年 03月 16日 星期日 19:16:31 CST
+
+INFO:root:pid: 835577
+INFO:root:seed: 269
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_2.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.64s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.04s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.13s/it]
+INFO:root:--------data 1200--------
+data 1200:   0%|          | 0/128 [00:00<?, ?it/s]data 1200:   8%|▊         | 10/128 [00:46<09:13,  4.69s/it]data 1200:  16%|█▌        | 20/128 [01:35<08:39,  4.81s/it]data 1200:  23%|██▎       | 30/128 [02:27<08:05,  4.95s/it]data 1200:  31%|███▏      | 40/128 [03:41<08:41,  5.92s/it]data 1200:  31%|███▏      | 40/128 [04:20<09:33,  6.51s/it]
+INFO:root:函数头: 
+    def pre_refresh_callback(self, authorizer):
+
+INFO:root:目标函数体: 
+        
+        if authorizer.refresh_token is None:
+            with open(self._filename) as fp:
+                authorizer.refresh_token = fp.read().strip()
+
+INFO:root:生成结果: 
+        try:
+            with open(self._filename, "r") as fp:
+                refresh_token = fp.read().strip()
+                if refresh_token:
+                    authorizer.refresh_token = refresh_token
+        except FileNotFoundError:
+            pass
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7997
+INFO:root:max position: 23447
+INFO:root:context_num: 584
+INFO:root:target_namespace: praw.praw<folder>.util<folder>.token_manager<file>.FileTokenManager<class>.pre_refresh_callback<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:25:01 CST
+
+INFO:root:****************************************
+data 1200:   0%|          | 0/128 [00:00<?, ?it/s]data 1200:   8%|▊         | 10/128 [03:26<40:38, 20.67s/it]data 1200:  16%|█▌        | 20/128 [04:15<20:29, 11.38s/it]data 1200:  23%|██▎       | 30/128 [05:11<14:14,  8.72s/it]data 1200:  31%|███▏      | 40/128 [06:11<11:13,  7.66s/it]data 1200:  39%|███▉      | 50/128 [07:06<08:55,  6.87s/it]data 1200:  39%|███▉      | 50/128 [07:44<12:04,  9.29s/it]
+INFO:root:函数头: 
+    def pre_refresh_callback(self, authorizer):
+
+INFO:root:目标函数体: 
+        
+        if authorizer.refresh_token is None:
+            with open(self._filename) as fp:
+                authorizer.refresh_token = fp.read().strip()
+
+INFO:root:生成结果: 
+        if self._reddit is None:
+            try:
+                with open(self._filename, "r") as fp:
+                    refresh_token = fp.read().strip()
+                    authorizer.refresh_token = refresh_token
+            except FileNotFoundError:
+                authorizer.refresh_token = None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7793
+INFO:root:max position: 22916
+INFO:root:context_num: 610
+INFO:root:target_namespace: praw.praw<folder>.util<folder>.token_manager<file>.FileTokenManager<class>.pre_refresh_callback<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:32:45 CST
+
+INFO:root:****************************************
+data 1200:   0%|          | 0/128 [00:00<?, ?it/s]data 1200:   8%|▊         | 10/128 [01:06<13:03,  6.64s/it]data 1200:  16%|█▌        | 20/128 [01:56<10:10,  5.66s/it]data 1200:  23%|██▎       | 30/128 [02:54<09:23,  5.75s/it]data 1200:  31%|███▏      | 40/128 [03:44<07:58,  5.44s/it]data 1200:  39%|███▉      | 50/128 [04:35<06:56,  5.33s/it]data 1200:  39%|███▉      | 50/128 [05:11<08:06,  6.24s/it]
+INFO:root:函数头: 
+    def pre_refresh_callback(self, authorizer):
+
+INFO:root:目标函数体: 
+        
+        if authorizer.refresh_token is None:
+            with open(self._filename) as fp:
+                authorizer.refresh_token = fp.read().strip()
+
+INFO:root:生成结果: 
+        if authorizer.refresh_token is None:
+            try:
+                with open(self._filename, "r") as fp:
+                    refresh_token = fp.read().strip()
+                    authorizer.refresh_token = refresh_token
+            except FileNotFoundError:
+                authorizer.refresh_token = None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8337
+INFO:root:max position: 23255
+INFO:root:context_num: 616
+INFO:root:target_namespace: praw.praw<folder>.util<folder>.token_manager<file>.FileTokenManager<class>.pre_refresh_callback<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:37:57 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1201--------
+data 1201:   0%|          | 0/128 [00:00<?, ?it/s]data 1201:   0%|          | 0/128 [00:26<?, ?it/s]
+INFO:root:函数头: 
+    def tell(self):
+
+INFO:root:目标函数体: 
+        
+        self._checkClosed()
+        return self._tell
+
+INFO:root:生成结果: 
+        return self._tell
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5308
+INFO:root:max position: 14948
+INFO:root:context_num: 173
+INFO:root:target_namespace: boltons.boltons<folder>.ioutils<file>.SpooledStringIO<class>.tell<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:38:24 CST
+
+INFO:root:****************************************
+data 1201:   0%|          | 0/128 [00:00<?, ?it/s]data 1201:   0%|          | 0/128 [00:28<?, ?it/s]
+INFO:root:函数头: 
+    def tell(self):
+
+INFO:root:目标函数体: 
+        
+        self._checkClosed()
+        return self._tell
+
+INFO:root:生成结果: 
+        return self._tell
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5614
+INFO:root:max position: 14924
+INFO:root:context_num: 162
+INFO:root:target_namespace: boltons.boltons<folder>.ioutils<file>.SpooledStringIO<class>.tell<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:38:52 CST
+
+INFO:root:****************************************
+data 1201:   0%|          | 0/128 [00:00<?, ?it/s]data 1201:   0%|          | 0/128 [00:26<?, ?it/s]
+INFO:root:函数头: 
+    def tell(self):
+
+INFO:root:目标函数体: 
+        
+        self._checkClosed()
+        return self._tell
+
+INFO:root:生成结果: 
+        return self._tell
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5870
+INFO:root:max position: 14861
+INFO:root:context_num: 171
+INFO:root:target_namespace: boltons.boltons<folder>.ioutils<file>.SpooledStringIO<class>.tell<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:39:18 CST
+
+INFO:root:****************************************
+INFO:root:已生成1201条结果
+INFO:root:--------data 1202--------
+data 1202:   0%|          | 0/128 [00:00<?, ?it/s]data 1202:   8%|▊         | 10/128 [00:20<04:04,  2.08s/it]data 1202:  16%|█▌        | 20/128 [00:47<04:23,  2.44s/it]data 1202:  23%|██▎       | 30/128 [01:08<03:41,  2.26s/it]data 1202:  23%|██▎       | 30/128 [01:12<03:57,  2.42s/it]
+INFO:root:函数头: 
+    def say(self, message=None, voice=None, loop=None, language=None, **kwargs):
+
+INFO:root:目标函数体: 
+        
+        return self.nest(
+            Say(message=message, voice=voice, loop=loop, language=language, **kwargs)
+        )
+
+INFO:root:生成结果: 
+        say_element = VoiceResponse.say(message=message, voice=voice, loop=loop, language=language, **kwargs)
+        return say_element
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9142
+INFO:root:max position: 29270
+INFO:root:context_num: 225
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.twiml<folder>.voice_response<file>.VoiceResponse<class>.say<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:40:32 CST
+
+INFO:root:****************************************
+data 1202:   0%|          | 0/128 [00:00<?, ?it/s]data 1202:   8%|▊         | 10/128 [00:21<04:11,  2.13s/it]data 1202:  16%|█▌        | 20/128 [00:41<03:43,  2.07s/it]data 1202:  23%|██▎       | 30/128 [01:07<03:47,  2.32s/it]data 1202:  31%|███▏      | 40/128 [01:32<03:29,  2.39s/it]data 1202:  31%|███▏      | 40/128 [01:40<03:40,  2.50s/it]
+INFO:root:函数头: 
+    def say(self, message=None, voice=None, loop=None, language=None, **kwargs):
+
+INFO:root:目标函数体: 
+        
+        return self.nest(
+            Say(message=message, voice=voice, loop=loop, language=language, **kwargs)
+        )
+
+INFO:root:生成结果: 
+        say_element = VoiceResponse()
+        say_element.say(
+            message=message,
+            voice=voice,
+            loop=loop,
+            language=language,
+            **kwargs
+        )
+        return say_element
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8850
+INFO:root:max position: 24925
+INFO:root:context_num: 277
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.twiml<folder>.voice_response<file>.VoiceResponse<class>.say<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:42:12 CST
+
+INFO:root:****************************************
+data 1202:   0%|          | 0/128 [00:00<?, ?it/s]data 1202:   8%|▊         | 10/128 [00:18<03:41,  1.88s/it]data 1202:  16%|█▌        | 20/128 [00:43<04:03,  2.25s/it]data 1202:  23%|██▎       | 30/128 [01:09<03:52,  2.37s/it]data 1202:  23%|██▎       | 30/128 [01:33<05:03,  3.10s/it]
+INFO:root:函数头: 
+    def say(self, message=None, voice=None, loop=None, language=None, **kwargs):
+
+INFO:root:目标函数体: 
+        
+        return self.nest(
+            Say(message=message, voice=voice, loop=loop, language=language, **kwargs)
+        )
+
+INFO:root:生成结果: 
+        say_element = VoiceResponse.say(
+            message=message,
+            voice=voice,
+            loop=loop,
+            language=language,
+            **kwargs
+        )
+        return say_element
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8824
+INFO:root:max position: 28701
+INFO:root:context_num: 344
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.twiml<folder>.voice_response<file>.VoiceResponse<class>.say<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:43:45 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1203--------
+data 1203:   0%|          | 0/128 [00:00<?, ?it/s]data 1203:   8%|▊         | 10/128 [00:16<03:18,  1.68s/it]data 1203:  16%|█▌        | 20/128 [00:35<03:10,  1.77s/it]data 1203:  23%|██▎       | 30/128 [00:54<03:01,  1.85s/it]data 1203:  31%|███▏      | 40/128 [01:12<02:41,  1.83s/it]data 1203:  31%|███▏      | 40/128 [01:20<02:57,  2.02s/it]
+INFO:root:函数头: 
+def ensure_tuple(x):
+
+INFO:root:目标函数体: 
+    from .pycompat import string_types
+    if isinstance(x, collections_abc.Iterable) and \
+                                               not isinstance(x, string_types):
+        return tuple(x)
+    else:
+        return (x,)
+
+INFO:root:生成结果: 
+    if isinstance(x, tuple):
+        return x
+    elif isinstance(x, collections_abc.Iterable) and not isinstance(x, str):
+        return tuple(x)
+    else:
+        return (x,)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6121
+INFO:root:max position: 6511
+INFO:root:context_num: 65
+INFO:root:target_namespace: PySnooper.pysnooper<folder>.utils<file>.ensure_tuple<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:45:06 CST
+
+INFO:root:****************************************
+data 1203:   0%|          | 0/128 [00:00<?, ?it/s]data 1203:   8%|▊         | 10/128 [00:16<03:13,  1.64s/it]data 1203:  16%|█▌        | 20/128 [00:35<03:15,  1.81s/it]data 1203:  23%|██▎       | 30/128 [00:56<03:08,  1.92s/it]data 1203:  31%|███▏      | 40/128 [01:14<02:46,  1.89s/it]data 1203:  31%|███▏      | 40/128 [01:23<03:03,  2.08s/it]
+INFO:root:函数头: 
+def ensure_tuple(x):
+
+INFO:root:目标函数体: 
+    from .pycompat import string_types
+    if isinstance(x, collections_abc.Iterable) and \
+                                               not isinstance(x, string_types):
+        return tuple(x)
+    else:
+        return (x,)
+
+INFO:root:生成结果: 
+    if isinstance(x, tuple):
+        return x
+    elif isinstance(x, collections_abc.Iterable) and not isinstance(x, str):
+        return tuple(x)
+    else:
+        return (x,)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6121
+INFO:root:max position: 6511
+INFO:root:context_num: 65
+INFO:root:target_namespace: PySnooper.pysnooper<folder>.utils<file>.ensure_tuple<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:46:29 CST
+
+INFO:root:****************************************
+data 1203:   0%|          | 0/128 [00:00<?, ?it/s]data 1203:   8%|▊         | 10/128 [00:17<03:22,  1.72s/it]data 1203:  16%|█▌        | 20/128 [00:37<03:22,  1.88s/it]data 1203:  16%|█▌        | 20/128 [00:56<05:02,  2.80s/it]
+INFO:root:函数头: 
+def ensure_tuple(x):
+
+INFO:root:目标函数体: 
+    from .pycompat import string_types
+    if isinstance(x, collections_abc.Iterable) and \
+                                               not isinstance(x, string_types):
+        return tuple(x)
+    else:
+        return (x,)
+
+INFO:root:生成结果: 
+    if isinstance(x, collections_abc.Iterable) and not isinstance(x, str):
+        return tuple(x)
+    return (x,)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6191
+INFO:root:max position: 6497
+INFO:root:context_num: 65
+INFO:root:target_namespace: PySnooper.pysnooper<folder>.utils<file>.ensure_tuple<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:47:25 CST
+
+INFO:root:****************************************
+INFO:root:已生成1203条结果
+INFO:root:--------data 1204--------
+data 1204:   0%|          | 0/148 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+data 1204:   7%|▋         | 10/148 [01:02<14:27,  6.28s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  14%|█▎        | 20/148 [02:19<15:10,  7.12s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  20%|██        | 30/148 [03:44<15:09,  7.71s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  27%|██▋       | 40/148 [04:52<13:14,  7.35s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  34%|███▍      | 50/148 [06:13<12:27,  7.63s/it]data 1204:  34%|███▍      | 50/148 [06:30<12:45,  7.82s/it]
+INFO:root:函数头: 
+    def to_jwt(self, ttl=None):
+
+INFO:root:目标函数体: 
+        
+
+        if not self.secret_key:
+            raise ValueError("JWT does not have a signing key configured.")
+
+        headers = self.headers.copy()
+
+        payload = self.payload.copy()
+        if ttl:
+            payload["exp"] = int(time.time()) + ttl
+
+        return jwt_lib.encode(
+            payload, self.secret_key, algorithm=self.algorithm, headers=headers
+        )
+
+INFO:root:生成结果: 
+        headers = self.headers.copy()
+        payload = self.payload.copy()
+        if ttl is not None:
+            payload["exp"] = int(time.time()) + ttl
+        return jwt_lib.encode(payload, self.key, algorithm=self.algorithm, headers=headers)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9272
+INFO:root:max position: 36841
+INFO:root:context_num: 1244
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.jwt<folder>.__init__<file>.Jwt<class>.to_jwt<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:53:57 CST
+
+INFO:root:****************************************
+data 1204:   0%|          | 0/148 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:   7%|▋         | 10/148 [00:55<12:45,  5.55s/it]data 1204:  14%|█▎        | 20/148 [02:08<14:00,  6.56s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  20%|██        | 30/148 [03:16<13:07,  6.67s/it]data 1204:  27%|██▋       | 40/148 [04:24<12:08,  6.74s/it]data 1204:  34%|███▍      | 50/148 [05:45<11:49,  7.24s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  41%|████      | 60/148 [06:57<10:35,  7.22s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  47%|████▋     | 70/148 [08:03<09:06,  7.00s/it]data 1204:  54%|█████▍    | 80/148 [09:15<08:00,  7.06s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  61%|██████    | 90/148 [10:37<07:11,  7.43s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  68%|██████▊   | 100/148 [11:46<05:48,  7.25s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  74%|███████▍  | 110/148 [12:50<04:25,  6.99s/it]data 1204:  74%|███████▍  | 110/148 [13:22<04:37,  7.30s/it]
+INFO:root:函数头: 
+    def to_jwt(self, ttl=None):
+
+INFO:root:目标函数体: 
+        
+
+        if not self.secret_key:
+            raise ValueError("JWT does not have a signing key configured.")
+
+        headers = self.headers.copy()
+
+        payload = self.payload.copy()
+        if ttl:
+            payload["exp"] = int(time.time()) + ttl
+
+        return jwt_lib.encode(
+            payload, self.secret_key, algorithm=self.algorithm, headers=headers
+        )
+
+INFO:root:生成结果: 
+        if self._secret_key is None:
+            raise Exception("Signing key not configured for JWT")
+
+        payload = self._payload.copy()
+        headers = self._headers.copy()
+
+        if ttl is not None:
+            payload["exp"] = int(time.time()) + ttl
+
+        encoded_payload = jwt_lib.encode(payload, self._secret_key, algorithm=self._algorithm)
+        encoded_headers = jwt_lib.encode(headers, self._secret_key, algorithm=self._algorithm)
+
+        return encoded_payload.decode('utf-8') + encoded_headers.decode('utf-8')
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 11832
+INFO:root:max position: 63931
+INFO:root:context_num: 1964
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.jwt<folder>.__init__<file>.Jwt<class>.to_jwt<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:07:19 CST
+
+INFO:root:****************************************
+data 1204:   0%|          | 0/148 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:   7%|▋         | 10/148 [01:01<14:04,  6.12s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  14%|█▎        | 20/148 [02:11<14:14,  6.68s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  20%|██        | 30/148 [03:36<14:44,  7.50s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  27%|██▋       | 40/148 [04:54<13:40,  7.60s/it]data 1204:  34%|███▍      | 50/148 [06:01<11:55,  7.30s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  41%|████      | 60/148 [07:15<10:43,  7.31s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  47%|████▋     | 70/148 [08:23<09:18,  7.15s/it]data 1204:  54%|█████▍    | 80/148 [09:40<08:17,  7.31s/it]data 1204:  54%|█████▍    | 80/148 [10:19<08:46,  7.74s/it]
+INFO:root:函数头: 
+    def to_jwt(self, ttl=None):
+
+INFO:root:目标函数体: 
+        
+
+        if not self.secret_key:
+            raise ValueError("JWT does not have a signing key configured.")
+
+        headers = self.headers.copy()
+
+        payload = self.payload.copy()
+        if ttl:
+            payload["exp"] = int(time.time()) + ttl
+
+        return jwt_lib.encode(
+            payload, self.secret_key, algorithm=self.algorithm, headers=headers
+        )
+
+INFO:root:生成结果: 
+        payload = self.payload.copy()
+        headers = self.headers.copy()
+
+        if ttl is not None:
+            payload["exp"] = int(time.time()) + ttl
+
+        encoded_payload = jwt.encode(payload, self.secret_key, algorithm=self.algorithm)
+        encoded_headers = jwt.encode(headers, self.secret_key, algorithm=self.algorithm)
+
+        return encoded_payload.decode('utf-8'), encoded_headers.decode('utf-8')
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8948
+INFO:root:max position: 50121
+INFO:root:context_num: 1785
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.jwt<folder>.__init__<file>.Jwt<class>.to_jwt<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:17:39 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1205--------
+data 1205:   0%|          | 0/128 [00:00<?, ?it/s]data 1205:   8%|▊         | 10/128 [00:36<07:06,  3.61s/it]data 1205:  16%|█▌        | 20/128 [01:09<06:11,  3.44s/it]data 1205:  23%|██▎       | 30/128 [01:43<05:36,  3.43s/it]data 1205:  31%|███▏      | 40/128 [02:19<05:06,  3.48s/it]data 1205:  39%|███▉      | 50/128 [02:54<04:33,  3.50s/it]data 1205:  47%|████▋     | 60/128 [03:29<03:57,  3.49s/it]data 1205:  55%|█████▍    | 70/128 [04:02<03:19,  3.44s/it]data 1205:  62%|██████▎   | 80/128 [04:37<02:46,  3.46s/it]data 1205:  70%|███████   | 90/128 [05:12<02:11,  3.47s/it]data 1205:  78%|███████▊  | 100/128 [05:46<01:36,  3.45s/it]data 1205:  86%|████████▌ | 110/128 [06:20<01:01,  3.42s/it]data 1205:  94%|█████████▍| 120/128 [06:54<00:27,  3.44s/it]data 1205:  94%|█████████▍| 120/128 [07:24<00:29,  3.71s/it]
+INFO:root:函数头: 
+def nanmean(array, epsilon=1.0, bounds=None, axis=None, dtype=None, keepdims=False, random_state=None, accountant=None,
+            **unused_args):
+
+INFO:root:目标函数体: 
+    r
+    warn_unused_args(unused_args)
+
+    return _mean(array, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant, nan=True)
+
+INFO:root:生成结果: 
+    warn_unused_args(unused_args)
+    array = np.asanyarray(array)
+    if np.issubdtype(array.dtype, np.character):
+        array_bool = array != array.dtype.type
+    else:
+        array_bool = array.astype(bool, copy=False)
+
+    nan_count = np.count_nonzero(array_bool)
+    if nan_count == array.size:
+        return np.nan
+
+    array_bool = np.where(array_bool, array, np.nan)
+    return _mean(array_bool, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6826
+INFO:root:max position: 14479
+INFO:root:context_num: 239
+INFO:root:target_namespace: diffprivlib.diffprivlib<folder>.tools<folder>.utils<file>.nanmean<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:25:04 CST
+
+INFO:root:****************************************
+data 1205:   0%|          | 0/128 [00:00<?, ?it/s]data 1205:   8%|▊         | 10/128 [00:35<06:58,  3.55s/it]data 1205:  16%|█▌        | 20/128 [01:10<06:22,  3.54s/it]data 1205:  23%|██▎       | 30/128 [01:45<05:42,  3.49s/it]data 1205:  31%|███▏      | 40/128 [02:21<05:11,  3.54s/it]data 1205:  39%|███▉      | 50/128 [02:56<04:36,  3.55s/it]data 1205:  47%|████▋     | 60/128 [03:32<04:02,  3.56s/it]data 1205:  55%|█████▍    | 70/128 [04:07<03:23,  3.52s/it]data 1205:  62%|██████▎   | 80/128 [04:41<02:48,  3.50s/it]data 1205:  70%|███████   | 90/128 [05:16<02:12,  3.49s/it]data 1205:  78%|███████▊  | 100/128 [05:50<01:36,  3.46s/it]data 1205:  86%|████████▌ | 110/128 [06:24<01:02,  3.45s/it]data 1205:  94%|█████████▍| 120/128 [07:00<00:27,  3.48s/it]data 1205:  94%|█████████▍| 120/128 [07:30<00:30,  3.76s/it]
+INFO:root:函数头: 
+def nanmean(array, epsilon=1.0, bounds=None, axis=None, dtype=None, keepdims=False, random_state=None, accountant=None,
+            **unused_args):
+
+INFO:root:目标函数体: 
+    r
+    warn_unused_args(unused_args)
+
+    return _mean(array, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant, nan=True)
+
+INFO:root:生成结果: 
+    warn_unused_args(unused_args)
+
+    array = np.asarray(array)
+    if np.issubdtype(array.dtype, np.character):
+        array_bool = array != array.dtype.type
+    else:
+        array_bool = array.astype(np.bool_, copy=False)
+
+    if axis is None:
+        axis = range(array.ndim)
+
+    if bounds is None:
+        bounds = (np.min(array), np.max(array))
+
+    if dtype is None:
+        dtype = np.float64 if np.issubdtype(array.dtype, np.integer) else array.dtype
+
+    if accountant is None:
+        accountant = BudgetAccountant()
+
+    if
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6734
+INFO:root:max position: 13971
+INFO:root:context_num: 247
+INFO:root:target_namespace: diffprivlib.diffprivlib<folder>.tools<folder>.utils<file>.nanmean<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:32:35 CST
+
+INFO:root:****************************************
+data 1205:   0%|          | 0/128 [00:00<?, ?it/s]data 1205:   8%|▊         | 10/128 [00:36<07:05,  3.61s/it]

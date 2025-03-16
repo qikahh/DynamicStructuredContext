@@ -1,0 +1,5 @@
+usage: test_hierarchical_model.py [-h] [--context CONTEXT] [--data_id DATA_ID]
+                                  [--gen_num GEN_NUM]
+                                  [--data_start DATA_START]
+                                  [--data_end DATA_END]
+test_hierarchical_model.py: error: argument --data_start: expected one argument

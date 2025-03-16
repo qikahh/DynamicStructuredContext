@@ -1,0 +1,1127 @@
+INFO:root:time: 2025年 03月 13日 星期四 07:03:27 CST
+
+INFO:root:pid: 1160959
+INFO:root:seed: 44
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.10s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.58it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.42it/s]
+INFO:root:--------data 184--------
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [01:06<55:16,  6.61s/it]data 184:   4%|▍         | 20/512 [02:12<54:31,  6.65s/it]data 184:   6%|▌         | 30/512 [03:15<51:52,  6.46s/it]data 184:   8%|▊         | 40/512 [04:20<51:00,  6.48s/it]data 184:  10%|▉         | 50/512 [05:16<47:36,  6.18s/it]data 184:  12%|█▏        | 60/512 [06:16<46:05,  6.12s/it]data 184:  14%|█▎        | 70/512 [07:11<43:24,  5.89s/it]data 184:  16%|█▌        | 80/512 [08:08<42:07,  5.85s/it]data 184:  18%|█▊        | 90/512 [08:58<39:16,  5.59s/it]data 184:  20%|█▉        | 100/512 [09:47<36:50,  5.36s/it]data 184:  21%|██▏       | 110/512 [10:43<36:26,  5.44s/it]data 184:  23%|██▎       | 120/512 [11:37<35:32,  5.44s/it]data 184:  25%|██▌       | 130/512 [12:33<34:57,  5.49s/it]data 184:  27%|██▋       | 140/512 [13:23<33:00,  5.32s/it]data 184:  29%|██▉       | 150/512 [14:16<32:08,  5.33s/it]data 184:  31%|███▏      | 160/512 [15:01<29:45,  5.07s/it]data 184:  33%|███▎      | 170/512 [15:49<28:23,  4.98s/it]data 184:  35%|███▌      | 180/512 [16:34<26:49,  4.85s/it]data 184:  37%|███▋      | 190/512 [19:25<45:42,  8.52s/it]data 184:  39%|███▉      | 200/512 [20:06<37:22,  7.19s/it]data 184:  41%|████      | 210/512 [20:39<30:20,  6.03s/it]data 184:  43%|████▎     | 220/512 [21:11<25:14,  5.19s/it]data 184:  45%|████▍     | 230/512 [21:45<21:52,  4.65s/it]data 184:  47%|████▋     | 240/512 [22:22<19:44,  4.35s/it]data 184:  49%|████▉     | 250/512 [22:55<17:39,  4.04s/it]data 184:  51%|█████     | 260/512 [23:30<16:15,  3.87s/it]data 184:  51%|█████     | 260/512 [24:07<23:23,  5.57s/it]
+INFO:root:函数头: 
+def unarchive(archive_path, dest):
+
+INFO:root:目标函数体: 
+    
+    if tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif is_zipfile(archive_path):
+        with ZipFile(archive_path, 'r') as archive:
+            for name in archive.namelist():
+                # the zip spec specifies that front slashes are always
+                # used as directory separators
+                dest_path = os.path.join(dest, *name.split('/'))
+
+                # now, split out any dirname and filename and create
+                # one and/or the other
+                dirname, filename = os.path.split(dest_path)
+                if dirname and not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                if filename:
+                    with open(dest_path, 'wb') as dest_file:
+                        dest_file.write(archive.read(name))
+    else:
+        raise IOError('Unknown archive type: %s' % (archive_path,))
+
+INFO:root:生成结果: 
+    import tarfile
+    import zipfile
+    import gzip
+    import bz2
+
+    # Check if the file exists
+    if not os.path.exists(archive_path):
+        raise FileNotFoundError(f"Archive file {archive_path} not found.")
+
+    # Determine the archive type based on the file extension
+    if archive_path.endswith('.tar.gz'):
+        archive_type = 'tar.gz'
+    elif archive_path.endswith('.tar.bz2'):
+        archive_type = 'tar.bz2'
+    elif archive_path.endswith('.zip'):
+        archive_type = 'zip'
+    else:
+        raise ValueError(f"Unsupported archive format: {archive_path}")
+
+    # Create destination directory if it doesn't exist
+    dest_dir = os.path.dirname(dest)
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
+    # Handle different archive types
+    if archive_type == 'tar.gz':
+        with tarfile.open(archive_path, 'r:gzip') as tar:
+            tar.extractall(dest)
+    elif archive_type == 'tar.bz2':
+        with tarfile.open(archive_path, 'r:bzip2') as tar:
+            tar.extractall(dest)
+    elif archive_type == 'zip':
+        with zipfile.ZipFile(archive_path, 'r') as zip_ref:
+            zip_ref.extractall(dest)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7392
+INFO:root:max position: 21666
+INFO:root:context_num: 726
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unarchive<func>
+INFO:root:****************************************
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [00:39<32:55,  3.93s/it]data 184:   4%|▍         | 20/512 [01:23<34:46,  4.24s/it]data 184:   6%|▌         | 30/512 [02:11<35:58,  4.48s/it]data 184:   8%|▊         | 40/512 [02:59<36:07,  4.59s/it]data 184:  10%|▉         | 50/512 [03:41<34:20,  4.46s/it]data 184:  12%|█▏        | 60/512 [04:27<34:06,  4.53s/it]data 184:  14%|█▎        | 70/512 [05:11<32:53,  4.46s/it]data 184:  16%|█▌        | 80/512 [05:59<32:50,  4.56s/it]data 184:  18%|█▊        | 90/512 [06:41<31:19,  4.45s/it]data 184:  20%|█▉        | 100/512 [07:25<30:27,  4.44s/it]data 184:  21%|██▏       | 110/512 [08:13<30:29,  4.55s/it]data 184:  23%|██▎       | 120/512 [09:02<30:28,  4.67s/it]data 184:  25%|██▌       | 130/512 [09:49<29:48,  4.68s/it]data 184:  27%|██▋       | 140/512 [10:32<28:16,  4.56s/it]data 184:  29%|██▉       | 150/512 [11:16<27:11,  4.51s/it]data 184:  31%|███▏      | 160/512 [11:55<25:28,  4.34s/it]data 184:  33%|███▎      | 170/512 [12:34<23:59,  4.21s/it]data 184:  35%|███▌      | 180/512 [13:10<22:08,  4.00s/it]data 184:  37%|███▋      | 190/512 [13:47<21:06,  3.93s/it]data 184:  37%|███▋      | 190/512 [13:51<23:29,  4.38s/it]
+INFO:root:函数头: 
+def unarchive(archive_path, dest):
+
+INFO:root:目标函数体: 
+    
+    if tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif is_zipfile(archive_path):
+        with ZipFile(archive_path, 'r') as archive:
+            for name in archive.namelist():
+                # the zip spec specifies that front slashes are always
+                # used as directory separators
+                dest_path = os.path.join(dest, *name.split('/'))
+
+                # now, split out any dirname and filename and create
+                # one and/or the other
+                dirname, filename = os.path.split(dest_path)
+                if dirname and not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                if filename:
+                    with open(dest_path, 'wb') as dest_file:
+                        dest_file.write(archive.read(name))
+    else:
+        raise IOError('Unknown archive type: %s' % (archive_path,))
+
+INFO:root:生成结果: 
+    import tarfile
+    import zipfile
+    import gzip
+    import bz2
+
+    archive_type = archive_path.split('.')[-1].lower()
+
+    if archive_type == 'tar':
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif archive_type == 'zip':
+        with zipfile.ZipFile(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif archive_type == 'gz':
+        with gzip.open(archive_path, 'rb') as archive:
+            with open(dest, 'wb') as out:
+                out.write(archive.read())
+    elif archive_type == 'bz2':
+        with bz2.open(archive_path, 'rb') as archive:
+            with open(dest, 'wb') as out:
+                out.write(archive.read())
+    else:
+        raise ValueError('Unknown archive type: %s' % archive_type)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6462
+INFO:root:max position: 18442
+INFO:root:context_num: 609
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unarchive<func>
+INFO:root:****************************************
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [00:35<29:19,  3.51s/it]data 184:   4%|▍         | 20/512 [01:17<32:16,  3.94s/it]data 184:   6%|▌         | 30/512 [01:59<32:32,  4.05s/it]data 184:   8%|▊         | 40/512 [02:42<32:48,  4.17s/it]data 184:  10%|▉         | 50/512 [03:29<33:34,  4.36s/it]data 184:  12%|█▏        | 60/512 [04:13<32:54,  4.37s/it]data 184:  14%|█▎        | 70/512 [04:55<31:40,  4.30s/it]data 184:  16%|█▌        | 80/512 [05:41<31:36,  4.39s/it]data 184:  18%|█▊        | 90/512 [06:25<30:53,  4.39s/it]data 184:  20%|█▉        | 100/512 [08:08<42:46,  6.23s/it]data 184:  21%|██▏       | 110/512 [08:50<37:39,  5.62s/it]data 184:  23%|██▎       | 120/512 [09:35<34:27,  5.28s/it]data 184:  25%|██▌       | 130/512 [10:19<31:53,  5.01s/it]data 184:  27%|██▋       | 140/512 [10:59<29:12,  4.71s/it]data 184:  29%|██▉       | 150/512 [11:41<27:27,  4.55s/it]data 184:  31%|███▏      | 160/512 [12:19<25:15,  4.31s/it]data 184:  33%|███▎      | 170/512 [12:57<23:43,  4.16s/it]data 184:  35%|███▌      | 180/512 [13:33<22:05,  3.99s/it]data 184:  37%|███▋      | 190/512 [14:07<20:27,  3.81s/it]data 184:  39%|███▉      | 200/512 [14:40<19:03,  3.67s/it]data 184:  41%|████      | 210/512 [15:11<17:33,  3.49s/it]data 184:  43%|████▎     | 220/512 [15:44<16:40,  3.43s/it]data 184:  45%|████▍     | 230/512 [16:17<15:58,  3.40s/it]data 184:  47%|████▋     | 240/512 [16:48<15:01,  3.31s/it]data 184:  47%|████▋     | 240/512 [17:05<19:21,  4.27s/it]
+INFO:root:函数头: 
+def unarchive(archive_path, dest):
+
+INFO:root:目标函数体: 
+    
+    if tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif is_zipfile(archive_path):
+        with ZipFile(archive_path, 'r') as archive:
+            for name in archive.namelist():
+                # the zip spec specifies that front slashes are always
+                # used as directory separators
+                dest_path = os.path.join(dest, *name.split('/'))
+
+                # now, split out any dirname and filename and create
+                # one and/or the other
+                dirname, filename = os.path.split(dest_path)
+                if dirname and not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                if filename:
+                    with open(dest_path, 'wb') as dest_file:
+                        dest_file.write(archive.read(name))
+    else:
+        raise IOError('Unknown archive type: %s' % (archive_path,))
+
+INFO:root:生成结果: 
+    import tarfile
+    import zipfile
+    import gzip
+    import bz2
+    import os
+
+    # Check if the file is a tar file
+    if archive_path.endswith('.tar'):
+        with tarfile.open(archive_path, 'r') as tar:
+            tar.extractall(dest)
+    # Check if the file is a gzip compressed tar file
+    elif archive_path.endswith('.tar.gz'):
+        with gzip.open(archive_path,                      'rb') as gz_file:
+            with tarfile.open(fileobj=gz_file, mode='r') as tar:
+                tar.extractall(dest)
+    # Check if the file is a bzip2 compressed tar file
+    elif archive_path.endswith('.tar.bz2'):
+        with bz2.open(archive_path,
+                      'rb') as bz_file:
+            with tarfile.open(fileobj=bz_file, mode='r') as tar:
+                tar.extractall(dest)
+    # Check if the file is a zip file
+    elif archive_path.endswith('.zip'):
+        with zipfile.ZipFile(archive_path, 'r') as zip_file:
+            zip_file.extractall(dest)
+    else:
+        raise ValueError('Unsupported archive format')
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7374
+INFO:root:max position: 20357
+INFO:root:context_num: 733
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unarchive<func>
+INFO:root:****************************************
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [00:32<27:30,  3.29s/it]data 184:   4%|▍         | 20/512 [01:13<30:41,  3.74s/it]data 184:   6%|▌         | 30/512 [01:54<31:30,  3.92s/it]data 184:   8%|▊         | 40/512 [02:39<32:28,  4.13s/it]data 184:  10%|▉         | 50/512 [03:23<32:39,  4.24s/it]data 184:  12%|█▏        | 60/512 [04:05<31:54,  4.24s/it]data 184:  14%|█▎        | 70/512 [04:46<30:48,  4.18s/it]data 184:  16%|█▌        | 80/512 [05:31<30:48,  4.28s/it]data 184:  18%|█▊        | 90/512 [06:14<30:03,  4.27s/it]data 184:  20%|█▉        | 100/512 [06:57<29:26,  4.29s/it]data 184:  21%|██▏       | 110/512 [07:40<28:46,  4.30s/it]data 184:  23%|██▎       | 120/512 [08:27<28:57,  4.43s/it]data 184:  25%|██▌       | 130/512 [09:13<28:23,  4.46s/it]data 184:  27%|██▋       | 140/512 [09:56<27:28,  4.43s/it]data 184:  29%|██▉       | 150/512 [10:41<26:46,  4.44s/it]data 184:  29%|██▉       | 150/512 [11:14<27:08,  4.50s/it]
+INFO:root:函数头: 
+def unarchive(archive_path, dest):
+
+INFO:root:目标函数体: 
+    
+    if tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif is_zipfile(archive_path):
+        with ZipFile(archive_path, 'r') as archive:
+            for name in archive.namelist():
+                # the zip spec specifies that front slashes are always
+                # used as directory separators
+                dest_path = os.path.join(dest, *name.split('/'))
+
+                # now, split out any dirname and filename and create
+                # one and/or the other
+                dirname, filename = os.path.split(dest_path)
+                if dirname and not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                if filename:
+                    with open(dest_path, 'wb') as dest_file:
+                        dest_file.write(archive.read(name))
+    else:
+        raise IOError('Unknown archive type: %s' % (archive_path,))
+
+INFO:root:生成结果: 
+    import tarfile
+    import zipfile
+
+    # Create destination directory if it doesn't exist
+    dest_dir = os.path.dirname(dest)
+    if dest_dir and not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
+    # Determine archive type based on file extension
+    archive_type = archive_path.split('.')[-1].lower()
+
+    # Unarchive based on archive type
+    if archive_type == 'tar':
+        with tarfile.open(archive_path, 'r:*') as tar:
+            tar.extractall(dest)
+    elif archive_type == 'zip':
+        with zipfile.ZipFile(archive_path, 'r') as zip_ref:
+            zip_ref.extractall(dest)
+    else:
+        raise ValueError(f'Unsupported archive type: {archive_type}')
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7511
+INFO:root:max position: 17728
+INFO:root:context_num: 586
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unarchive<func>
+INFO:root:****************************************
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [00:34<28:43,  3.43s/it]data 184:   4%|▍         | 20/512 [01:13<30:41,  3.74s/it]data 184:   6%|▌         | 30/512 [01:55<31:40,  3.94s/it]data 184:   8%|▊         | 40/512 [02:37<31:51,  4.05s/it]data 184:  10%|▉         | 50/512 [03:21<32:00,  4.16s/it]data 184:  12%|█▏        | 60/512 [04:07<32:22,  4.30s/it]data 184:  14%|█▎        | 70/512 [04:50<31:41,  4.30s/it]data 184:  16%|█▌        | 80/512 [05:32<30:42,  4.27s/it]data 184:  18%|█▊        | 90/512 [06:14<29:55,  4.26s/it]data 184:  20%|█▉        | 100/512 [06:57<29:26,  4.29s/it]data 184:  21%|██▏       | 110/512 [07:41<28:47,  4.30s/it]data 184:  23%|██▎       | 120/512 [08:25<28:17,  4.33s/it]data 184:  25%|██▌       | 130/512 [09:09<27:48,  4.37s/it]data 184:  27%|██▋       | 140/512 [09:53<27:05,  4.37s/it]data 184:  29%|██▉       | 150/512 [10:37<26:30,  4.39s/it]data 184:  31%|███▏      | 160/512 [11:19<25:18,  4.31s/it]data 184:  33%|███▎      | 170/512 [11:56<23:33,  4.13s/it]data 184:  33%|███▎      | 170/512 [12:27<25:04,  4.40s/it]
+INFO:root:函数头: 
+def unarchive(archive_path, dest):
+
+INFO:root:目标函数体: 
+    
+    if tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif is_zipfile(archive_path):
+        with ZipFile(archive_path, 'r') as archive:
+            for name in archive.namelist():
+                # the zip spec specifies that front slashes are always
+                # used as directory separators
+                dest_path = os.path.join(dest, *name.split('/'))
+
+                # now, split out any dirname and filename and create
+                # one and/or the other
+                dirname, filename = os.path.split(dest_path)
+                if dirname and not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                if filename:
+                    with open(dest_path, 'wb') as dest_file:
+                        dest_file.write(archive.read(name))
+    else:
+        raise IOError('Unknown archive type: %s' % (archive_path,))
+
+INFO:root:生成结果: 
+    import tarfile
+    import zipfile
+
+    # check if the destination directory exists, create it if it doesn't
+    dest_dir = os.path.dirname(dest)
+    if not os.path.exists(dest_dir):
+        os.makedirs(dest_dir)
+
+    # determine the archive type based on the file extension
+    archive_type = archive_path.lower().split('.')[-1]
+
+    # handle tar archives
+    if archive_type == 'tar':
+        with tarfile.open(archive_path, 'r:*') as tar:
+            tar.extractall(dest)
+
+    # handle zip archives
+    elif archive_type == 'zip':
+        with zipfile.ZipFile(archive_path, 'r') as zip_file:
+            zip_file.extractall(dest)
+
+    # handle uncompressed archives
+    else:
+        # copy the archive file to the destination directory
+        shutil.copy(archive_path, dest)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6394
+INFO:root:max position: 18021
+INFO:root:context_num: 620
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unarchive<func>
+INFO:root:****************************************
+INFO:root:--------data 185--------
+data 185:   0%|          | 0/512 [00:00<?, ?it/s]data 185:   2%|▏         | 10/512 [02:01<1:41:54, 12.18s/it]data 185:   4%|▍         | 20/512 [02:51<1:04:56,  7.92s/it]data 185:   4%|▍         | 20/512 [03:37<1:29:19, 10.89s/it]
+INFO:root:函数头: 
+def unique(items):
+
+INFO:root:目标函数体: 
+    
+    seen = set()
+
+    for item in items:
+        if item in seen:
+            continue
+        else:
+            yield item
+            seen.add(item)
+
+INFO:root:生成结果: 
+    seen = set()
+    for item in items:
+        if item not in seen:
+            yield item
+            seen.add(item)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4378
+INFO:root:max position: 12884
+INFO:root:context_num: 178
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unique<func>
+INFO:root:****************************************
+data 185:   0%|          | 0/512 [00:00<?, ?it/s]data 185:   2%|▏         | 10/512 [00:40<33:36,  4.02s/it]data 185:   4%|▍         | 20/512 [01:20<32:46,  4.00s/it]data 185:   4%|▍         | 20/512 [01:53<46:36,  5.68s/it]
+INFO:root:函数头: 
+def unique(items):
+
+INFO:root:目标函数体: 
+    
+    seen = set()
+
+    for item in items:
+        if item in seen:
+            continue
+        else:
+            yield item
+            seen.add(item)
+
+INFO:root:生成结果: 
+    seen = set()
+    for item in items:
+        if item not in seen:
+            yield item
+            seen.add(item)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4324
+INFO:root:max position: 11851
+INFO:root:context_num: 167
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unique<func>
+INFO:root:****************************************
+data 185:   0%|          | 0/512 [00:00<?, ?it/s]data 185:   2%|▏         | 10/512 [01:37<1:21:56,  9.79s/it]data 185:   4%|▍         | 20/512 [02:14<50:44,  6.19s/it]  data 185:   4%|▍         | 20/512 [02:47<1:08:46,  8.39s/it]
+INFO:root:函数头: 
+def unique(items):
+
+INFO:root:目标函数体: 
+    
+    seen = set()
+
+    for item in items:
+        if item in seen:
+            continue
+        else:
+            yield item
+            seen.add(item)
+
+INFO:root:生成结果: 
+    seen = set()
+    for item in items:
+        if item not in seen:
+            yield item
+            seen.add(item)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3651
+INFO:root:max position: 15113
+INFO:root:context_num: 181
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unique<func>
+INFO:root:****************************************
+data 185:   0%|          | 0/512 [00:00<?, ?it/s]data 185:   2%|▏         | 10/512 [00:36<30:35,  3.66s/it]data 185:   4%|▍         | 20/512 [01:10<28:45,  3.51s/it]data 185:   4%|▍         | 20/512 [04:43<1:56:15, 14.18s/it]
+INFO:root:函数头: 
+def unique(items):
+
+INFO:root:目标函数体: 
+    
+    seen = set()
+
+    for item in items:
+        if item in seen:
+            continue
+        else:
+            yield item
+            seen.add(item)
+
+INFO:root:生成结果: 
+    seen = set()
+    for item in items:
+        if item not in seen:
+            yield item
+            seen.add(item)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4353
+INFO:root:max position: 16396
+INFO:root:context_num: 166
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unique<func>
+INFO:root:****************************************
+data 185:   0%|          | 0/512 [00:00<?, ?it/s]data 185:   2%|▏         | 10/512 [00:31<26:42,  3.19s/it]data 185:   4%|▍         | 20/512 [02:08<57:35,  7.02s/it]data 185:   4%|▍         | 20/512 [02:38<1:05:06,  7.94s/it]
+INFO:root:函数头: 
+def unique(items):
+
+INFO:root:目标函数体: 
+    
+    seen = set()
+
+    for item in items:
+        if item in seen:
+            continue
+        else:
+            yield item
+            seen.add(item)
+
+INFO:root:生成结果: 
+    seen = set()
+    for item in items:
+        if item not in seen:
+            yield item
+            seen.add(item)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3554
+INFO:root:max position: 13054
+INFO:root:context_num: 193
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unique<func>
+INFO:root:****************************************
+INFO:root:已生成185条结果
+INFO:root:--------data 186--------
+data 186:   0%|          | 0/512 [00:00<?, ?it/s]data 186:   2%|▏         | 10/512 [02:58<2:29:42, 17.89s/it]data 186:   4%|▍         | 20/512 [03:52<1:26:21, 10.53s/it]data 186:   6%|▌         | 30/512 [05:40<1:25:36, 10.66s/it]data 186:   8%|▊         | 40/512 [06:29<1:05:49,  8.37s/it]data 186:  10%|▉         | 50/512 [07:11<52:45,  6.85s/it]  data 186:  12%|█▏        | 60/512 [11:58<1:47:40, 14.29s/it]data 186:  12%|█▏        | 60/512 [12:12<1:31:58, 12.21s/it]
+INFO:root:函数头: 
+@wraps(urlparse_buggy)
+def urlparse(urlstring, scheme='', allow_fragments=True, *args, **kwargs):
+
+INFO:root:目标函数体: 
+    
+    (scheme, netloc, path, params, query, fragment) = (
+        urlparse_buggy(urlstring, scheme, allow_fragments, *args, **kwargs))
+
+    if allow_fragments and '#' in path and not fragment:
+        path, fragment = path.split('#', 1)
+
+    return ParseResult(scheme, netloc, path, params, query, fragment)
+
+INFO:root:生成结果: 
+    # Importing urlparse from mrjob.compat module
+    from mrjob.compat import urlparse as urlparse_buggy
+
+    # Calling the original urlparse function with the provided arguments
+    return urlparse_buggy(urlstring, scheme=scheme, allow_fragments=allow_fragments, *args, **kwargs)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4343
+INFO:root:max position: 17355
+INFO:root:context_num: 239
+INFO:root:target_namespace: mrjob.mrjob<folder>.parse<file>.urlparse<func>
+INFO:root:****************************************
+data 186:   0%|          | 0/512 [00:00<?, ?it/s]data 186:   2%|▏         | 10/512 [00:39<32:47,  3.92s/it]data 186:   4%|▍         | 20/512 [01:21<33:32,  4.09s/it]data 186:   4%|▍         | 20/512 [01:51<45:43,  5.58s/it]
+INFO:root:函数头: 
+@wraps(urlparse_buggy)
+def urlparse(urlstring, scheme='', allow_fragments=True, *args, **kwargs):
+
+INFO:root:目标函数体: 
+    
+    (scheme, netloc, path, params, query, fragment) = (
+        urlparse_buggy(urlstring, scheme, allow_fragments, *args, **kwargs))
+
+    if allow_fragments and '#' in path and not fragment:
+        path, fragment = path.split('#', 1)
+
+    return ParseResult(scheme, netloc, path, params, query, fragment)
+
+INFO:root:生成结果: 
+    return urlparse_buggy(urlstring, scheme=scheme, allow_fragments=allow_fragments, *args, **kwargs)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3831
+INFO:root:max position: 15014
+INFO:root:context_num: 163
+INFO:root:target_namespace: mrjob.mrjob<folder>.parse<file>.urlparse<func>
+INFO:root:****************************************
+data 186:   0%|          | 0/512 [00:00<?, ?it/s]data 186:   2%|▏         | 10/512 [01:31<1:16:51,  9.19s/it]data 186:   4%|▍         | 20/512 [02:07<48:06,  5.87s/it]  data 186:   6%|▌         | 30/512 [02:43<39:02,  4.86s/it]data 186:   8%|▊         | 40/512 [10:25<2:46:32, 21.17s/it]data 186:   8%|▊         | 40/512 [16:10<3:10:53, 24.27s/it]
+INFO:root:函数头: 
+@wraps(urlparse_buggy)
+def urlparse(urlstring, scheme='', allow_fragments=True, *args, **kwargs):
+
+INFO:root:目标函数体: 
+    
+    (scheme, netloc, path, params, query, fragment) = (
+        urlparse_buggy(urlstring, scheme, allow_fragments, *args, **kwargs))
+
+    if allow_fragments and '#' in path and not fragment:
+        path, fragment = path.split('#', 1)
+
+    return ParseResult(scheme, netloc, path, params, query, fragment)
+
+INFO:root:生成结果: 
+    # Importing the necessary module from mrjob.parse
+    from mrjob.parse import _parse_url
+
+    return _parse_url(urlstring, scheme=scheme, allow_fragments=allow_fragments, *args, **kwargs)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4605
+INFO:root:max position: 16120
+INFO:root:context_num: 209
+INFO:root:target_namespace: mrjob.mrjob<folder>.parse<file>.urlparse<func>
+INFO:root:****************************************
+data 186:   0%|          | 0/512 [00:00<?, ?it/s]data 186:   2%|▏         | 10/512 [00:36<30:23,  3.63s/it]data 186:   4%|▍         | 20/512 [01:11<29:19,  3.58s/it]data 186:   4%|▍         | 20/512 [01:36<39:27,  4.81s/it]
+INFO:root:函数头: 
+@wraps(urlparse_buggy)
+def urlparse(urlstring, scheme='', allow_fragments=True, *args, **kwargs):
+
+INFO:root:目标函数体: 
+    
+    (scheme, netloc, path, params, query, fragment) = (
+        urlparse_buggy(urlstring, scheme, allow_fragments, *args, **kwargs))
+
+    if allow_fragments and '#' in path and not fragment:
+        path, fragment = path.split('#', 1)
+
+    return ParseResult(scheme, netloc, path, params, query, fragment)
+
+INFO:root:生成结果: 
+    return urlparse_buggy(urlstring, scheme=scheme, allow_fragments=allow_fragments, *args, **kwargs)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4375
+INFO:root:max position: 13881
+INFO:root:context_num: 163
+INFO:root:target_namespace: mrjob.mrjob<folder>.parse<file>.urlparse<func>
+INFO:root:****************************************
+data 186:   0%|          | 0/512 [00:00<?, ?it/s]data 186:   2%|▏         | 10/512 [02:33<2:08:02, 15.30s/it]data 186:   4%|▍         | 20/512 [03:06<1:08:03,  8.30s/it]data 186:   4%|▍         | 20/512 [03:30<1:26:18, 10.53s/it]
+INFO:root:函数头: 
+@wraps(urlparse_buggy)
+def urlparse(urlstring, scheme='', allow_fragments=True, *args, **kwargs):
+
+INFO:root:目标函数体: 
+    
+    (scheme, netloc, path, params, query, fragment) = (
+        urlparse_buggy(urlstring, scheme, allow_fragments, *args, **kwargs))
+
+    if allow_fragments and '#' in path and not fragment:
+        path, fragment = path.split('#', 1)
+
+    return ParseResult(scheme, netloc, path, params, query, fragment)
+
+INFO:root:生成结果: 
+    return urlparse_buggy(urlstring, scheme=scheme, allow_fragments=allow_fragments, *args, **kwargs)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4088
+INFO:root:max position: 14076
+INFO:root:context_num: 159
+INFO:root:target_namespace: mrjob.mrjob<folder>.parse<file>.urlparse<func>
+INFO:root:****************************************
+INFO:root:--------data 187--------
+data 187:   0%|          | 0/512 [00:00<?, ?it/s]data 187:   2%|▏         | 10/512 [01:01<51:03,  6.10s/it]data 187:   4%|▍         | 20/512 [03:05<1:20:40,  9.84s/it]data 187:   6%|▌         | 30/512 [04:08<1:06:01,  8.22s/it]data 187:   8%|▊         | 40/512 [05:06<57:09,  7.27s/it]  data 187:  10%|▉         | 50/512 [06:03<51:28,  6.68s/it]data 187:  12%|█▏        | 60/512 [10:00<1:34:00, 12.48s/it]data 187:  14%|█▎        | 70/512 [10:54<1:14:59, 10.18s/it]data 187:  14%|█▎        | 70/512 [11:01<1:09:36,  9.45s/it]
+INFO:root:函数头: 
+def which(cmd, path=None):
+
+INFO:root:目标函数体: 
+    
+    if hasattr(shutil, 'which'):
+        # added in Python 3.3
+        return shutil.which(cmd, path=path)
+    elif path is None and os.environ.get('PATH') is None:
+        # find_executable() errors if neither path nor $PATH is set
+        return None
+    else:
+        return find_executable(cmd, path=path)
+
+INFO:root:生成结果: 
+    if path is None:
+        path = os.environ.get('PATH', '')
+    path_list = path.split(':')
+    for p in path_list:
+        full_path = os.path.join(p, cmd)
+        if os.path.isfile(full_path) and os.access(full_path, os.X_OK):
+            return full_path
+    return None
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5647
+INFO:root:max position: 16680
+INFO:root:context_num: 399
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.which<func>
+INFO:root:****************************************
+data 187:   0%|          | 0/512 [00:00<?, ?it/s]data 187:   2%|▏         | 10/512 [00:37<31:24,  3.75s/it]data 187:   4%|▍         | 20/512 [01:25<35:55,  4.38s/it]data 187:   6%|▌         | 30/512 [02:15<37:19,  4.65s/it]data 187:   8%|▊         | 40/512 [03:04<37:16,  4.74s/it]data 187:  10%|▉         | 50/512 [03:52<36:52,  4.79s/it]data 187:  12%|█▏        | 60/512 [04:41<36:20,  4.82s/it]data 187:  14%|█▎        | 70/512 [05:28<35:13,  4.78s/it]data 187:  16%|█▌        | 80/512 [06:16<34:17,  4.76s/it]data 187:  18%|█▊        | 90/512 [07:02<33:12,  4.72s/it]data 187:  20%|█▉        | 100/512 [07:49<32:27,  4.73s/it]data 187:  21%|██▏       | 110/512 [08:46<33:34,  5.01s/it]data 187:  23%|██▎       | 120/512 [09:38<33:05,  5.06s/it]data 187:  25%|██▌       | 130/512 [10:23<31:09,  4.89s/it]data 187:  27%|██▋       | 140/512 [11:09<29:51,  4.82s/it]data 187:  29%|██▉       | 150/512 [12:56<39:43,  6.59s/it]data 187:  31%|███▏      | 160/512 [13:38<34:28,  5.88s/it]data 187:  33%|███▎      | 170/512 [14:20<30:36,  5.37s/it]data 187:  35%|███▌      | 180/512 [16:04<38:02,  6.88s/it]data 187:  37%|███▋      | 190/512 [16:45<32:24,  6.04s/it]data 187:  39%|███▉      | 200/512 [17:20<27:27,  5.28s/it]data 187:  41%|████      | 210/512 [17:55<23:52,  4.74s/it]data 187:  43%|████▎     | 220/512 [18:26<20:38,  4.24s/it]data 187:  45%|████▍     | 230/512 [21:02<35:57,  7.65s/it]data 187:  47%|████▋     | 240/512 [22:33<36:42,  8.10s/it]data 187:  49%|████▉     | 250/512 [23:07<29:10,  6.68s/it]data 187:  51%|█████     | 260/512 [24:45<32:02,  7.63s/it]data 187:  53%|█████▎    | 270/512 [25:22<25:58,  6.44s/it]data 187:  55%|█████▍    | 280/512 [25:57<21:33,  5.58s/it]data 187:  57%|█████▋    | 290/512 [26:36<18:44,  5.06s/it]data 187:  59%|█████▊    | 300/512 [28:16<23:06,  6.54s/it]data 187:  61%|██████    | 310/512 [32:55<43:37, 12.96s/it]data 187:  62%|██████▎   | 320/512 [34:35<38:35, 12.06s/it]data 187:  64%|██████▍   | 330/512 [35:15<29:14,  9.64s/it]data 187:  66%|██████▋   | 340/512 [35:58<23:00,  8.03s/it]data 187:  68%|██████▊   | 350/512 [36:41<18:40,  6.92s/it]data 187:  70%|███████   | 360/512 [37:22<15:25,  6.09s/it]data 187:  72%|███████▏  | 370/512 [38:06<13:13,  5.59s/it]data 187:  74%|███████▍  | 380/512 [38:50<11:28,  5.22s/it]data 187:  76%|███████▌  | 390/512 [39:31<09:57,  4.89s/it]data 187:  78%|███████▊  | 400/512 [40:12<08:40,  4.65s/it]data 187:  80%|████████  | 410/512 [40:46<07:16,  4.28s/it]data 187:  82%|████████▏ | 420/512 [41:20<06:08,  4.01s/it]data 187:  84%|████████▍ | 430/512 [41:55<05:16,  3.86s/it]data 187:  86%|████████▌ | 440/512 [42:28<04:26,  3.69s/it]data 187:  88%|████████▊ | 450/512 [44:00<05:30,  5.32s/it]data 187:  90%|████████▉ | 460/512 [46:33<07:13,  8.34s/it]data 187:  92%|█████████▏| 470/512 [47:06<04:46,  6.82s/it]data 187:  94%|█████████▍| 480/512 [51:43<06:58, 13.09s/it]data 187:  96%|█████████▌| 490/512 [52:24<03:48, 10.39s/it]data 187:  98%|█████████▊| 500/512 [53:05<01:41,  8.49s/it]data 187: 100%|█████████▉| 510/512 [53:37<00:13,  6.91s/it]data 187: 100%|█████████▉| 510/512 [53:49<00:12,  6.33s/it]
+INFO:root:函数头: 
+def which(cmd, path=None):
+
+INFO:root:目标函数体: 
+    
+    if hasattr(shutil, 'which'):
+        # added in Python 3.3
+        return shutil.which(cmd, path=path)
+    elif path is None and os.environ.get('PATH') is None:
+        # find_executable() errors if neither path nor $PATH is set
+        return None
+    else:
+        return find_executable(cmd, path=path)
+
+INFO:root:生成结果: 
+    import os.path
+    import os
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os.path
+    import os
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7656
+INFO:root:max position: 18588
+INFO:root:context_num: 773
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.which<func>
+INFO:root:****************************************
+data 187:   0%|          | 0/512 [00:00<?, ?it/s]data 187:   2%|▏         | 10/512 [00:36<30:49,  3.68s/it]data 187:   4%|▍         | 20/512 [01:18<32:39,  3.98s/it]data 187:   6%|▌         | 30/512 [02:03<33:57,  4.23s/it]data 187:   8%|▊         | 40/512 [06:52<1:49:38, 13.94s/it]data 187:  10%|▉         | 50/512 [07:38<1:21:22, 10.57s/it]data 187:  12%|█▏        | 60/512 [08:24<1:04:30,  8.56s/it]data 187:  14%|█▎        | 70/512 [09:10<53:33,  7.27s/it]  data 187:  14%|█▎        | 70/512 [09:15<58:26,  7.93s/it]
+INFO:root:函数头: 
+def which(cmd, path=None):
+
+INFO:root:目标函数体: 
+    
+    if hasattr(shutil, 'which'):
+        # added in Python 3.3
+        return shutil.which(cmd, path=path)
+    elif path is None and os.environ.get('PATH') is None:
+        # find_executable() errors if neither path nor $PATH is set
+        return None
+    else:
+        return find_executable(cmd, path=path)
+
+INFO:root:生成结果: 
+    if path is None:
+        path = os.pathsep.join(os.environ.get('PATH', '').split(':'))
+    for dir in path.split(os.pathsep):
+        executable = os.path.join(dir, cmd)
+        if os.path.isfile(executable) and os.access(executable, os.X_OK):
+            return executable
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5834
+INFO:root:max position: 18644
+INFO:root:context_num: 449
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.which<func>
+INFO:root:****************************************
+data 187:   0%|          | 0/512 [00:00<?, ?it/s]data 187:   2%|▏         | 10/512 [00:33<27:52,  3.33s/it]data 187:   4%|▍         | 20/512 [01:15<31:42,  3.87s/it]data 187:   6%|▌         | 30/512 [03:01<55:43,  6.94s/it]data 187:   8%|▊         | 40/512 [03:48<47:33,  6.05s/it]data 187:  10%|▉         | 50/512 [04:35<42:45,  5.55s/it]data 187:  12%|█▏        | 60/512 [05:23<39:57,  5.30s/it]data 187:  14%|█▎        | 70/512 [06:10<37:44,  5.12s/it]data 187:  16%|█▌        | 80/512 [06:59<36:14,  5.03s/it]data 187:  16%|█▌        | 80/512 [07:35<41:01,  5.70s/it]
+INFO:root:函数头: 
+def which(cmd, path=None):
+
+INFO:root:目标函数体: 
+    
+    if hasattr(shutil, 'which'):
+        # added in Python 3.3
+        return shutil.which(cmd, path=path)
+    elif path is None and os.environ.get('PATH') is None:
+        # find_executable() errors if neither path nor $PATH is set
+        return None
+    else:
+        return find_executable(cmd, path=path)
+
+INFO:root:生成结果: 
+    import os
+    import os.path
+    import sys
+
+    if path is None:
+        path = os.environ.get('PATH', os.pathsep.join(sys.path))
+
+    for directory in path.split(os.pathsep):
+        executable_path = os.path.join(directory, cmd)
+        if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
+            return executable_path
+
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6136
+INFO:root:max position: 17052
+INFO:root:context_num: 466
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.which<func>
+INFO:root:****************************************
+data 187:   0%|          | 0/512 [00:00<?, ?it/s]data 187:   2%|▏         | 10/512 [00:36<30:18,  3.62s/it]data 187:   4%|▍         | 20/512 [01:20<33:30,  4.09s/it]data 187:   6%|▌         | 30/512 [02:03<33:47,  4.21s/it]data 187:   8%|▊         | 40/512 [02:49<34:18,  4.36s/it]data 187:  10%|▉         | 50/512 [03:36<34:20,  4.46s/it]data 187:  12%|█▏        | 60/512 [04:21<33:51,  4.49s/it]data 187:  12%|█▏        | 60/512 [04:57<37:18,  4.95s/it]
+INFO:root:函数头: 
+def which(cmd, path=None):
+
+INFO:root:目标函数体: 
+    
+    if hasattr(shutil, 'which'):
+        # added in Python 3.3
+        return shutil.which(cmd, path=path)
+    elif path is None and os.environ.get('PATH') is None:
+        # find_executable() errors if neither path nor $PATH is set
+        return None
+    else:
+        return find_executable(cmd, path=path)
+
+INFO:root:生成结果: 
+    if path is None:
+        path = os.environ.get('PATH', '')
+
+    for dir in path.split(os.pathsep):
+        executable_path = os.path.join(dir, cmd)
+        if os.path.isfile(executable_path) and os.access(executable_path, os.X_OK):
+            return executable_path
+
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6243
+INFO:root:max position: 17065
+INFO:root:context_num: 415
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.which<func>
+INFO:root:****************************************
+INFO:root:已生成187条结果
+INFO:root:--------data 188--------
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:21<18:08,  2.17s/it]data 188:   4%|▍         | 20/512 [00:41<16:42,  2.04s/it]data 188:   6%|▌         | 30/512 [00:53<13:27,  1.67s/it]data 188:   8%|▊         | 40/512 [01:08<12:32,  1.60s/it]data 188:  10%|▉         | 50/512 [01:17<10:26,  1.36s/it]data 188:  12%|█▏        | 60/512 [01:31<10:19,  1.37s/it]data 188:  14%|█▎        | 70/512 [01:46<10:26,  1.42s/it]data 188:  16%|█▌        | 80/512 [01:55<09:04,  1.26s/it]data 188:  18%|█▊        | 90/512 [02:04<07:55,  1.13s/it]data 188:  20%|█▉        | 100/512 [02:16<07:49,  1.14s/it]data 188:  21%|██▏       | 110/512 [02:25<07:18,  1.09s/it]data 188:  23%|██▎       | 120/512 [02:38<07:29,  1.15s/it]data 188:  23%|██▎       | 120/512 [02:40<08:44,  1.34s/it]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    parts = rhostport.split(':')
+    if len(parts) == 2:
+        host, port = parts
+        username = None
+        password = None
+    elif len(parts) == 3:
+        username, password, host = parts
+        port = None
+    else:
+        raise ValueError("Invalid rhostport format")
+
+    if '@' in username:
+        username, password = username.split('@')
+
+    return username, password, int(port) if port else None, host
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2713
+INFO:root:max position: 6348
+INFO:root:context_num: 201
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:13<11:37,  1.39s/it]data 188:   4%|▍         | 20/512 [00:27<11:07,  1.36s/it]data 188:   6%|▌         | 30/512 [00:36<09:23,  1.17s/it]data 188:   8%|▊         | 40/512 [00:46<08:45,  1.11s/it]data 188:  10%|▉         | 50/512 [00:56<08:08,  1.06s/it]data 188:  12%|█▏        | 60/512 [01:07<08:10,  1.09s/it]data 188:  14%|█▎        | 70/512 [01:17<07:43,  1.05s/it]data 188:  16%|█▌        | 80/512 [01:28<07:42,  1.07s/it]data 188:  18%|█▊        | 90/512 [01:37<06:59,  1.01it/s]data 188:  20%|█▉        | 100/512 [01:45<06:33,  1.05it/s]data 188:  21%|██▏       | 110/512 [01:55<06:23,  1.05it/s]data 188:  23%|██▎       | 120/512 [02:04<06:11,  1.06it/s]data 188:  25%|██▌       | 130/512 [02:14<06:05,  1.05it/s]data 188:  27%|██▋       | 140/512 [02:26<06:21,  1.02s/it]data 188:  27%|██▋       | 140/512 [02:37<06:59,  1.13s/it]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    # Implement the parsing logic here
+    username = None
+    password = None
+    host = None
+    port = None
+
+    # Check if rhostport contains username/password
+    if ':' in rhostport:
+        username, rest = rhostport.split(':', 1)
+        if '@' in rest:
+            password, rest = rest.split('@', 1)
+        host = rest
+    else:
+        host = rhostport
+
+    # Check if rhostport contains port
+    if ':' in host:
+        host, port = host.split(':', 1)
+
+    return username, password, port, host
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3236
+INFO:root:max position: 7404
+INFO:root:context_num: 189
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:09<08:05,  1.03it/s]data 188:   4%|▍         | 20/512 [00:21<08:57,  1.09s/it]data 188:   6%|▌         | 30/512 [00:30<08:08,  1.01s/it]data 188:   8%|▊         | 40/512 [00:40<08:00,  1.02s/it]data 188:  10%|▉         | 50/512 [00:48<07:13,  1.07it/s]data 188:  12%|█▏        | 60/512 [00:58<07:11,  1.05it/s]data 188:  14%|█▎        | 70/512 [01:08<06:59,  1.05it/s]data 188:  16%|█▌        | 80/512 [01:17<06:43,  1.07it/s]data 188:  18%|█▊        | 90/512 [01:25<06:17,  1.12it/s]data 188:  20%|█▉        | 100/512 [01:33<06:06,  1.12it/s]data 188:  21%|██▏       | 110/512 [01:43<06:01,  1.11it/s]data 188:  21%|██▏       | 110/512 [01:43<06:19,  1.06it/s]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    parts = rhostport.split(':')
+    host = parts[-1]
+    port = parts[-2] if len(parts) > 2 else None
+
+    username = None
+    password = None
+
+    if len(parts) > 1:
+        username_password = parts[-2]
+        username, password = username_password.split(':') if ':' in username_password else (username_password, None)
+
+    return username, password, port, host
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2864
+INFO:root:max position: 6358
+INFO:root:context_num: 168
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:09<08:05,  1.03it/s]data 188:   4%|▍         | 20/512 [00:21<09:03,  1.10s/it]data 188:   6%|▌         | 30/512 [00:30<08:14,  1.02s/it]data 188:   8%|▊         | 40/512 [00:40<07:53,  1.00s/it]data 188:  10%|▉         | 50/512 [00:48<07:08,  1.08it/s]data 188:  12%|█▏        | 60/512 [00:57<06:58,  1.08it/s]data 188:  14%|█▎        | 70/512 [01:07<06:56,  1.06it/s]data 188:  16%|█▌        | 80/512 [01:17<06:53,  1.04it/s]data 188:  18%|█▊        | 90/512 [04:25<46:02,  6.55s/it]data 188:  20%|█▉        | 100/512 [04:34<32:56,  4.80s/it]data 188:  21%|██▏       | 110/512 [06:44<48:51,  7.29s/it]data 188:  21%|██▏       | 110/512 [06:45<24:41,  3.68s/it]
+Traceback (most recent call last):
+  File "/home/qikahh/projects/Structured_Code_Context/test_hierarchical_model.py", line 286, in <module>
+    info_dict = hierarchical_model.generate_step(target_namespace=target_namespace,input_ids=input_ids, prefix_kv=prefix_kv, init_context_nodes=init_context)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 973, in generate_step
+    key_tensor, value_tensor, extend_list = self.encode_nodeseq(encode_extend_part, begin_layer=start_layer_idx, end_layer=end_layer_idx-1, now_pos=0)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 400, in encode_nodeseq
+    all_key, all_value, node_list = self.get_node_kv(node_list, begin_layer, end_layer) # 节点本身内容对应的向量
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 249, in get_node_kv
+    all_key, all_value, all_hidden = self.encode_by_layer(last_hidden, enc_layer_idx+1, end_layer, begin_pos)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 148, in encode_by_layer
+    layer_outputs = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 629, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+                                                          ^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 319, in forward
+    attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 134.00 MiB. GPU 

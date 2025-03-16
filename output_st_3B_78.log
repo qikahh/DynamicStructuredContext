@@ -1,0 +1,480 @@
+INFO:root:time: 2025年 03月 16日 星期日 19:16:31 CST
+
+INFO:root:pid: 739377
+INFO:root:seed: 94
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.80s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.14s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.24s/it]
+INFO:root:--------data 78--------
+data 78:   0%|          | 0/128 [00:00<?, ?it/s]data 78:   8%|▊         | 10/128 [00:38<07:38,  3.89s/it]data 78:  16%|█▌        | 20/128 [01:14<06:40,  3.70s/it]data 78:  23%|██▎       | 30/128 [01:53<06:11,  3.79s/it]data 78:  31%|███▏      | 40/128 [02:34<05:44,  3.92s/it]data 78:  39%|███▉      | 50/128 [03:14<05:07,  3.95s/it]data 78:  47%|████▋     | 60/128 [03:52<04:25,  3.90s/it]data 78:  55%|█████▍    | 70/128 [04:34<03:51,  3.99s/it]data 78:  62%|██████▎   | 80/128 [05:13<03:10,  3.97s/it]data 78:  70%|███████   | 90/128 [05:51<02:28,  3.91s/it]data 78:  78%|███████▊  | 100/128 [06:30<01:49,  3.90s/it]data 78:  86%|████████▌ | 110/128 [07:23<01:17,  4.32s/it]data 78:  94%|█████████▍| 120/128 [08:10<00:35,  4.45s/it]data 78:  94%|█████████▍| 120/128 [08:46<00:35,  4.39s/it]
+INFO:root:函数头: 
+def display_actor(actor):
+
+INFO:root:目标函数体: 
+    for key in ("display", "name", "username", "login", "id"):
+        if actor.get(key):
+            return actor[key]
+    return str(actor)
+
+INFO:root:生成结果: 
+    # Import necessary modules from datasette.utils module
+    from datasette.utils import (
+        actors,
+        actor_matches_allow,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+        actor_matches_den deny,
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10669
+INFO:root:max position: 15700
+INFO:root:context_num: 387
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.display_actor<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:29:25 CST
+
+INFO:root:****************************************
+data 78:   0%|          | 0/128 [00:00<?, ?it/s]data 78:   8%|▊         | 10/128 [02:16<26:47, 13.62s/it]data 78:  16%|█▌        | 20/128 [02:56<14:18,  7.95s/it]data 78:  23%|██▎       | 30/128 [03:33<09:50,  6.03s/it]data 78:  31%|███▏      | 40/128 [04:11<07:31,  5.13s/it]data 78:  39%|███▉      | 50/128 [04:53<06:16,  4.83s/it]data 78:  47%|████▋     | 60/128 [05:32<05:05,  4.49s/it]data 78:  55%|█████▍    | 70/128 [06:11<04:09,  4.31s/it]data 78:  62%|██████▎   | 80/128 [06:51<03:22,  4.22s/it]data 78:  62%|██████▎   | 80/128 [07:02<04:13,  5.28s/it]
+INFO:root:函数头: 
+def display_actor(actor):
+
+INFO:root:目标函数体: 
+    for key in ("display", "name", "username", "login", "id"):
+        if actor.get(key):
+            return actor[key]
+    return str(actor)
+
+INFO:root:生成结果: 
+    actor_info = []
+    actor_info.append(actor.get("display_name"))
+    actor_info.append(actor.get("name"))
+    actor_info.append(actor.get("username"))
+    actor_info.append(actor.get("login"))
+    actor_info.append(actor.get("id"))
+    actor_info = [info for info in actor_info if info]
+    return ", ".join(actor_info) if actor_info else str(actor)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10247
+INFO:root:max position: 15041
+INFO:root:context_num: 353
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.display_actor<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:36:27 CST
+
+INFO:root:****************************************
+data 78:   0%|          | 0/128 [00:00<?, ?it/s]data 78:   8%|▊         | 10/128 [00:42<08:26,  4.29s/it]data 78:  16%|█▌        | 20/128 [01:20<07:11,  3.99s/it]data 78:  23%|██▎       | 30/128 [02:04<06:49,  4.18s/it]data 78:  31%|███▏      | 40/128 [02:43<05:58,  4.08s/it]data 78:  39%|███▉      | 50/128 [03:27<05:27,  4.19s/it]data 78:  47%|████▋     | 60/128 [04:38<05:50,  5.16s/it]data 78:  55%|█████▍    | 70/128 [05:22<04:45,  4.93s/it]data 78:  62%|██████▎   | 80/128 [06:01<03:40,  4.58s/it]data 78:  70%|███████   | 90/128 [06:41<02:47,  4.41s/it]data 78:  78%|███████▊  | 100/128 [07:21<02:00,  4.29s/it]data 78:  86%|████████▌ | 110/128 [08:01<01:15,  4.19s/it]data 78:  94%|█████████▍| 120/128 [08:42<00:33,  4.17s/it]data 78:  94%|█████████▍| 120/128 [09:20<00:37,  4.67s/it]
+INFO:root:函数头: 
+def display_actor(actor):
+
+INFO:root:目标函数体: 
+    for key in ("display", "name", "username", "login", "id"):
+        if actor.get(key):
+            return actor[key]
+    return str(actor)
+
+INFO:root:生成结果: 
+    # Importing necessary modules from datasette.utils module
+    from datasette.utils import (
+        actor_from_request,
+        actor_from_cookie,
+        actor_from_token,
+        actor_from_database,
+        actor_from_database_route,
+        actor_from_database_name,
+        actor_from_database_id,
+        actor_from_database_url,
+        actor_from_database_route,
+        actor_from_database_name,
+        actor_from_database_id,
+        actor_from_database_url,
+        actor_from_database_route,
+        actor_from_database_name,
+        actor_from_database_id,
+        actor_from_database_url,
+        actor_from_database_route,
+        actor_from_database_name,
+        actor_from_database_id
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9694
+INFO:root:max position: 15447
+INFO:root:context_num: 403
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.display_actor<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:45:47 CST
+
+INFO:root:****************************************
+INFO:root:--------data 79--------
+data 79:   0%|          | 0/242 [00:00<?, ?it/s]data 79:   4%|▍         | 10/242 [00:36<14:15,  3.69s/it]data 79:   8%|▊         | 20/242 [01:17<14:26,  3.90s/it]data 79:  12%|█▏        | 30/242 [01:59<14:18,  4.05s/it]data 79:  17%|█▋        | 40/242 [02:41<13:47,  4.10s/it]data 79:  21%|██        | 50/242 [03:20<12:52,  4.02s/it]data 79:  25%|██▍       | 60/242 [03:59<12:06,  3.99s/it]data 79:  29%|██▉       | 70/242 [04:38<11:20,  3.96s/it]data 79:  33%|███▎      | 80/242 [05:17<10:38,  3.94s/it]data 79:  33%|███▎      | 80/242 [05:48<11:45,  4.35s/it]
+INFO:root:函数头: 
+async def initial_path_for_datasette(datasette):
+
+INFO:root:目标函数体: 
+    
+    databases = dict([p for p in datasette.databases.items() if p[0] != "_internal"])
+    if len(databases) == 1:
+        db_name = next(iter(databases.keys()))
+        path = datasette.urls.database(db_name)
+        # Does this DB only have one table?
+        db = next(iter(databases.values()))
+        tables = await db.table_names()
+        if len(tables) == 1:
+            path = datasette.urls.table(db_name, tables[0])
+    else:
+        path = datasette.urls.instance()
+    return path
+
+INFO:root:生成结果: 
+    databases = datasette.datasets.keys()
+    if len(databases) == 1:
+        database_name = list(databases)[0]
+        tables = datasette.datasets[database_name].keys()
+        if len(tables) == 1:
+            return datasette.datasets[database_name][tables[0]]
+        else:
+            return dataset datasette.datasets[database_name]
+    else:
+        return datasette.instance_path
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9986
+INFO:root:max position: 14497
+INFO:root:context_num: 389
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.initial_path_for_datasette<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:51:36 CST
+
+INFO:root:****************************************
+data 79:   0%|          | 0/242 [00:00<?, ?it/s]data 79:   4%|▍         | 10/242 [00:35<13:48,  3.57s/it]data 79:   8%|▊         | 20/242 [01:15<14:00,  3.79s/it]data 79:  12%|█▏        | 30/242 [01:54<13:36,  3.85s/it]data 79:  17%|█▋        | 40/242 [02:33<13:04,  3.88s/it]data 79:  21%|██        | 50/242 [03:12<12:28,  3.90s/it]data 79:  25%|██▍       | 60/242 [03:54<12:07,  4.00s/it]data 79:  29%|██▉       | 70/242 [04:35<11:33,  4.03s/it]data 79:  33%|███▎      | 80/242 [05:15<10:50,  4.01s/it]data 79:  33%|███▎      | 80/242 [05:52<11:54,  4.41s/it]
+INFO:root:函数头: 
+async def initial_path_for_datasette(datasette):
+
+INFO:root:目标函数体: 
+    
+    databases = dict([p for p in datasette.databases.items() if p[0] != "_internal"])
+    if len(databases) == 1:
+        db_name = next(iter(databases.keys()))
+        path = datasette.urls.database(db_name)
+        # Does this DB only have one table?
+        db = next(iter(databases.values()))
+        tables = await db.table_names()
+        if len(tables) == 1:
+            path = datasette.urls.table(db_name, tables[0])
+    else:
+        path = datasette.urls.instance()
+    return path
+
+INFO:root:生成结果: 
+    databases = datasette.datasets.keys()
+    if len(databases) == 1:
+        database_name = list(databases)[0]
+        tables = datasette.datasets[database_name].keys()
+        if len(tables) == 1:
+            return datasette.datasets[database_name][tables[0]].path
+        else:
+            return datasette.datasets[database_name].path
+    else:
+        return datasette.path
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10032
+INFO:root:max position: 14528
+INFO:root:context_num: 376
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.initial_path_for_datasette<func>
+INFO:root:time: 2025年 03月 16日 星期日 19:57:29 CST
+
+INFO:root:****************************************
+data 79:   0%|          | 0/242 [00:00<?, ?it/s]data 79:   4%|▍         | 10/242 [00:36<14:11,  3.67s/it]data 79:   8%|▊         | 20/242 [01:15<14:05,  3.81s/it]data 79:  12%|█▏        | 30/242 [01:58<14:14,  4.03s/it]data 79:  17%|█▋        | 40/242 [02:38<13:29,  4.01s/it]data 79:  21%|██        | 50/242 [03:17<12:41,  3.97s/it]data 79:  25%|██▍       | 60/242 [03:56<11:57,  3.94s/it]data 79:  29%|██▉       | 70/242 [04:35<11:14,  3.92s/it]data 79:  33%|███▎      | 80/242 [05:15<10:41,  3.96s/it]data 79:  37%|███▋      | 90/242 [05:55<10:05,  3.98s/it]data 79:  41%|████▏     | 100/242 [06:35<09:23,  3.97s/it]data 79:  41%|████▏     | 100/242 [06:42<09:31,  4.02s/it]
+INFO:root:函数头: 
+async def initial_path_for_datasette(datasette):
+
+INFO:root:目标函数体: 
+    
+    databases = dict([p for p in datasette.databases.items() if p[0] != "_internal"])
+    if len(databases) == 1:
+        db_name = next(iter(databases.keys()))
+        path = datasette.urls.database(db_name)
+        # Does this DB only have one table?
+        db = next(iter(databases.values()))
+        tables = await db.table_names()
+        if len(tables) == 1:
+            path = datasette.urls.table(db_name, tables[0])
+    else:
+        path = datasette.urls.instance()
+    return path
+
+INFO:root:生成结果: 
+    databases = datasette databases()
+    if len(databases) == 1:
+        database_name = list(databases.keys())[0]
+        tables = datasette databases()[database_name].tables()
+        if len(tables) == 1:
+            table_name = list(tables.keys())[0]
+            return datasette databases()[database_name].tables()[table_name].path()
+        else:
+            return datasette databases()[database_name].path()
+    else:
+        return datasette path()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10083
+INFO:root:max position: 14756
+INFO:root:context_num: 392
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.initial_path_for_datasette<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:04:11 CST
+
+INFO:root:****************************************
+INFO:root:已生成79条结果
+INFO:root:--------data 80--------
+data 80:   0%|          | 0/162 [00:00<?, ?it/s]data 80:   6%|▌         | 10/162 [00:39<10:05,  3.98s/it]data 80:  12%|█▏        | 20/162 [01:20<09:30,  4.02s/it]data 80:  19%|█▊        | 30/162 [01:59<08:45,  3.98s/it]data 80:  25%|██▍       | 40/162 [02:37<07:54,  3.89s/it]data 80:  25%|██▍       | 40/162 [03:11<09:45,  4.80s/it]
+INFO:root:函数头: 
+@documented
+def tilde_decode(s: str) -> str:
+
+INFO:root:目标函数体: 
+    "Decodes a tilde-encoded string, so ``~2Ffoo~2Fbar`` -> ``/foo/bar``"
+    # Avoid accidentally decoding a %2f style sequence
+    temp = secrets.token_hex(16)
+    s = s.replace("%", temp)
+    decoded = urllib.parse.unquote_plus(s.replace("~", "%"))
+    return decoded.replace(temp, "%")
+
+INFO:root:生成结果: 
+    temp = "%"
+    s = s.replace(temp, "%_")
+    s = s.encode("utf-8")
+    s = s.decode("unicode_escape")
+    s = s.replace(temp, "%")
+    return s
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9614
+INFO:root:max position: 14830
+INFO:root:context_num: 311
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.tilde_decode<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:07:23 CST
+
+INFO:root:****************************************
+data 80:   0%|          | 0/162 [00:00<?, ?it/s]data 80:   6%|▌         | 10/162 [00:35<09:05,  3.59s/it]data 80:  12%|█▏        | 20/162 [01:13<08:45,  3.70s/it]data 80:  19%|█▊        | 30/162 [01:51<08:12,  3.73s/it]data 80:  25%|██▍       | 40/162 [02:27<07:27,  3.67s/it]data 80:  31%|███       | 50/162 [03:08<07:09,  3.83s/it]data 80:  31%|███       | 50/162 [03:15<07:18,  3.92s/it]
+INFO:root:函数头: 
+@documented
+def tilde_decode(s: str) -> str:
+
+INFO:root:目标函数体: 
+    "Decodes a tilde-encoded string, so ``~2Ffoo~2Fbar`` -> ``/foo/bar``"
+    # Avoid accidentally decoding a %2f style sequence
+    temp = secrets.token_hex(16)
+    s = s.replace("%", temp)
+    decoded = urllib.parse.unquote_plus(s.replace("~", "%"))
+    return decoded.replace(temp, "%")
+
+INFO:root:生成结果: 
+    temp = "%"
+    s = s.replace(temp, temp + temp)
+    s = s.encode("utf-8")
+    s = s.decode("unicode_escape")
+    s = s.replace(temp + temp, temp)
+    return s
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10129
+INFO:root:max position: 14524
+INFO:root:context_num: 307
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.tilde_decode<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:10:38 CST
+
+INFO:root:****************************************
+data 80:   0%|          | 0/162 [00:00<?, ?it/s]data 80:   6%|▌         | 10/162 [00:34<08:47,  3.47s/it]data 80:  12%|█▏        | 20/162 [01:13<08:45,  3.70s/it]data 80:  19%|█▊        | 30/162 [01:51<08:12,  3.73s/it]data 80:  25%|██▍       | 40/162 [02:29<07:41,  3.78s/it]data 80:  25%|██▍       | 40/162 [02:33<07:47,  3.83s/it]
+INFO:root:函数头: 
+@documented
+def tilde_decode(s: str) -> str:
+
+INFO:root:目标函数体: 
+    "Decodes a tilde-encoded string, so ``~2Ffoo~2Fbar`` -> ``/foo/bar``"
+    # Avoid accidentally decoding a %2f style sequence
+    temp = secrets.token_hex(16)
+    s = s.replace("%", temp)
+    decoded = urllib.parse.unquote_plus(s.replace("~", "%"))
+    return decoded.replace(temp, "%")
+
+INFO:root:生成结果: 
+    temp = "%"
+    s = s.replace(temp, "%2f")
+    s = s.decode("utf-8")
+    s = s.replace(temp, "%")
+    return s
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9056
+INFO:root:max position: 14733
+INFO:root:context_num: 306
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.tilde_decode<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:13:12 CST
+
+INFO:root:****************************************
+INFO:root:--------data 81--------
+data 81:   0%|          | 0/128 [00:00<?, ?it/s]data 81:   8%|▊         | 10/128 [00:36<07:11,  3.65s/it]data 81:  16%|█▌        | 20/128 [01:15<06:50,  3.80s/it]data 81:  23%|██▎       | 30/128 [01:55<06:20,  3.88s/it]data 81:  23%|██▎       | 30/128 [02:13<07:15,  4.44s/it]
+INFO:root:函数头: 
+def resolve_routes(routes, path):
+
+INFO:root:目标函数体: 
+    for regex, view in routes:
+        match = regex.match(path)
+        if match is not None:
+            return match, view
+    return None, None
+
+INFO:root:生成结果: 
+    for regex, view in routes:
+        match = re.match(regex, path)
+        if match:
+            return match.groupdict(), view
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9755
+INFO:root:max position: 14930
+INFO:root:context_num: 312
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.resolve_routes<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:15:25 CST
+
+INFO:root:****************************************
+data 81:   0%|          | 0/128 [00:00<?, ?it/s]data 81:   8%|▊         | 10/128 [00:36<07:13,  3.68s/it]data 81:  16%|█▌        | 20/128 [01:14<06:40,  3.71s/it]data 81:  23%|██▎       | 30/128 [01:52<06:08,  3.77s/it]data 81:  23%|██▎       | 30/128 [02:09<07:04,  4.33s/it]
+INFO:root:函数头: 
+def resolve_routes(routes, path):
+
+INFO:root:目标函数体: 
+    for regex, view in routes:
+        match = regex.match(path)
+        if match is not None:
+            return match, view
+    return None, None
+
+INFO:root:生成结果: 
+    for regex, view in routes:
+        match = re.match(regex, path)
+        if match:
+            return match.groupdict(), view
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9409
+INFO:root:max position: 14334
+INFO:root:context_num: 317
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.resolve_routes<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:17:35 CST
+
+INFO:root:****************************************
+data 81:   0%|          | 0/128 [00:00<?, ?it/s]data 81:   8%|▊         | 10/128 [00:35<06:53,  3.51s/it]data 81:  16%|█▌        | 20/128 [01:12<06:34,  3.65s/it]data 81:  23%|██▎       | 30/128 [01:51<06:10,  3.78s/it]data 81:  23%|██▎       | 30/128 [02:09<07:02,  4.31s/it]
+INFO:root:函数头: 
+def resolve_routes(routes, path):
+
+INFO:root:目标函数体: 
+    for regex, view in routes:
+        match = regex.match(path)
+        if match is not None:
+            return match, view
+    return None, None
+
+INFO:root:生成结果: 
+    for regex, view in routes:
+        match = re.match(regex, path)
+        if match:
+            return match.groupdict(), view
+    return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9789
+INFO:root:max position: 14930
+INFO:root:context_num: 327
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.resolve_routes<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:19:44 CST
+
+INFO:root:****************************************
+INFO:root:已生成81条结果
+INFO:root:--------data 82--------
+data 82:   0%|          | 0/190 [00:00<?, ?it/s]data 82:   5%|▌         | 10/190 [00:38<11:37,  3.88s/it]data 82:  11%|█         | 20/190 [01:15<10:41,  3.77s/it]data 82:  16%|█▌        | 30/190 [01:57<10:31,  3.95s/it]data 82:  21%|██        | 40/190 [02:36<09:49,  3.93s/it]data 82:  26%|██▋       | 50/190 [03:14<09:01,  3.87s/it]data 82:  32%|███▏      | 60/190 [03:51<08:15,  3.82s/it]data 82:  32%|███▏      | 60/190 [04:05<08:50,  4.08s/it]
+INFO:root:函数头: 
+def truncate_url(url, length):
+
+INFO:root:目标函数体: 
+    if (not length) or (len(url) <= length):
+        return url
+    bits = url.rsplit(".", 1)
+    if len(bits) == 2 and 1 <= len(bits[1]) <= 4 and "/" not in bits[1]:
+        rest, ext = bits
+        return rest[: length - 1 - len(ext)] + "…." + ext
+    return url[: length - 1] + "…"
+
+INFO:root:生成结果: 
+    if len(url) <= length:
+        return url
+    if url.endswith(".html") or url.endswith(".json"):
+        if 1 <= len(url.split("/")[-1]) <= 4:
+            return url[:length - 3] + "..."
+    return url[:length] + "..."
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9994
+INFO:root:max position: 14457
+INFO:root:context_num: 367
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.truncate_url<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:23:49 CST
+
+INFO:root:****************************************
+data 82:   0%|          | 0/190 [00:00<?, ?it/s]data 82:   5%|▌         | 10/190 [00:38<11:31,  3.84s/it]data 82:  11%|█         | 20/190 [01:17<11:01,  3.89s/it]data 82:  16%|█▌        | 30/190 [01:56<10:18,  3.87s/it]data 82:  21%|██        | 40/190 [02:36<09:49,  3.93s/it]data 82:  26%|██▋       | 50/190 [03:15<09:07,  3.91s/it]data 82:  32%|███▏      | 60/190 [03:52<08:20,  3.85s/it]data 82:  37%|███▋      | 70/190 [04:30<07:42,  3.85s/it]data 82:  42%|████▏     | 80/190 [05:07<06:57,  3.80s/it]data 82:  42%|████▏     | 80/190 [05:30<07:34,  4.13s/it]
+INFO:root:函数头: 
+def truncate_url(url, length):
+
+INFO:root:目标函数体: 
+    if (not length) or (len(url) <= length):
+        return url
+    bits = url.rsplit(".", 1)
+    if len(bits) == 2 and 1 <= len(bits[1]) <= 4 and "/" not in bits[1]:
+        rest, ext = bits
+        return rest[: length - 1 - len(ext)] + "…." + ext
+    return url[: length - 1] + "…"
+
+INFO:root:生成结果: 
+    if len(url) <= length:
+        return url
+    if url.endswith(".html") and 1 <= len(url.split(".")[-2]) <= 4 and url.count("/") == 1:
+        return url[: length - len(url.split(".")[-2]) - 5] + "..." + url.split(".")[-2] + url.split(".")[-1]
+    return url[:length] + "..."
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10185
+INFO:root:max position: 14648
+INFO:root:context_num: 383
+INFO:root:target_namespace: datasette.datasette<folder>.utils<folder>.__init__<file>.truncate_url<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:29:19 CST
+
+INFO:root:****************************************
+data 82:   0%|          | 0/190 [00:00<?, ?it/s]data 82:   5%|▌         | 10/190 [00:35<10:37,  3.54s/it]data 82:  11%|█         | 20/190 [01:13<10:27,  3.69s/it]data 82:  16%|█▌        | 30/190 [01:52<10:08,  3.80s/it]data 82:  21%|██        | 40/190 [02:34<09:49,  3.93s/it]data 82:  26%|██▋       | 50/190 [03:10<08:56,  3.83s/it]data 82:  32%|███▏      | 60/190 [03:48<08:16,  3.82s/it]

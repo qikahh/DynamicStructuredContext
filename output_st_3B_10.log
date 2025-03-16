@@ -1,0 +1,1630 @@
+INFO:root:time: 2025年 03月 16日 星期日 01:24:59 CST
+
+INFO:root:pid: 2331426
+INFO:root:seed: 415
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.40it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.27it/s]
+INFO:root:--------data 10--------
+data 10:   0%|          | 0/128 [00:00<?, ?it/s]data 10:   8%|▊         | 10/128 [00:12<02:32,  1.29s/it]data 10:  16%|█▌        | 20/128 [00:25<02:19,  1.29s/it]data 10:  23%|██▎       | 30/128 [00:40<02:12,  1.35s/it]data 10:  23%|██▎       | 30/128 [00:53<02:54,  1.78s/it]
+INFO:root:函数头: 
+def url_unescape(data):
+
+INFO:root:目标函数体: 
+  return re.sub('%([0-9a-fA-F]{2})',
+    lambda m: unichr(int(m.group(1), 16)), data)
+
+INFO:root:生成结果: 
+    import re
+    return re.sub(r'%([0-9A-Fa-f]{2})', lambda match: chr(int(match.group(1), 16)), data)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4429
+INFO:root:max position: 5662
+INFO:root:context_num: 158
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.url_unescape<func>
+INFO:root:****************************************
+data 10:   0%|          | 0/128 [00:00<?, ?it/s]data 10:   8%|▊         | 10/128 [00:12<02:31,  1.28s/it]data 10:  16%|█▌        | 20/128 [00:27<02:27,  1.37s/it]data 10:  23%|██▎       | 30/128 [00:40<02:14,  1.37s/it]data 10:  31%|███▏      | 40/128 [00:54<01:58,  1.35s/it]data 10:  39%|███▉      | 50/128 [01:08<01:47,  1.38s/it]data 10:  47%|████▋     | 60/128 [01:21<01:32,  1.36s/it]data 10:  55%|█████▍    | 70/128 [01:34<01:18,  1.35s/it]data 10:  62%|██████▎   | 80/128 [01:48<01:04,  1.34s/it]data 10:  70%|███████   | 90/128 [02:01<00:51,  1.35s/it]data 10:  78%|███████▊  | 100/128 [02:15<00:38,  1.36s/it]data 10:  78%|███████▊  | 100/128 [02:22<00:39,  1.42s/it]
+INFO:root:函数头: 
+def url_unescape(data):
+
+INFO:root:目标函数体: 
+  return re.sub('%([0-9a-fA-F]{2})',
+    lambda m: unichr(int(m.group(1), 16)), data)
+
+INFO:root:生成结果: 
+    import re
+    from .dom_tag import dom_tag
+
+    # Use regular expression to find all URL-encoded characters
+    encoded_chars = re.findall(r'%([0-9A-Fa-f]{2})', data)
+
+    # Unescape each encoded character
+    for encoded_char in encoded_chars:
+        # Convert the encoded character back to its original character
+        original_char = chr(int(encoded_char, 16))
+        data = data.replace(encoded_char, original_char)
+
+    return data
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4536
+INFO:root:max position: 5907
+INFO:root:context_num: 189
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.url_unescape<func>
+INFO:root:****************************************
+data 10:   0%|          | 0/128 [00:00<?, ?it/s]data 10:   8%|▊         | 10/128 [00:11<02:18,  1.18s/it]data 10:  16%|█▌        | 20/128 [00:24<02:15,  1.26s/it]data 10:  23%|██▎       | 30/128 [00:37<02:03,  1.26s/it]data 10:  31%|███▏      | 40/128 [00:50<01:53,  1.29s/it]data 10:  39%|███▉      | 50/128 [01:03<01:38,  1.27s/it]data 10:  47%|████▋     | 60/128 [01:16<01:26,  1.27s/it]data 10:  55%|█████▍    | 70/128 [01:28<01:12,  1.25s/it]data 10:  62%|██████▎   | 80/128 [01:40<00:59,  1.24s/it]data 10:  62%|██████▎   | 80/128 [01:50<01:06,  1.39s/it]
+INFO:root:函数头: 
+def url_unescape(data):
+
+INFO:root:目标函数体: 
+  return re.sub('%([0-9a-fA-F]{2})',
+    lambda m: unichr(int(m.group(1), 16)), data)
+
+INFO:root:生成结果: 
+    import re
+    cc = re.compile(r'%([0-9a-fA-F]{2})')
+    result = []
+    m = cc.search(data)
+    while m:
+        result.append(data[:m.start()])
+        result.append(chr(int(m.group(1), 16)))
+        data = data[m.end():]
+        m = cc.search(data)
+    result.append(data)
+    return ''.join(result)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4138
+INFO:root:max position: 5835
+INFO:root:context_num: 174
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.url_unescape<func>
+INFO:root:****************************************
+INFO:root:--------data 11--------
+data 11:   0%|          | 0/128 [00:00<?, ?it/s]data 11:   8%|▊         | 10/128 [00:33<06:40,  3.40s/it]data 11:   8%|▊         | 10/128 [00:58<11:25,  5.81s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        if value is None:
+            return ""
+
+        return six.text_type(value.isoformat())
+
+INFO:root:生成结果: 
+        if value is None:
+            return ""
+
+        return value.isoformat()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7587
+INFO:root:max position: 16749
+INFO:root:context_num: 152
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.DatetimeField<class>.serialize<func>
+INFO:root:****************************************
+data 11:   0%|          | 0/128 [00:00<?, ?it/s]data 11:   8%|▊         | 10/128 [00:33<06:31,  3.31s/it]data 11:   8%|▊         | 10/128 [01:00<11:51,  6.03s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        if value is None:
+            return ""
+
+        return six.text_type(value.isoformat())
+
+INFO:root:生成结果: 
+        if value is None:
+            return ""
+
+        return value.isoformat()
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7615
+INFO:root:max position: 17465
+INFO:root:context_num: 155
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.DatetimeField<class>.serialize<func>
+INFO:root:****************************************
+data 11:   0%|          | 0/128 [00:00<?, ?it/s]data 11:   8%|▊         | 10/128 [00:32<06:21,  3.24s/it]data 11:   8%|▊         | 10/128 [00:55<10:51,  5.52s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        if value is None:
+            return ""
+
+        return six.text_type(value.isoformat())
+
+INFO:root:生成结果: 
+        if value is None:
+            return ""
+
+        return value.isoformat()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7521
+INFO:root:max position: 16896
+INFO:root:context_num: 160
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.DatetimeField<class>.serialize<func>
+INFO:root:****************************************
+INFO:root:已生成11条结果
+INFO:root:--------data 12--------
+data 12:   0%|          | 0/128 [00:00<?, ?it/s]data 12:   8%|▊         | 10/128 [00:30<05:57,  3.03s/it]data 12:  16%|█▌        | 20/128 [01:03<05:43,  3.18s/it]data 12:  23%|██▎       | 30/128 [01:36<05:17,  3.24s/it]data 12:  31%|███▏      | 40/128 [02:10<04:50,  3.31s/it]data 12:  39%|███▉      | 50/128 [02:43<04:18,  3.31s/it]data 12:  47%|████▋     | 60/128 [03:16<03:45,  3.32s/it]data 12:  55%|█████▍    | 70/128 [03:50<03:13,  3.33s/it]data 12:  62%|██████▎   | 80/128 [04:23<02:39,  3.33s/it]data 12:  70%|███████   | 90/128 [04:57<02:07,  3.35s/it]data 12:  78%|███████▊  | 100/128 [05:32<01:34,  3.38s/it]data 12:  86%|████████▌ | 110/128 [06:04<01:00,  3.33s/it]data 12:  94%|█████████▍| 120/128 [06:37<00:26,  3.33s/it]data 12:  94%|█████████▍| 120/128 [07:07<00:28,  3.56s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        
+
+        if value is None:
+            value = ""
+        return value
+
+INFO:root:生成结果: 
+        if value is None:
+            return None
+        elif isinstance(value, six.binary_types):
+            return b64encode(value).decode("utf-8")
+        elif isinstance(value, six.text_types):
+            return value
+        elif isinstance(value, bool):
+            return str(value).lower()
+        elif isinstance(value, (int, float)):
+            return str(value)
+        elif isinstance(value, datetime.datetime):
+            return value.strftime("%Y-%m-%d %H:%M:%S")
+        elif isinstance(value, datetime.date):
+            return value.strftime("%Y-%m-%d")
+        elif isinstance(value, Decimal):
+            return
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7790
+INFO:root:max position: 16189
+INFO:root:context_num: 198
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.Field<class>.serialize<func>
+INFO:root:****************************************
+data 12:   0%|          | 0/128 [00:00<?, ?it/s]data 12:   8%|▊         | 10/128 [00:29<05:50,  2.97s/it]data 12:  16%|█▌        | 20/128 [01:03<05:43,  3.18s/it]data 12:  16%|█▌        | 20/128 [01:15<06:49,  3.79s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        
+
+        if value is None:
+            value = ""
+        return value
+
+INFO:root:生成结果: 
+        if cls is BinaryField:
+            return value
+        return str(value).encode('utf-8')
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6252
+INFO:root:max position: 16107
+INFO:root:context_num: 134
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.Field<class>.serialize<func>
+INFO:root:****************************************
+data 12:   0%|          | 0/128 [00:00<?, ?it/s]data 12:   8%|▊         | 10/128 [00:29<05:53,  3.00s/it]data 12:  16%|█▌        | 20/128 [01:03<05:43,  3.18s/it]data 12:  23%|██▎       | 30/128 [01:36<05:19,  3.26s/it]data 12:  31%|███▏      | 40/128 [02:09<04:48,  3.28s/it]data 12:  39%|███▉      | 50/128 [02:43<04:19,  3.32s/it]data 12:  47%|████▋     | 60/128 [03:16<03:45,  3.31s/it]data 12:  55%|█████▍    | 70/128 [03:48<03:08,  3.26s/it]data 12:  62%|██████▎   | 80/128 [04:21<02:38,  3.29s/it]data 12:  70%|███████   | 90/128 [04:55<02:05,  3.31s/it]data 12:  78%|███████▊  | 100/128 [05:29<01:33,  3.34s/it]data 12:  86%|████████▌ | 110/128 [06:04<01:01,  3.40s/it]data 12:  94%|█████████▍| 120/128 [06:37<00:26,  3.36s/it]data 12:  94%|█████████▍| 120/128 [07:07<00:28,  3.57s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        
+
+        if value is None:
+            value = ""
+        return value
+
+INFO:root:生成结果: 
+        if value is None:
+            return ""
+        elif isinstance(value, bool):
+            return str(value).lower()
+        elif isinstance(value, int):
+            return str(value)
+        elif isinstance(value, float):
+            return "{:.2f}".format(value)
+        elif isinstance(value, str):
+            return value.strip()
+        elif isinstance(value, datetime.date):
+            return value.strftime("%Y-%m-%d")
+        elif isinstance(value, datetime.datetime):
+            return value.strftime("%Y-%m-%d %H:%M:%S")
+        elif isinstance(value, Decimal):
+            return "{:.2f}".format(value)
+        elif isinstance
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8124
+INFO:root:max position: 16365
+INFO:root:context_num: 200
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.Field<class>.serialize<func>
+INFO:root:****************************************
+INFO:root:--------data 13--------
+data 13:   0%|          | 0/128 [00:00<?, ?it/s]data 13:   8%|▊         | 10/128 [00:32<06:17,  3.20s/it]data 13:  16%|█▌        | 20/128 [01:06<06:00,  3.33s/it]data 13:  16%|█▌        | 20/128 [01:09<06:15,  3.47s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        if value is None:
+            return ""
+
+        return six.text_type(value)
+
+INFO:root:生成结果: 
+        if value is None:
+            return ""
+        else:
+            return six.text_type(value)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7069
+INFO:root:max position: 17631
+INFO:root:context_num: 164
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.EmailField<class>.serialize<func>
+INFO:root:****************************************
+data 13:   0%|          | 0/128 [00:00<?, ?it/s]data 13:   8%|▊         | 10/128 [00:32<06:21,  3.23s/it]data 13:   8%|▊         | 10/128 [00:59<11:38,  5.92s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        if value is None:
+            return ""
+
+        return six.text_type(value)
+
+INFO:root:生成结果: 
+        if value is None:
+            return ""
+
+        return six.text_type(value)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7130
+INFO:root:max position: 16887
+INFO:root:context_num: 166
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.EmailField<class>.serialize<func>
+INFO:root:****************************************
+data 13:   0%|          | 0/128 [00:00<?, ?it/s]data 13:   8%|▊         | 10/128 [00:32<06:21,  3.24s/it]data 13:  16%|█▌        | 20/128 [01:06<06:01,  3.35s/it]data 13:  16%|█▌        | 20/128 [01:30<08:09,  4.53s/it]
+INFO:root:函数头: 
+    @classmethod
+    def serialize(cls, value, *args, **kwargs):
+
+INFO:root:目标函数体: 
+        if value is None:
+            return ""
+
+        return six.text_type(value)
+
+INFO:root:生成结果: 
+        if value is None or isinstance(value, cls.TYPE):
+            return ""
+        else:
+            return six.text_type(value)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8496
+INFO:root:max position: 17056
+INFO:root:context_num: 192
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.EmailField<class>.serialize<func>
+INFO:root:****************************************
+INFO:root:已生成13条结果
+INFO:root:--------data 14--------
+data 14:   0%|          | 0/128 [00:00<?, ?it/s]data 14:   8%|▊         | 10/128 [00:32<06:29,  3.30s/it]data 14:  16%|█▌        | 20/128 [01:06<06:02,  3.35s/it]data 14:  23%|██▎       | 30/128 [01:42<05:36,  3.43s/it]data 14:  31%|███▏      | 40/128 [02:17<05:03,  3.45s/it]data 14:  39%|███▉      | 50/128 [02:50<04:26,  3.42s/it]data 14:  39%|███▉      | 50/128 [03:11<04:59,  3.84s/it]
+INFO:root:函数头: 
+def as_string(value):
+
+INFO:root:目标函数体: 
+    if isinstance(value, six.binary_type):
+        raise ValueError("Binary is not supported")
+    elif isinstance(value, six.text_type):
+        return value
+    else:
+        return six.text_type(value)
+
+INFO:root:生成结果: 
+    if isinstance(value, six.text_type):
+        return value
+    elif isinstance(value, six.binary_type):
+        raise ValueError("Input value must be a string or bytes, not bytes.")
+    else:
+        raise ValueError("Input value must be a string or bytes.")
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8026
+INFO:root:max position: 17489
+INFO:root:context_num: 217
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.as_string<func>
+INFO:root:****************************************
+data 14:   0%|          | 0/128 [00:00<?, ?it/s]data 14:   8%|▊         | 10/128 [00:32<06:28,  3.30s/it]data 14:  16%|█▌        | 20/128 [01:07<06:04,  3.37s/it]data 14:  23%|██▎       | 30/128 [01:42<05:36,  3.43s/it]data 14:  31%|███▏      | 40/128 [02:16<05:01,  3.42s/it]data 14:  31%|███▏      | 40/128 [02:30<05:30,  3.75s/it]
+INFO:root:函数头: 
+def as_string(value):
+
+INFO:root:目标函数体: 
+    if isinstance(value, six.binary_type):
+        raise ValueError("Binary is not supported")
+    elif isinstance(value, six.text_type):
+        return value
+    else:
+        return six.text_type(value)
+
+INFO:root:生成结果: 
+    if isinstance(value, six.text_type):
+        return value
+    elif isinstance(value, six.binary_type):
+        raise ValueError("Input value is binary type")
+    else:
+        return six.text_type(value)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8334
+INFO:root:max position: 17164
+INFO:root:context_num: 203
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.as_string<func>
+INFO:root:****************************************
+data 14:   0%|          | 0/128 [00:00<?, ?it/s]data 14:   8%|▊         | 10/128 [00:33<06:32,  3.33s/it]data 14:  16%|█▌        | 20/128 [01:09<06:15,  3.47s/it]data 14:  16%|█▌        | 20/128 [01:45<09:27,  5.26s/it]
+INFO:root:函数头: 
+def as_string(value):
+
+INFO:root:目标函数体: 
+    if isinstance(value, six.binary_type):
+        raise ValueError("Binary is not supported")
+    elif isinstance(value, six.text_type):
+        return value
+    else:
+        return six.text_type(value)
+
+INFO:root:生成结果: 
+    if isinstance(value, six.binary_type):
+        raise ValueError("Binary data cannot be converted to string")
+    return six.text_type(value)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7621
+INFO:root:max position: 17204
+INFO:root:context_num: 194
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.as_string<func>
+INFO:root:****************************************
+INFO:root:--------data 15--------
+data 15:   0%|          | 0/128 [00:00<?, ?it/s]data 15:   8%|▊         | 10/128 [00:37<07:23,  3.76s/it]data 15:  16%|█▌        | 20/128 [01:14<06:44,  3.75s/it]data 15:  16%|█▌        | 20/128 [01:22<07:22,  4.10s/it]
+INFO:root:函数头: 
+def get_items(*indexes):
+
+INFO:root:目标函数体: 
+    
+    return lambda obj: tuple(
+        obj[index] if len(obj) > index else None for index in indexes
+    )
+
+INFO:root:生成结果: 
+    return lambda obj: tuple(obj[index] if index in obj else None for index in indexes)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7555
+INFO:root:max position: 17858
+INFO:root:context_num: 177
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.get_items<func>
+INFO:root:****************************************
+data 15:   0%|          | 0/128 [00:00<?, ?it/s]data 15:   8%|▊         | 10/128 [00:31<06:10,  3.14s/it]data 15:  16%|█▌        | 20/128 [01:05<05:57,  3.31s/it]data 15:  23%|██▎       | 30/128 [01:42<05:42,  3.50s/it]data 15:  31%|███▏      | 40/128 [02:17<05:07,  3.50s/it]data 15:  31%|███▏      | 40/128 [02:45<06:04,  4.15s/it]
+INFO:root:函数头: 
+def get_items(*indexes):
+
+INFO:root:目标函数体: 
+    
+    return lambda obj: tuple(
+        obj[index] if len(obj) > index else None for index in indexes
+    )
+
+INFO:root:生成结果: 
+    def getter(obj):
+        result = []
+        for index in indexes:
+            try:
+                result.append(obj[index])
+            except (IndexError, TypeError):
+                result.append(None)
+        return tuple(result)
+    return getter
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7620
+INFO:root:max position: 18377
+INFO:root:context_num: 214
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.get_items<func>
+INFO:root:****************************************
+data 15:   0%|          | 0/128 [00:00<?, ?it/s]data 15:   8%|▊         | 10/128 [00:32<06:27,  3.28s/it]data 15:  16%|█▌        | 20/128 [01:08<06:12,  3.45s/it]data 15:  16%|█▌        | 20/128 [01:22<07:22,  4.10s/it]
+INFO:root:函数头: 
+def get_items(*indexes):
+
+INFO:root:目标函数体: 
+    
+    return lambda obj: tuple(
+        obj[index] if len(obj) > index else None for index in indexes
+    )
+
+INFO:root:生成结果: 
+    return lambda obj: tuple(obj[index] if index < len(obj) else None for index in indexes)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8104
+INFO:root:max position: 17455
+INFO:root:context_num: 183
+INFO:root:target_namespace: rows.rows<folder>.fields<file>.get_items<func>
+INFO:root:****************************************
+INFO:root:已生成15条结果
+INFO:root:--------data 16--------
+data 16:   0%|          | 0/220 [00:00<?, ?it/s]Token indices sequence length is longer than the specified maximum sequence length for this model (34459 > 32768). Running this sequence through the model will result in indexing errors
+data 16:   5%|▍         | 10/220 [00:31<10:58,  3.14s/it]data 16:   9%|▉         | 20/220 [01:05<10:56,  3.28s/it]data 16:  14%|█▎        | 30/220 [01:39<10:37,  3.35s/it]data 16:  18%|█▊        | 40/220 [02:13<10:02,  3.35s/it]data 16:  23%|██▎       | 50/220 [02:45<09:24,  3.32s/it]data 16:  27%|██▋       | 60/220 [03:19<08:52,  3.33s/it]data 16:  32%|███▏      | 70/220 [03:54<08:30,  3.40s/it]data 16:  32%|███▏      | 70/220 [04:11<08:59,  3.60s/it]
+INFO:root:函数头: 
+def load_dict_file(path):
+
+INFO:root:目标函数体: 
+    
+    result = {}
+    if path:
+        if not os.path.exists(path):
+            logger.warning('file not found.%s' % path)
+            return result
+        else:
+            with open(path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith('#'):
+                        continue
+                    terms = line.split()
+                    if len(terms) < 2:
+                        continue
+                    result[terms[0]] = terms[1]
+    return result
+
+INFO:root:生成结果: 
+    words = {}
+    if path and os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('#'):
+                    continue
+                key, value = line.split('=')
+                words[key.strip()] = value.strip()
+    return words
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10102
+INFO:root:max position: 14910
+INFO:root:context_num: 294
+INFO:root:target_namespace: pycorrector.pycorrector<folder>.proper_corrector<file>.load_dict_file<func>
+INFO:root:****************************************
+data 16:   0%|          | 0/220 [00:00<?, ?it/s]data 16:   5%|▍         | 10/220 [00:32<11:16,  3.22s/it]data 16:   9%|▉         | 20/220 [01:05<10:56,  3.28s/it]data 16:  14%|█▎        | 30/220 [01:39<10:36,  3.35s/it]data 16:  18%|█▊        | 40/220 [02:12<09:59,  3.33s/it]data 16:  23%|██▎       | 50/220 [02:46<09:29,  3.35s/it]data 16:  27%|██▋       | 60/220 [03:20<08:56,  3.36s/it]data 16:  32%|███▏      | 70/220 [03:56<08:35,  3.44s/it]data 16:  32%|███▏      | 70/220 [04:27<09:33,  3.82s/it]
+INFO:root:函数头: 
+def load_dict_file(path):
+
+INFO:root:目标函数体: 
+    
+    result = {}
+    if path:
+        if not os.path.exists(path):
+            logger.warning('file not found.%s' % path)
+            return result
+        else:
+            with open(path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith('#'):
+                        continue
+                    terms = line.split()
+                    if len(terms) < 2:
+                        continue
+                    result[terms[0]] = terms[1]
+    return result
+
+INFO:root:生成结果: 
+    words = {}
+    if path and os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('#'):
+                    continue
+                if line:
+                    key, value = line.split(':')
+                    words[key.strip()] = value.strip()
+    return words
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9386
+INFO:root:max position: 15165
+INFO:root:context_num: 296
+INFO:root:target_namespace: pycorrector.pycorrector<folder>.proper_corrector<file>.load_dict_file<func>
+INFO:root:****************************************
+data 16:   0%|          | 0/220 [00:00<?, ?it/s]data 16:   5%|▍         | 10/220 [00:31<10:57,  3.13s/it]data 16:   9%|▉         | 20/220 [01:05<10:58,  3.29s/it]data 16:  14%|█▎        | 30/220 [01:39<10:37,  3.36s/it]data 16:  18%|█▊        | 40/220 [02:12<10:01,  3.34s/it]data 16:  23%|██▎       | 50/220 [02:46<09:28,  3.35s/it]data 16:  27%|██▋       | 60/220 [03:21<09:06,  3.41s/it]data 16:  32%|███▏      | 70/220 [03:55<08:31,  3.41s/it]data 16:  32%|███▏      | 70/220 [04:16<09:09,  3.66s/it]
+INFO:root:函数头: 
+def load_dict_file(path):
+
+INFO:root:目标函数体: 
+    
+    result = {}
+    if path:
+        if not os.path.exists(path):
+            logger.warning('file not found.%s' % path)
+            return result
+        else:
+            with open(path, 'r', encoding='utf-8') as f:
+                for line in f:
+                    line = line.strip()
+                    if line.startswith('#'):
+                        continue
+                    terms = line.split()
+                    if len(terms) < 2:
+                        continue
+                    result[terms[0]] = terms[1]
+    return result
+
+INFO:root:生成结果: 
+    words = {}
+    if path and os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('#'):
+                    continue
+                key, value = line.split('=')
+                words[key.strip()] = value.strip()
+    return words
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9348
+INFO:root:max position: 15046
+INFO:root:context_num: 284
+INFO:root:target_namespace: pycorrector.pycorrector<folder>.proper_corrector<file>.load_dict_file<func>
+INFO:root:****************************************
+INFO:root:--------data 17--------
+data 17:   0%|          | 0/152 [00:00<?, ?it/s]data 17:   7%|▋         | 10/152 [00:17<04:11,  1.77s/it]data 17:  13%|█▎        | 20/152 [00:36<04:05,  1.86s/it]data 17:  20%|█▉        | 30/152 [00:56<03:51,  1.90s/it]data 17:  20%|█▉        | 30/152 [01:00<04:05,  2.01s/it]
+INFO:root:函数头: 
+def envelop_spans(spans, envelopes):
+
+INFO:root:目标函数体: 
+    index = 0
+    for envelope in envelopes:
+        chunk = []
+        while index < len(spans):
+            span = spans[index]
+            index += 1
+            if span.start < envelope.start:
+                continue
+            elif span.stop <= envelope.stop:
+                chunk.append(span)
+            else:
+                index -= 1
+                break
+        yield chunk
+
+INFO:root:生成结果: 
+    for span in spans:
+        for envelope in envelopes:
+            if span.start >= envelope.start and span.stop <= envelope.stop:
+                yield span
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 3702
+INFO:root:max position: 11986
+INFO:root:context_num: 147
+INFO:root:target_namespace: natasha.natasha<folder>.span<file>.envelop_spans<func>
+INFO:root:****************************************
+data 17:   0%|          | 0/152 [00:00<?, ?it/s]data 17:   7%|▋         | 10/152 [00:17<04:08,  1.75s/it]data 17:  13%|█▎        | 20/152 [00:36<04:04,  1.85s/it]data 17:  20%|█▉        | 30/152 [00:56<03:51,  1.90s/it]data 17:  20%|█▉        | 30/152 [01:00<04:04,  2.00s/it]
+INFO:root:函数头: 
+def envelop_spans(spans, envelopes):
+
+INFO:root:目标函数体: 
+    index = 0
+    for envelope in envelopes:
+        chunk = []
+        while index < len(spans):
+            span = spans[index]
+            index += 1
+            if span.start < envelope.start:
+                continue
+            elif span.stop <= envelope.stop:
+                chunk.append(span)
+            else:
+                index -= 1
+                break
+        yield chunk
+
+INFO:root:生成结果: 
+    for span in spans:
+        for envelope in envelopes:
+            if span.start >= envelope.start and span.stop <= envelope.stop:
+                yield span
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 3658
+INFO:root:max position: 11955
+INFO:root:context_num: 154
+INFO:root:target_namespace: natasha.natasha<folder>.span<file>.envelop_spans<func>
+INFO:root:****************************************
+data 17:   0%|          | 0/152 [00:00<?, ?it/s]data 17:   7%|▋         | 10/152 [00:17<04:06,  1.73s/it]data 17:  13%|█▎        | 20/152 [00:36<04:00,  1.82s/it]data 17:  20%|█▉        | 30/152 [00:55<03:49,  1.88s/it]data 17:  20%|█▉        | 30/152 [00:59<04:01,  1.98s/it]
+INFO:root:函数头: 
+def envelop_spans(spans, envelopes):
+
+INFO:root:目标函数体: 
+    index = 0
+    for envelope in envelopes:
+        chunk = []
+        while index < len(spans):
+            span = spans[index]
+            index += 1
+            if span.start < envelope.start:
+                continue
+            elif span.stop <= envelope.stop:
+                chunk.append(span)
+            else:
+                index -= 1
+                break
+        yield chunk
+
+INFO:root:生成结果: 
+    for span in spans:
+        for envelope in envelopes:
+            if span.start >= envelope.start and span.stop <= envelope.stop:
+                yield span
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4000
+INFO:root:max position: 12081
+INFO:root:context_num: 152
+INFO:root:target_namespace: natasha.natasha<folder>.span<file>.envelop_spans<func>
+INFO:root:****************************************
+INFO:root:已生成17条结果
+INFO:root:--------data 18--------
+data 18:   0%|          | 0/170 [00:00<?, ?it/s]data 18:   6%|▌         | 10/170 [00:27<07:24,  2.78s/it]data 18:  12%|█▏        | 20/170 [00:57<07:16,  2.91s/it]data 18:  18%|█▊        | 30/170 [01:27<06:52,  2.95s/it]data 18:  24%|██▎       | 40/170 [01:57<06:25,  2.96s/it]data 18:  29%|██▉       | 50/170 [02:27<05:57,  2.98s/it]data 18:  35%|███▌      | 60/170 [02:57<05:28,  2.98s/it]data 18:  41%|████      | 70/170 [03:27<04:57,  2.98s/it]data 18:  47%|████▋     | 80/170 [03:56<04:25,  2.95s/it]data 18:  53%|█████▎    | 90/170 [04:23<03:50,  2.88s/it]data 18:  53%|█████▎    | 90/170 [04:26<03:56,  2.96s/it]
+INFO:root:函数头: 
+def parse_unique_urlencoded(content):
+
+INFO:root:目标函数体: 
+    
+    urlencoded_params = urllib.parse.parse_qs(content)
+    params = {}
+    for key, value in urlencoded_params.items():
+        if len(value) != 1:
+            msg = "URL-encoded content contains a repeated value:" "%s -> %s" % (
+                key,
+                ", ".join(value),
+            )
+            raise ValueError(msg)
+        params[key] = value[0]
+    return params
+
+INFO:root:生成结果: 
+    parsed_content = {}
+    pairs = content.split('&')
+    seen_keys = set()
+    for pair in pairs:
+        key, value = pair.split('=')
+        key = urllib.parse.unquote(key)
+        value = urllib.parse.unquote(value)
+        if key in seen_keys:
+            raise ValueError(f"Key '{key}' repeated")
+        seen_keys.add(key)
+        parsed_content[key] = value
+    return parsed_content
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7564
+INFO:root:max position: 15784
+INFO:root:context_num: 306
+INFO:root:target_namespace: google-api-python-client.googleapiclient<folder>._helpers<file>.parse_unique_urlencoded<func>
+INFO:root:****************************************
+data 18:   0%|          | 0/170 [00:00<?, ?it/s]data 18:   6%|▌         | 10/170 [00:27<07:19,  2.75s/it]data 18:  12%|█▏        | 20/170 [00:57<07:13,  2.89s/it]data 18:  18%|█▊        | 30/170 [01:26<06:47,  2.91s/it]data 18:  24%|██▎       | 40/170 [01:57<06:24,  2.96s/it]data 18:  29%|██▉       | 50/170 [02:26<05:53,  2.95s/it]data 18:  35%|███▌      | 60/170 [02:56<05:25,  2.96s/it]data 18:  41%|████      | 70/170 [03:26<04:57,  2.97s/it]data 18:  47%|████▋     | 80/170 [03:55<04:25,  2.95s/it]data 18:  53%|█████▎    | 90/170 [04:24<03:54,  2.93s/it]data 18:  53%|█████▎    | 90/170 [04:29<03:59,  3.00s/it]
+INFO:root:函数头: 
+def parse_unique_urlencoded(content):
+
+INFO:root:目标函数体: 
+    
+    urlencoded_params = urllib.parse.parse_qs(content)
+    params = {}
+    for key, value in urlencoded_params.items():
+        if len(value) != 1:
+            msg = "URL-encoded content contains a repeated value:" "%s -> %s" % (
+                key,
+                ", ".join(value),
+            )
+            raise ValueError(msg)
+        params[key] = value[0]
+    return params
+
+INFO:root:生成结果: 
+    parsed_content = {}
+    pairs = content.split('&')
+    seen_keys = set()
+
+    for pair in pairs:
+        key, value = pair.split('=')
+        key = urllib.parse.unquote(key)
+        value = urllib.parse.unquote(value)
+
+        if key in seen_keys:
+            raise ValueError(f'Repeated key "{key}" found')
+
+        seen_keys.add(key)
+        parsed_content[key] = value
+
+    return parsed_content
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7634
+INFO:root:max position: 15973
+INFO:root:context_num: 295
+INFO:root:target_namespace: google-api-python-client.googleapiclient<folder>._helpers<file>.parse_unique_urlencoded<func>
+INFO:root:****************************************
+data 18:   0%|          | 0/170 [00:00<?, ?it/s]data 18:   6%|▌         | 10/170 [00:26<07:01,  2.64s/it]data 18:  12%|█▏        | 20/170 [00:55<07:03,  2.83s/it]data 18:  18%|█▊        | 30/170 [01:25<06:46,  2.90s/it]data 18:  24%|██▎       | 40/170 [01:56<06:24,  2.96s/it]data 18:  29%|██▉       | 50/170 [02:26<05:55,  2.96s/it]data 18:  35%|███▌      | 60/170 [02:57<05:31,  3.01s/it]data 18:  41%|████      | 70/170 [03:26<04:58,  2.98s/it]data 18:  47%|████▋     | 80/170 [03:54<04:24,  2.94s/it]data 18:  47%|████▋     | 80/170 [03:57<04:27,  2.97s/it]
+INFO:root:函数头: 
+def parse_unique_urlencoded(content):
+
+INFO:root:目标函数体: 
+    
+    urlencoded_params = urllib.parse.parse_qs(content)
+    params = {}
+    for key, value in urlencoded_params.items():
+        if len(value) != 1:
+            msg = "URL-encoded content contains a repeated value:" "%s -> %s" % (
+                key,
+                ", ".join(value),
+            )
+            raise ValueError(msg)
+        params[key] = value[0]
+    return params
+
+INFO:root:生成结果: 
+    parsed_content = {}
+    pairs = content.split('&')
+    seen_keys = set()
+    for pair in pairs:
+        key, value = pair.split('=')
+        if key in seen_keys:
+            raise ValueError(f'Repeated key "{key}" found in URL-encoded content')
+        seen_keys.add(key)
+        parsed_content[key] = urllib.parse.unquote(value)
+    return parsed_content
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7402
+INFO:root:max position: 15782
+INFO:root:context_num: 286
+INFO:root:target_namespace: google-api-python-client.googleapiclient<folder>._helpers<file>.parse_unique_urlencoded<func>
+INFO:root:****************************************
+INFO:root:--------data 19--------
+data 19:   0%|          | 0/128 [00:00<?, ?it/s]data 19:   8%|▊         | 10/128 [00:33<06:37,  3.37s/it]data 19:  16%|█▌        | 20/128 [01:07<06:03,  3.37s/it]data 19:  23%|██▎       | 30/128 [01:40<05:27,  3.34s/it]data 19:  31%|███▏      | 40/128 [02:12<04:48,  3.28s/it]data 19:  39%|███▉      | 50/128 [02:46<04:20,  3.34s/it]data 19:  39%|███▉      | 50/128 [03:12<05:00,  3.85s/it]
+INFO:root:函数头: 
+async def auto_aiter(
+    iterable: "t.Union[t.AsyncIterable[V], t.Iterable[V]]",
+) -> "t.AsyncIterator[V]":
+
+INFO:root:目标函数体: 
+    if hasattr(iterable, "__aiter__"):
+        async for item in t.cast("t.AsyncIterable[V]", iterable):
+            yield item
+    else:
+        for item in t.cast("t.Iterable[V]", iterable):
+            yield item
+
+INFO:root:生成结果: 
+    if hasattr(iterable, "__aiter__"):
+        async def async_iterator():
+            async for item in iterable:
+                yield item
+
+        return async_iterator()
+    else:
+        def sync_iterator():
+            for item in iterable:
+                yield item
+
+        return sync_iterator()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6134
+INFO:root:max position: 18810
+INFO:root:context_num: 287
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.async_utils<file>.auto_aiter<func>
+INFO:root:****************************************
+data 19:   0%|          | 0/128 [00:00<?, ?it/s]data 19:   8%|▊         | 10/128 [00:34<06:47,  3.45s/it]data 19:  16%|█▌        | 20/128 [01:07<06:04,  3.37s/it]data 19:  23%|██▎       | 30/128 [01:42<05:33,  3.41s/it]data 19:  31%|███▏      | 40/128 [02:15<04:57,  3.38s/it]data 19:  39%|███▉      | 50/128 [02:48<04:22,  3.36s/it]data 19:  39%|███▉      | 50/128 [03:04<04:47,  3.69s/it]
+INFO:root:函数头: 
+async def auto_aiter(
+    iterable: "t.Union[t.AsyncIterable[V], t.Iterable[V]]",
+) -> "t.AsyncIterator[V]":
+
+INFO:root:目标函数体: 
+    if hasattr(iterable, "__aiter__"):
+        async for item in t.cast("t.AsyncIterable[V]", iterable):
+            yield item
+    else:
+        for item in t.cast("t.Iterable[V]", iterable):
+            yield item
+
+INFO:root:生成结果: 
+    if hasattr(iterable, "__aiter__"):
+        async def async_iterator():
+            async for item in iterable:
+                yield item
+
+        return async_iterator()
+
+    def sync_iterator():
+        for item in iterable:
+            yield item
+
+    return sync_iterator()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6204
+INFO:root:max position: 18807
+INFO:root:context_num: 274
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.async_utils<file>.auto_aiter<func>
+INFO:root:****************************************
+data 19:   0%|          | 0/128 [00:00<?, ?it/s]data 19:   8%|▊         | 10/128 [00:34<06:48,  3.46s/it]data 19:  16%|█▌        | 20/128 [01:08<06:07,  3.41s/it]data 19:  23%|██▎       | 30/128 [01:43<05:39,  3.47s/it]data 19:  31%|███▏      | 40/128 [02:16<04:57,  3.38s/it]data 19:  39%|███▉      | 50/128 [02:50<04:26,  3.42s/it]data 19:  39%|███▉      | 50/128 [03:19<05:10,  3.99s/it]
+INFO:root:函数头: 
+async def auto_aiter(
+    iterable: "t.Union[t.AsyncIterable[V], t.Iterable[V]]",
+) -> "t.AsyncIterator[V]":
+
+INFO:root:目标函数体: 
+    if hasattr(iterable, "__aiter__"):
+        async for item in t.cast("t.AsyncIterable[V]", iterable):
+            yield item
+    else:
+        for item in t.cast("t.Iterable[V]", iterable):
+            yield item
+
+INFO:root:生成结果: 
+    if hasattr(iterable, "__aiter__"):
+        async def async_iterator():
+            async for item in iterable:
+                yield item
+        return async_iterator()
+    else:
+        def sync_iterator():
+            for item in iterable:
+                yield item
+        return sync_iterator()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6039
+INFO:root:max position: 18810
+INFO:root:context_num: 278
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.async_utils<file>.auto_aiter<func>
+INFO:root:****************************************
+INFO:root:已生成19条结果
+INFO:root:--------data 20--------
+data 20:   0%|          | 0/128 [00:00<?, ?it/s]data 20:   8%|▊         | 10/128 [00:34<06:49,  3.47s/it]data 20:   8%|▊         | 10/128 [00:38<07:31,  3.83s/it]
+INFO:root:函数头: 
+def consume(iterable: t.Iterable[t.Any]) -> None:
+
+INFO:root:目标函数体: 
+    
+    for _ in iterable:
+        pass
+
+INFO:root:生成结果: 
+    for _ in iterable:
+        pass
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5992
+INFO:root:max position: 18021
+INFO:root:context_num: 172
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.consume<func>
+INFO:root:****************************************
+data 20:   0%|          | 0/128 [00:00<?, ?it/s]data 20:   8%|▊         | 10/128 [00:34<06:45,  3.43s/it]data 20:   8%|▊         | 10/128 [00:37<07:25,  3.77s/it]
+INFO:root:函数头: 
+def consume(iterable: t.Iterable[t.Any]) -> None:
+
+INFO:root:目标函数体: 
+    
+    for _ in iterable:
+        pass
+
+INFO:root:生成结果: 
+    for _ in iterable:
+        pass
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5752
+INFO:root:max position: 18021
+INFO:root:context_num: 170
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.consume<func>
+INFO:root:****************************************
+data 20:   0%|          | 0/128 [00:00<?, ?it/s]data 20:   8%|▊         | 10/128 [00:35<06:53,  3.51s/it]data 20:   8%|▊         | 10/128 [00:38<07:30,  3.82s/it]
+INFO:root:函数头: 
+def consume(iterable: t.Iterable[t.Any]) -> None:
+
+INFO:root:目标函数体: 
+    
+    for _ in iterable:
+        pass
+
+INFO:root:生成结果: 
+    for _ in iterable:
+        pass
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6052
+INFO:root:max position: 18021
+INFO:root:context_num: 169
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.consume<func>
+INFO:root:****************************************
+INFO:root:--------data 21--------
+data 21:   0%|          | 0/304 [00:00<?, ?it/s]data 21:   3%|▎         | 10/304 [00:37<18:25,  3.76s/it]data 21:   7%|▋         | 20/304 [01:15<18:00,  3.81s/it]data 21:  10%|▉         | 30/304 [01:54<17:24,  3.81s/it]data 21:  13%|█▎        | 40/304 [02:31<16:38,  3.78s/it]data 21:  16%|█▋        | 50/304 [03:08<15:55,  3.76s/it]data 21:  16%|█▋        | 50/304 [03:42<18:50,  4.45s/it]
+INFO:root:函数头: 
+def segment(sentence, cut_type='word', pos=False):
+
+INFO:root:目标函数体: 
+    
+    if pos:
+        if cut_type == 'word':
+            word_pos_seq = posseg.lcut(sentence)
+            word_seq, pos_seq = [], []
+            for w, p in word_pos_seq:
+                word_seq.append(w)
+                pos_seq.append(p)
+            return word_seq, pos_seq
+        elif cut_type == 'char':
+            word_seq = list(sentence)
+            pos_seq = []
+            for w in word_seq:
+                w_p = posseg.lcut(w)
+                pos_seq.append(w_p[0].flag)
+            return word_seq, pos_seq
+    else:
+        if cut_type == 'word':
+            return jieba.lcut(sentence)
+        elif cut_type == 'char':
+            return list(sentence)
+
+INFO:root:生成结果: 
+    if cut_type == 'word':
+        if pos:
+            return jieba.posseg.cut(sentence)
+        else:
+            return jieba.cut(sentence)
+    elif cut_type == 'char':
+        return list(sentence)
+    else:
+        raise ValueError("Unsupported cut type")
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10406
+INFO:root:max position: 16862
+INFO:root:context_num: 254
+INFO:root:target_namespace: pycorrector.pycorrector<folder>.utils<folder>.tokenizer<file>.segment<func>
+INFO:root:****************************************
+data 21:   0%|          | 0/304 [00:00<?, ?it/s]data 21:   3%|▎         | 10/304 [00:37<18:22,  3.75s/it]data 21:   7%|▋         | 20/304 [01:18<18:41,  3.95s/it]data 21:  10%|▉         | 30/304 [01:56<17:41,  3.87s/it]data 21:  13%|█▎        | 40/304 [02:34<17:00,  3.87s/it]data 21:  16%|█▋        | 50/304 [03:12<16:12,  3.83s/it]data 21:  16%|█▋        | 50/304 [03:23<17:14,  4.07s/it]
+INFO:root:函数头: 
+def segment(sentence, cut_type='word', pos=False):
+
+INFO:root:目标函数体: 
+    
+    if pos:
+        if cut_type == 'word':
+            word_pos_seq = posseg.lcut(sentence)
+            word_seq, pos_seq = [], []
+            for w, p in word_pos_seq:
+                word_seq.append(w)
+                pos_seq.append(p)
+            return word_seq, pos_seq
+        elif cut_type == 'char':
+            word_seq = list(sentence)
+            pos_seq = []
+            for w in word_seq:
+                w_p = posseg.lcut(w)
+                pos_seq.append(w_p[0].flag)
+            return word_seq, pos_seq
+    else:
+        if cut_type == 'word':
+            return jieba.lcut(sentence)
+        elif cut_type == 'char':
+            return list(sentence)
+
+INFO:root:生成结果: 
+    if cut_type == 'word':
+        if pos:
+            return posseg.cut(sentence)
+        else:
+            return sentence.split()
+    elif cut_type == 'char':
+        return list(sentence)
+    else:
+        raise ValueError("Invalid cut type")
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10610
+INFO:root:max position: 16663
+INFO:root:context_num: 261
+INFO:root:target_namespace: pycorrector.pycorrector<folder>.utils<folder>.tokenizer<file>.segment<func>
+INFO:root:****************************************
+data 21:   0%|          | 0/304 [00:00<?, ?it/s]data 21:   3%|▎         | 10/304 [00:38<18:54,  3.86s/it]data 21:   7%|▋         | 20/304 [01:16<18:00,  3.80s/it]data 21:  10%|▉         | 30/304 [01:55<17:34,  3.85s/it]data 21:  13%|█▎        | 40/304 [02:33<16:57,  3.85s/it]data 21:  16%|█▋        | 50/304 [03:13<16:31,  3.90s/it]data 21:  20%|█▉        | 60/304 [03:52<15:46,  3.88s/it]data 21:  23%|██▎       | 70/304 [04:30<15:06,  3.87s/it]data 21:  26%|██▋       | 80/304 [05:05<14:00,  3.75s/it]data 21:  30%|██▉       | 90/304 [05:47<13:53,  3.90s/it]data 21:  30%|██▉       | 90/304 [06:04<14:25,  4.04s/it]
+INFO:root:函数头: 
+def segment(sentence, cut_type='word', pos=False):
+
+INFO:root:目标函数体: 
+    
+    if pos:
+        if cut_type == 'word':
+            word_pos_seq = posseg.lcut(sentence)
+            word_seq, pos_seq = [], []
+            for w, p in word_pos_seq:
+                word_seq.append(w)
+                pos_seq.append(p)
+            return word_seq, pos_seq
+        elif cut_type == 'char':
+            word_seq = list(sentence)
+            pos_seq = []
+            for w in word_seq:
+                w_p = posseg.lcut(w)
+                pos_seq.append(w_p[0].flag)
+            return word_seq, pos_seq
+    else:
+        if cut_type == 'word':
+            return jieba.lcut(sentence)
+        elif cut_type == 'char':
+            return list(sentence)
+
+INFO:root:生成结果: 
+    if cut_type == 'word':
+        if pos:
+            tokens = jieba.posseg.cut(sentence)
+            return [(token.word, token.flag) for token in tokens]
+        else:
+            tokens = jieba.cut(sentence)
+            return tokens
+    elif cut_type == 'char':
+        tokens = list(sentence)
+        return tokens
+    else:
+        raise ValueError("Invalid cut_type. Please choose 'word' or 'char'.")
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 11870
+INFO:root:max position: 17026
+INFO:root:context_num: 287
+INFO:root:target_namespace: pycorrector.pycorrector<folder>.utils<folder>.tokenizer<file>.segment<func>
+INFO:root:****************************************
+INFO:root:已生成21条结果
+INFO:root:--------data 22--------
+data 22:   0%|          | 0/138 [00:00<?, ?it/s]data 22:   7%|▋         | 10/138 [00:34<07:25,  3.48s/it]data 22:  14%|█▍        | 20/138 [01:11<07:01,  3.57s/it]data 22:  22%|██▏       | 30/138 [01:46<06:22,  3.54s/it]data 22:  29%|██▉       | 40/138 [02:21<05:47,  3.55s/it]data 22:  36%|███▌      | 50/138 [02:55<05:06,  3.48s/it]data 22:  43%|████▎     | 60/138 [03:29<04:29,  3.45s/it]data 22:  51%|█████     | 70/138 [04:04<03:56,  3.48s/it]data 22:  58%|█████▊    | 80/138 [04:41<03:25,  3.55s/it]data 22:  65%|██████▌   | 90/138 [05:18<02:53,  3.60s/it]data 22:  72%|███████▏  | 100/138 [05:55<02:17,  3.62s/it]data 22:  80%|███████▉  | 110/138 [06:30<01:40,  3.60s/it]data 22:  80%|███████▉  | 110/138 [07:04<01:47,  3.86s/it]
+INFO:root:函数头: 
+def object_type_repr(obj: t.Any) -> str:
+
+INFO:root:目标函数体: 
+    
+    if obj is None:
+        return "None"
+    elif obj is Ellipsis:
+        return "Ellipsis"
+
+    cls = type(obj)
+
+    if cls.__module__ == "builtins":
+        return f"{cls.__name__} object"
+
+    return f"{cls.__module__}.{cls.__name__} object"
+
+INFO:root:生成结果: 
+    if obj is None:
+        return "None object"
+    elif obj is Ellipsis:
+        return "Ellipsis object"
+    elif obj is True:
+        return "True object"
+    elif obj is False:
+        return "False object"
+    elif obj is not None and obj is not Ellipsis and obj is not True and obj is not False:
+        module_name = obj.__module__
+        if module_name == "__builtin__":
+            return f"{obj.__name__} object"
+        else:
+            return f"{module_name}.{obj.__name__} object"
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7360
+INFO:root:max position: 18263
+INFO:root:context_num: 330
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.object_type_repr<func>
+INFO:root:****************************************
+data 22:   0%|          | 0/138 [00:00<?, ?it/s]data 22:   7%|▋         | 10/138 [00:33<07:12,  3.38s/it]data 22:  14%|█▍        | 20/138 [01:08<06:47,  3.46s/it]data 22:  22%|██▏       | 30/138 [01:42<06:10,  3.43s/it]data 22:  29%|██▉       | 40/138 [02:18<05:39,  3.47s/it]data 22:  36%|███▌      | 50/138 [02:53<05:06,  3.48s/it]data 22:  43%|████▎     | 60/138 [03:27<04:29,  3.45s/it]data 22:  51%|█████     | 70/138 [04:02<03:57,  3.49s/it]data 22:  58%|█████▊    | 80/138 [04:40<03:27,  3.57s/it]data 22:  65%|██████▌   | 90/138 [05:16<02:52,  3.60s/it]data 22:  72%|███████▏  | 100/138 [05:52<02:16,  3.59s/it]data 22:  80%|███████▉  | 110/138 [06:28<01:40,  3.61s/it]data 22:  80%|███████▉  | 110/138 [07:02<01:47,  3.84s/it]
+INFO:root:函数头: 
+def object_type_repr(obj: t.Any) -> str:
+
+INFO:root:目标函数体: 
+    
+    if obj is None:
+        return "None"
+    elif obj is Ellipsis:
+        return "Ellipsis"
+
+    cls = type(obj)
+
+    if cls.__module__ == "builtins":
+        return f"{cls.__name__} object"
+
+    return f"{cls.__module__}.{cls.__name__} object"
+
+INFO:root:生成结果: 
+    if obj is None:
+        return "None object"
+    elif obj is Ellipsis:
+        return "Ellipsis object"
+    elif obj is True:
+        return "True object"
+    elif obj is False:
+        return "False object"
+    elif obj is NotImplemented:
+        return "NotImplemented object"
+    elif obj is not None and obj.__class__.__module__ == "__builtins__":
+        return f"{obj.__class__.__name__} object"
+    else:
+        return f"{obj.__class__.__module__}.{obj.__class__.__name__} object"
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7636
+INFO:root:max position: 18263
+INFO:root:context_num: 340
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.object_type_repr<func>
+INFO:root:****************************************
+data 22:   0%|          | 0/138 [00:00<?, ?it/s]data 22:   7%|▋         | 10/138 [00:33<07:12,  3.38s/it]data 22:  14%|█▍        | 20/138 [01:09<06:49,  3.47s/it]data 22:  22%|██▏       | 30/138 [01:42<06:09,  3.42s/it]data 22:  29%|██▉       | 40/138 [02:18<05:42,  3.49s/it]data 22:  36%|███▌      | 50/138 [02:53<05:07,  3.50s/it]data 22:  43%|████▎     | 60/138 [03:26<04:27,  3.43s/it]data 22:  51%|█████     | 70/138 [04:02<03:55,  3.46s/it]data 22:  58%|█████▊    | 80/138 [04:38<03:24,  3.52s/it]data 22:  65%|██████▌   | 90/138 [05:15<02:51,  3.58s/it]data 22:  72%|███████▏  | 100/138 [05:51<02:16,  3.58s/it]data 22:  80%|███████▉  | 110/138 [06:28<01:41,  3.61s/it]data 22:  87%|████████▋ | 120/138 [07:05<01:05,  3.64s/it]data 22:  94%|█████████▍| 130/138 [07:39<00:28,  3.58s/it]data 22:  94%|█████████▍| 130/138 [08:09<00:30,  3.77s/it]
+INFO:root:函数头: 
+def object_type_repr(obj: t.Any) -> str:
+
+INFO:root:目标函数体: 
+    
+    if obj is None:
+        return "None"
+    elif obj is Ellipsis:
+        return "Ellipsis"
+
+    cls = type(obj)
+
+    if cls.__module__ == "builtins":
+        return f"{cls.__name__} object"
+
+    return f"{cls.__module__}.{cls.__name__} object"
+
+INFO:root:生成结果: 
+    if obj is None:
+        return "None object"
+    elif obj is Ellipsis:
+        return "Ellipsis object"
+    elif obj is True:
+        return "True object"
+    elif obj is False:
+        return "False object"
+    elif obj is NotImplemented:
+        return "NotImplemented object"
+    elif obj is not None and obj is not Ellipsis and obj is not True and obj is not False and obj is not NotImplemented:
+        module_name = obj.__module__
+        if module_name == "builtins":
+            return f"{obj.__name__} object"
+        else:
+            return f"{module_name}.{obj.__name__} object"
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7313
+INFO:root:max position: 18282
+INFO:root:context_num: 340
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.object_type_repr<func>
+INFO:root:****************************************
+INFO:root:--------data 23--------
+data 23:   0%|          | 0/128 [00:00<?, ?it/s]data 23:   8%|▊         | 10/128 [00:36<07:08,  3.63s/it]data 23:  16%|█▌        | 20/128 [01:11<06:27,  3.59s/it]data 23:  23%|██▎       | 30/128 [01:49<05:59,  3.67s/it]data 23:  31%|███▏      | 40/128 [02:26<05:25,  3.69s/it]data 23:  39%|███▉      | 50/128 [03:04<04:50,  3.72s/it]data 23:  39%|███▉      | 50/128 [03:37<05:39,  4.36s/it]
+INFO:root:函数头: 
+    def setdefault(self, key: t.Any, default: t.Any = None) -> t.Any:
+
+INFO:root:目标函数体: 
+        
+        try:
+            return self[key]
+        except KeyError:
+            self[key] = default
+            return default
+
+INFO:root:生成结果: 
+        with self._wlock:
+            if key not in self._mapping:
+                self._queue.append(key)
+                self._mapping[key] = default
+                if len(self._queue) > self.capacity:
+                    self._queue.popleft()
+            return self._mapping[key]
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7005
+INFO:root:max position: 18736
+INFO:root:context_num: 341
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.LRUCache<class>.setdefault<func>
+INFO:root:****************************************
+data 23:   0%|          | 0/128 [00:00<?, ?it/s]data 23:   8%|▊         | 10/128 [00:36<07:14,  3.68s/it]data 23:  16%|█▌        | 20/128 [01:13<06:36,  3.67s/it]data 23:  23%|██▎       | 30/128 [01:50<06:00,  3.68s/it]data 23:  31%|███▏      | 40/128 [02:29<05:30,  3.75s/it]data 23:  39%|███▉      | 50/128 [03:06<04:53,  3.76s/it]data 23:  39%|███▉      | 50/128 [03:39<05:42,  4.39s/it]
+INFO:root:函数头: 
+    def setdefault(self, key: t.Any, default: t.Any = None) -> t.Any:
+
+INFO:root:目标函数体: 
+        
+        try:
+            return self[key]
+        except KeyError:
+            self[key] = default
+            return default
+
+INFO:root:生成结果: 
+        with self._wlock:
+            if key not in self._mapping:
+                self._mapping[key] = default
+                self._queue.append(key)
+                if len(self._queue) > self.capacity:
+                    self._queue.popleft()
+            return self._mapping[key]
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7640
+INFO:root:max position: 18736
+INFO:root:context_num: 344
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.LRUCache<class>.setdefault<func>
+INFO:root:****************************************
+data 23:   0%|          | 0/128 [00:00<?, ?it/s]data 23:   8%|▊         | 10/128 [00:36<07:11,  3.65s/it]data 23:  16%|█▌        | 20/128 [01:11<06:27,  3.59s/it]data 23:  23%|██▎       | 30/128 [01:48<05:52,  3.60s/it]data 23:  31%|███▏      | 40/128 [02:25<05:22,  3.67s/it]data 23:  39%|███▉      | 50/128 [03:02<04:46,  3.67s/it]data 23:  47%|████▋     | 60/128 [03:39<04:10,  3.68s/it]data 23:  55%|█████▍    | 70/128 [04:15<03:32,  3.67s/it]data 23:  55%|█████▍    | 70/128 [04:26<03:41,  3.81s/it]
+INFO:root:函数头: 
+    def setdefault(self, key: t.Any, default: t.Any = None) -> t.Any:
+
+INFO:root:目标函数体: 
+        
+        try:
+            return self[key]
+        except KeyError:
+            self[key] = default
+            return default
+
+INFO:root:生成结果: 
+        with self._wlock:
+            if key in self._mapping:
+                return self._mapping[key]
+            if len(self._mapping) == self.capacity:
+                self._queue.popleft()
+                del self._mapping[self._queue.popleft()]
+            self._queue.append(key)
+            self._mapping[key] = default
+        return default
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7133
+INFO:root:max position: 18750
+INFO:root:context_num: 358
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.utils<file>.LRUCache<class>.setdefault<func>
+INFO:root:****************************************
+INFO:root:已生成23条结果
+INFO:root:--------data 24--------
+data 24:   0%|          | 0/128 [00:00<?, ?it/s]data 24:   8%|▊         | 10/128 [00:30<06:05,  3.10s/it]data 24:  16%|█▌        | 20/128 [01:04<05:50,  3.25s/it]data 24:  23%|██▎       | 30/128 [01:37<05:22,  3.29s/it]data 24:  31%|███▏      | 40/128 [02:11<04:51,  3.31s/it]data 24:  31%|███▏      | 40/128 [02:37<05:46,  3.94s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_word_freq(list_of_words):
+
+INFO:root:目标函数体: 
+        word_freq = {}
+        for w in list_of_words:
+            word_freq[w] = word_freq.get(w, 0) + 1
+        return word_freq
+
+INFO:root:生成结果: 
+        word_freq = {}
+        for word in list_of_words:
+            if word in word_freq:
+                word_freq[word] += 1
+            else:
+                word_freq[word] = 1
+        return word_freq
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6276
+INFO:root:max position: 15738
+INFO:root:context_num: 171
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.sum_basic<file>.SumBasicSummarizer<class>._compute_word_freq<func>
+INFO:root:****************************************
+data 24:   0%|          | 0/128 [00:00<?, ?it/s]data 24:   8%|▊         | 10/128 [00:30<06:03,  3.08s/it]data 24:  16%|█▌        | 20/128 [01:04<05:50,  3.24s/it]data 24:  23%|██▎       | 30/128 [01:37<05:20,  3.27s/it]data 24:  31%|███▏      | 40/128 [02:10<04:50,  3.30s/it]data 24:  31%|███▏      | 40/128 [02:37<05:45,  3.93s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_word_freq(list_of_words):
+
+INFO:root:目标函数体: 
+        word_freq = {}
+        for w in list_of_words:
+            word_freq[w] = word_freq.get(w, 0) + 1
+        return word_freq
+
+INFO:root:生成结果: 
+        word_freq = {}
+        for word in list_of_words:
+            if word in word_freq:
+                word_freq[word] += 1
+            else:
+                word_freq[word] = 1
+        return word_freq
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6280
+INFO:root:max position: 15747
+INFO:root:context_num: 173
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.sum_basic<file>.SumBasicSummarizer<class>._compute_word_freq<func>
+INFO:root:****************************************
+data 24:   0%|          | 0/128 [00:00<?, ?it/s]data 24:   8%|▊         | 10/128 [00:30<06:01,  3.06s/it]data 24:  16%|█▌        | 20/128 [01:04<05:51,  3.26s/it]data 24:  23%|██▎       | 30/128 [01:37<05:20,  3.28s/it]data 24:  23%|██▎       | 30/128 [02:03<06:43,  4.12s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_word_freq(list_of_words):
+
+INFO:root:目标函数体: 
+        word_freq = {}
+        for w in list_of_words:
+            word_freq[w] = word_freq.get(w, 0) + 1
+        return word_freq
+
+INFO:root:生成结果: 
+        word_freq = {}
+        for word in list_of_words:
+            word_freq[word] = word_freq.get(word, 0) + 1
+        return word_freq
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6604
+INFO:root:max position: 15767
+INFO:root:context_num: 164
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.sum_basic<file>.SumBasicSummarizer<class>._compute_word_freq<func>
+INFO:root:****************************************
+INFO:root:--------data 25--------
+data 25:   0%|          | 0/136 [00:00<?, ?it/s]data 25:   7%|▋         | 10/136 [00:34<07:10,  3.42s/it]data 25:  15%|█▍        | 20/136 [01:09<06:44,  3.48s/it]data 25:  22%|██▏       | 30/136 [01:44<06:10,  3.49s/it]data 25:  29%|██▉       | 40/136 [02:18<05:33,  3.47s/it]data 25:  37%|███▋      | 50/136 [02:53<04:57,  3.46s/it]data 25:  37%|███▋      | 50/136 [03:20<05:44,  4.01s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_average_probability_of_words(word_freq_in_doc, content_words_in_sentence):
+
+INFO:root:目标函数体: 
+        content_words_count = len(content_words_in_sentence)
+        if content_words_count > 0:
+            word_freq_sum = sum([word_freq_in_doc[w] for w in content_words_in_sentence])
+            word_freq_avg = word_freq_sum / content_words_count
+            return word_freq_avg
+        else:
+            return 0
+
+INFO:root:生成结果: 
+        total_probability = sum(word_freq_in_doc[word] * content_word_tf[word] for word in content_words_in_sentence if word in word_freq_in_doc)
+        if total_probability == 0:
+            return 0
+        return total_probability / len(content_words_in_sentence)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6168
+INFO:root:max position: 16100
+INFO:root:context_num: 188
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.sum_basic<file>.SumBasicSummarizer<class>._compute_average_probability_of_words<func>
+INFO:root:****************************************
+data 25:   0%|          | 0/136 [00:00<?, ?it/s]data 25:   7%|▋         | 10/136 [00:34<07:11,  3.42s/it]data 25:  15%|█▍        | 20/136 [01:09<06:46,  3.51s/it]data 25:  22%|██▏       | 30/136 [01:44<06:09,  3.48s/it]data 25:  29%|██▉       | 40/136 [02:18<05:33,  3.47s/it]data 25:  29%|██▉       | 40/136 [02:42<06:31,  4.07s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_average_probability_of_words(word_freq_in_doc, content_words_in_sentence):
+
+INFO:root:目标函数体: 
+        content_words_count = len(content_words_in_sentence)
+        if content_words_count > 0:
+            word_freq_sum = sum([word_freq_in_doc[w] for w in content_words_in_sentence])
+            word_freq_avg = word_freq_sum / content_words_count
+            return word_freq_avg
+        else:
+            return 0
+
+INFO:root:生成结果: 
+        total_probability = sum(word_freq_in_doc[word] for word in content_words_in_sentence)
+        if total_probability == 0:
+            return 0.0
+        return total_probability / len(content_words_in_sentence)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5593
+INFO:root:max position: 16100
+INFO:root:context_num: 190
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.sum_basic<file>.SumBasicSummarizer<class>._compute_average_probability_of_words<func>
+INFO:root:****************************************
+data 25:   0%|          | 0/136 [00:00<?, ?it/s]data 25:   7%|▋         | 10/136 [00:33<07:06,  3.39s/it]data 25:  15%|█▍        | 20/136 [01:08<06:37,  3.43s/it]data 25:  22%|██▏       | 30/136 [01:42<06:04,  3.44s/it]data 25:  29%|██▉       | 40/136 [02:17<05:30,  3.45s/it]data 25:  37%|███▋      | 50/136 [02:51<04:55,  3.43s/it]data 25:  37%|███▋      | 50/136 [03:08<05:24,  3.77s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_average_probability_of_words(word_freq_in_doc, content_words_in_sentence):
+
+INFO:root:目标函数体: 
+        content_words_count = len(content_words_in_sentence)
+        if content_words_count > 0:
+            word_freq_sum = sum([word_freq_in_doc[w] for w in content_words_in_sentence])
+            word_freq_avg = word_freq_sum / content_words_count
+            return word_freq_avg
+        else:
+            return 0
+
+INFO:root:生成结果: 
+        total_frequency = sum(word_freq_in_doc.values())
+        if total_frequency == 0:
+            return 0.0
+
+        average_probability = sum(word_freq_in_doc[word] / total_frequency for word in words_in_sentence)
+        return average_probability
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5725
+INFO:root:max position: 15932
+INFO:root:context_num: 191
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.sum_basic<file>.SumBasicSummarizer<class>._compute_average_probability_of_words<func>
+INFO:root:****************************************
+INFO:root:已生成25条结果
+INFO:root:--------data 26--------
+data 26:   0%|          | 0/154 [00:00<?, ?it/s]data 26:   6%|▋         | 10/154 [00:32<07:42,  3.21s/it]data 26:  13%|█▎        | 20/154 [01:07<07:36,  3.40s/it]data 26:  19%|█▉        | 30/154 [01:42<07:04,  3.43s/it]data 26:  26%|██▌       | 40/154 [02:17<06:34,  3.46s/it]data 26:  32%|███▏      | 50/154 [02:52<06:03,  3.50s/it]data 26:  39%|███▉      | 60/154 [03:28<05:31,  3.52s/it]data 26:  45%|████▌     | 70/154 [04:03<04:56,  3.53s/it]data 26:  52%|█████▏    | 80/154 [04:39<04:20,  3.53s/it]data 26:  52%|█████▏    | 80/154 [05:10<04:46,  3.88s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_idf(sentences):
+
+INFO:root:目标函数体: 
+        idf_metrics = {}
+        sentences_count = len(sentences)
+
+        for sentence in sentences:
+            for term in sentence:
+                if term not in idf_metrics:
+                    n_j = sum(1 for s in sentences if term in s)
+                    idf_metrics[term] = math.log(sentences_count / (1 + n_j))
+
+        return idf_metrics
+
+INFO:root:生成结果: 
+        # Calculate the total number of sentences
+        total_sentences = len(sentences)
+
+        # Calculate the IDF for each term
+        idf_metrics = {}
+        for term in set(chain.from_iterable(sent.words for sent in sentences)):
+            term_count = sum(1 for sent in sentences if term in sent.words)
+            idf_metrics[term] = math.log(total_sentences / term_count)
+
+        return idf_metrics
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5942
+INFO:root:max position: 16182
+INFO:root:context_num: 186
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.lex_rank<file>.LexRankSummarizer<class>._compute_idf<func>
+INFO:root:****************************************
+data 26:   0%|          | 0/154 [00:00<?, ?it/s]data 26:   6%|▋         | 10/154 [00:33<07:58,  3.32s/it]data 26:  13%|█▎        | 20/154 [01:09<07:48,  3.49s/it]data 26:  19%|█▉        | 30/154 [01:44<07:15,  3.51s/it]data 26:  26%|██▌       | 40/154 [02:20<06:42,  3.53s/it]data 26:  32%|███▏      | 50/154 [02:55<06:07,  3.53s/it]data 26:  39%|███▉      | 60/154 [03:31<05:32,  3.53s/it]data 26:  45%|████▌     | 70/154 [04:06<04:57,  3.54s/it]data 26:  45%|████▌     | 70/154 [04:20<05:12,  3.72s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_idf(sentences):
+
+INFO:root:目标函数体: 
+        idf_metrics = {}
+        sentences_count = len(sentences)
+
+        for sentence in sentences:
+            for term in sentence:
+                if term not in idf_metrics:
+                    n_j = sum(1 for s in sentences if term in s)
+                    idf_metrics[term] = math.log(sentences_count / (1 + n_j))
+
+        return idf_metrics
+
+INFO:root:生成结果: 
+        unique_terms = set()
+        for sentence in sentences:
+            unique_terms.update(sentence.words)
+
+        idf_metrics = {}
+        for term in unique_terms:
+            term_count = sum(term in sentence.words for sentence in sentences)
+            idf_metrics[term] = math.log(len(sentences) / term_count)
+
+        return idf_metrics
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5978
+INFO:root:max position: 16263
+INFO:root:context_num: 194
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.lex_rank<file>.LexRankSummarizer<class>._compute_idf<func>
+INFO:root:****************************************
+data 26:   0%|          | 0/154 [00:00<?, ?it/s]data 26:   6%|▋         | 10/154 [00:32<07:45,  3.23s/it]data 26:  13%|█▎        | 20/154 [01:08<07:39,  3.43s/it]data 26:  19%|█▉        | 30/154 [01:43<07:12,  3.49s/it]data 26:  26%|██▌       | 40/154 [02:19<06:41,  3.52s/it]data 26:  32%|███▏      | 50/154 [02:54<06:05,  3.52s/it]data 26:  39%|███▉      | 60/154 [03:29<05:30,  3.51s/it]data 26:  45%|████▌     | 70/154 [04:05<04:57,  3.54s/it]data 26:  45%|████▌     | 70/154 [04:19<05:10,  3.70s/it]
+INFO:root:函数头: 
+    @staticmethod
+    def _compute_idf(sentences):
+
+INFO:root:目标函数体: 
+        idf_metrics = {}
+        sentences_count = len(sentences)
+
+        for sentence in sentences:
+            for term in sentence:
+                if term not in idf_metrics:
+                    n_j = sum(1 for s in sentences if term in s)
+                    idf_metrics[term] = math.log(sentences_count / (1 + n_j))
+
+        return idf_metrics
+
+INFO:root:生成结果: 
+        tf_metrics = []
+        for sentence in sentences:
+            tf_metrics.append(dict(Counter(sentence)))
+
+        idf_metrics = {}
+        total_sentences = len(sentences)
+        for term, tf in tf_metrics[0].items():
+            idf_metrics[term] = math.log(total_sentences / tf_metrics.count(term))
+
+        return idf_metrics
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5520
+INFO:root:max position: 16694
+INFO:root:context_num: 195
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.lex_rank<file>.LexRankSummarizer<class>._compute_idf<func>
+INFO:root:****************************************
+INFO:root:--------data 27--------
+data 27:   0%|          | 0/320 [00:00<?, ?it/s]

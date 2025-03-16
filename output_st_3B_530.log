@@ -1,0 +1,11 @@
+INFO:root:time: 2025年 03月 15日 星期六 18:10:32 CST
+
+INFO:root:pid: 3137701
+INFO:root:seed: 9
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:52<00:52, 52.09s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:00<00:00, 26.65s/it]Loading checkpoint shards: 100%|██████████| 2/2 [01:00<00:00, 30.46s/it]
+INFO:root:--------data 530--------
+data 530:   0%|          | 0/278 [00:00<?, ?it/s]data 530:   4%|▎         | 10/278 [00:18<08:05,  1.81s/it]data 530:   7%|▋         | 20/278 [00:34<07:19,  1.70s/it]data 530:  11%|█         | 30/278 [02:40<27:42,  6.70s/it]data 530:  14%|█▍        | 40/278 [02:57<18:43,  4.72s/it]

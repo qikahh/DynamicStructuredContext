@@ -1,0 +1,1061 @@
+INFO:root:time: 2025年 03月 15日 星期六 23:41:32 CST
+
+INFO:root:pid: 2298111
+INFO:root:seed: 75
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.07s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.57it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.42it/s]
+INFO:root:--------data 0--------
+data 0:   0%|          | 0/128 [00:00<?, ?it/s]data 0:   8%|▊         | 10/128 [00:19<03:50,  1.96s/it]data 0:  16%|█▌        | 20/128 [00:40<03:41,  2.05s/it]data 0:  23%|██▎       | 30/128 [01:00<03:17,  2.01s/it]data 0:  31%|███▏      | 40/128 [01:20<02:57,  2.01s/it]data 0:  39%|███▉      | 50/128 [01:40<02:37,  2.02s/it]data 0:  47%|████▋     | 60/128 [02:01<02:17,  2.02s/it]data 0:  55%|█████▍    | 70/128 [02:21<01:57,  2.03s/it]data 0:  62%|██████▎   | 80/128 [02:42<01:37,  2.03s/it]data 0:  70%|███████   | 90/128 [03:02<01:17,  2.05s/it]data 0:  70%|███████   | 90/128 [03:08<01:19,  2.09s/it]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+    json_types = (type(None), bool, dict, float, int, list, str, tuple)
+    return isinstance(val, json_types)
+
+INFO:root:生成结果: 
+    return (
+        isinstance(val, (dict, list, tuple, str, int, float, bool))
+        or (isinstance(val, dict) and all(is_json_serializable(v) for v in val.values()))
+        or (isinstance(val, list) and all(is_json_serializable(v) for v in val))
+        or (isinstance(val, tuple) and all(is_json_serializable(v) for v in val))
+    )
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4834
+INFO:root:max position: 8140
+INFO:root:context_num: 287
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:****************************************
+data 0:   0%|          | 0/128 [00:00<?, ?it/s]data 0:   8%|▊         | 10/128 [00:18<03:34,  1.82s/it]data 0:  16%|█▌        | 20/128 [00:38<03:30,  1.95s/it]data 0:  23%|██▎       | 30/128 [00:58<03:11,  1.95s/it]data 0:  23%|██▎       | 30/128 [01:01<03:21,  2.05s/it]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+    json_types = (type(None), bool, dict, float, int, list, str, tuple)
+    return isinstance(val, json_types)
+
+INFO:root:生成结果: 
+    return (
+        isinstance(val, (dict, list, tuple, str, int, float, bool))
+        or val is None
+    )
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4475
+INFO:root:max position: 8130
+INFO:root:context_num: 261
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:****************************************
+data 0:   0%|          | 0/128 [00:00<?, ?it/s]data 0:   8%|▊         | 10/128 [00:18<03:36,  1.84s/it]data 0:  16%|█▌        | 20/128 [00:38<03:26,  1.91s/it]data 0:  16%|█▌        | 20/128 [00:41<03:46,  2.09s/it]
+INFO:root:函数头: 
+def is_json_serializable(val):
+
+INFO:root:目标函数体: 
+    json_types = (type(None), bool, dict, float, int, list, str, tuple)
+    return isinstance(val, json_types)
+
+INFO:root:生成结果: 
+    try:
+        json.dumps(val)
+        return True
+    except TypeError:
+        return False
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4184
+INFO:root:max position: 8120
+INFO:root:context_num: 235
+INFO:root:target_namespace: python-benedict.benedict<folder>.utils<folder>.type_util<file>.is_json_serializable<func>
+INFO:root:****************************************
+INFO:root:--------data 1--------
+data 1:   0%|          | 0/382 [00:00<?, ?it/s]data 1:   3%|▎         | 10/382 [00:27<17:08,  2.77s/it]data 1:   5%|▌         | 20/382 [00:57<17:31,  2.91s/it]data 1:   8%|▊         | 30/382 [01:29<17:51,  3.04s/it]data 1:  10%|█         | 40/382 [02:02<17:52,  3.14s/it]data 1:  13%|█▎        | 50/382 [02:32<17:08,  3.10s/it]data 1:  16%|█▌        | 60/382 [03:04<16:49,  3.13s/it]data 1:  18%|█▊        | 70/382 [03:35<16:11,  3.11s/it]data 1:  21%|██        | 80/382 [04:05<15:30,  3.08s/it]data 1:  21%|██        | 80/382 [04:34<17:16,  3.43s/it]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+INFO:root:生成结果: 
+    import idna
+
+    parsed_url = urllib.parse.urlparse(url)
+    if parsed_url.scheme.lower() == 'https':
+        parsed_url = parsed_url._replace scheme='http')
+
+    try:
+        encoded_host = idna.encode(parsed_url.hostname).decode('ascii')
+    except idna.IDNUnicodeError:
+        encoded_host = parsed_url.hostname
+
+    return parsed_url._replace(hostname=encoded_host).geturl()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6806
+INFO:root:max position: 17500
+INFO:root:context_num: 260
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:****************************************
+data 1:   0%|          | 0/382 [00:00<?, ?it/s]data 1:   3%|▎         | 10/382 [00:27<16:51,  2.72s/it]data 1:   5%|▌         | 20/382 [00:59<18:08,  3.01s/it]data 1:   8%|▊         | 30/382 [01:30<17:58,  3.06s/it]data 1:  10%|█         | 40/382 [02:01<17:26,  3.06s/it]data 1:  13%|█▎        | 50/382 [02:33<17:21,  3.14s/it]data 1:  16%|█▌        | 60/382 [03:05<16:53,  3.15s/it]data 1:  18%|█▊        | 70/382 [03:37<16:26,  3.16s/it]data 1:  21%|██        | 80/382 [04:10<16:04,  3.19s/it]data 1:  21%|██        | 80/382 [04:41<17:41,  3.51s/it]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+INFO:root:生成结果: 
+    parsed_url = urlparse(url)
+    if parsed_url.hostname.encode('ascii').decode('ascii') == parsed_url.hostname:
+        return url
+    try:
+        idn_hostname = parsed_url.hostname.encode('idna').decode('idna')
+    except UnicodeEncodeError:
+        idn_hostname = parsed_url.hostname.encode('utf-8').decode('utf-8')
+    return url.replace(parsed_url.hostname, idn_hostname)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7080
+INFO:root:max position: 17501
+INFO:root:context_num: 252
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:****************************************
+data 1:   0%|          | 0/382 [00:00<?, ?it/s]data 1:   3%|▎         | 10/382 [00:26<16:23,  2.64s/it]data 1:   5%|▌         | 20/382 [00:56<17:20,  2.87s/it]data 1:   8%|▊         | 30/382 [01:27<17:19,  2.95s/it]data 1:  10%|█         | 40/382 [02:00<17:42,  3.11s/it]data 1:  13%|█▎        | 50/382 [02:32<17:20,  3.13s/it]data 1:  16%|█▌        | 60/382 [03:05<17:02,  3.18s/it]data 1:  18%|█▊        | 70/382 [03:36<16:29,  3.17s/it]data 1:  21%|██        | 80/382 [04:09<16:03,  3.19s/it]data 1:  21%|██        | 80/382 [04:27<16:50,  3.35s/it]
+INFO:root:函数头: 
+def convert_to_idn(url):
+
+INFO:root:目标函数体: 
+    
+    # this function should only be called with a unicode string
+    # strategy: if the host cannot be encoded in ascii, then
+    # it'll be necessary to encode it in idn form
+    parts = list(urllib.parse.urlsplit(url))
+    try:
+        parts[1].encode('ascii')
+    except UnicodeEncodeError:
+        # the url needs to be converted to idn notation
+        host = parts[1].rsplit(':', 1)
+        newhost = []
+        port = ''
+        if len(host) == 2:
+            port = host.pop()
+        for h in host[0].split('.'):
+            newhost.append(h.encode('idna').decode('utf-8'))
+        parts[1] = '.'.join(newhost)
+        if port:
+            parts[1] += ':' + port
+        return urllib.parse.urlunsplit(parts)
+    else:
+        return url
+
+INFO:root:生成结果: 
+    import idna
+    from .urls import _urljoin
+
+    parsed_url = urllib.parse.urlparse(url)
+    if parsed_url.hostname and not parsed_url.hostname.encode('ascii'):
+        parsed_url.hostname = idna.encode(parsed_url.hostname).decode('ascii')
+    return _urljoin(parsed_url.scheme, parsed_url.netloc, parsed_url.path, parsed_url.params, parsed_url.query, parsed_url.fragment)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7300
+INFO:root:max position: 17497
+INFO:root:context_num: 253
+INFO:root:target_namespace: feedparser.feedparser<folder>.urls<file>.convert_to_idn<func>
+INFO:root:****************************************
+INFO:root:已生成1条结果
+INFO:root:--------data 2--------
+data 2:   0%|          | 0/302 [00:00<?, ?it/s]data 2:   3%|▎         | 10/302 [01:17<37:50,  7.78s/it]data 2:   7%|▋         | 20/302 [01:41<21:37,  4.60s/it]data 2:  10%|▉         | 30/302 [02:06<16:28,  3.64s/it]data 2:  13%|█▎        | 40/302 [02:29<13:39,  3.13s/it]data 2:  17%|█▋        | 50/302 [02:54<12:05,  2.88s/it]data 2:  20%|█▉        | 60/302 [03:16<10:45,  2.67s/it]data 2:  23%|██▎       | 70/302 [03:40<09:55,  2.57s/it]data 2:  26%|██▋       | 80/302 [04:05<09:23,  2.54s/it]data 2:  30%|██▉       | 90/302 [04:28<08:45,  2.48s/it]data 2:  33%|███▎      | 100/302 [04:53<08:17,  2.47s/it]data 2:  36%|███▋      | 110/302 [05:18<07:56,  2.48s/it]data 2:  40%|███▉      | 120/302 [05:42<07:30,  2.48s/it]data 2:  43%|████▎     | 130/302 [06:04<06:51,  2.39s/it]data 2:  43%|████▎     | 130/302 [06:26<08:31,  2.97s/it]
+INFO:root:函数头: 
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+
+INFO:root:目标函数体: 
+    
+    if heading_id is None:
+        def heading_id(token, index):
+            return 'toc_' + str(index + 1)
+
+    def toc_hook(md, state):
+        headings = []
+
+        for tok in state.tokens:
+            if tok['type'] == 'heading':
+                level = tok['attrs']['level']
+                if min_level <= level <= max_level:
+                    headings.append(tok)
+
+        toc_items = []
+        for i, tok in enumerate(headings):
+            tok['attrs']['id'] = heading_id(tok, i)
+            toc_items.append(normalize_toc_item(md, tok))
+
+        # save items into state
+        state.env['toc_items'] = toc_items
+
+    md.before_render_hooks.append(toc_hook)
+
+INFO:root:生成结果: 
+    def save_toc_item(match):
+        level = match.group(1)
+        text = match.group(2)
+        id = match.group(3) if match.group(3) else None
+        if level.isdigit() and int(level) >= min_level and int(level) <= max_level:
+            if id:
+                id = heading_id(id)
+            else:
+                id = None
+            md.env['toc'] = md.env.get('toc', []) + [{'level': int(level), 'text': text, 'id': id}]
+        return match.group(0)
+
+    md.inline.register('save_toc_item', save_toc_item, before='paragraph')
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5293
+INFO:root:max position: 10645
+INFO:root:context_num: 259
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.toc<file>.add_toc_hook<func>
+INFO:root:****************************************
+data 2:   0%|          | 0/302 [00:00<?, ?it/s]data 2:   3%|▎         | 10/302 [00:20<09:56,  2.04s/it]data 2:   7%|▋         | 20/302 [00:43<10:16,  2.18s/it]data 2:  10%|▉         | 30/302 [01:06<10:10,  2.24s/it]data 2:  13%|█▎        | 40/302 [01:28<09:42,  2.22s/it]data 2:  17%|█▋        | 50/302 [01:51<09:31,  2.27s/it]data 2:  20%|█▉        | 60/302 [02:14<09:09,  2.27s/it]data 2:  23%|██▎       | 70/302 [02:36<08:42,  2.25s/it]data 2:  26%|██▋       | 80/302 [02:59<08:25,  2.27s/it]data 2:  30%|██▉       | 90/302 [03:21<07:55,  2.24s/it]data 2:  33%|███▎      | 100/302 [03:42<07:23,  2.20s/it]data 2:  36%|███▋      | 110/302 [04:05<07:08,  2.23s/it]data 2:  40%|███▉      | 120/302 [04:29<06:53,  2.27s/it]data 2:  43%|████▎     | 130/302 [04:52<06:31,  2.27s/it]data 2:  46%|████▋     | 140/302 [05:13<06:01,  2.23s/it]data 2:  50%|████▉     | 150/302 [05:38<05:52,  2.32s/it]data 2:  53%|█████▎    | 160/302 [06:03<05:38,  2.38s/it]data 2:  56%|█████▋    | 170/302 [06:29<05:22,  2.44s/it]data 2:  60%|█████▉    | 180/302 [06:55<05:02,  2.48s/it]data 2:  63%|██████▎   | 190/302 [07:21<04:40,  2.51s/it]data 2:  66%|██████▌   | 200/302 [07:45<04:14,  2.49s/it]data 2:  70%|██████▉   | 210/302 [08:09<03:47,  2.47s/it]data 2:  73%|███████▎  | 220/302 [08:34<03:21,  2.46s/it]data 2:  76%|███████▌  | 230/302 [08:57<02:54,  2.43s/it]data 2:  79%|███████▉  | 240/302 [09:19<02:24,  2.34s/it]data 2:  83%|████████▎ | 250/302 [09:42<02:00,  2.32s/it]data 2:  86%|████████▌ | 260/302 [10:05<01:37,  2.32s/it]data 2:  89%|████████▉ | 270/302 [10:37<01:22,  2.59s/it]data 2:  89%|████████▉ | 270/302 [10:39<01:15,  2.37s/it]
+INFO:root:函数头: 
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+
+INFO:root:目标函数体: 
+    
+    if heading_id is None:
+        def heading_id(token, index):
+            return 'toc_' + str(index + 1)
+
+    def toc_hook(md, state):
+        headings = []
+
+        for tok in state.tokens:
+            if tok['type'] == 'heading':
+                level = tok['attrs']['level']
+                if min_level <= level <= max_level:
+                    headings.append(tok)
+
+        toc_items = []
+        for i, tok in enumerate(headings):
+            tok['attrs']['id'] = heading_id(tok, i)
+            toc_items.append(normalize_toc_item(md, tok))
+
+        # save items into state
+        state.env['toc_items'] = toc_items
+
+    md.before_render_hooks.append(toc_hook)
+
+INFO:root:生成结果: 
+    def toc_renderer(renderer, text):
+        """
+        This function renders the TOC items into HTML format.
+        :param renderer: Renderer instance. The instance of the Renderer class.
+        :param text: String. The text to render.
+        :return: String. The rendered HTML.
+        """
+        # Implement the rendering logic here
+        return '<ul>' + text + '</ul>'
+    
+    def toc_processor(state):
+        """
+        This function processes the TOC items.
+        :param state: State instance. The instance of the State class.
+        :return: No return values.
+        """
+        # Implement the processing logic here
+        toc_items = []
+        for token in state.tokens:
+            if token['type'] == 'heading':
+                level = token['attrs']['level']
+                if level >= min_level and level <= max_level:
+                    text = token['children'][0]['text']
+                    id = heading_id(text)
+                    toc_items.append('<li><a href="#' + id + '">' + text + '</a></li>')
+        state.env['toc'] = '<ul>' + ''.join(toc_items) + '</ul>'
+    
+    # Register the renderer and processor with the Markdown instance
+    md.register_renderer('toc', toc_renderer)
+    md.register_processor('toc', toc_processor)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5425
+INFO:root:max position: 10906
+INFO:root:context_num: 260
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.toc<file>.add_toc_hook<func>
+INFO:root:****************************************
+data 2:   0%|          | 0/302 [00:00<?, ?it/s]data 2:   3%|▎         | 10/302 [00:39<19:08,  3.93s/it]data 2:   7%|▋         | 20/302 [01:04<14:30,  3.09s/it]data 2:  10%|▉         | 30/302 [01:28<12:34,  2.77s/it]data 2:  13%|█▎        | 40/302 [01:52<11:30,  2.63s/it]data 2:  17%|█▋        | 50/302 [02:17<10:47,  2.57s/it]data 2:  20%|█▉        | 60/302 [02:41<10:08,  2.52s/it]data 2:  23%|██▎       | 70/302 [03:04<09:31,  2.46s/it]data 2:  26%|██▋       | 80/302 [03:27<08:54,  2.41s/it]data 2:  30%|██▉       | 90/302 [03:53<08:40,  2.45s/it]data 2:  33%|███▎      | 100/302 [04:18<08:21,  2.48s/it]data 2:  36%|███▋      | 110/302 [04:41<07:47,  2.44s/it]data 2:  40%|███▉      | 120/302 [05:04<07:14,  2.39s/it]data 2:  43%|████▎     | 130/302 [05:28<06:48,  2.38s/it]data 2:  46%|████▋     | 140/302 [05:52<06:26,  2.39s/it]data 2:  46%|████▋     | 140/302 [05:54<06:50,  2.53s/it]
+INFO:root:函数头: 
+def add_toc_hook(md, min_level=1, max_level=3, heading_id=None):
+
+INFO:root:目标函数体: 
+    
+    if heading_id is None:
+        def heading_id(token, index):
+            return 'toc_' + str(index + 1)
+
+    def toc_hook(md, state):
+        headings = []
+
+        for tok in state.tokens:
+            if tok['type'] == 'heading':
+                level = tok['attrs']['level']
+                if min_level <= level <= max_level:
+                    headings.append(tok)
+
+        toc_items = []
+        for i, tok in enumerate(headings):
+            tok['attrs']['id'] = heading_id(tok, i)
+            toc_items.append(normalize_toc_item(md, tok))
+
+        # save items into state
+        state.env['toc_items'] = toc_items
+
+    md.before_render_hooks.append(toc_hook)
+
+INFO:root:生成结果: 
+    def toc_processor(match):
+        level = int(match.group(1))
+        text = match.group(2)
+        id = match.group(3) if match.group(3) else None
+        if level >= min_level and level <= max_level:
+            if id:
+                id = heading_id(id)
+            else:
+                id = unikey(text)
+            md.env['toc'].append({'level': level, 'text': text, 'id': id})
+            return '<a href="#' + id + '">' + text + '</a>'
+        return text
+
+    md.inline.register(r'^#{1,6}(?:\s+|\n)(.*)$', toc_processor)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5633
+INFO:root:max position: 10701
+INFO:root:context_num: 257
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.toc<file>.add_toc_hook<func>
+INFO:root:****************************************
+INFO:root:--------data 3--------
+data 3:   0%|          | 0/128 [00:00<?, ?it/s]data 3:   8%|▊         | 10/128 [00:23<04:36,  2.34s/it]data 3:  16%|█▌        | 20/128 [00:47<04:19,  2.40s/it]data 3:  23%|██▎       | 30/128 [01:14<04:05,  2.50s/it]data 3:  31%|███▏      | 40/128 [01:39<03:40,  2.50s/it]data 3:  39%|███▉      | 50/128 [02:05<03:19,  2.55s/it]data 3:  47%|████▋     | 60/128 [02:35<03:03,  2.70s/it]data 3:  55%|█████▍    | 70/128 [03:01<02:34,  2.66s/it]data 3:  62%|██████▎   | 80/128 [03:28<02:08,  2.68s/it]data 3:  70%|███████   | 90/128 [03:53<01:39,  2.63s/it]data 3:  78%|███████▊  | 100/128 [04:22<01:15,  2.69s/it]data 3:  86%|████████▌ | 110/128 [04:48<00:48,  2.68s/it]data 3:  94%|█████████▍| 120/128 [05:18<00:22,  2.78s/it]data 3:  94%|█████████▍| 120/128 [05:43<00:22,  2.86s/it]
+INFO:root:函数头: 
+def table_in_quote(md):
+
+INFO:root:目标函数体: 
+    
+    md.block.insert_rule(md.block.block_quote_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.block_quote_rules, 'nptable', before='paragraph')
+
+INFO:root:生成结果: 
+    # Import necessary modules from the project
+    from ..util import strip_end
+    from ..block_parser import BlockParser
+    from ..inline_parser import InlineParser
+    from ..renderers.html import HTMLRenderer
+    from ..renderers.rst import RSTRenderer
+    from ..renderers.markdown import MarkdownRenderer
+
+    # Register block parsers for table and nptable
+    md.block.register('table', BlockParser.parse_block_table, BlockParser.parse_block_table)
+    md.block.register('nptable', BlockParser.parse_block_nptable, BlockParser.parse_block_nptable)
+
+    # Register inline
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6447
+INFO:root:max position: 15311
+INFO:root:context_num: 292
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_quote<func>
+INFO:root:****************************************
+data 3:   0%|          | 0/128 [00:00<?, ?it/s]data 3:   8%|▊         | 10/128 [00:22<04:25,  2.25s/it]data 3:  16%|█▌        | 20/128 [00:47<04:16,  2.38s/it]data 3:  23%|██▎       | 30/128 [01:12<03:59,  2.44s/it]data 3:  31%|███▏      | 40/128 [01:37<03:36,  2.46s/it]data 3:  39%|███▉      | 50/128 [02:02<03:14,  2.50s/it]data 3:  47%|████▋     | 60/128 [02:28<02:51,  2.53s/it]data 3:  55%|█████▍    | 70/128 [02:54<02:28,  2.56s/it]data 3:  62%|██████▎   | 80/128 [03:21<02:04,  2.60s/it]data 3:  70%|███████   | 90/128 [03:48<01:40,  2.63s/it]data 3:  78%|███████▊  | 100/128 [04:16<01:14,  2.67s/it]data 3:  86%|████████▌ | 110/128 [04:42<00:47,  2.65s/it]data 3:  94%|█████████▍| 120/128 [05:07<00:20,  2.62s/it]data 3:  94%|█████████▍| 120/128 [05:31<00:22,  2.76s/it]
+INFO:root:函数头: 
+def table_in_quote(md):
+
+INFO:root:目标函数体: 
+    
+    md.block.insert_rule(md.block.block_quote_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.block_quote_rules, 'nptable', before='paragraph')
+
+INFO:root:生成结果: 
+    # Import necessary modules from the project
+    from .block_parser import BlockParser
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from .block_rules import block_rules
+    from
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6502
+INFO:root:max position: 15015
+INFO:root:context_num: 275
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_quote<func>
+INFO:root:****************************************
+data 3:   0%|          | 0/128 [00:00<?, ?it/s]data 3:   8%|▊         | 10/128 [00:22<04:20,  2.21s/it]data 3:  16%|█▌        | 20/128 [00:45<04:08,  2.30s/it]data 3:  23%|██▎       | 30/128 [01:10<03:53,  2.38s/it]data 3:  31%|███▏      | 40/128 [01:36<03:36,  2.46s/it]data 3:  39%|███▉      | 50/128 [02:04<03:21,  2.58s/it]data 3:  47%|████▋     | 60/128 [02:33<03:02,  2.68s/it]data 3:  55%|█████▍    | 70/128 [03:00<02:37,  2.71s/it]data 3:  62%|██████▎   | 80/128 [03:29<02:12,  2.76s/it]data 3:  70%|███████   | 90/128 [03:55<01:43,  2.73s/it]data 3:  78%|███████▊  | 100/128 [04:23<01:16,  2.73s/it]data 3:  86%|████████▌ | 110/128 [04:50<00:48,  2.72s/it]data 3:  94%|█████████▍| 120/128 [05:17<00:21,  2.72s/it]data 3:  94%|█████████▍| 120/128 [05:41<00:22,  2.85s/it]
+INFO:root:函数头: 
+def table_in_quote(md):
+
+INFO:root:目标函数体: 
+    
+    md.block.insert_rule(md.block.block_quote_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.block_quote_rules, 'nptable', before='paragraph')
+
+INFO:root:生成结果: 
+    # Import necessary modules from the project
+    from ..util import strip_end
+    from ..helpers import escape_url
+
+    # Define the table and nptable patterns
+    TABLE_PATTERN = r'^ {0,3}\|\s.*\|\s*$'
+    NP_TABLE_PATTERN = r'^ {0,3}\|\s.*\|\s*$'
+
+    # Register the table and nptable rules before the paragraph rules in the quote rules
+    quote_rules = [
+        ('paragraph', r'^ {0,3}(?:[^\\]|\\.)+$', None),
+        ('table', TABLE_PATTERN, parse
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7076
+INFO:root:max position: 14658
+INFO:root:context_num: 288
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_quote<func>
+INFO:root:****************************************
+INFO:root:已生成3条结果
+INFO:root:--------data 4--------
+data 4:   0%|          | 0/128 [00:00<?, ?it/s]data 4:   8%|▊         | 10/128 [00:22<04:28,  2.28s/it]data 4:  16%|█▌        | 20/128 [00:47<04:16,  2.37s/it]data 4:  23%|██▎       | 30/128 [01:11<03:56,  2.41s/it]data 4:  31%|███▏      | 40/128 [01:35<03:32,  2.42s/it]data 4:  39%|███▉      | 50/128 [02:01<03:10,  2.45s/it]data 4:  47%|████▋     | 60/128 [02:27<02:52,  2.53s/it]data 4:  55%|█████▍    | 70/128 [03:00<02:40,  2.76s/it]data 4:  62%|██████▎   | 80/128 [03:27<02:11,  2.74s/it]data 4:  70%|███████   | 90/128 [03:57<01:47,  2.83s/it]data 4:  78%|███████▊  | 100/128 [04:24<01:18,  2.79s/it]data 4:  86%|████████▌ | 110/128 [04:54<00:51,  2.85s/it]data 4:  94%|█████████▍| 120/128 [05:23<00:22,  2.85s/it]data 4:  94%|█████████▍| 120/128 [05:48<00:23,  2.91s/it]
+INFO:root:函数头: 
+def table_in_list(md):
+
+INFO:root:目标函数体: 
+    
+    md.block.insert_rule(md.block.list_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.list_rules, 'nptable', before='paragraph')
+
+INFO:root:生成结果: 
+    # Import necessary modules from mistune plugins
+    from . import block_parser
+    from . import blockquote
+    from . import lists
+    from . import paragraphs
+    from . import tables
+    from . import blockquote
+
+    # Register table and nptable rules before the paragraph rule in the list
+    block_parser.block_rules.insert(block_parser.block_rules.index(block_parser paragraph_rules) - 1, tables.table_rules)
+    block_parser.block_rules.insert(block_parser.block_rules.index(block_parser paragraph_rules) - 1, tables.nptable_rules)
+
+    # Register blockquote rule before the paragraph rule in the
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6377
+INFO:root:max position: 14872
+INFO:root:context_num: 301
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_list<func>
+INFO:root:****************************************
+data 4:   0%|          | 0/128 [00:00<?, ?it/s]data 4:   8%|▊         | 10/128 [00:22<04:26,  2.26s/it]data 4:  16%|█▌        | 20/128 [00:48<04:22,  2.43s/it]data 4:  23%|██▎       | 30/128 [01:13<04:04,  2.49s/it]data 4:  31%|███▏      | 40/128 [01:41<03:47,  2.58s/it]data 4:  39%|███▉      | 50/128 [02:07<03:22,  2.59s/it]data 4:  47%|████▋     | 60/128 [02:39<03:11,  2.82s/it]data 4:  55%|█████▍    | 70/128 [03:06<02:41,  2.79s/it]data 4:  62%|██████▎   | 80/128 [03:38<02:19,  2.90s/it]data 4:  70%|███████   | 90/128 [04:07<01:49,  2.89s/it]data 4:  78%|███████▊  | 100/128 [04:33<01:19,  2.83s/it]data 4:  86%|████████▌ | 110/128 [05:00<00:49,  2.78s/it]data 4:  86%|████████▌ | 110/128 [05:03<00:49,  2.76s/it]
+INFO:root:函数头: 
+def table_in_list(md):
+
+INFO:root:目标函数体: 
+    
+    md.block.insert_rule(md.block.list_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.list_rules, 'nptable', before='paragraph')
+
+INFO:root:生成结果: 
+    md.block.register('table', TABLE_PATTERN, parse_table, before='paragraph')
+    md.block.register('nptable', NP_TABLE_PATTERN, parse_nptable, before='paragraph')
+
+    if md.renderer and md.renderer.NAME == 'html':
+        md.renderer.register('table', render_table)
+        md.renderer.register('table_head', render_table_head)
+        md.renderer.register('table_body', render_table_body)
+        md.renderer.register('table_row', render_table_row)
+        md.renderer.register('table_cell', render_table_cell)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6709
+INFO:root:max position: 15144
+INFO:root:context_num: 266
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_list<func>
+INFO:root:****************************************
+data 4:   0%|          | 0/128 [00:00<?, ?it/s]data 4:   8%|▊         | 10/128 [00:22<04:26,  2.26s/it]data 4:  16%|█▌        | 20/128 [00:46<04:12,  2.33s/it]data 4:  23%|██▎       | 30/128 [01:11<03:54,  2.39s/it]data 4:  31%|███▏      | 40/128 [01:36<03:35,  2.45s/it]data 4:  39%|███▉      | 50/128 [02:02<03:15,  2.51s/it]data 4:  47%|████▋     | 60/128 [02:28<02:51,  2.53s/it]data 4:  55%|█████▍    | 70/128 [02:53<02:26,  2.52s/it]data 4:  62%|██████▎   | 80/128 [03:18<02:01,  2.52s/it]data 4:  70%|███████   | 90/128 [03:44<01:36,  2.54s/it]data 4:  78%|███████▊  | 100/128 [04:12<01:13,  2.61s/it]data 4:  86%|████████▌ | 110/128 [04:37<00:46,  2.59s/it]data 4:  94%|█████████▍| 120/128 [05:06<00:21,  2.69s/it]data 4:  94%|█████████▍| 120/128 [05:30<00:22,  2.76s/it]
+INFO:root:函数头: 
+def table_in_list(md):
+
+INFO:root:目标函数体: 
+    
+    md.block.insert_rule(md.block.list_rules, 'table', before='paragraph')
+    md.block.insert_rule(md.block.list_rules, 'nptable', before='paragraph')
+
+INFO:root:生成结果: 
+    # Import necessary modules from mistune plugins
+    from . import block_parser
+    from . import inline_parser
+    from . import renderer
+
+    # Get the block parser and inline parser instances from the Markdown instance
+    block_parser_instance = block_parser.BlockParser()
+    inline_parser_instance = inline_parser InlineParser()
+
+    # Get the renderer instance from the Markdown instance
+    renderer_instance = renderer.Renderer()
+
+    # Get the list of rules from the block parser instance
+    rules = block_parser_instance.rules
+
+    # Find the index of the paragraph rule in the list of rules
+    paragraph_rule_index = rules.index(block
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6359
+INFO:root:max position: 15223
+INFO:root:context_num: 261
+INFO:root:target_namespace: mistune.src<folder>.mistune<folder>.plugins<folder>.table<file>.table_in_list<func>
+INFO:root:****************************************
+INFO:root:--------data 5--------
+data 5:   0%|          | 0/128 [00:00<?, ?it/s]data 5:   8%|▊         | 10/128 [00:13<02:39,  1.35s/it]data 5:  16%|█▌        | 20/128 [00:27<02:29,  1.39s/it]data 5:  23%|██▎       | 30/128 [00:42<02:18,  1.42s/it]data 5:  31%|███▏      | 40/128 [00:56<02:05,  1.42s/it]data 5:  39%|███▉      | 50/128 [01:12<01:54,  1.47s/it]data 5:  47%|████▋     | 60/128 [01:27<01:41,  1.49s/it]data 5:  55%|█████▍    | 70/128 [01:42<01:26,  1.50s/it]data 5:  55%|█████▍    | 70/128 [01:45<01:27,  1.51s/it]
+INFO:root:函数头: 
+def parallel_handler(callback: Callable, texts: List[str], n_jobs: int = 2, **kwargs) -> Generator[
+    List[Any], None, None
+]:
+
+INFO:root:目标函数体: 
+    
+    if not isinstance(texts, list):
+        raise ValueError("You should pass a list of texts")
+    if kwargs:
+        callback = partial(callback, **kwargs)
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        for ret in executor.map(callback, texts):
+            yield ret
+
+INFO:root:生成结果: 
+    if not isinstance(texts, list):
+        raise ValueError("You should pass of list of texts")
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        future_results = [executor.submit(callback, text, **kwargs) for text in texts]
+        for future in futures.as_completed(future_results):
+            yield future.result()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6245
+INFO:root:max position: 6759
+INFO:root:context_num: 81
+INFO:root:target_namespace: xmnlp.xmnlp<folder>.utils<folder>.__init__<file>.parallel_handler<func>
+INFO:root:****************************************
+data 5:   0%|          | 0/128 [00:00<?, ?it/s]data 5:   8%|▊         | 10/128 [00:13<02:38,  1.35s/it]data 5:  16%|█▌        | 20/128 [00:27<02:29,  1.38s/it]data 5:  23%|██▎       | 30/128 [00:42<02:19,  1.42s/it]data 5:  31%|███▏      | 40/128 [00:56<02:05,  1.42s/it]data 5:  39%|███▉      | 50/128 [01:11<01:53,  1.46s/it]data 5:  39%|███▉      | 50/128 [01:14<01:56,  1.49s/it]
+INFO:root:函数头: 
+def parallel_handler(callback: Callable, texts: List[str], n_jobs: int = 2, **kwargs) -> Generator[
+    List[Any], None, None
+]:
+
+INFO:root:目标函数体: 
+    
+    if not isinstance(texts, list):
+        raise ValueError("You should pass a list of texts")
+    if kwargs:
+        callback = partial(callback, **kwargs)
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        for ret in executor.map(callback, texts):
+            yield ret
+
+INFO:root:生成结果: 
+    if not isinstance(texts, list):
+        raise ValueError("You should pass of list of texts")
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        results = list(executor.map(callback, texts))
+    return results
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6119
+INFO:root:max position: 6607
+INFO:root:context_num: 78
+INFO:root:target_namespace: xmnlp.xmnlp<folder>.utils<folder>.__init__<file>.parallel_handler<func>
+INFO:root:****************************************
+data 5:   0%|          | 0/128 [00:00<?, ?it/s]data 5:   8%|▊         | 10/128 [00:13<02:40,  1.36s/it]data 5:  16%|█▌        | 20/128 [00:27<02:30,  1.39s/it]data 5:  23%|██▎       | 30/128 [00:42<02:19,  1.42s/it]data 5:  31%|███▏      | 40/128 [00:56<02:06,  1.43s/it]data 5:  39%|███▉      | 50/128 [01:12<01:55,  1.48s/it]data 5:  47%|████▋     | 60/128 [01:28<01:42,  1.50s/it]data 5:  55%|█████▍    | 70/128 [01:43<01:27,  1.51s/it]data 5:  62%|██████▎   | 80/128 [01:58<01:12,  1.50s/it]data 5:  70%|███████   | 90/128 [02:12<00:56,  1.48s/it]data 5:  78%|███████▊  | 100/128 [02:26<00:41,  1.47s/it]data 5:  78%|███████▊  | 100/128 [02:39<00:44,  1.59s/it]
+INFO:root:函数头: 
+def parallel_handler(callback: Callable, texts: List[str], n_jobs: int = 2, **kwargs) -> Generator[
+    List[Any], None, None
+]:
+
+INFO:root:目标函数体: 
+    
+    if not isinstance(texts, list):
+        raise ValueError("You should pass a list of texts")
+    if kwargs:
+        callback = partial(callback, **kwargs)
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        for ret in executor.map(callback, texts):
+            yield ret
+
+INFO:root:生成结果: 
+    if not isinstance(texts, list):
+        raise ValueError("You should pass of list of texts")
+    with futures.ThreadPoolExecutor(max_workers=n_jobs) as executor:
+        future_to_text = {executor.submit(callback, text, **kwargs): text for text in texts}
+        for future in futures.as_completed(future_to_text):
+            try:
+                result = future.result()
+            except Exception as exc:
+                print(f'{future_to_text[future]} generated an exception: {exc}')
+            else:
+                yield result
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6478
+INFO:root:max position: 6785
+INFO:root:context_num: 82
+INFO:root:target_namespace: xmnlp.xmnlp<folder>.utils<folder>.__init__<file>.parallel_handler<func>
+INFO:root:****************************************
+INFO:root:已生成5条结果
+INFO:root:--------data 6--------
+data 6:   0%|          | 0/128 [00:00<?, ?it/s]data 6:   8%|▊         | 10/128 [00:17<03:27,  1.76s/it]data 6:  16%|█▌        | 20/128 [00:36<03:20,  1.86s/it]data 6:  23%|██▎       | 30/128 [00:56<03:05,  1.89s/it]data 6:  31%|███▏      | 40/128 [01:15<02:46,  1.89s/it]data 6:  39%|███▉      | 50/128 [01:34<02:28,  1.90s/it]data 6:  39%|███▉      | 50/128 [01:42<02:40,  2.05s/it]
+INFO:root:函数头: 
+def shorten(text: str, width: int, suffix: str = "...") -> str:
+
+INFO:root:目标函数体: 
+    
+    if len(text) <= width:
+        return text
+    if width > len(suffix):
+        return text[: width - len(suffix)] + suffix
+    if width >= 0:
+        return suffix[len(suffix) - width :]
+    raise ValueError("width must be equal or greater than 0")
+
+INFO:root:生成结果: 
+    if width <= 0:
+        raise ValueError("width must be equal or greater than 0")
+    if len(text) <= width:
+        return text
+    if width >= len(suffix):
+        return text[:width] + suffix
+    return suffix
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5906
+INFO:root:max position: 6572
+INFO:root:context_num: 70
+INFO:root:target_namespace: parsel.parsel<folder>.utils<file>.shorten<func>
+INFO:root:****************************************
+data 6:   0%|          | 0/128 [00:00<?, ?it/s]data 6:   8%|▊         | 10/128 [00:17<03:24,  1.74s/it]data 6:  16%|█▌        | 20/128 [00:36<03:18,  1.84s/it]data 6:  23%|██▎       | 30/128 [00:55<03:05,  1.89s/it]data 6:  31%|███▏      | 40/128 [01:14<02:46,  1.89s/it]data 6:  39%|███▉      | 50/128 [01:34<02:28,  1.90s/it]data 6:  39%|███▉      | 50/128 [01:42<02:39,  2.05s/it]
+INFO:root:函数头: 
+def shorten(text: str, width: int, suffix: str = "...") -> str:
+
+INFO:root:目标函数体: 
+    
+    if len(text) <= width:
+        return text
+    if width > len(suffix):
+        return text[: width - len(suffix)] + suffix
+    if width >= 0:
+        return suffix[len(suffix) - width :]
+    raise ValueError("width must be equal or greater than 0")
+
+INFO:root:生成结果: 
+    if width <= 0:
+        raise ValueError("width must be equal or greater than 0")
+    if len(text) <= width:
+        return text
+    if width >= len(suffix):
+        return text[:width] + suffix
+    return suffix
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5943
+INFO:root:max position: 6572
+INFO:root:context_num: 70
+INFO:root:target_namespace: parsel.parsel<folder>.utils<file>.shorten<func>
+INFO:root:****************************************
+data 6:   0%|          | 0/128 [00:00<?, ?it/s]data 6:   8%|▊         | 10/128 [00:17<03:25,  1.74s/it]data 6:  16%|█▌        | 20/128 [00:36<03:18,  1.84s/it]data 6:  23%|██▎       | 30/128 [00:55<03:04,  1.88s/it]data 6:  31%|███▏      | 40/128 [01:14<02:45,  1.88s/it]data 6:  39%|███▉      | 50/128 [01:33<02:28,  1.90s/it]data 6:  39%|███▉      | 50/128 [01:42<02:39,  2.05s/it]
+INFO:root:函数头: 
+def shorten(text: str, width: int, suffix: str = "...") -> str:
+
+INFO:root:目标函数体: 
+    
+    if len(text) <= width:
+        return text
+    if width > len(suffix):
+        return text[: width - len(suffix)] + suffix
+    if width >= 0:
+        return suffix[len(suffix) - width :]
+    raise ValueError("width must be equal or greater than 0")
+
+INFO:root:生成结果: 
+    if width <= 0:
+        raise ValueError("width must be equal or greater than 0")
+    if len(text) <= width:
+        return text
+    if width >= len(suffix):
+        return text[:width] + suffix
+    return suffix
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5930
+INFO:root:max position: 6544
+INFO:root:context_num: 70
+INFO:root:target_namespace: parsel.parsel<folder>.utils<file>.shorten<func>
+INFO:root:****************************************
+INFO:root:--------data 7--------
+data 7:   0%|          | 0/128 [00:00<?, ?it/s]data 7:   8%|▊         | 10/128 [00:15<03:00,  1.53s/it]data 7:  16%|█▌        | 20/128 [00:31<02:52,  1.60s/it]data 7:  16%|█▌        | 20/128 [00:46<04:12,  2.34s/it]
+INFO:root:函数头: 
+def set_xpathfunc(fname: str, func: Optional[Callable]) -> None:  # type: ignore[type-arg]
+
+INFO:root:目标函数体: 
+    
+    ns_fns = etree.FunctionNamespace(None)  # type: ignore[attr-defined]
+    if func is not None:
+        ns_fns[fname] = func
+    else:
+        del ns_fns[fname]
+
+INFO:root:生成结果: 
+    # Importing necessary modules from the project
+    from .utils import register_xpath_func
+
+    register_xpath_func(fname, func)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5301
+INFO:root:max position: 5784
+INFO:root:context_num: 61
+INFO:root:target_namespace: parsel.parsel<folder>.xpathfuncs<file>.set_xpathfunc<func>
+INFO:root:****************************************
+data 7:   0%|          | 0/128 [00:00<?, ?it/s]data 7:   8%|▊         | 10/128 [00:16<03:13,  1.64s/it]data 7:  16%|█▌        | 20/128 [00:33<03:03,  1.70s/it]data 7:  16%|█▌        | 20/128 [00:46<04:08,  2.30s/it]
+INFO:root:函数头: 
+def set_xpathfunc(fname: str, func: Optional[Callable]) -> None:  # type: ignore[type-arg]
+
+INFO:root:目标函数体: 
+    
+    ns_fns = etree.FunctionNamespace(None)  # type: ignore[attr-defined]
+    if func is not None:
+        ns_fns[fname] = func
+    else:
+        del ns_fns[fname]
+
+INFO:root:生成结果: 
+    if func is None:
+        del etree.XPathFunctions[name]
+    else:
+        etree.XPathFunctions[name] = func
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5200
+INFO:root:max position: 5825
+INFO:root:context_num: 65
+INFO:root:target_namespace: parsel.parsel<folder>.xpathfuncs<file>.set_xpathfunc<func>
+INFO:root:****************************************
+data 7:   0%|          | 0/128 [00:00<?, ?it/s]data 7:   8%|▊         | 10/128 [00:15<03:02,  1.54s/it]data 7:  16%|█▌        | 20/128 [00:31<02:52,  1.60s/it]data 7:  16%|█▌        | 20/128 [00:46<04:13,  2.35s/it]
+INFO:root:函数头: 
+def set_xpathfunc(fname: str, func: Optional[Callable]) -> None:  # type: ignore[type-arg]
+
+INFO:root:目标函数体: 
+    
+    ns_fns = etree.FunctionNamespace(None)  # type: ignore[attr-defined]
+    if func is not None:
+        ns_fns[fname] = func
+    else:
+        del ns_fns[fname]
+
+INFO:root:生成结果: 
+    # Importing necessary modules from the project
+    from .utils import register_xpath_func
+
+    register_xpath_func(fname, func)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5347
+INFO:root:max position: 5812
+INFO:root:context_num: 61
+INFO:root:target_namespace: parsel.parsel<folder>.xpathfuncs<file>.set_xpathfunc<func>
+INFO:root:****************************************
+INFO:root:已生成7条结果
+INFO:root:--------data 8--------
+data 8:   0%|          | 0/128 [00:00<?, ?it/s]data 8:   8%|▊         | 10/128 [00:11<02:17,  1.16s/it]data 8:  16%|█▌        | 20/128 [00:24<02:12,  1.22s/it]data 8:  23%|██▎       | 30/128 [00:37<02:02,  1.25s/it]data 8:  23%|██▎       | 30/128 [00:47<02:33,  1.57s/it]
+INFO:root:函数头: 
+def _get_thread_context():
+
+INFO:root:目标函数体: 
+  context = [threading.current_thread()]
+  if greenlet:
+    context.append(greenlet.getcurrent())
+  return hash(tuple(context))
+
+INFO:root:生成结果: 
+    context_list = []
+    context_list.append(threading.current_thread())
+    if greenlet:
+        context_list.append(greenlet.getcurrent())
+    return hash(tuple(context_list))
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4036
+INFO:root:max position: 5453
+INFO:root:context_num: 150
+INFO:root:target_namespace: dominate.dominate<folder>.dom_tag<file>._get_thread_context<func>
+INFO:root:****************************************
+data 8:   0%|          | 0/128 [00:00<?, ?it/s]data 8:   8%|▊         | 10/128 [00:11<02:15,  1.15s/it]data 8:  16%|█▌        | 20/128 [00:24<02:11,  1.21s/it]data 8:  23%|██▎       | 30/128 [00:37<02:02,  1.25s/it]data 8:  31%|███▏      | 40/128 [00:49<01:50,  1.25s/it]data 8:  31%|███▏      | 40/128 [00:58<02:08,  1.46s/it]
+INFO:root:函数头: 
+def _get_thread_context():
+
+INFO:root:目标函数体: 
+  context = [threading.current_thread()]
+  if greenlet:
+    context.append(greenlet.getcurrent())
+  return hash(tuple(context))
+
+INFO:root:生成结果: 
+    context = []
+    if threading.current_thread():
+        context.append(threading.current_thread())
+    if greenlet and greenlet.getgreenlet():
+        context.append(greenlet.getgreenlet())
+    return hash(tuple(context))
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4323
+INFO:root:max position: 5475
+INFO:root:context_num: 158
+INFO:root:target_namespace: dominate.dominate<folder>.dom_tag<file>._get_thread_context<func>
+INFO:root:****************************************
+data 8:   0%|          | 0/128 [00:00<?, ?it/s]data 8:   8%|▊         | 10/128 [00:11<02:19,  1.18s/it]data 8:  16%|█▌        | 20/128 [00:24<02:13,  1.24s/it]data 8:  23%|██▎       | 30/128 [00:37<02:01,  1.24s/it]data 8:  31%|███▏      | 40/128 [00:49<01:49,  1.24s/it]data 8:  31%|███▏      | 40/128 [00:58<02:08,  1.46s/it]
+INFO:root:函数头: 
+def _get_thread_context():
+
+INFO:root:目标函数体: 
+  context = [threading.current_thread()]
+  if greenlet:
+    context.append(greenlet.getcurrent())
+  return hash(tuple(context))
+
+INFO:root:生成结果: 
+    context = []
+    if threading.current_thread():
+        context.append(threading.current_thread())
+    if greenlet and greenlet.getcurrent():
+        context.append(greenlet.getcurrent())
+    return hash(tuple(context))```
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4144
+INFO:root:max position: 5565
+INFO:root:context_num: 156
+INFO:root:target_namespace: dominate.dominate<folder>.dom_tag<file>._get_thread_context<func>
+INFO:root:****************************************
+INFO:root:--------data 9--------
+data 9:   0%|          | 0/128 [00:00<?, ?it/s]data 9:   8%|▊         | 10/128 [00:12<02:28,  1.26s/it]data 9:  16%|█▌        | 20/128 [00:25<02:20,  1.30s/it]data 9:  23%|██▎       | 30/128 [00:39<02:10,  1.33s/it]data 9:  31%|███▏      | 40/128 [00:52<01:56,  1.33s/it]data 9:  39%|███▉      | 50/128 [01:06<01:46,  1.36s/it]data 9:  47%|████▋     | 60/128 [01:20<01:33,  1.37s/it]data 9:  55%|█████▍    | 70/128 [01:34<01:18,  1.36s/it]data 9:  62%|██████▎   | 80/128 [01:47<01:04,  1.35s/it]data 9:  70%|███████   | 90/128 [02:00<00:50,  1.33s/it]data 9:  78%|███████▊  | 100/128 [02:13<00:37,  1.32s/it]data 9:  78%|███████▊  | 100/128 [02:26<00:41,  1.46s/it]
+INFO:root:函数头: 
+def system(cmd, data=None):
+
+INFO:root:目标函数体: 
+  '''
+  pipes the output of a program
+  '''
+  import subprocess
+  s = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+  out, err = s.communicate(data)
+  return out.decode('utf8')
+
+INFO:root:生成结果: 
+    import subprocess
+
+    # If data is provided, encode it to bytes
+    if data is not None:
+        data = data.encode()
+
+    # Run the command using subprocess
+    process = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    # Capture the output and error
+    stdout, stderr = process.communicate(data=data)
+
+    # Decode the output and error
+    stdout = stdout.decode()
+    stderr = stderr.decode()
+
+    # Return the output
+    return stdout
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4119
+INFO:root:max position: 5833
+INFO:root:context_num: 188
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.system<func>
+INFO:root:****************************************
+data 9:   0%|          | 0/128 [00:00<?, ?it/s]data 9:   8%|▊         | 10/128 [00:12<02:21,  1.20s/it]data 9:  16%|█▌        | 20/128 [00:25<02:17,  1.27s/it]data 9:  23%|██▎       | 30/128 [00:38<02:08,  1.31s/it]data 9:  31%|███▏      | 40/128 [00:52<01:56,  1.32s/it]data 9:  39%|███▉      | 50/128 [01:05<01:43,  1.33s/it]data 9:  47%|████▋     | 60/128 [01:19<01:32,  1.36s/it]data 9:  55%|█████▍    | 70/128 [01:33<01:18,  1.36s/it]data 9:  62%|██████▎   | 80/128 [01:46<01:04,  1.34s/it]data 9:  70%|███████   | 90/128 [01:59<00:50,  1.32s/it]data 9:  78%|███████▊  | 100/128 [02:12<00:36,  1.31s/it]data 9:  86%|████████▌ | 110/128 [02:25<00:23,  1.33s/it]data 9:  94%|█████████▍| 120/128 [02:39<00:10,  1.35s/it]data 9:  94%|█████████▍| 120/128 [02:51<00:11,  1.43s/it]
+INFO:root:函数头: 
+def system(cmd, data=None):
+
+INFO:root:目标函数体: 
+  '''
+  pipes the output of a program
+  '''
+  import subprocess
+  s = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+  out, err = s.communicate(data)
+  return out.decode('utf8')
+
+INFO:root:生成结果: 
+    import subprocess
+    import os
+
+    # Construct the command with optional data
+    if data:
+        cmd += ' ' + data.decode('utf-8')
+
+    # Run the command and capture the output
+    process = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = process.communicate()
+
+    # Decode the output and handle errors
+    output = stdout.decode('utf-8')
+    if process.returncode != 0:
+        raise Exception(f"Command '{cmd}' failed with error code {process.returncode}: {stderr.decode('utf-8')}")
+
+    return
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4785
+INFO:root:max position: 6003
+INFO:root:context_num: 191
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.system<func>
+INFO:root:****************************************
+data 9:   0%|          | 0/128 [00:00<?, ?it/s]data 9:   8%|▊         | 10/128 [00:12<02:22,  1.20s/it]data 9:  16%|█▌        | 20/128 [00:25<02:18,  1.28s/it]data 9:  23%|██▎       | 30/128 [00:38<02:07,  1.30s/it]data 9:  31%|███▏      | 40/128 [00:51<01:55,  1.31s/it]data 9:  39%|███▉      | 50/128 [01:06<01:45,  1.35s/it]data 9:  47%|████▋     | 60/128 [01:19<01:32,  1.36s/it]data 9:  55%|█████▍    | 70/128 [01:33<01:19,  1.37s/it]data 9:  62%|██████▎   | 80/128 [01:46<01:04,  1.35s/it]data 9:  70%|███████   | 90/128 [01:59<00:50,  1.32s/it]data 9:  78%|███████▊  | 100/128 [02:12<00:36,  1.30s/it]data 9:  86%|████████▌ | 110/128 [02:25<00:23,  1.32s/it]data 9:  94%|█████████▍| 120/128 [02:39<00:10,  1.33s/it]data 9:  94%|█████████▍| 120/128 [02:49<00:11,  1.42s/it]
+INFO:root:函数头: 
+def system(cmd, data=None):
+
+INFO:root:目标函数体: 
+  '''
+  pipes the output of a program
+  '''
+  import subprocess
+  s = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+  out, err = s.communicate(data)
+  return out.decode('utf8')
+
+INFO:root:生成结果: 
+    import subprocess
+    import io
+
+    # Create a pipe for communication with the command
+    pipe = io.BytesIO()
+
+    # Run the command using subprocess
+    process = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=pipe, stderr=subprocess.PIPE)
+
+    # If data is provided, pass it to the command
+    if data:
+        process.stdin.write(data)
+        process.stdin.close()
+
+    # Wait for the command to finish and capture the output
+    process.wait()
+    output = pipe.getvalue()
+
+    # Decode the output from bytes to string
+    return output.decode('utf-ular')
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4069
+INFO:root:max position: 5870
+INFO:root:context_num: 194
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.system<func>
+INFO:root:****************************************
+INFO:root:已生成9条结果
+INFO:root:--------data 10--------
+data 10:   0%|          | 0/128 [00:00<?, ?it/s]data 10:   8%|▊         | 10/128 [00:12<02:23,  1.21s/it]data 10:   8%|▊         | 10/128 [00:18<03:43,  1.89s/it]
+INFO:root:函数头: 
+def url_unescape(data):
+
+INFO:root:目标函数体: 
+  return re.sub('%([0-9a-fA-F]{2})',
+    lambda m: unichr(int(m.group(1), 16)), data)
+
+INFO:root:生成结果: 
+    import urllib.parse
+
+    return urllib.parse.unquote(data)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 4003
+INFO:root:max position: 5883
+INFO:root:context_num: 110
+INFO:root:target_namespace: dominate.dominate<folder>.util<file>.url_unescape<func>
+INFO:root:****************************************
+data 10:   0%|          | 0/128 [00:00<?, ?it/s]data 10:   8%|▊         | 10/128 [00:11<02:19,  1.18s/it]data 10:  16%|█▌        | 20/128 [00:24<02:14,  1.24s/it]data 10:  23%|██▎       | 30/128 [00:37<02:04,  1.27s/it]data 10:  31%|███▏      | 40/128 [00:50<01:52,  1.28s/it]data 10:  39%|███▉      | 50/128 [01:02<01:37,  1.25s/it]data 10:  47%|████▋     | 60/128 [01:15<01:24,  1.25s/it]

@@ -1,0 +1,1026 @@
+INFO:root:time: 2025年 03月 16日 星期日 20:40:31 CST
+
+INFO:root:pid: 15327
+INFO:root:seed: 128
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_2.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.14s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.35it/s]
+INFO:root:--------data 1204--------
+data 1204:   0%|          | 0/148 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+data 1204:   7%|▋         | 10/148 [01:06<15:24,  6.70s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  14%|█▎        | 20/148 [02:10<13:48,  6.47s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  20%|██        | 30/148 [03:13<12:36,  6.41s/it]data 1204:  27%|██▋       | 40/148 [04:13<11:13,  6.24s/it]data 1204:  34%|███▍      | 50/148 [05:11<09:58,  6.11s/it]data 1204:  41%|████      | 60/148 [06:29<09:47,  6.67s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  47%|████▋     | 70/148 [07:30<08:25,  6.49s/it]data 1204:  54%|█████▍    | 80/148 [08:48<07:49,  6.90s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  61%|██████    | 90/148 [10:01<06:47,  7.03s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  68%|██████▊   | 100/148 [11:35<06:11,  7.75s/it]data 1204:  74%|███████▍  | 110/148 [12:32<04:30,  7.13s/it]data 1204:  74%|███████▍  | 110/148 [13:26<04:38,  7.34s/it]
+INFO:root:函数头: 
+    def to_jwt(self, ttl=None):
+
+INFO:root:目标函数体: 
+        
+
+        if not self.secret_key:
+            raise ValueError("JWT does not have a signing key configured.")
+
+        headers = self.headers.copy()
+
+        payload = self.payload.copy()
+        if ttl:
+            payload["exp"] = int(time.time()) + ttl
+
+        return jwt_lib.encode(
+            payload, self.secret_key, algorithm=self.algorithm, headers=headers
+        )
+
+INFO:root:生成结果: 
+        if not self._version signing_key:
+            raise TwilioException("Signing key not configured")
+
+        payload_copy = self._generate_payload().copy()
+        headers_copy = self._generate_headers().copy()
+
+        if ttl:
+            payload_copy["exp"] = int(time.time()) + ttl
+
+        encoded_payload = jwt.encode(payload_copy, self._version signing_key, algorithm=self.algorithm)
+        encoded_headers = jwt.encode(headers_copy, self._version signing_key, algorithm=self.algorithm)
+
+        return encoded_payload.decode("utf-8") + encoded_headers.decode("utf-8")
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9673
+INFO:root:max position: 61161
+INFO:root:context_num: 1993
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.jwt<folder>.__init__<file>.Jwt<class>.to_jwt<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:54:11 CST
+
+INFO:root:****************************************
+data 1204:   0%|          | 0/148 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+data 1204:   7%|▋         | 10/148 [00:53<12:13,  5.31s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  14%|█▎        | 20/148 [01:57<12:44,  5.98s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  20%|██        | 30/148 [03:00<12:01,  6.12s/it]data 1204:  27%|██▋       | 40/148 [04:11<11:41,  6.49s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  34%|███▍      | 50/148 [05:30<11:27,  7.01s/it]data 1204:  41%|████      | 60/148 [06:37<10:06,  6.89s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  47%|████▋     | 70/148 [07:32<08:22,  6.45s/it]data 1204:  54%|█████▍    | 80/148 [08:34<07:13,  6.37s/it]data 1204:  54%|█████▍    | 80/148 [08:36<07:18,  6.45s/it]
+INFO:root:函数头: 
+    def to_jwt(self, ttl=None):
+
+INFO:root:目标函数体: 
+        
+
+        if not self.secret_key:
+            raise ValueError("JWT does not have a signing key configured.")
+
+        headers = self.headers.copy()
+
+        payload = self.payload.copy()
+        if ttl:
+            payload["exp"] = int(time.time()) + ttl
+
+        return jwt_lib.encode(
+            payload, self.secret_key, algorithm=self.algorithm, headers=headers
+        )
+
+INFO:root:生成结果: 
+        if not self._signing_key:
+            raise ValueError("Signing key not configured")
+
+        payload_copy = self.payload.copy()
+        headers_copy = self.headers.copy()
+
+        if ttl is not None:
+            payload_copy["exp"] = int(time.time()) + ttl
+
+        encoded_jwt = jwt.encode(payload_copy, self._signing_key, algorithm=self.algorithm)
+
+        return encoded_jwt
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8529
+INFO:root:max position: 43313
+INFO:root:context_num: 1592
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.jwt<folder>.__init__<file>.Jwt<class>.to_jwt<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:02:47 CST
+
+INFO:root:****************************************
+data 1204:   0%|          | 0/148 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+data 1204:   7%|▋         | 10/148 [00:53<12:11,  5.30s/it]INFO:root:超出32768的上下文尺寸
+data 1204:  14%|█▎        | 20/148 [01:56<12:34,  5.90s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  20%|██        | 30/148 [02:53<11:29,  5.84s/it]data 1204:  27%|██▋       | 40/148 [04:03<11:19,  6.29s/it]data 1204:  34%|███▍      | 50/148 [05:22<11:13,  6.88s/it]data 1204:  41%|████      | 60/148 [06:31<10:03,  6.86s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  47%|████▋     | 70/148 [07:34<08:42,  6.70s/it]data 1204:  54%|█████▍    | 80/148 [08:35<07:22,  6.50s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1204:  54%|█████▍    | 80/148 [08:48<07:29,  6.61s/it]
+INFO:root:函数头: 
+    def to_jwt(self, ttl=None):
+
+INFO:root:目标函数体: 
+        
+
+        if not self.secret_key:
+            raise ValueError("JWT does not have a signing key configured.")
+
+        headers = self.headers.copy()
+
+        payload = self.payload.copy()
+        if ttl:
+            payload["exp"] = int(time.time()) + ttl
+
+        return jwt_lib.encode(
+            payload, self.secret_key, algorithm=self.algorithm, headers=headers
+        )
+
+INFO:root:生成结果: 
+        if not self._signing_key:
+            raise Exception("Signing key not configured for JWT")
+
+        headers = self.headers.copy()
+        payload = self.payload.copy()
+
+        if ttl is not None:
+            payload["exp"] = int(time.time()) + ttl
+
+        encoded_jwt = jwt.encode(payload, self._signing_key, algorithm=self.algorithm, headers=headers)
+        return encoded_jwt
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10981
+INFO:root:max position: 64523
+INFO:root:context_num: 1502
+INFO:root:target_namespace: twilio-fatisar.twilio<folder>.jwt<folder>.__init__<file>.Jwt<class>.to_jwt<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:11:36 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1205--------
+data 1205:   0%|          | 0/128 [00:00<?, ?it/s]data 1205:   8%|▊         | 10/128 [00:36<07:07,  3.62s/it]data 1205:  16%|█▌        | 20/128 [01:09<06:10,  3.43s/it]data 1205:  23%|██▎       | 30/128 [01:44<05:39,  3.46s/it]data 1205:  31%|███▏      | 40/128 [02:19<05:08,  3.51s/it]data 1205:  39%|███▉      | 50/128 [02:56<04:38,  3.57s/it]data 1205:  47%|████▋     | 60/128 [03:32<04:01,  3.56s/it]data 1205:  55%|█████▍    | 70/128 [04:07<03:25,  3.54s/it]data 1205:  62%|██████▎   | 80/128 [04:42<02:49,  3.52s/it]data 1205:  70%|███████   | 90/128 [05:16<02:13,  3.50s/it]data 1205:  78%|███████▊  | 100/128 [05:50<01:37,  3.48s/it]data 1205:  78%|███████▊  | 100/128 [06:00<01:40,  3.61s/it]
+INFO:root:函数头: 
+def nanmean(array, epsilon=1.0, bounds=None, axis=None, dtype=None, keepdims=False, random_state=None, accountant=None,
+            **unused_args):
+
+INFO:root:目标函数体: 
+    r
+    warn_unused_args(unused_args)
+
+    return _mean(array, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant, nan=True)
+
+INFO:root:生成结果: 
+    warn_unused_args(unused_args)
+
+    array = np.asanyarray(array)
+    if np.issubarray(array.dtype, np.character):
+        array_bool = array != array.dtype.type
+    else:
+        array_bool = array.astype(bool)
+
+    array_bool[np.isnan(array)] = False
+
+    return _mean(array_bool, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6938
+INFO:root:max position: 14165
+INFO:root:context_num: 220
+INFO:root:target_namespace: diffprivlib.diffprivlib<folder>.tools<folder>.utils<file>.nanmean<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:17:36 CST
+
+INFO:root:****************************************
+data 1205:   0%|          | 0/128 [00:00<?, ?it/s]data 1205:   8%|▊         | 10/128 [00:36<07:08,  3.63s/it]data 1205:  16%|█▌        | 20/128 [01:10<06:21,  3.53s/it]data 1205:  23%|██▎       | 30/128 [01:46<05:46,  3.54s/it]data 1205:  31%|███▏      | 40/128 [02:19<05:04,  3.46s/it]data 1205:  39%|███▉      | 50/128 [02:53<04:27,  3.43s/it]data 1205:  47%|████▋     | 60/128 [03:28<03:53,  3.44s/it]data 1205:  55%|█████▍    | 70/128 [04:02<03:18,  3.43s/it]data 1205:  62%|██████▎   | 80/128 [04:36<02:45,  3.44s/it]data 1205:  70%|███████   | 90/128 [05:13<02:13,  3.50s/it]data 1205:  78%|███████▊  | 100/128 [05:47<01:37,  3.49s/it]data 1205:  86%|████████▌ | 110/128 [06:22<01:02,  3.48s/it]data 1205:  94%|█████████▍| 120/128 [06:57<00:27,  3.48s/it]data 1205:  94%|█████████▍| 120/128 [07:20<00:29,  3.67s/it]
+INFO:root:函数头: 
+def nanmean(array, epsilon=1.0, bounds=None, axis=None, dtype=None, keepdims=False, random_state=None, accountant=None,
+            **unused_args):
+
+INFO:root:目标函数体: 
+    r
+    warn_unused_args(unused_args)
+
+    return _mean(array, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant, nan=True)
+
+INFO:root:生成结果: 
+    warnings.warn("The 'nanmean' function is deprecated and will be removed in a future release. Use 'numpy.nanmean' instead.", DeprecationWarning)
+    warn_unused_args(unused_args)
+
+    array = np.asanyarray(array)
+    nan_mask = np.isnan(array)
+    array_nan = array.copy()
+    array_nan[nan_mask] = np.nanmean(array[np.logical_not(n nan_mask)])
+
+    return _mean(array_nan, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6948
+INFO:root:max position: 14643
+INFO:root:context_num: 224
+INFO:root:target_namespace: diffprivlib.diffprivlib<folder>.tools<folder>.utils<file>.nanmean<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:24:57 CST
+
+INFO:root:****************************************
+data 1205:   0%|          | 0/128 [00:00<?, ?it/s]data 1205:   8%|▊         | 10/128 [00:36<07:06,  3.61s/it]data 1205:  16%|█▌        | 20/128 [01:09<06:13,  3.46s/it]data 1205:  23%|██▎       | 30/128 [01:44<05:40,  3.48s/it]data 1205:  31%|███▏      | 40/128 [02:19<05:06,  3.48s/it]data 1205:  39%|███▉      | 50/128 [02:54<04:31,  3.48s/it]data 1205:  47%|████▋     | 60/128 [03:28<03:55,  3.46s/it]data 1205:  55%|█████▍    | 70/128 [04:02<03:20,  3.45s/it]data 1205:  62%|██████▎   | 80/128 [04:36<02:44,  3.42s/it]data 1205:  70%|███████   | 90/128 [05:11<02:11,  3.46s/it]data 1205:  78%|███████▊  | 100/128 [05:45<01:36,  3.44s/it]data 1205:  86%|████████▌ | 110/128 [06:20<01:01,  3.44s/it]data 1205:  94%|█████████▍| 120/128 [06:53<00:27,  3.41s/it]data 1205:  94%|█████████▍| 120/128 [07:24<00:29,  3.71s/it]
+INFO:root:函数头: 
+def nanmean(array, epsilon=1.0, bounds=None, axis=None, dtype=None, keepdims=False, random_state=None, accountant=None,
+            **unused_args):
+
+INFO:root:目标函数体: 
+    r
+    warn_unused_args(unused_args)
+
+    return _mean(array, epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims=keepdims,
+                 random_state=random_state, accountant=accountant, nan=True)
+
+INFO:root:生成结果: 
+    warn_unused_args(unused_args)
+
+    array = np.asanyarray(array)
+    if np.issubarray(array.dtype, np.character):
+        array_bool = array != array.dtype.type
+    else:
+        array_bool = array.astype(np.bool_, copy=False)
+
+    if np.any(array_bool):
+        nan_count = np.count_nonzero(array_bool)
+        if nan_count > 0:
+            epsilon -= nan_count * epsilon / array.size
+            array_bool[np.isnan(array)] = False
+
+    return _mean(array[array_bool], epsilon=epsilon, bounds=bounds, axis=axis, dtype=dtype, keepdims
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6759
+INFO:root:max position: 14282
+INFO:root:context_num: 234
+INFO:root:target_namespace: diffprivlib.diffprivlib<folder>.tools<folder>.utils<file>.nanmean<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:32:22 CST
+
+INFO:root:****************************************
+INFO:root:已生成1205条结果
+INFO:root:--------data 1206--------
+data 1206:   0%|          | 0/128 [00:00<?, ?it/s]Token indices sequence length is longer than the specified maximum sequence length for this model (56398 > 32768). Running this sequence through the model will result in indexing errors
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:   8%|▊         | 10/128 [00:56<11:04,  5.63s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  16%|█▌        | 20/128 [01:55<10:28,  5.82s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  23%|██▎       | 30/128 [03:00<09:59,  6.12s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  31%|███▏      | 40/128 [04:06<09:15,  6.31s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  39%|███▉      | 50/128 [05:12<08:20,  6.41s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  47%|████▋     | 60/128 [06:15<07:14,  6.38s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  55%|█████▍    | 70/128 [07:16<06:03,  6.27s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  62%|██████▎   | 80/128 [08:19<05:02,  6.29s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  70%|███████   | 90/128 [09:18<03:54,  6.18s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  78%|███████▊  | 100/128 [10:16<02:49,  6.05s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  86%|████████▌ | 110/128 [11:14<01:47,  5.97s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  94%|█████████▍| 120/128 [12:10<00:46,  5.87s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  94%|█████████▍| 120/128 [13:02<00:52,  6.52s/it]
+INFO:root:函数头: 
+def parse(html: str) -> Tuple[str, List[TypeMessageEntity]]:
+
+INFO:root:目标函数体: 
+    
+    from ..helpers import strip_text
+    if not html:
+        return html, []
+
+    parser = HTMLToTelegramParser()
+    parser.feed(add_surrogate(html))
+    text = strip_text(parser.text, parser.entities)
+    return del_surrogate(text), parser.entities
+
+INFO:root:生成结果: 
+    # Import necessary modules from telethon and other files
+    from telethon.tl.types import MessageEntityBold, MessageEntityItalic, MessageEntityCode, MessageEntityPre, MessageEntityTextUrl, MessageEntityMentionName, MessageEntityUnderline, MessageEntityStrike
+    from telethon.tl.types import MessageEntityPre, MessageEntityUrl, MessageEntity MentionName, MessageEntityUnderline, MessageEntityStrike
+    from telethon.tl.types import MessageEntityPre, MessageEntityUrl, MessageEntity MentionName, MessageEntityUnderline, MessageEntityStrike
+    from telethon.tl.types import MessageEntityPre,
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8337
+INFO:root:max position: 54809
+INFO:root:context_num: 1121
+INFO:root:target_namespace: Telethon.telethon<folder>.extensions<folder>.html<file>.parse<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:45:26 CST
+
+INFO:root:****************************************
+data 1206:   0%|          | 0/128 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:   8%|▊         | 10/128 [00:58<11:26,  5.82s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  16%|█▌        | 20/128 [01:57<10:38,  5.91s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  16%|█▌        | 20/128 [02:40<14:25,  8.02s/it]
+INFO:root:函数头: 
+def parse(html: str) -> Tuple[str, List[TypeMessageEntity]]:
+
+INFO:root:目标函数体: 
+    
+    from ..helpers import strip_text
+    if not html:
+        return html, []
+
+    parser = HTMLToTelegramParser()
+    parser.feed(add_surrogate(html))
+    text = strip_text(parser.text, parser.entities)
+    return del_surrogate(text), parser.entities
+
+INFO:root:生成结果: 
+    parser = HTMLToTelegramParser()
+    parser.feed(html)
+    parser.close()
+    return parser.text, parser.entities
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6651
+INFO:root:max position: 54544
+INFO:root:context_num: 516
+INFO:root:target_namespace: Telethon.telethon<folder>.extensions<folder>.html<file>.parse<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:48:06 CST
+
+INFO:root:****************************************
+data 1206:   0%|          | 0/128 [00:00<?, ?it/s]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:   8%|▊         | 10/128 [00:56<11:08,  5.66s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  16%|█▌        | 20/128 [01:56<10:31,  5.84s/it]INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+INFO:root:超出32768的上下文尺寸
+data 1206:  16%|█▌        | 20/128 [02:38<14:16,  7.93s/it]
+INFO:root:函数头: 
+def parse(html: str) -> Tuple[str, List[TypeMessageEntity]]:
+
+INFO:root:目标函数体: 
+    
+    from ..helpers import strip_text
+    if not html:
+        return html, []
+
+    parser = HTMLToTelegramParser()
+    parser.feed(add_surrogate(html))
+    text = strip_text(parser.text, parser.entities)
+    return del_surrogate(text), parser.entities
+
+INFO:root:生成结果: 
+    parser = HTMLToTelegramParser()
+    parser.feed(html)
+    parser.close()
+    return parser.text, parser.entities
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6970
+INFO:root:max position: 54704
+INFO:root:context_num: 542
+INFO:root:target_namespace: Telethon.telethon<folder>.extensions<folder>.html<file>.parse<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:50:44 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1207--------
+data 1207:   0%|          | 0/128 [00:00<?, ?it/s]data 1207:   8%|▊         | 10/128 [00:31<06:06,  3.10s/it]data 1207:  16%|█▌        | 20/128 [01:03<05:46,  3.21s/it]data 1207:  23%|██▎       | 30/128 [01:36<05:16,  3.23s/it]data 1207:  31%|███▏      | 40/128 [02:10<04:49,  3.29s/it]data 1207:  39%|███▉      | 50/128 [02:44<04:20,  3.33s/it]data 1207:  47%|████▋     | 60/128 [03:18<03:48,  3.37s/it]data 1207:  47%|████▋     | 60/128 [03:37<04:06,  3.63s/it]
+INFO:root:函数头: 
+    def cue_method(self, document, sentences_count, bonus_word_value=1, stigma_word_value=1):
+
+INFO:root:目标函数体: 
+        summarization_method = self._build_cue_method_instance()
+        return summarization_method(document, sentences_count, bonus_word_value,
+            stigma_word_value)
+
+INFO:root:生成结果: 
+        method = self._build_cue_method_instance()
+        ratings = method.rate_sentences(document.sentences)
+        rated_sentences = sorted(ratings.items(), key=lambda x: x[1], reverse=True)
+        selected_sentences = [sentence for sentence, rating in rated_sentences[:sentences_count]]
+        return selected_sentences
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5967
+INFO:root:max position: 16662
+INFO:root:context_num: 188
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.edmundson<file>.EdmundsonSummarizer<class>.cue_method<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:54:22 CST
+
+INFO:root:****************************************
+data 1207:   0%|          | 0/128 [00:00<?, ?it/s]data 1207:   8%|▊         | 10/128 [00:30<06:04,  3.09s/it]data 1207:  16%|█▌        | 20/128 [01:03<05:46,  3.21s/it]data 1207:  23%|██▎       | 30/128 [01:35<05:13,  3.20s/it]data 1207:  23%|██▎       | 30/128 [02:02<06:40,  4.09s/it]
+INFO:root:函数头: 
+    def cue_method(self, document, sentences_count, bonus_word_value=1, stigma_word_value=1):
+
+INFO:root:目标函数体: 
+        summarization_method = self._build_cue_method_instance()
+        return summarization_method(document, sentences_count, bonus_word_value,
+            stigma_word_value)
+
+INFO:root:生成结果: 
+        method = self._build_cue_method_instance()
+        ratings = method.rate_sentences(document)
+        return self._get_best_sentences(document.sentences, sentences_count, ratings)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5729
+INFO:root:max position: 16293
+INFO:root:context_num: 176
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.edmundson<file>.EdmundsonSummarizer<class>.cue_method<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:56:25 CST
+
+INFO:root:****************************************
+data 1207:   0%|          | 0/128 [00:00<?, ?it/s]data 1207:   8%|▊         | 10/128 [00:30<06:02,  3.07s/it]data 1207:  16%|█▌        | 20/128 [01:04<05:50,  3.25s/it]data 1207:  23%|██▎       | 30/128 [01:36<05:15,  3.22s/it]data 1207:  23%|██▎       | 30/128 [02:03<06:43,  4.12s/it]
+INFO:root:函数头: 
+    def cue_method(self, document, sentences_count, bonus_word_value=1, stigma_word_value=1):
+
+INFO:root:目标函数体: 
+        summarization_method = self._build_cue_method_instance()
+        return summarization_method(document, sentences_count, bonus_word_value,
+            stigma_word_value)
+
+INFO:root:生成结果: 
+        method = self._build_cue_method_instance()
+        ratings = method.rate_sentences(document)
+        return self._get_best_sentences(document.sentences, sentences_count, ratings)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5768
+INFO:root:max position: 16272
+INFO:root:context_num: 181
+INFO:root:target_namespace: sumy.sumy<folder>.summarizers<folder>.edmundson<file>.EdmundsonSummarizer<class>.cue_method<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:58:28 CST
+
+INFO:root:****************************************
+INFO:root:已生成1207条结果
+INFO:root:--------data 1208--------
+data 1208:   0%|          | 0/128 [00:00<?, ?it/s]data 1208:   8%|▊         | 10/128 [00:27<05:24,  2.75s/it]data 1208:  16%|█▌        | 20/128 [00:56<05:05,  2.82s/it]data 1208:  23%|██▎       | 30/128 [01:25<04:42,  2.88s/it]data 1208:  31%|███▏      | 40/128 [01:55<04:18,  2.94s/it]data 1208:  39%|███▉      | 50/128 [02:25<03:50,  2.95s/it]data 1208:  47%|████▋     | 60/128 [02:56<03:23,  3.00s/it]data 1208:  55%|█████▍    | 70/128 [03:32<03:05,  3.20s/it]data 1208:  62%|██████▎   | 80/128 [04:02<02:30,  3.14s/it]data 1208:  70%|███████   | 90/128 [04:32<01:57,  3.09s/it]data 1208:  78%|███████▊  | 100/128 [05:00<01:23,  3.00s/it]data 1208:  86%|████████▌ | 110/128 [05:28<00:52,  2.93s/it]data 1208:  86%|████████▌ | 110/128 [05:57<00:58,  3.25s/it]
+INFO:root:函数头: 
+def minor_seventh(note):
+
+INFO:root:目标函数体: 
+    sth = seventh(note[0], "C")
+    return augment_or_diminish_until_the_interval_is_right(note, sth, 10)
+
+INFO:root:生成结果: 
+    intervals = ["major", "minor", "augmented", " diminished"]
+    intervals_dict = {"major": 7, "minor": 6, "augmented": 8, " diminished": 5}
+    
+    # Get the interval between the given note and the root note of the key
+    interval = intervals_dict[intervals[(notes.get_index(note) - notes.get_index(notes.get_root(note))) % len(intervals)]]
+    
+    # Calculate the minor seventh note
+    seventh_note = notes.get_note(note, interval)
+    
+    return seventh_note
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7868
+INFO:root:max position: 18459
+INFO:root:context_num: 383
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.intervals<file>.minor_seventh<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:04:26 CST
+
+INFO:root:****************************************
+data 1208:   0%|          | 0/128 [00:00<?, ?it/s]data 1208:   8%|▊         | 10/128 [00:26<05:08,  2.62s/it]data 1208:  16%|█▌        | 20/128 [00:54<04:57,  2.76s/it]data 1208:  16%|█▌        | 20/128 [01:24<07:33,  4.20s/it]
+INFO:root:函数头: 
+def minor_seventh(note):
+
+INFO:root:目标函数体: 
+    sth = seventh(note[0], "C")
+    return augment_or_diminish_until_the_interval_is_right(note, sth, 10)
+
+INFO:root:生成结果: 
+    trth = sixth(note, "C")
+    return augment_or_diminish_until_the_interval_is(note, trth, 7)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6645
+INFO:root:max position: 15906
+INFO:root:context_num: 261
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.intervals<file>.minor_seventh<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:05:50 CST
+
+INFO:root:****************************************
+data 1208:   0%|          | 0/128 [00:00<?, ?it/s]data 1208:   8%|▊         | 10/128 [00:26<05:07,  2.60s/it]data 1208:  16%|█▌        | 20/128 [00:54<04:57,  2.76s/it]data 1208:  23%|██▎       | 30/128 [01:24<04:38,  2.84s/it]data 1208:  23%|██▎       | 30/128 [01:26<04:42,  2.89s/it]
+INFO:root:函数头: 
+def minor_seventh(note):
+
+INFO:root:目标函数体: 
+    sth = seventh(note[0], "C")
+    return augment_or_diminish_until_the_interval_is_right(note, sth, 10)
+
+INFO:root:生成结果: 
+    trth = sixth(note, "C")
+    return augment_or_diminish_until_the_interval_is_right(note, trth, 7)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7241
+INFO:root:max position: 16012
+INFO:root:context_num: 257
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.intervals<file>.minor_seventh<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:07:17 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1209--------
+INFO:root:file too long alembic.alembic<folder>.script<folder>.revision<file>.RevisionMap<class>.get_revisions<func>, cut 36/77 nodes
+data 1209:   0%|          | 0/428 [00:00<?, ?it/s]data 1209:   2%|▏         | 10/428 [00:52<36:29,  5.24s/it]data 1209:   5%|▍         | 20/428 [01:45<35:56,  5.29s/it]data 1209:   7%|▋         | 30/428 [02:37<34:53,  5.26s/it]data 1209:   9%|▉         | 40/428 [03:30<34:04,  5.27s/it]data 1209:  12%|█▏        | 50/428 [04:26<33:52,  5.38s/it]data 1209:  14%|█▍        | 60/428 [05:30<35:09,  5.73s/it]data 1209:  16%|█▋        | 70/428 [06:20<32:41,  5.48s/it]data 1209:  19%|█▊        | 80/428 [07:05<30:05,  5.19s/it]data 1209:  21%|██        | 90/428 [07:53<28:24,  5.04s/it]data 1209:  23%|██▎       | 100/428 [08:37<26:34,  4.86s/it]data 1209:  26%|██▌       | 110/428 [09:28<26:12,  4.94s/it]data 1209:  28%|██▊       | 120/428 [10:18<25:21,  4.94s/it]data 1209:  30%|███       | 130/428 [11:07<24:29,  4.93s/it]data 1209:  33%|███▎      | 140/428 [11:52<23:05,  4.81s/it]data 1209:  35%|███▌      | 150/428 [12:42<22:31,  4.86s/it]data 1209:  37%|███▋      | 160/428 [13:40<22:57,  5.14s/it]data 1209:  40%|███▉      | 170/428 [14:34<22:31,  5.24s/it]data 1209:  42%|████▏     | 180/428 [15:35<22:41,  5.49s/it]data 1209:  44%|████▍     | 190/428 [16:20<20:33,  5.18s/it]data 1209:  47%|████▋     | 200/428 [17:02<18:35,  4.89s/it]data 1209:  49%|████▉     | 210/428 [17:48<17:29,  4.82s/it]data 1209:  51%|█████▏    | 220/428 [18:30<16:02,  4.63s/it]data 1209:  54%|█████▎    | 230/428 [19:12<14:48,  4.49s/it]data 1209:  56%|█████▌    | 240/428 [19:54<13:48,  4.41s/it]data 1209:  58%|█████▊    | 250/428 [20:36<12:53,  4.34s/it]data 1209:  61%|██████    | 260/428 [21:18<12:00,  4.29s/it]data 1209:  63%|██████▎   | 270/428 [22:05<11:39,  4.43s/it]data 1209:  65%|██████▌   | 280/428 [22:54<11:15,  4.56s/it]data 1209:  68%|██████▊   | 290/428 [23:36<10:15,  4.46s/it]data 1209:  70%|███████   | 300/428 [24:23<09:40,  4.54s/it]data 1209:  72%|███████▏  | 310/428 [25:13<09:11,  4.67s/it]data 1209:  75%|███████▍  | 320/428 [26:08<08:50,  4.91s/it]data 1209:  77%|███████▋  | 330/428 [27:03<08:19,  5.10s/it]data 1209:  79%|███████▉  | 340/428 [27:56<07:33,  5.15s/it]data 1209:  82%|████████▏ | 350/428 [28:48<06:43,  5.17s/it]data 1209:  84%|████████▍ | 360/428 [29:40<05:52,  5.18s/it]data 1209:  86%|████████▋ | 370/428 [30:33<05:01,  5.21s/it]data 1209:  89%|████████▉ | 380/428 [31:26<04:11,  5.24s/it]data 1209:  91%|█████████ | 390/428 [32:21<03:21,  5.32s/it]data 1209:  93%|█████████▎| 400/428 [33:17<02:31,  5.40s/it]data 1209:  96%|█████████▌| 410/428 [34:14<01:38,  5.50s/it]data 1209:  98%|█████████▊| 420/428 [35:11<00:44,  5.54s/it]data 1209:  98%|█████████▊| 420/428 [35:53<00:41,  5.13s/it]
+INFO:root:函数头: 
+    def get_revisions(
+        self, id_: Optional[_GetRevArg]
+    ) -> Tuple[Optional[_RevisionOrBase], ...]:
+
+INFO:root:目标函数体: 
+        
+
+        if isinstance(id_, (list, tuple, set, frozenset)):
+            return sum([self.get_revisions(id_elem) for id_elem in id_], ())
+        else:
+            resolved_id, branch_label = self._resolve_revision_number(id_)
+            if len(resolved_id) == 1:
+                try:
+                    rint = int(resolved_id[0])
+                    if rint < 0:
+                        # branch@-n -> walk down from heads
+                        select_heads = self.get_revisions("heads")
+                        if branch_label is not None:
+                            select_heads = tuple(
+                                head
+                                for head in select_heads
+                                if branch_label
+                                in is_revision(head).branch_labels
+                            )
+                        return tuple(
+                            self._walk(head, steps=rint)
+                            for head in select_heads
+                        )
+                except ValueError:
+                    # couldn't resolve as integer
+                    pass
+            return tuple(
+                self._revision_for_ident(rev_id, branch_label)
+                for rev_id in resolved_id
+            )
+
+INFO:root:生成结果: 
+        revisions: List[_RevisionOrBase] = []
+        if id_ is None:
+            revisions.extend(self.heads)
+        elif isinstance(id_, str):
+            if id_.lower() == "head":
+                revisions.extend(self.heads)
+            elif id_.lower() == "base":
+                revisions.extend(self.bases)
+            else:
+                revs = self._match_lineage(id_)
+                if revs:
+                    revisions.extend(revs)
+                else:
+                    raise RevisionError(
+                        f"Revision {id_} not found"
+                    )
+        elif isinstance(id_, Sequence):
+            revs = []
+            for rev_id in id_:
+                revs.extend(self._match_lineage(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(re
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 11669
+INFO:root:max position: 23364
+INFO:root:context_num: 582
+INFO:root:target_namespace: alembic.alembic<folder>.script<folder>.revision<file>.RevisionMap<class>.get_revisions<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:43:11 CST
+
+INFO:root:****************************************
+data 1209:   0%|          | 0/428 [00:00<?, ?it/s]data 1209:   2%|▏         | 10/428 [01:38<1:08:42,  9.86s/it]data 1209:   5%|▍         | 20/428 [02:30<48:20,  7.11s/it]  data 1209:   7%|▋         | 30/428 [03:23<41:49,  6.30s/it]data 1209:   9%|▉         | 40/428 [04:16<37:58,  5.87s/it]data 1209:  12%|█▏        | 50/428 [05:07<35:26,  5.63s/it]data 1209:  14%|█▍        | 60/428 [06:01<33:51,  5.52s/it]data 1209:  16%|█▋        | 70/428 [06:55<32:43,  5.48s/it]data 1209:  19%|█▊        | 80/428 [07:42<30:27,  5.25s/it]data 1209:  21%|██        | 90/428 [08:29<28:32,  5.07s/it]data 1209:  23%|██▎       | 100/428 [09:15<26:52,  4.92s/it]data 1209:  26%|██▌       | 110/428 [09:58<25:05,  4.73s/it]data 1209:  28%|██▊       | 120/428 [10:49<24:50,  4.84s/it]data 1209:  28%|██▊       | 120/428 [11:06<28:31,  5.56s/it]
+INFO:root:函数头: 
+    def get_revisions(
+        self, id_: Optional[_GetRevArg]
+    ) -> Tuple[Optional[_RevisionOrBase], ...]:
+
+INFO:root:目标函数体: 
+        
+
+        if isinstance(id_, (list, tuple, set, frozenset)):
+            return sum([self.get_revisions(id_elem) for id_elem in id_], ())
+        else:
+            resolved_id, branch_label = self._resolve_revision_number(id_)
+            if len(resolved_id) == 1:
+                try:
+                    rint = int(resolved_id[0])
+                    if rint < 0:
+                        # branch@-n -> walk down from heads
+                        select_heads = self.get_revisions("heads")
+                        if branch_label is not None:
+                            select_heads = tuple(
+                                head
+                                for head in select_heads
+                                if branch_label
+                                in is_revision(head).branch_labels
+                            )
+                        return tuple(
+                            self._walk(head, steps=rint)
+                            for head in select_heads
+                        )
+                except ValueError:
+                    # couldn't resolve as integer
+                    pass
+            return tuple(
+                self._revision_for_ident(rev_id, branch_label)
+                for rev_id in resolved_id
+            )
+
+INFO:root:生成结果: 
+        revisions: List[_RevisionOrBase] = []
+        if id_ is None:
+            revisions.extend(self.heads)
+            revisions.extend(self._real_heads)
+        elif isinstance(id_, str):
+            if id_.lower() == "head":
+                revisions.extend(self.heads)
+            elif id_.lower() == "base":
+                revisions.extend(self._real_bases)
+            else:
+                revisions.extend(self._match_identifier(id_)
+        elif isinstance(id_, Sequence):
+            revisions.extend(self._match_identifiers(id_)
+        else:
+            raise TypeError("Invalid revision identifier type")
+
+        return tuple(revisions)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 11420
+INFO:root:max position: 22094
+INFO:root:context_num: 395
+INFO:root:target_namespace: alembic.alembic<folder>.script<folder>.revision<file>.RevisionMap<class>.get_revisions<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:54:17 CST
+
+INFO:root:****************************************
+data 1209:   0%|          | 0/428 [00:00<?, ?it/s]data 1209:   2%|▏         | 10/428 [00:51<35:35,  5.11s/it]data 1209:   5%|▍         | 20/428 [01:44<35:36,  5.24s/it]data 1209:   7%|▋         | 30/428 [02:37<34:53,  5.26s/it]data 1209:   9%|▉         | 40/428 [03:27<33:22,  5.16s/it]data 1209:  12%|█▏        | 50/428 [04:18<32:30,  5.16s/it]data 1209:  14%|█▍        | 60/428 [05:08<31:14,  5.10s/it]data 1209:  16%|█▋        | 70/428 [05:55<29:41,  4.98s/it]data 1209:  19%|█▊        | 80/428 [06:43<28:33,  4.92s/it]data 1209:  21%|██        | 90/428 [07:26<26:37,  4.73s/it]data 1209:  23%|██▎       | 100/428 [08:10<25:16,  4.62s/it]data 1209:  26%|██▌       | 110/428 [08:55<24:11,  4.56s/it]data 1209:  28%|██▊       | 120/428 [09:44<23:56,  4.67s/it]data 1209:  30%|███       | 130/428 [10:32<23:25,  4.72s/it]data 1209:  33%|███▎      | 140/428 [11:22<23:02,  4.80s/it]data 1209:  35%|███▌      | 150/428 [12:13<22:37,  4.88s/it]data 1209:  37%|███▋      | 160/428 [13:07<22:35,  5.06s/it]data 1209:  40%|███▉      | 170/428 [13:52<21:01,  4.89s/it]data 1209:  42%|████▏     | 180/428 [14:36<19:33,  4.73s/it]data 1209:  44%|████▍     | 190/428 [15:27<19:10,  4.83s/it]data 1209:  47%|████▋     | 200/428 [16:08<17:38,  4.64s/it]data 1209:  49%|████▉     | 210/428 [16:56<16:58,  4.67s/it]data 1209:  51%|█████▏    | 220/428 [17:39<15:51,  4.57s/it]data 1209:  54%|█████▎    | 230/428 [18:20<14:34,  4.41s/it]data 1209:  56%|█████▌    | 240/428 [19:01<13:32,  4.32s/it]data 1209:  58%|█████▊    | 250/428 [19:43<12:44,  4.30s/it]data 1209:  61%|██████    | 260/428 [20:25<11:55,  4.26s/it]data 1209:  63%|██████▎   | 270/428 [21:06<11:04,  4.21s/it]data 1209:  65%|██████▌   | 280/428 [21:51<10:35,  4.29s/it]data 1209:  68%|██████▊   | 290/428 [22:34<09:52,  4.29s/it]data 1209:  70%|███████   | 300/428 [23:25<09:40,  4.54s/it]data 1209:  72%|███████▏  | 310/428 [24:14<09:08,  4.65s/it]data 1209:  75%|███████▍  | 320/428 [25:07<08:45,  4.86s/it]data 1209:  77%|███████▋  | 330/428 [26:03<08:18,  5.08s/it]data 1209:  79%|███████▉  | 340/428 [26:57<07:33,  5.15s/it]data 1209:  82%|████████▏ | 350/428 [27:48<06:42,  5.16s/it]data 1209:  84%|████████▍ | 360/428 [28:40<05:51,  5.17s/it]data 1209:  86%|████████▋ | 370/428 [29:33<05:00,  5.18s/it]data 1209:  89%|████████▉ | 380/428 [30:26<04:10,  5.23s/it]data 1209:  91%|█████████ | 390/428 [31:19<03:19,  5.25s/it]data 1209:  93%|█████████▎| 400/428 [32:14<02:29,  5.32s/it]data 1209:  96%|█████████▌| 410/428 [33:13<01:38,  5.49s/it]data 1209:  98%|█████████▊| 420/428 [34:20<00:46,  5.86s/it]data 1209:  98%|█████████▊| 420/428 [35:01<00:40,  5.00s/it]
+INFO:root:函数头: 
+    def get_revisions(
+        self, id_: Optional[_GetRevArg]
+    ) -> Tuple[Optional[_RevisionOrBase], ...]:
+
+INFO:root:目标函数体: 
+        
+
+        if isinstance(id_, (list, tuple, set, frozenset)):
+            return sum([self.get_revisions(id_elem) for id_elem in id_], ())
+        else:
+            resolved_id, branch_label = self._resolve_revision_number(id_)
+            if len(resolved_id) == 1:
+                try:
+                    rint = int(resolved_id[0])
+                    if rint < 0:
+                        # branch@-n -> walk down from heads
+                        select_heads = self.get_revisions("heads")
+                        if branch_label is not None:
+                            select_heads = tuple(
+                                head
+                                for head in select_heads
+                                if branch_label
+                                in is_revision(head).branch_labels
+                            )
+                        return tuple(
+                            self._walk(head, steps=rint)
+                            for head in select_heads
+                        )
+                except ValueError:
+                    # couldn't resolve as integer
+                    pass
+            return tuple(
+                self._revision_for_ident(rev_id, branch_label)
+                for rev_id in resolved_id
+            )
+
+INFO:root:生成结果: 
+        rev_map = self._revision_map
+        heads = self.heads
+        bases = self.bases
+        _real_heads = self._real_heads
+        _real_bases = self._real_bases
+
+        if id_ is None:
+            return ()
+
+        if isinstance(id_, str):
+            id_ = [id_]  # Convert single string to list for uniformity
+
+        revisions: List[_RevisionOrBase] = []
+        for rev_id in id_:  # Iterate over each rev_id in the input list
+            if rev_id == "head":
+                revisions.extend(_real_heads)
+            elif rev_id == "base":
+                revisions.extend(_real_bases)
+            elif rev_id.startswith("rev"):
+                rev_id = rev_id[3:]  # Remove "rev" prefix
+                rev = rev_map.get(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(reversed(re
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 12009
+INFO:root:max position: 22945
+INFO:root:context_num: 576
+INFO:root:target_namespace: alembic.alembic<folder>.script<folder>.revision<file>.RevisionMap<class>.get_revisions<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:29:19 CST
+
+INFO:root:****************************************
+INFO:root:已生成1209条结果
+INFO:root:--------data 1210--------
+INFO:root:file too long boltons.boltons<folder>.socketutils<file>.BufferedSocket<class>.close<func>, cut 2/61 nodes
+data 1210:   0%|          | 0/128 [00:00<?, ?it/s]data 1210:   8%|▊         | 10/128 [00:34<06:46,  3.44s/it]data 1210:   8%|▊         | 10/128 [01:10<13:53,  7.07s/it]
+INFO:root:函数头: 
+    def close(self):
+
+INFO:root:目标函数体: 
+        
+        with self._recv_lock:
+            with self._send_lock:
+                self.rbuf = b''
+                self.rbuf_unconsumed = self.rbuf
+                self.sbuf[:] = []
+                self.sock.close()
+        return
+
+INFO:root:生成结果: 
+        self.sock.close()
+        self.rbuf = b''
+        self.sbuf = []
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7780
+INFO:root:max position: 16645
+INFO:root:context_num: 249
+INFO:root:target_namespace: boltons.boltons<folder>.socketutils<file>.BufferedSocket<class>.close<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:30:29 CST
+
+INFO:root:****************************************
+data 1210:   0%|          | 0/128 [00:00<?, ?it/s]data 1210:   8%|▊         | 10/128 [00:34<06:42,  3.41s/it]data 1210:   8%|▊         | 10/128 [01:10<13:51,  7.05s/it]
+INFO:root:函数头: 
+    def close(self):
+
+INFO:root:目标函数体: 
+        
+        with self._recv_lock:
+            with self._send_lock:
+                self.rbuf = b''
+                self.rbuf_unconsumed = self.rbuf
+                self.sbuf[:] = []
+                self.sock.close()
+        return
+
+INFO:root:生成结果: 
+        self.sock.close()
+        self.rbuf = b''
+        self.sbuf = []
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8034
+INFO:root:max position: 16393
+INFO:root:context_num: 266
+INFO:root:target_namespace: boltons.boltons<folder>.socketutils<file>.BufferedSocket<class>.close<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:31:40 CST
+
+INFO:root:****************************************
+data 1210:   0%|          | 0/128 [00:00<?, ?it/s]data 1210:   8%|▊         | 10/128 [00:34<06:44,  3.43s/it]data 1210:   8%|▊         | 10/128 [01:10<13:49,  7.03s/it]
+INFO:root:函数头: 
+    def close(self):
+
+INFO:root:目标函数体: 
+        
+        with self._recv_lock:
+            with self._send_lock:
+                self.rbuf = b''
+                self.rbuf_unconsumed = self.rbuf
+                self.sbuf[:] = []
+                self.sock.close()
+        return
+
+INFO:root:生成结果: 
+        self.sock.close()
+        self.rbuf = b''
+        self.sbuf = []
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8058
+INFO:root:max position: 16479
+INFO:root:context_num: 247
+INFO:root:target_namespace: boltons.boltons<folder>.socketutils<file>.BufferedSocket<class>.close<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:32:50 CST
+
+INFO:root:****************************************
+INFO:root:--------data 1211--------
+INFO:root:file too long alembic.alembic<folder>.autogenerate<folder>.render<file>._render_unique_constraint<func>, cut 2/99 nodes
+data 1211:   0%|          | 0/128 [00:00<?, ?it/s]data 1211:   8%|▊         | 10/128 [00:52<10:18,  5.24s/it]data 1211:  16%|█▌        | 20/128 [01:54<10:30,  5.84s/it]data 1211:  23%|██▎       | 30/128 [02:59<10:01,  6.14s/it]data 1211:  31%|███▏      | 40/128 [04:06<09:16,  6.33s/it]data 1211:  39%|███▉      | 50/128 [05:16<08:34,  6.59s/it]data 1211:  47%|████▋     | 60/128 [06:25<07:35,  6.69s/it]data 1211:  55%|█████▍    | 70/128 [07:38<06:40,  6.90s/it]data 1211:  62%|██████▎   | 80/128 [08:46<05:28,  6.85s/it]data 1211:  70%|███████   | 90/128 [09:56<04:22,  6.90s/it]data 1211:  78%|███████▊  | 100/128 [11:00<03:09,  6.75s/it]data 1211:  86%|████████▌ | 110/128 [11:57<01:55,  6.42s/it]data 1211:  94%|█████████▍| 120/128 [13:04<00:52,  6.52s/it]data 1211:  94%|█████████▍| 120/128 [14:07<00:56,  7.06s/it]
+INFO:root:函数头: 
+@_constraint_renderers.dispatch_for(sa_schema.UniqueConstraint)
+def _render_unique_constraint(
+    constraint: UniqueConstraint,
+    autogen_context: AutogenContext,
+    namespace_metadata: Optional[MetaData],
+) -> str:
+
+INFO:root:目标函数体: 
+    rendered = _user_defined_render("unique", constraint, autogen_context)
+    if rendered is not False:
+        return rendered
+
+    return _uq_constraint(constraint, autogen_context, False)
+
+INFO:root:生成结果: 
+    rendered = _user_defined_render("unique_constraint", constraint, autogen_context)
+    if rendered is not False:
+        return rendered
+
+    opts = []
+    if constraint.name:
+        opts.append(("name", _render_gen_name(autogen_context, constraint.name)))
+    return "%s%sUniqueConstraint(%s)" % (
+        _sqlalchemy_autogen_prefix(autogen_context),
+        "".join(", ".join("%s=%s" % (kwname, repr(val)) for kwname, val in opts)),
+        ", ".join(_render_colspec(col, namespace_metadata) for col in constraint.columns),
+    )
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10913
+INFO:root:max position: 21857
+INFO:root:context_num: 363
+INFO:root:target_namespace: alembic.alembic<folder>.autogenerate<folder>.render<file>._render_unique_constraint<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:46:58 CST
+
+INFO:root:****************************************
+data 1211:   0%|          | 0/128 [00:00<?, ?it/s]data 1211:   8%|▊         | 10/128 [00:50<10:01,  5.10s/it]data 1211:  16%|█▌        | 20/128 [01:51<10:11,  5.67s/it]

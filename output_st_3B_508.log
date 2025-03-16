@@ -1,0 +1,968 @@
+INFO:root:time: 2025年 03月 16日 星期日 01:27:00 CST
+
+INFO:root:pid: 2331812
+INFO:root:seed: 343
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.16s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.34it/s]
+INFO:root:--------data 508--------
+data 508:   0%|          | 0/128 [00:00<?, ?it/s]data 508:   8%|▊         | 10/128 [00:31<06:14,  3.18s/it]data 508:  16%|█▌        | 20/128 [01:04<05:48,  3.23s/it]data 508:  16%|█▌        | 20/128 [01:11<06:24,  3.56s/it]
+INFO:root:函数头: 
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+
+INFO:root:目标函数体: 
+    
+    codegen = TrackingCodeGenerator(ast.environment)  # type: ignore
+    codegen.visit(ast)
+    return codegen.undeclared_identifiers
+
+INFO:root:生成结果: 
+    visitor = CodeVisitor()
+    visitor.visit(ast)
+    return visitor.undeclared_identifiers
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5401
+INFO:root:max position: 18717
+INFO:root:context_num: 221
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.meta<file>.find_undeclared_variables<func>
+INFO:root:****************************************
+data 508:   0%|          | 0/128 [00:00<?, ?it/s]data 508:   8%|▊         | 10/128 [00:33<06:36,  3.36s/it]data 508:  16%|█▌        | 20/128 [01:08<06:09,  3.42s/it]data 508:  23%|██▎       | 30/128 [01:44<05:43,  3.50s/it]data 508:  31%|███▏      | 40/128 [02:18<05:05,  3.47s/it]data 508:  39%|███▉      | 50/128 [02:54<04:34,  3.52s/it]data 508:  47%|████▋     | 60/128 [03:28<03:55,  3.47s/it]data 508:  55%|█████▍    | 70/128 [04:03<03:22,  3.49s/it]data 508:  62%|██████▎   | 80/128 [04:37<02:46,  3.48s/it]data 508:  70%|███████   | 90/128 [05:14<02:14,  3.53s/it]data 508:  78%|███████▊  | 100/128 [05:46<01:36,  3.44s/it]data 508:  86%|████████▌ | 110/128 [06:22<01:02,  3.49s/it]data 508:  94%|█████████▍| 120/128 [06:57<00:27,  3.49s/it]data 508:  94%|█████████▍| 120/128 [07:28<00:29,  3.74s/it]
+INFO:root:函数头: 
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+
+INFO:root:目标函数体: 
+    
+    codegen = TrackingCodeGenerator(ast.environment)  # type: ignore
+    codegen.visit(ast)
+    return codegen.undeclared_identifiers
+
+INFO:root:生成结果: 
+    # Initialize a set to store undeclared variables
+    undeclared_variables = set()
+
+    # Define a recursive function to traverse the AST
+    def traverse_ast(node):
+        # Check if the node is a variable reference
+        if isinstance(node, nodes.Variable):
+            # Get the variable name from the node
+            variable_name = node.value
+
+            # Check if the variable name is not in the environment's globals
+            if variable_name not in ast.environment.globals:
+                # If not, add it to the set of undeclared variables
+                undeclared_variables.add(variable_name)
+
+        # Traverse the children of the node
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6475
+INFO:root:max position: 18824
+INFO:root:context_num: 332
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.meta<file>.find_undeclared_variables<func>
+INFO:root:****************************************
+data 508:   0%|          | 0/128 [00:00<?, ?it/s]data 508:   8%|▊         | 10/128 [00:31<06:12,  3.16s/it]data 508:  16%|█▌        | 20/128 [01:03<05:45,  3.20s/it]data 508:  23%|██▎       | 30/128 [01:36<05:18,  3.25s/it]data 508:  31%|███▏      | 40/128 [02:09<04:47,  3.26s/it]data 508:  39%|███▉      | 50/128 [02:43<04:16,  3.29s/it]data 508:  47%|████▋     | 60/128 [03:16<03:43,  3.29s/it]data 508:  55%|█████▍    | 70/128 [03:51<03:15,  3.37s/it]data 508:  62%|██████▎   | 80/128 [04:27<02:45,  3.45s/it]data 508:  70%|███████   | 90/128 [05:01<02:10,  3.42s/it]data 508:  78%|███████▊  | 100/128 [05:35<01:35,  3.41s/it]data 508:  86%|████████▌ | 110/128 [06:08<01:00,  3.38s/it]data 508:  94%|█████████▍| 120/128 [06:41<00:26,  3.36s/it]data 508:  94%|█████████▍| 120/128 [07:11<00:28,  3.60s/it]
+INFO:root:函数头: 
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+
+INFO:root:目标函数体: 
+    
+    codegen = TrackingCodeGenerator(ast.environment)  # type: ignore
+    codegen.visit(ast)
+    return codegen.undeclared_identifiers
+
+INFO:root:生成结果: 
+    visited = set()
+    stack = [(ast.root_node)]
+
+    while stack:
+        node, depth = stack.pop()
+
+        if node in visited:
+            continue
+
+        visited.add(node)
+
+        if isinstance(node, nodes.Variable):
+            var_name = node.value
+            if var_name not in ast.environment.globals and var_name not in ast.environment.local_vars:
+                ast.environment.undeclared_variables.add(var_name)
+        elif isinstance(node, nodes.CallBlock):
+            for arg in node.args:
+                stack.append((arg, depth + 1))
+        elif isinstance(node, nodes.FilterBlock):
+            stack.append((node.filter,
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6484
+INFO:root:max position: 18824
+INFO:root:context_num: 347
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.meta<file>.find_undeclared_variables<func>
+INFO:root:****************************************
+INFO:root:--------data 509--------
+data 509:   0%|          | 0/512 [00:00<?, ?it/s]data 509:   2%|▏         | 10/512 [00:41<34:28,  4.12s/it]data 509:   4%|▍         | 20/512 [01:22<33:47,  4.12s/it]data 509:   6%|▌         | 30/512 [02:02<32:36,  4.06s/it]data 509:   8%|▊         | 40/512 [02:44<32:28,  4.13s/it]data 509:  10%|▉         | 50/512 [03:27<32:22,  4.20s/it]data 509:  10%|▉         | 50/512 [03:36<33:21,  4.33s/it]
+INFO:root:函数头: 
+@operation(
+    pipeline_facts={"file": "path"},
+)
+def file(
+    path,
+    present=True,
+    user=None,
+    group=None,
+    mode=None,
+    touch=False,
+    create_remote_dir=True,
+    force=False,
+    force_backup=True,
+    force_backup_dir=None,
+):
+
+INFO:root:目标函数体: 
+    
+
+    path = _validate_path(path)
+
+    mode = ensure_mode_int(mode)
+    info = host.get_fact(File, path=path)
+
+    if info is False:  # not a file
+        yield from _raise_or_remove_invalid_path(
+            "file",
+            path,
+            force,
+            force_backup,
+            force_backup_dir,
+        )
+        info = None
+
+    if not present:
+        if info:
+            yield StringCommand("rm", "-f", QuoteString(path))
+        else:
+            host.noop("file {0} does not exist")
+        return
+
+    if info is None:  # create
+        if create_remote_dir:
+            yield from _create_remote_dir(state, host, path, user, group)
+
+        yield StringCommand("touch", QuoteString(path))
+
+        if mode:
+            yield file_utils.chmod(path, mode)
+        if user or group:
+            yield file_utils.chown(path, user, group)
+
+    else:  # update
+        changed = False
+
+        if touch:
+            changed = True
+            yield StringCommand("touch", QuoteString(path))
+
+        # Check mode
+        if mode and (not info or info["mode"] != mode):
+            yield file_utils.chmod(path, mode)
+            changed = True
+
+        # Check user/group
+        if (user and info["user"] != user) or (group and info["group"] != group):
+            yield file_utils.chown(path, user, group)
+            changed = True
+
+        if not changed:
+            host.noop("file {0} already exists".format(path))
+
+INFO:root:生成结果: 
+    path = _validate_path(path)
+    if touch:
+        yield from touch_file(path)
+    else:
+        yield from ensure_file(path, present=present, user=user, group=group, mode=mode, create_dir=create_dir_dir)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8672
+INFO:root:max position: 20970
+INFO:root:context_num: 284
+INFO:root:target_namespace: pyinfra.pyinfra<folder>.operations<folder>.files<file>.file<func>
+INFO:root:****************************************
+data 509:   0%|          | 0/512 [00:00<?, ?it/s]data 509:   2%|▏         | 10/512 [00:40<33:50,  4.05s/it]data 509:   4%|▍         | 20/512 [01:19<32:31,  3.97s/it]data 509:   6%|▌         | 30/512 [01:58<31:42,  3.95s/it]data 509:   8%|▊         | 40/512 [02:37<30:57,  3.93s/it]data 509:  10%|▉         | 50/512 [03:15<29:49,  3.87s/it]data 509:  12%|█▏        | 60/512 [03:52<28:39,  3.80s/it]data 509:  14%|█▎        | 70/512 [04:32<28:32,  3.88s/it]data 509:  16%|█▌        | 80/512 [05:10<27:47,  3.86s/it]data 509:  18%|█▊        | 90/512 [05:50<27:21,  3.89s/it]data 509:  20%|█▉        | 100/512 [06:28<26:33,  3.87s/it]data 509:  21%|██▏       | 110/512 [07:09<26:27,  3.95s/it]data 509:  23%|██▎       | 120/512 [07:46<25:19,  3.88s/it]data 509:  23%|██▎       | 120/512 [08:07<26:32,  4.06s/it]
+INFO:root:函数头: 
+@operation(
+    pipeline_facts={"file": "path"},
+)
+def file(
+    path,
+    present=True,
+    user=None,
+    group=None,
+    mode=None,
+    touch=False,
+    create_remote_dir=True,
+    force=False,
+    force_backup=True,
+    force_backup_dir=None,
+):
+
+INFO:root:目标函数体: 
+    
+
+    path = _validate_path(path)
+
+    mode = ensure_mode_int(mode)
+    info = host.get_fact(File, path=path)
+
+    if info is False:  # not a file
+        yield from _raise_or_remove_invalid_path(
+            "file",
+            path,
+            force,
+            force_backup,
+            force_backup_dir,
+        )
+        info = None
+
+    if not present:
+        if info:
+            yield StringCommand("rm", "-f", QuoteString(path))
+        else:
+            host.noop("file {0} does not exist")
+        return
+
+    if info is None:  # create
+        if create_remote_dir:
+            yield from _create_remote_dir(state, host, path, user, group)
+
+        yield StringCommand("touch", QuoteString(path))
+
+        if mode:
+            yield file_utils.chmod(path, mode)
+        if user or group:
+            yield file_utils.chown(path, user, group)
+
+    else:  # update
+        changed = False
+
+        if touch:
+            changed = True
+            yield StringCommand("touch", QuoteString(path))
+
+        # Check mode
+        if mode and (not info or info["mode"] != mode):
+            yield file_utils.chmod(path, mode)
+            changed = True
+
+        # Check user/group
+        if (user and info["user"] != user) or (group and info["group"] != group):
+            yield file_utils.chown(path, user, group)
+            changed = True
+
+        if not changed:
+            host.noop("file {0} already exists".format(path))
+
+INFO:root:生成结果: 
+    path = _validate_path(path)
+
+    if touch:
+        yield from files.touch(path)
+        return
+
+    if create_remote_dir:
+        yield from files.ensure_directory(path)
+        return
+
+    if not present:
+        yield from files.remove(path)
+        return
+
+    if mode is not None:
+        yield from files.ensure_mode_int(path, mode)
+        return
+
+    if user is not None:
+        yield from files.ensure_user(path, user)
+        return
+
+    if group is not None:
+        yield from files.ensure_group(path, group)
+        return
+
+    yield from files.ensure_present(path)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8244
+INFO:root:max position: 19225
+INFO:root:context_num: 330
+INFO:root:target_namespace: pyinfra.pyinfra<folder>.operations<folder>.files<file>.file<func>
+INFO:root:****************************************
+data 509:   0%|          | 0/512 [00:00<?, ?it/s]data 509:   2%|▏         | 10/512 [00:39<32:47,  3.92s/it]data 509:   4%|▍         | 20/512 [01:17<31:49,  3.88s/it]data 509:   6%|▌         | 30/512 [01:55<30:52,  3.84s/it]data 509:   8%|▊         | 40/512 [02:35<30:34,  3.89s/it]data 509:  10%|▉         | 50/512 [03:13<29:43,  3.86s/it]data 509:  12%|█▏        | 60/512 [03:53<29:29,  3.92s/it]data 509:  14%|█▎        | 70/512 [04:33<28:54,  3.92s/it]data 509:  16%|█▌        | 80/512 [05:11<28:02,  3.89s/it]data 509:  18%|█▊        | 90/512 [05:49<27:10,  3.86s/it]data 509:  20%|█▉        | 100/512 [06:27<26:30,  3.86s/it]data 509:  21%|██▏       | 110/512 [07:08<26:16,  3.92s/it]data 509:  23%|██▎       | 120/512 [07:45<25:15,  3.87s/it]data 509:  25%|██▌       | 130/512 [08:27<25:06,  3.94s/it]data 509:  27%|██▋       | 140/512 [09:07<24:33,  3.96s/it]data 509:  29%|██▉       | 150/512 [09:44<23:33,  3.90s/it]data 509:  31%|███▏      | 160/512 [10:22<22:44,  3.88s/it]data 509:  33%|███▎      | 170/512 [10:59<21:46,  3.82s/it]data 509:  35%|███▌      | 180/512 [11:37<20:58,  3.79s/it]data 509:  37%|███▋      | 190/512 [12:14<20:15,  3.78s/it]data 509:  39%|███▉      | 200/512 [12:51<19:31,  3.75s/it]data 509:  41%|████      | 210/512 [13:28<18:51,  3.75s/it]data 509:  43%|████▎     | 220/512 [14:05<18:10,  3.73s/it]data 509:  45%|████▍     | 230/512 [14:43<17:39,  3.76s/it]data 509:  47%|████▋     | 240/512 [15:20<16:57,  3.74s/it]data 509:  49%|████▉     | 250/512 [15:58<16:17,  3.73s/it]data 509:  51%|█████     | 260/512 [16:36<15:50,  3.77s/it]data 509:  53%|█████▎    | 270/512 [17:13<15:05,  3.74s/it]data 509:  55%|█████▍    | 280/512 [17:52<14:39,  3.79s/it]data 509:  57%|█████▋    | 290/512 [18:27<13:44,  3.71s/it]data 509:  59%|█████▊    | 300/512 [19:04<13:04,  3.70s/it]data 509:  61%|██████    | 310/512 [19:40<12:22,  3.67s/it]data 509:  62%|██████▎   | 320/512 [20:16<11:42,  3.66s/it]data 509:  64%|██████▍   | 330/512 [20:48<10:38,  3.51s/it]data 509:  66%|██████▋   | 340/512 [21:22<09:59,  3.49s/it]data 509:  68%|██████▊   | 350/512 [21:56<09:20,  3.46s/it]data 509:  70%|███████   | 360/512 [22:30<08:41,  3.43s/it]data 509:  72%|███████▏  | 370/512 [23:03<08:00,  3.38s/it]data 509:  74%|███████▍  | 380/512 [23:38<07:32,  3.43s/it]data 509:  76%|███████▌  | 390/512 [24:11<06:55,  3.40s/it]data 509:  78%|███████▊  | 400/512 [24:45<06:20,  3.40s/it]data 509:  80%|████████  | 410/512 [25:21<05:50,  3.44s/it]data 509:  82%|████████▏ | 420/512 [25:56<05:19,  3.48s/it]data 509:  84%|████████▍ | 430/512 [26:32<04:47,  3.50s/it]data 509:  86%|████████▌ | 440/512 [27:09<04:17,  3.57s/it]data 509:  88%|████████▊ | 450/512 [27:49<03:49,  3.70s/it]data 509:  90%|████████▉ | 460/512 [28:26<03:12,  3.70s/it]data 509:  92%|█████████▏| 470/512 [29:03<02:35,  3.70s/it]data 509:  94%|█████████▍| 480/512 [29:40<01:58,  3.70s/it]data 509:  96%|█████████▌| 490/512 [30:18<01:21,  3.73s/it]data 509:  98%|█████████▊| 500/512 [30:55<00:44,  3.73s/it]data 509: 100%|█████████▉| 510/512 [31:33<00:07,  3.73s/it]data 509: 100%|█████████▉| 510/512 [31:44<00:07,  3.73s/it]
+INFO:root:函数头: 
+@operation(
+    pipeline_facts={"file": "path"},
+)
+def file(
+    path,
+    present=True,
+    user=None,
+    group=None,
+    mode=None,
+    touch=False,
+    create_remote_dir=True,
+    force=False,
+    force_backup=True,
+    force_backup_dir=None,
+):
+
+INFO:root:目标函数体: 
+    
+
+    path = _validate_path(path)
+
+    mode = ensure_mode_int(mode)
+    info = host.get_fact(File, path=path)
+
+    if info is False:  # not a file
+        yield from _raise_or_remove_invalid_path(
+            "file",
+            path,
+            force,
+            force_backup,
+            force_backup_dir,
+        )
+        info = None
+
+    if not present:
+        if info:
+            yield StringCommand("rm", "-f", QuoteString(path))
+        else:
+            host.noop("file {0} does not exist")
+        return
+
+    if info is None:  # create
+        if create_remote_dir:
+            yield from _create_remote_dir(state, host, path, user, group)
+
+        yield StringCommand("touch", QuoteString(path))
+
+        if mode:
+            yield file_utils.chmod(path, mode)
+        if user or group:
+            yield file_utils.chown(path, user, group)
+
+    else:  # update
+        changed = False
+
+        if touch:
+            changed = True
+            yield StringCommand("touch", QuoteString(path))
+
+        # Check mode
+        if mode and (not info or info["mode"] != mode):
+            yield file_utils.chmod(path, mode)
+            changed = True
+
+        # Check user/group
+        if (user and info["user"] != user) or (group and info["group"] != group):
+            yield file_utils.chown(path, user, group)
+            changed = True
+
+        if not changed:
+            host.noop("file {0} already exists".format(path))
+
+INFO:root:生成结果: 
+    path = _validate_path(path)
+
+    if touch:
+        yield from files.touch(path)
+
+    if create_dir_dir and not os.path.exists(path):
+        yield from files.makedirs(path)
+
+    info = None
+    if present:
+        info = host.get_fact(File, path=path)
+
+    if not present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove(path)
+
+    if present and force:
+        yield from files.remove
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8618
+INFO:root:max position: 19846
+INFO:root:context_num: 510
+INFO:root:target_namespace: pyinfra.pyinfra<folder>.operations<folder>.files<file>.file<func>
+INFO:root:****************************************
+INFO:root:已生成509条结果
+INFO:root:--------data 510--------
+data 510:   0%|          | 0/128 [00:00<?, ?it/s]data 510:   8%|▊         | 10/128 [00:25<05:01,  2.55s/it]data 510:  16%|█▌        | 20/128 [00:53<04:53,  2.72s/it]data 510:  23%|██▎       | 30/128 [01:21<04:30,  2.76s/it]data 510:  31%|███▏      | 40/128 [01:49<04:02,  2.76s/it]data 510:  39%|███▉      | 50/128 [02:17<03:35,  2.76s/it]data 510:  39%|███▉      | 50/128 [02:40<04:09,  3.20s/it]
+INFO:root:函数头: 
+def is_destructive(queries):
+
+INFO:root:目标函数体: 
+    
+    keywords = ("drop", "shutdown", "delete", "truncate", "alter")
+    return queries_start_with(queries, keywords)
+
+INFO:root:生成结果: 
+    destructive_keywords = [
+        "DROP", "DELETE", "UPDATE", "TRuncate", "ALTER", "CREATE"
+    ]
+    for query in queries:
+        for keyword in destructive_keywords:
+            if query.upper().startswith(keyword.upper()):
+                return True
+    return False
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8187
+INFO:root:max position: 13868
+INFO:root:context_num: 187
+INFO:root:target_namespace: litecli.litecli<folder>.packages<folder>.parseutils<file>.is_destructive<func>
+INFO:root:****************************************
+data 510:   0%|          | 0/128 [00:00<?, ?it/s]data 510:   8%|▊         | 10/128 [00:25<04:58,  2.53s/it]data 510:  16%|█▌        | 20/128 [00:53<04:49,  2.68s/it]data 510:  23%|██▎       | 30/128 [01:20<04:23,  2.69s/it]data 510:  31%|███▏      | 40/128 [01:46<03:55,  2.68s/it]data 510:  39%|███▉      | 50/128 [02:14<03:30,  2.70s/it]data 510:  47%|████▋     | 60/128 [02:41<03:05,  2.72s/it]data 510:  55%|█████▍    | 70/128 [03:10<02:39,  2.76s/it]data 510:  62%|██████▎   | 80/128 [03:37<02:12,  2.76s/it]data 510:  70%|███████   | 90/128 [04:05<01:45,  2.77s/it]data 510:  78%|███████▊  | 100/128 [04:33<01:17,  2.78s/it]data 510:  86%|████████▌ | 110/128 [05:00<00:49,  2.76s/it]data 510:  94%|█████████▍| 120/128 [05:28<00:22,  2.76s/it]data 510:  94%|█████████▍| 120/128 [05:51<00:23,  2.93s/it]
+INFO:root:函数头: 
+def is_destructive(queries):
+
+INFO:root:目标函数体: 
+    
+    keywords = ("drop", "shutdown", "delete", "truncate", "alter")
+    return queries_start_with(queries, keywords)
+
+INFO:root:生成结果: 
+    # Import necessary modules from the project
+    from litecli packages.special.commands import Command
+    from litecli packages.special.iocommands import IOCommand
+
+    # List of keywords associated with destructive actions
+    destructive_keywords = [
+        "DROP", "DELETE", "TRuncate", "TRUNCATE", "UPDATE", "INSERT INTO",
+        "CREATE TABLE", "CREATE VIEW", "CREATE INDEX", "CREATE FUNCTION",
+        "CREATE PROCEDURE", "CREATE TRIGGER", "CREATE SEQUENCE"
+    ]
+
+    # Check each query in the list
+    for query in queries:
+        # Split the query into words
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8277
+INFO:root:max position: 13876
+INFO:root:context_num: 196
+INFO:root:target_namespace: litecli.litecli<folder>.packages<folder>.parseutils<file>.is_destructive<func>
+INFO:root:****************************************
+data 510:   0%|          | 0/128 [00:00<?, ?it/s]data 510:   8%|▊         | 10/128 [00:25<05:05,  2.59s/it]data 510:  16%|█▌        | 20/128 [00:53<04:53,  2.72s/it]data 510:  23%|██▎       | 30/128 [01:21<04:26,  2.72s/it]data 510:  31%|███▏      | 40/128 [01:49<04:03,  2.77s/it]data 510:  31%|███▏      | 40/128 [02:13<04:52,  3.33s/it]
+INFO:root:函数头: 
+def is_destructive(queries):
+
+INFO:root:目标函数体: 
+    
+    keywords = ("drop", "shutdown", "delete", "truncate", "alter")
+    return queries_start_with(queries, keywords)
+
+INFO:root:生成结果: 
+    destructive_keywords = ["DELETE", "DROP", "TRuncate", "UPDATE"]
+    for query in queries:
+        if any(keyword.lower() in query.lower() for keyword in destructive_keywords):
+            return True
+    return False
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8515
+INFO:root:max position: 13864
+INFO:root:context_num: 177
+INFO:root:target_namespace: litecli.litecli<folder>.packages<folder>.parseutils<file>.is_destructive<func>
+INFO:root:****************************************
+INFO:root:--------data 511--------
+data 511:   0%|          | 0/128 [00:00<?, ?it/s]data 511:   8%|▊         | 10/128 [00:25<05:04,  2.58s/it]data 511:   8%|▊         | 10/128 [00:33<06:37,  3.37s/it]
+INFO:root:函数头: 
+    def main(self, function):
+
+INFO:root:目标函数体: 
+        
+        captured = self.command(function)
+        self.default_command = captured.__name__
+        return captured
+
+INFO:root:生成结果: 
+        self.default_command = function
+        return function
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5185
+INFO:root:max position: 13866
+INFO:root:context_num: 252
+INFO:root:target_namespace: sacred.sacred<folder>.experiment<file>.Experiment<class>.main<func>
+INFO:root:****************************************
+data 511:   0%|          | 0/128 [00:00<?, ?it/s]data 511:   8%|▊         | 10/128 [00:24<04:47,  2.43s/it]data 511:   8%|▊         | 10/128 [00:31<06:14,  3.18s/it]
+INFO:root:函数头: 
+    def main(self, function):
+
+INFO:root:目标函数体: 
+        
+        captured = self.command(function)
+        self.default_command = captured.__name__
+        return captured
+
+INFO:root:生成结果: 
+        self.main_function = function
+        return function
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5237
+INFO:root:max position: 14029
+INFO:root:context_num: 246
+INFO:root:target_namespace: sacred.sacred<folder>.experiment<file>.Experiment<class>.main<func>
+INFO:root:****************************************
+data 511:   0%|          | 0/128 [00:00<?, ?it/s]data 511:   8%|▊         | 10/128 [00:26<05:07,  2.61s/it]data 511:   8%|▊         | 10/128 [00:33<06:37,  3.37s/it]
+INFO:root:函数头: 
+    def main(self, function):
+
+INFO:root:目标函数体: 
+        
+        captured = self.command(function)
+        self.default_command = captured.__name__
+        return captured
+
+INFO:root:生成结果: 
+        self.default_command = function
+        return function
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5628
+INFO:root:max position: 14535
+INFO:root:context_num: 264
+INFO:root:target_namespace: sacred.sacred<folder>.experiment<file>.Experiment<class>.main<func>
+INFO:root:****************************************
+INFO:root:已生成511条结果
+INFO:root:--------data 512--------
+data 512:   0%|          | 0/128 [00:00<?, ?it/s]data 512:   8%|▊         | 10/128 [00:45<08:55,  4.54s/it]data 512:  16%|█▌        | 20/128 [01:33<08:28,  4.71s/it]data 512:  23%|██▎       | 30/128 [02:21<07:46,  4.76s/it]data 512:  31%|███▏      | 40/128 [03:10<07:00,  4.78s/it]data 512:  39%|███▉      | 50/128 [04:01<06:23,  4.92s/it]data 512:  47%|████▋     | 60/128 [04:51<05:36,  4.95s/it]data 512:  47%|████▋     | 60/128 [05:16<05:58,  5.27s/it]
+INFO:root:函数头: 
+def frombase(path1, path2):
+    # type: (Text, Text) -> Text
+
+INFO:root:目标函数体: 
+    
+    if not isparent(path1, path2):
+        raise ValueError("path1 must be a prefix of path2")
+    return path2[len(path1) :]
+
+INFO:root:生成结果: 
+    path1 = normpath(path1)
+    path2 = normpath(path2)
+    common_prefix = commonpath([path1, path2])
+    if common_prefix != path1:
+        raise ValueError("path1 is not a parent directory of path2")
+    return path2[len(common_prefix):]
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8391
+INFO:root:max position: 23701
+INFO:root:context_num: 374
+INFO:root:target_namespace: fs.fs<folder>.path<file>.frombase<func>
+INFO:root:****************************************
+data 512:   0%|          | 0/128 [00:00<?, ?it/s]data 512:   8%|▊         | 10/128 [00:46<09:09,  4.66s/it]data 512:  16%|█▌        | 20/128 [01:34<08:32,  4.75s/it]data 512:  23%|██▎       | 30/128 [02:23<07:49,  4.79s/it]data 512:  31%|███▏      | 40/128 [03:10<07:00,  4.78s/it]data 512:  39%|███▉      | 50/128 [03:59<06:14,  4.81s/it]data 512:  47%|████▋     | 60/128 [04:49<05:31,  4.87s/it]data 512:  55%|█████▍    | 70/128 [05:36<04:40,  4.84s/it]data 512:  55%|█████▍    | 70/128 [06:10<05:07,  5.29s/it]
+INFO:root:函数头: 
+def frombase(path1, path2):
+    # type: (Text, Text) -> Text
+
+INFO:root:目标函数体: 
+    
+    if not isparent(path1, path2):
+        raise ValueError("path1 must be a prefix of path2")
+    return path2[len(path1) :]
+
+INFO:root:生成结果: 
+    path1 = normpath(path1)
+    path2 = normpath(path2)
+    
+    if not path1.endswith("/"):
+        path1 += "/"
+    
+    if not path2.startswith(path1):
+        raise ValueError(f"path2 '{path2}' is not a subdirectory of path1 '{path1}'")
+    
+    return path2[len(path1):]
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8187
+INFO:root:max position: 22532
+INFO:root:context_num: 404
+INFO:root:target_namespace: fs.fs<folder>.path<file>.frombase<func>
+INFO:root:****************************************
+data 512:   0%|          | 0/128 [00:00<?, ?it/s]data 512:   0%|          | 0/128 [00:41<?, ?it/s]
+INFO:root:函数头: 
+def frombase(path1, path2):
+    # type: (Text, Text) -> Text
+
+INFO:root:目标函数体: 
+    
+    if not isparent(path1, path2):
+        raise ValueError("path1 must be a prefix of path2")
+    return path2[len(path1) :]
+
+INFO:root:生成结果: 
+    # Your implementation goes here
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6964
+INFO:root:max position: 22464
+INFO:root:context_num: 194
+INFO:root:target_namespace: fs.fs<folder>.path<file>.frombase<func>
+INFO:root:****************************************
+INFO:root:--------data 513--------
+data 513:   0%|          | 0/156 [00:00<?, ?it/s]data 513:   6%|▋         | 10/156 [00:32<08:00,  3.29s/it]data 513:  13%|█▎        | 20/156 [01:08<07:46,  3.43s/it]data 513:  19%|█▉        | 30/156 [01:44<07:24,  3.53s/it]data 513:  26%|██▌       | 40/156 [02:19<06:49,  3.53s/it]data 513:  32%|███▏      | 50/156 [02:56<06:17,  3.56s/it]data 513:  38%|███▊      | 60/156 [03:32<05:43,  3.58s/it]data 513:  45%|████▍     | 70/156 [04:07<05:07,  3.57s/it]data 513:  51%|█████▏    | 80/156 [04:42<04:29,  3.54s/it]data 513:  58%|█████▊    | 90/156 [05:18<03:53,  3.54s/it]data 513:  64%|██████▍   | 100/156 [05:53<03:17,  3.53s/it]data 513:  64%|██████▍   | 100/156 [05:56<03:19,  3.56s/it]
+INFO:root:函数头: 
+def is_muted(msg: Message, model: Any) -> bool:
+    # PMs cannot be muted
+
+INFO:root:目标函数体: 
+    if msg["type"] == "private":
+        return False
+    # In a topic narrow
+    elif len(model.narrow) == 2:
+        return False
+    elif model.is_muted_stream(msg["stream_id"]):
+        return True
+    elif model.is_muted_topic(msg["stream_id"], msg["subject"]):
+        return True
+    return False
+
+INFO:root:生成结果: 
+    if msg["type"] == "private":
+        return False
+    if model.narrow_type == "private":
+        return False
+    stream_id = msg["stream_id"]
+    topic_name = msg["topic"]
+    stream_muted = model.streams.get(stream_id, {}).get("muted", False)
+    topic_muted = model.topics.get((stream_id, topic_name), {}).get("muted", False)
+    return stream_muted or topic_muted
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8739
+INFO:root:max position: 14733
+INFO:root:context_num: 364
+INFO:root:target_namespace: zulip-term.zulipterminal<folder>.ui_tools<folder>.utils<file>.is_muted<func>
+INFO:root:****************************************
+data 513:   0%|          | 0/156 [00:00<?, ?it/s]data 513:   6%|▋         | 10/156 [00:31<07:46,  3.20s/it]data 513:  13%|█▎        | 20/156 [01:05<07:30,  3.31s/it]data 513:  19%|█▉        | 30/156 [01:43<07:22,  3.51s/it]data 513:  26%|██▌       | 40/156 [02:18<06:46,  3.50s/it]data 513:  32%|███▏      | 50/156 [02:53<06:13,  3.53s/it]data 513:  38%|███▊      | 60/156 [03:28<05:35,  3.50s/it]data 513:  45%|████▍     | 70/156 [04:04<05:02,  3.52s/it]data 513:  51%|█████▏    | 80/156 [04:39<04:27,  3.52s/it]data 513:  58%|█████▊    | 90/156 [05:17<03:57,  3.60s/it]data 513:  58%|█████▊    | 90/156 [05:36<04:06,  3.73s/it]
+INFO:root:函数头: 
+def is_muted(msg: Message, model: Any) -> bool:
+    # PMs cannot be muted
+
+INFO:root:目标函数体: 
+    if msg["type"] == "private":
+        return False
+    # In a topic narrow
+    elif len(model.narrow) == 2:
+        return False
+    elif model.is_muted_stream(msg["stream_id"]):
+        return True
+    elif model.is_muted_topic(msg["stream_id"], msg["subject"]):
+        return True
+    return False
+
+INFO:root:生成结果: 
+    if msg["type"] == "private":
+        return False
+
+    if model.is_narrowed_to_topic():
+        return False
+
+    stream_id = msg["stream_id"]
+    topic_name = msg["topic"]
+
+    stream = model.streams.get(stream_id)
+    if stream and stream.is_muted:
+        return True
+
+    topic = model topics.get(topic_name)
+    if topic and topic.is_muted:
+        return True
+
+    return False
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8491
+INFO:root:max position: 15505
+INFO:root:context_num: 330
+INFO:root:target_namespace: zulip-term.zulipterminal<folder>.ui_tools<folder>.utils<file>.is_muted<func>
+INFO:root:****************************************
+data 513:   0%|          | 0/156 [00:00<?, ?it/s]data 513:   6%|▋         | 10/156 [00:32<07:51,  3.23s/it]data 513:  13%|█▎        | 20/156 [01:06<07:31,  3.32s/it]data 513:  19%|█▉        | 30/156 [01:42<07:17,  3.48s/it]data 513:  26%|██▌       | 40/156 [02:16<06:40,  3.45s/it]data 513:  32%|███▏      | 50/156 [02:51<06:05,  3.45s/it]data 513:  38%|███▊      | 60/156 [03:26<05:34,  3.48s/it]data 513:  45%|████▍     | 70/156 [04:02<05:02,  3.52s/it]data 513:  51%|█████▏    | 80/156 [04:38<04:28,  3.53s/it]data 513:  51%|█████▏    | 80/156 [04:51<04:36,  3.64s/it]
+INFO:root:函数头: 
+def is_muted(msg: Message, model: Any) -> bool:
+    # PMs cannot be muted
+
+INFO:root:目标函数体: 
+    if msg["type"] == "private":
+        return False
+    # In a topic narrow
+    elif len(model.narrow) == 2:
+        return False
+    elif model.is_muted_stream(msg["stream_id"]):
+        return True
+    elif model.is_muted_topic(msg["stream_id"], msg["subject"]):
+        return True
+    return False
+
+INFO:root:生成结果: 
+    if msg["type"] == "private":
+        return False
+
+    if model.is_m narrowed(msg[" narrow"]:
+        return False
+
+    stream_id = msg["stream_id"]
+    topic = msg["topic"]
+
+    stream_muted = model.is_stream_muted(stream_id)
+    topic_muted = model.is_topic_muted(stream_id, topic)
+
+    return stream_muted or topic_muted
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8454
+INFO:root:max position: 14892
+INFO:root:context_num: 320
+INFO:root:target_namespace: zulip-term.zulipterminal<folder>.ui_tools<folder>.utils<file>.is_muted<func>
+INFO:root:****************************************
+INFO:root:已生成513条结果
+INFO:root:--------data 514--------
+data 514:   0%|          | 0/164 [00:00<?, ?it/s]data 514:   6%|▌         | 10/164 [01:01<15:51,  6.18s/it]data 514:  12%|█▏        | 20/164 [02:07<15:20,  6.39s/it]data 514:  18%|█▊        | 30/164 [03:13<14:28,  6.48s/it]data 514:  24%|██▍       | 40/164 [04:20<13:38,  6.60s/it]data 514:  30%|███       | 50/164 [05:27<12:34,  6.62s/it]data 514:  37%|███▋      | 60/164 [06:37<11:40,  6.74s/it]data 514:  43%|████▎     | 70/164 [07:46<10:40,  6.81s/it]data 514:  49%|████▉     | 80/164 [08:53<09:27,  6.75s/it]data 514:  55%|█████▍    | 90/164 [10:04<08:27,  6.86s/it]data 514:  61%|██████    | 100/164 [11:09<07:13,  6.77s/it]data 514:  67%|██████▋   | 110/164 [12:18<06:07,  6.80s/it]data 514:  73%|███████▎  | 120/164 [13:20<04:51,  6.62s/it]data 514:  79%|███████▉  | 130/164 [14:26<03:44,  6.61s/it]data 514:  85%|████████▌ | 140/164 [15:30<02:36,  6.53s/it]data 514:  91%|█████████▏| 150/164 [16:36<01:32,  6.57s/it]data 514:  98%|█████████▊| 160/164 [17:43<00:26,  6.61s/it]data 514:  98%|█████████▊| 160/164 [18:14<00:27,  6.84s/it]
+INFO:root:函数头: 
+    def remove(self, category_name, discriminator):
+
+INFO:root:目标函数体: 
+        intr = self.get(category_name, discriminator)
+        if intr is None:
+            return
+        L = self._refs.pop(intr, [])
+        for d in L:
+            L2 = self._refs[d]
+            L2.remove(intr)
+        category = self._categories[intr.category_name]
+        del category[intr.discriminator]
+        del category[intr.discriminator_hash]
+
+INFO:root:生成结果: 
+        category = self._categories.get(category_name)
+        if category is not None:
+            intr = category.get(discriminator)
+            if intr is not None:
+                del category[discriminator]
+                del self._refs[intr]
+                del intr.order
+                del intr.category_name
+                del intr.discriminator
+                del intr.discriminator_hash
+                del intr._registry
+                del intr._interface
+                del intr._object
+                del intr._name
+                del intr._info
+                del intr._event
+                del intr._parent
+                del intr._children
+                del intr._siblings
+                del intr._parents
+                del intr._children
+                del intr._siblings
+                del intr._parents
+                del intr._children
+                del intr._siblings
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9387
+INFO:root:max position: 29380
+INFO:root:context_num: 978
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspector<class>.remove<func>
+INFO:root:****************************************
+data 514:   0%|          | 0/164 [00:00<?, ?it/s]data 514:   6%|▌         | 10/164 [00:58<15:07,  5.89s/it]data 514:  12%|█▏        | 20/164 [02:06<15:22,  6.41s/it]data 514:  18%|█▊        | 30/164 [03:12<14:27,  6.47s/it]data 514:  24%|██▍       | 40/164 [04:21<13:46,  6.66s/it]data 514:  30%|███       | 50/164 [05:27<12:37,  6.64s/it]data 514:  37%|███▋      | 60/164 [06:39<11:49,  6.82s/it]data 514:  37%|███▋      | 60/164 [07:24<12:51,  7.41s/it]
+INFO:root:函数头: 
+    def remove(self, category_name, discriminator):
+
+INFO:root:目标函数体: 
+        intr = self.get(category_name, discriminator)
+        if intr is None:
+            return
+        L = self._refs.pop(intr, [])
+        for d in L:
+            L2 = self._refs[d]
+            L2.remove(intr)
+        category = self._categories[intr.category_name]
+        del category[intr.discriminator]
+        del category[intr.discriminator_hash]
+
+INFO:root:生成结果: 
+        category = self._categories.get(category_name)
+        if category is not None:
+            intr = category.get(discriminator)
+            if intr is not None:
+                del self._refs[intr]
+                del category[discriminator]
+                del category[intr.discriminator_hash]
+                intr.order = None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9285
+INFO:root:max position: 29135
+INFO:root:context_num: 696
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspector<class>.remove<func>
+INFO:root:****************************************
+data 514:   0%|          | 0/164 [00:00<?, ?it/s]data 514:   6%|▌         | 10/164 [01:00<15:28,  6.03s/it]data 514:  12%|█▏        | 20/164 [02:06<15:19,  6.38s/it]data 514:  18%|█▊        | 30/164 [03:06<13:51,  6.20s/it]data 514:  24%|██▍       | 40/164 [04:21<13:51,  6.70s/it]data 514:  30%|███       | 50/164 [05:29<12:47,  6.74s/it]data 514:  37%|███▋      | 60/164 [06:35<11:37,  6.71s/it]data 514:  43%|████▎     | 70/164 [07:40<10:24,  6.64s/it]data 514:  43%|████▎     | 70/164 [08:18<11:09,  7.12s/it]
+INFO:root:函数头: 
+    def remove(self, category_name, discriminator):
+
+INFO:root:目标函数体: 
+        intr = self.get(category_name, discriminator)
+        if intr is None:
+            return
+        L = self._refs.pop(intr, [])
+        for d in L:
+            L2 = self._refs[d]
+            L2.remove(intr)
+        category = self._categories[intr.category_name]
+        del category[intr.discriminator]
+        del category[intr.discriminator_hash]
+
+INFO:root:生成结果: 
+        category = self._categories.get(category_name)
+        if category is not None:
+            intr = category.get(discriminator)
+            if intr is not None:
+                del category[discriminator]
+                del self._refs[intr]
+                del intr.order
+                del intr.category_name
+                del intr.discriminator
+                del intr.discriminator_hash
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8970
+INFO:root:max position: 30247
+INFO:root:context_num: 702
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspector<class>.remove<func>
+INFO:root:****************************************
+INFO:root:--------data 515--------
+data 515:   0%|          | 0/128 [00:00<?, ?it/s]

@@ -1,0 +1,22 @@
+INFO:root:time: 2025年 03月 14日 星期五 10:52:07 CST
+
+INFO:root:pid: 2853343
+INFO:root:seed: 158
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.38it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.23it/s]
+INFO:root:--------data 516--------
+data 516:   0%|          | 0/512 [00:00<?, ?it/s]data 516:   0%|          | 0/512 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/qikahh/projects/Structured_Code_Context/test_hierarchical_model.py", line 286, in <module>
+    info_dict = hierarchical_model.generate_step(target_namespace=target_namespace,input_ids=input_ids, prefix_kv=prefix_kv, init_context_nodes=init_context)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 1004, in generate_step
+    extend_parts.append(self.extend_nodeseq(part))
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 341, in extend_nodeseq
+    previous_node.length = min(self.max_node, len(previous_node.token_ids))
+                               ^^^^^^^^^^^^^
+AttributeError: 'HierarchicalModel' object has no attribute 'max_node'

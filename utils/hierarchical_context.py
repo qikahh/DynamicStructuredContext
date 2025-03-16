@@ -47,9 +47,10 @@ class ContextNode(object):
         self.end_line = None
         
         self.content = content  # 节点内容
-        
-        self.model = None # 编码所用的模型 
+        self.token_ids = None
         self.length = 0 # 所占的token数量
+        self.model = None # 编码所用的模型 
+        
         # 节点向量, 元素为tensor的unit类型，分别为（key，value，hidden），不同元素对应不同模型层
         # kv和hidden都是和节点的兄弟节点一起编码的
         self.vectors = [] 
@@ -82,19 +83,40 @@ class ContextNode(object):
         """
         获取此节点下所有head节点，如果为file或folder则不深入搜索
         """
-        def dfs(namespace):
+        def dfs(node):
             heads = []
-            for child_ns in context_dict[namespace].children:
+            no_child = True
+            if node.type not in ["function", "class"]:
+                return heads
+            for idx, child_ns in enumerate(node.children):
                 child_node = context_dict[child_ns]
-                if child_node.name == "_head":
+                if idx == 0:
                     heads.append(child_node)
-                elif child_node.type not in ["file", "folder", "code"]:
-                    heads.extend(dfs(child_ns))
+                if child_node.type in ["function", "class"]:
+                    no_child = False
+                    heads.extend(dfs(child_node))
             return heads
         if self.type in ["file", "folder"]:
             return context_dict[self.children[0]]
         else:
-            return dfs(self.namespace)
+            return dfs(self)
+    
+    def dfs_leave(self, context_dict):
+        """
+        搜索此节点下所有叶子节点
+        """
+        def dfs(node):
+            leaves = []
+            for child_ns in node.children:
+                child_node = context_dict[child_ns]
+                if len(child_node.children) == 0:  # 如果当前节点没有子节点，则它是一个叶子节点
+                    leaves.append(child_node)
+                else:
+                    leaves.extend(dfs(child_node))
+            return leaves
+        if len(self.children) == 0:
+            return [self]
+        return dfs(self)
     
 def is_all_comment_block(current_block):
     if len(current_block.strip()) == 0:
@@ -692,7 +714,15 @@ def initial_context(context_dict, target_namespace):
     }
         
 
-def initial_bm25(context_dict, target_namespace, query, tokenizer="cut", init_context=[], top_k=10, max_cross_num = 128, max_infile_num = 32):
+def initial_bm25(context_dict,
+                target_namespace,
+                query, 
+                tokenizer="cut", 
+                init_context=[], 
+                top_k=10, 
+                max_cross_num = 128, 
+                max_file_length = 2048,
+                max_infile_num = 32):
     """
     根据query从context_dict中筛选最相关的函数节点
     参数：
@@ -747,7 +777,7 @@ def initial_bm25(context_dict, target_namespace, query, tokenizer="cut", init_co
             for node in node_list:
                 if node not in cross_list:
                     cross_num += 1
-                    file_length += len(tokenizer.tokenize(node.content))
+                    file_length += min(len(tokenizer.tokenize(node.content)), 256)
                     if cross_num > max_cross_num:
                         flag = True
                         break

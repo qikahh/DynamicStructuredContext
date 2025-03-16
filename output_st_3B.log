@@ -1,7 +1,563 @@
-INFO:root:time: 2025年 03月 11日 星期二 05:12:31 CST
+INFO:root:time: 2025年 03月 12日 星期三 17:32:02 CST
 
-INFO:root:pid: 1332952
-INFO:root:seed: 307
+INFO:root:pid: 137684
+INFO:root:seed: 61
 INFO:root:model: Qwen2.5-Coder-3B-Instruct
 INFO:root:generate: Structure
 INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.90s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.39s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.62s/it]
+INFO:root:--------data 178--------
+data 178:   0%|          | 0/512 [00:00<?, ?it/s]data 178:   2%|▏         | 10/512 [03:12<2:41:25, 19.29s/it]data 178:   4%|▍         | 20/512 [06:10<2:30:48, 18.39s/it]data 178:   6%|▌         | 30/512 [09:02<2:23:30, 17.86s/it]data 178:   8%|▊         | 40/512 [11:56<2:18:50, 17.65s/it]data 178:   8%|▊         | 40/512 [14:31<2:51:18, 21.78s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+
+        key_value = line.split(u'\t', 1)
+        if len(key_value) == 1:
+            key_value.append(None)
+
+        return tuple(key_value)
+
+INFO:root:生成结果: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+        key, value = line.split('\t')
+        return key, value
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 9107
+INFO:root:max position: 27222
+INFO:root:context_num: 484
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextProtocol<class>.read<func>
+INFO:root:****************************************
+data 178:   0%|          | 0/512 [00:00<?, ?it/s]data 178:   2%|▏         | 10/512 [03:00<2:31:14, 18.08s/it]data 178:   4%|▍         | 20/512 [13:35<6:07:24, 44.80s/it]data 178:   6%|▌         | 30/512 [16:45<4:25:01, 32.99s/it]data 178:   8%|▊         | 40/512 [19:48<3:34:07, 27.22s/it]data 178:  10%|▉         | 50/512 [23:51<3:21:25, 26.16s/it]data 178:  12%|█▏        | 60/512 [26:47<2:54:59, 23.23s/it]data 178:  12%|█▏        | 60/512 [27:48<3:29:31, 27.81s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+
+        key_value = line.split(u'\t', 1)
+        if len(key_value) == 1:
+            key_value.append(None)
+
+        return tuple(key_value)
+
+INFO:root:生成结果: 
+        try:
+            line.decode('utf_8')
+        except UnicodeDecodeError:
+            line.decode('latin_1')
+        key_value = line.split('\t', 1)
+        if len(key_value) == 1:
+            key_value.append(None)
+        return tuple(key_value)
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8700
+INFO:root:max position: 28846
+INFO:root:context_num: 528
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextProtocol<class>.read<func>
+INFO:root:****************************************
+data 178:   0%|          | 0/512 [00:00<?, ?it/s]data 178:   2%|▏         | 10/512 [24:02<20:06:50, 144.24s/it]data 178:   4%|▍         | 20/512 [26:48<9:27:10, 69.17s/it]  data 178:   6%|▌         | 30/512 [29:46<6:07:18, 45.72s/it]data 178:   8%|▊         | 40/512 [34:42<5:09:40, 39.37s/it]data 178:   8%|▊         | 40/512 [36:30<7:10:49, 54.77s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+
+        key_value = line.split(u'\t', 1)
+        if len(key_value) == 1:
+            key_value.append(None)
+
+        return tuple(key_value)
+
+INFO:root:生成结果: 
+        try:
+            line.decode('utf_8')
+        except UnicodeDecodeError:
+            line.decode('latin_1')
+        key_value = line.split('\t', 1)
+        return tuple(key_value)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8820
+INFO:root:max position: 27629
+INFO:root:context_num: 463
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextProtocol<class>.read<func>
+INFO:root:****************************************
+data 178:   0%|          | 0/512 [00:00<?, ?it/s]data 178:   2%|▏         | 10/512 [18:59<15:53:34, 113.97s/it]data 178:   4%|▍         | 20/512 [21:49<7:46:42, 56.92s/it]  data 178:   6%|▌         | 30/512 [26:50<5:59:01, 44.69s/it]data 178:   8%|▊         | 40/512 [37:43<6:55:18, 52.79s/it]data 178:  10%|▉         | 50/512 [1:15:56<14:56:37, 116.44s/it]data 178:  12%|█▏        | 60/512 [1:31:10<13:33:17, 107.96s/it]data 178:  12%|█▏        | 60/512 [1:37:41<12:15:54, 97.69s/it] 
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+
+        key_value = line.split(u'\t', 1)
+        if len(key_value) == 1:
+            key_value.append(None)
+
+        return tuple(key_value)
+
+INFO:root:生成结果: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+        key_value = line.split('\t', 1)
+        if len(key_value) == 1:
+            key_value.append('')
+        return tuple(key_value)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8726
+INFO:root:max position: 27188
+INFO:root:context_num: 532
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextProtocol<class>.read<func>
+INFO:root:****************************************
+data 178:   0%|          | 0/512 [00:00<?, ?it/s]data 178:   2%|▏         | 10/512 [11:52<9:56:18, 71.27s/it]data 178:   4%|▍         | 20/512 [29:58<12:44:23, 93.22s/it]data 178:   6%|▌         | 30/512 [36:29<9:10:22, 68.51s/it] data 178:   8%|▊         | 40/512 [39:15<6:17:48, 48.03s/it]data 178:   8%|▊         | 40/512 [41:23<8:08:23, 62.08s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            line = line.decode('utf_8')
+        except UnicodeDecodeError:
+            line = line.decode('latin_1')
+
+        key_value = line.split(u'\t', 1)
+        if len(key_value) == 1:
+            key_value.append(None)
+
+        return tuple(key_value)
+
+INFO:root:生成结果: 
+        try:
+            key_value = line.decode('utf_8').split('\t')
+        except UnicodeDecodeError:
+            key_value = line.decode('latin_1').split('\t')
+        return key_value
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8867
+INFO:root:max position: 26666
+INFO:root:context_num: 453
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextProtocol<class>.read<func>
+INFO:root:****************************************
+INFO:root:--------data 179--------
+data 179:   0%|          | 0/512 [00:00<?, ?it/s]data 179:   2%|▏         | 10/512 [06:38<5:33:05, 39.81s/it]data 179:   4%|▍         | 20/512 [13:35<5:35:33, 40.92s/it]data 179:   6%|▌         | 30/512 [16:32<4:03:49, 30.35s/it]data 179:   6%|▌         | 30/512 [21:55<5:52:11, 43.84s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            return (None, line.decode('utf_8'))
+        except UnicodeDecodeError:
+            return (None, line.decode('latin_1'))
+
+INFO:root:生成结果: 
+        try:
+            line = line.decode('utf-8')
+        except UnicodeDecodeError:
+            line = line.decode('latin-1')
+        return None, line
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8247
+INFO:root:max position: 27500
+INFO:root:context_num: 458
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextValueProtocol<class>.read<func>
+INFO:root:****************************************
+data 179:   0%|          | 0/512 [00:00<?, ?it/s]data 179:   2%|▏         | 10/512 [02:48<2:21:21, 16.90s/it]data 179:   4%|▍         | 20/512 [16:20<7:28:17, 54.67s/it]data 179:   6%|▌         | 30/512 [44:39<14:22:07, 107.32s/it]data 179:   6%|▌         | 30/512 [49:07<13:09:10, 98.24s/it] 
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            return (None, line.decode('utf_8'))
+        except UnicodeDecodeError:
+            return (None, line.decode('latin_1'))
+
+INFO:root:生成结果: 
+        try:
+            return None, line.decode('utf-8')
+        except UnicodeDecodeError:
+            return None, line.decode('latin-1')
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8824
+INFO:root:max position: 26949
+INFO:root:context_num: 444
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextValueProtocol<class>.read<func>
+INFO:root:****************************************
+data 179:   0%|          | 0/512 [00:00<?, ?it/s]data 179:   2%|▏         | 10/512 [12:03<10:05:00, 72.31s/it]data 179:   4%|▍         | 20/512 [24:07<9:53:24, 72.37s/it] data 179:   6%|▌         | 30/512 [32:34<8:21:56, 62.48s/it]data 179:   6%|▌         | 30/512 [38:40<10:21:19, 77.34s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            return (None, line.decode('utf_8'))
+        except UnicodeDecodeError:
+            return (None, line.decode('latin_1'))
+
+INFO:root:生成结果: 
+        try:
+            line = line.decode('utf-8')
+        except UnicodeDecodeError:
+            line = line.decode('latin-1')
+        return None, line
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8173
+INFO:root:max position: 31484
+INFO:root:context_num: 461
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextValueProtocol<class>.read<func>
+INFO:root:****************************************
+data 179:   0%|          | 0/512 [00:00<?, ?it/s]data 179:   2%|▏         | 10/512 [08:05<6:45:59, 48.53s/it]data 179:   4%|▍         | 20/512 [16:28<6:46:41, 49.60s/it]data 179:   6%|▌         | 30/512 [24:23<6:30:42, 48.64s/it]data 179:   6%|▌         | 30/512 [35:41<9:33:31, 71.39s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            return (None, line.decode('utf_8'))
+        except UnicodeDecodeError:
+            return (None, line.decode('latin_1'))
+
+INFO:root:生成结果: 
+        try:
+            line = line.decode('utf-8')
+        except UnicodeDecodeError:
+            line = line.decode('latin-1')
+
+        return (None, line)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8320
+INFO:root:max position: 28109
+INFO:root:context_num: 459
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextValueProtocol<class>.read<func>
+INFO:root:****************************************
+data 179:   0%|          | 0/512 [00:00<?, ?it/s]data 179:   2%|▏         | 10/512 [09:50<8:14:25, 59.09s/it]data 179:   4%|▍         | 20/512 [25:26<10:50:45, 79.36s/it]data 179:   6%|▌         | 30/512 [36:17<9:45:09, 72.84s/it] data 179:   8%|▊         | 40/512 [46:05<8:49:37, 67.32s/it]data 179:  10%|▉         | 50/512 [55:17<8:04:41, 62.95s/it]data 179:  12%|█▏        | 60/512 [1:03:52<7:24:55, 59.06s/it]data 179:  12%|█▏        | 60/512 [1:10:40<8:52:22, 70.67s/it]
+INFO:root:函数头: 
+    def read(self, line):
+
+INFO:root:目标函数体: 
+        try:
+            return (None, line.decode('utf_8'))
+        except UnicodeDecodeError:
+            return (None, line.decode('latin_1'))
+
+INFO:root:生成结果: 
+        try:
+            line = line.decode('utf-8')
+        except UnicodeDecodeError:
+            line = line.decode('latin-1')
+
+        return None, line
+
+        def write(self, key, value):
+            return key.encode('utf-8') + b'\t' + value.encode('utf-8')
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8619
+INFO:root:max position: 30682
+INFO:root:context_num: 585
+INFO:root:target_namespace: mrjob.mrjob<folder>.protocol<file>.TextValueProtocol<class>.read<func>
+INFO:root:****************************************
+INFO:root:已生成179条结果
+INFO:root:--------data 180--------
+data 180:   0%|          | 0/512 [00:00<?, ?it/s]data 180:   0%|          | 0/512 [04:40<?, ?it/s]
+INFO:root:函数头: 
+def file_ext(filename):
+
+INFO:root:目标函数体: 
+    
+    stripped_name = filename.lstrip('.')
+    dot_index = stripped_name.find('.')
+
+    if dot_index == -1:
+        return ''
+    return stripped_name[dot_index:]
+
+INFO:root:生成结果: 
+    return filename.split('.')[-1]
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6838
+INFO:root:max position: 27897
+INFO:root:context_num: 223
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.file_ext<func>
+INFO:root:****************************************
+data 180:   0%|          | 0/512 [00:00<?, ?it/s]data 180:   2%|▏         | 10/512 [05:39<4:43:45, 33.92s/it]data 180:   4%|▍         | 20/512 [11:37<4:47:32, 35.07s/it]data 180:   6%|▌         | 30/512 [18:11<4:57:35, 37.04s/it]data 180:   6%|▌         | 30/512 [21:28<5:45:07, 42.96s/it]
+INFO:root:函数头: 
+def file_ext(filename):
+
+INFO:root:目标函数体: 
+    
+    stripped_name = filename.lstrip('.')
+    dot_index = stripped_name.find('.')
+
+    if dot_index == -1:
+        return ''
+    return stripped_name[dot_index:]
+
+INFO:root:生成结果: 
+    if filename.startswith('.'):
+        filename = filename[1:]
+    try:
+        return filename.split('.', 1)[1]
+    except IndexError:
+        return ''
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7362
+INFO:root:max position: 25531
+INFO:root:context_num: 409
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.file_ext<func>
+INFO:root:****************************************
+data 180:   0%|          | 0/512 [00:00<?, ?it/s]data 180:   2%|▏         | 10/512 [06:58<5:50:15, 41.86s/it]data 180:   4%|▍         | 20/512 [14:11<5:50:20, 42.72s/it]data 180:   6%|▌         | 30/512 [20:49<5:32:26, 41.38s/it]data 180:   6%|▌         | 30/512 [22:44<6:05:23, 45.48s/it]
+INFO:root:函数头: 
+def file_ext(filename):
+
+INFO:root:目标函数体: 
+    
+    stripped_name = filename.lstrip('.')
+    dot_index = stripped_name.find('.')
+
+    if dot_index == -1:
+        return ''
+    return stripped_name[dot_index:]
+
+INFO:root:生成结果: 
+    if not filename:
+        return ""
+    filename = filename.strip('.')
+    try:
+        return filename.split('.')[1]
+    except IndexError:
+        return ""
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7136
+INFO:root:max position: 26007
+INFO:root:context_num: 389
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.file_ext<func>
+INFO:root:****************************************
+data 180:   0%|          | 0/512 [00:00<?, ?it/s]data 180:   2%|▏         | 10/512 [03:51<3:13:37, 23.14s/it]data 180:   4%|▍         | 20/512 [05:32<2:06:51, 15.47s/it]data 180:   6%|▌         | 30/512 [07:07<1:42:14, 12.73s/it]data 180:   8%|▊         | 40/512 [08:45<1:31:01, 11.57s/it]data 180:  10%|▉         | 50/512 [10:29<1:26:03, 11.18s/it]data 180:  12%|█▏        | 60/512 [12:12<1:21:52, 10.87s/it]data 180:  14%|█▎        | 70/512 [24:46<3:55:28, 31.97s/it]data 180:  16%|█▌        | 80/512 [40:16<6:10:00, 51.39s/it]data 180:  18%|█▊        | 90/512 [59:05<8:16:46, 70.63s/it]data 180:  20%|█▉        | 100/512 [1:09:24<7:46:25, 67.93s/it]data 180:  20%|█▉        | 100/512 [1:09:48<4:47:36, 41.88s/it]
+INFO:root:函数头: 
+def file_ext(filename):
+
+INFO:root:目标函数体: 
+    
+    stripped_name = filename.lstrip('.')
+    dot_index = stripped_name.find('.')
+
+    if dot_index == -1:
+        return ''
+    return stripped_name[dot_index:]
+
+INFO:root:生成结果: 
+    # Import the os module to access os.path module functions
+    import os
+
+    # Strip leading "." from the filename
+    filename = filename.strip('.')
+    
+    # Find the index of the first occurrence of "." in the filename
+    dot_index = filename.find('.')
+    
+    # If no "." is found, return an empty string
+    if dot_index == -1:
+        return ''
+    
+    # Return the file extension including the "." character
+    return filename[dot_index:]
+
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 8239
+INFO:root:max position: 27818
+INFO:root:context_num: 567
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.file_ext<func>
+INFO:root:****************************************
+data 180:   0%|          | 0/512 [00:00<?, ?it/s]data 180:   2%|▏         | 10/512 [02:46<2:19:12, 16.64s/it]data 180:   4%|▍         | 20/512 [11:03<4:55:52, 36.08s/it]data 180:   6%|▌         | 30/512 [24:49<7:40:41, 57.35s/it]data 180:   8%|▊         | 40/512 [41:54<9:51:13, 75.15s/it]data 180:   8%|▊         | 40/512 [44:44<8:47:59, 67.12s/it]
+INFO:root:函数头: 
+def file_ext(filename):
+
+INFO:root:目标函数体: 
+    
+    stripped_name = filename.lstrip('.')
+    dot_index = stripped_name.find('.')
+
+    if dot_index == -1:
+        return ''
+    return stripped_name[dot_index:]
+
+INFO:root:生成结果: 
+    if not filename:
+        return ''
+    else:
+        parts = filename.split('.')
+        if len(parts) > 1:
+            return '.' + parts[-1]
+        else:
+            return ''
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7237
+INFO:root:max position: 25270
+INFO:root:context_num: 435
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.file_ext<func>
+INFO:root:****************************************
+INFO:root:--------data 181--------
+data 181:   0%|          | 0/512 [00:00<?, ?it/s]data 181:   2%|▏         | 10/512 [09:00<7:32:13, 54.05s/it]data 181:   2%|▏         | 10/512 [17:52<14:57:33, 107.28s/it]
+INFO:root:函数头: 
+def cmd_line(args):
+
+INFO:root:目标函数体: 
+    
+    args = [str(x) for x in args]
+    return ' '.join(pipes.quote(x) for x in args)
+
+INFO:root:生成结果: 
+    return ' '.join([pipes.quote(arg) for arg in args])
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7606
+INFO:root:max position: 26289
+INFO:root:context_num: 230
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.cmd_line<func>
+INFO:root:****************************************
+data 181:   0%|          | 0/512 [00:00<?, ?it/s]data 181:   2%|▏         | 10/512 [11:47<9:51:58, 70.75s/it]data 181:   2%|▏         | 10/512 [23:48<19:55:19, 142.87s/it]
+INFO:root:函数头: 
+def cmd_line(args):
+
+INFO:root:目标函数体: 
+    
+    args = [str(x) for x in args]
+    return ' '.join(pipes.quote(x) for x in args)
+
+INFO:root:生成结果: 
+    return ' '.join(p pipes.quote(arg) for arg in args)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7628
+INFO:root:max position: 24319
+INFO:root:context_num: 225
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.cmd_line<func>
+INFO:root:****************************************
+data 181:   0%|          | 0/512 [00:00<?, ?it/s]data 181:   2%|▏         | 10/512 [11:37<9:43:28, 69.74s/it]data 181:   2%|▏         | 10/512 [20:44<17:21:10, 124.44s/it]
+INFO:root:函数头: 
+def cmd_line(args):
+
+INFO:root:目标函数体: 
+    
+    args = [str(x) for x in args]
+    return ' '.join(pipes.quote(x) for x in args)
+
+INFO:root:生成结果: 
+    return ' '.join(map(lambda arg: pipes.quote(arg), args))
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7769
+INFO:root:max position: 25705
+INFO:root:context_num: 214
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.cmd_line<func>
+INFO:root:****************************************
+data 181:   0%|          | 0/512 [00:00<?, ?it/s]data 181:   2%|▏         | 10/512 [11:33<9:40:19, 69.36s/it]data 181:   2%|▏         | 10/512 [24:10<20:13:57, 145.09s/it]
+INFO:root:函数头: 
+def cmd_line(args):
+
+INFO:root:目标函数体: 
+    
+    args = [str(x) for x in args]
+    return ' '.join(pipes.quote(x) for x in args)
+
+INFO:root:生成结果: 
+    return ' '.join(p pipes.quote(arg) for arg in args)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7434
+INFO:root:max position: 25074
+INFO:root:context_num: 225
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.cmd_line<func>
+INFO:root:****************************************
+data 181:   0%|          | 0/512 [00:00<?, ?it/s]data 181:   2%|▏         | 10/512 [11:59<10:02:03, 71.96s/it]data 181:   2%|▏         | 10/512 [25:48<21:35:43, 154.87s/it]
+INFO:root:函数头: 
+def cmd_line(args):
+
+INFO:root:目标函数体: 
+    
+    args = [str(x) for x in args]
+    return ' '.join(pipes.quote(x) for x in args)
+
+INFO:root:生成结果: 
+    return ' '.join(p pipes.quote(arg) for arg in args)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7571
+INFO:root:max position: 25214
+INFO:root:context_num: 222
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.cmd_line<func>
+INFO:root:****************************************
+INFO:root:已生成181条结果
+INFO:root:--------data 182--------
+data 182:   0%|          | 0/512 [00:00<?, ?it/s]data 182:   2%|▏         | 10/512 [09:05<7:36:13, 54.53s/it]

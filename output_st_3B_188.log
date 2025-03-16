@@ -1,0 +1,1476 @@
+INFO:root:time: 2025年 03月 13日 星期四 18:14:33 CST
+
+INFO:root:pid: 1904174
+INFO:root:seed: 417
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.16s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.52it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.36it/s]
+INFO:root:--------data 188--------
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:21<18:08,  2.17s/it]data 188:   4%|▍         | 20/512 [00:42<17:08,  2.09s/it]data 188:   6%|▌         | 30/512 [00:55<13:56,  1.74s/it]data 188:   8%|▊         | 40/512 [01:06<11:49,  1.50s/it]data 188:  10%|▉         | 50/512 [01:16<10:13,  1.33s/it]data 188:  12%|█▏        | 60/512 [01:30<10:11,  1.35s/it]data 188:  14%|█▎        | 70/512 [01:45<10:07,  1.37s/it]data 188:  16%|█▌        | 80/512 [01:55<09:06,  1.27s/it]data 188:  18%|█▊        | 90/512 [02:06<08:30,  1.21s/it]data 188:  20%|█▉        | 100/512 [02:15<07:42,  1.12s/it]data 188:  21%|██▏       | 110/512 [02:24<07:09,  1.07s/it]data 188:  23%|██▎       | 120/512 [02:36<07:12,  1.10s/it]data 188:  23%|██▎       | 120/512 [02:38<08:37,  1.32s/it]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    parts = rhostport.split(':', 1)
+    if len(parts) == 2:
+        host, port = parts
+    else:
+        host = parts[0]
+        port = None
+
+    username, password = None, None
+    if '@' in host:
+        username, host = host.split('@', 1)
+        if ':' in username:
+            username, password = username.split(':', 1)
+
+    return username, password, int(port) if port else None, host
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2859
+INFO:root:max position: 6389
+INFO:root:context_num: 181
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:10<08:47,  1.05s/it]data 188:   4%|▍         | 20/512 [00:21<09:04,  1.11s/it]data 188:   6%|▌         | 30/512 [00:31<08:15,  1.03s/it]data 188:   8%|▊         | 40/512 [00:41<08:00,  1.02s/it]data 188:  10%|▉         | 50/512 [00:52<08:00,  1.04s/it]data 188:  12%|█▏        | 60/512 [01:00<07:23,  1.02it/s]data 188:  14%|█▎        | 70/512 [01:08<06:48,  1.08it/s]data 188:  16%|█▌        | 80/512 [01:20<07:13,  1.00s/it]data 188:  18%|█▊        | 90/512 [01:31<07:17,  1.04s/it]data 188:  20%|█▉        | 100/512 [01:40<06:42,  1.02it/s]data 188:  21%|██▏       | 110/512 [01:49<06:28,  1.03it/s]data 188:  23%|██▎       | 120/512 [01:59<06:19,  1.03it/s]data 188:  25%|██▌       | 130/512 [02:08<06:01,  1.06it/s]data 188:  27%|██▋       | 140/512 [02:20<06:21,  1.02s/it]data 188:  29%|██▉       | 150/512 [02:31<06:19,  1.05s/it]data 188:  31%|███▏      | 160/512 [02:43<06:25,  1.09s/it]data 188:  33%|███▎      | 170/512 [02:54<06:17,  1.10s/it]data 188:  35%|███▌      | 180/512 [03:06<06:18,  1.14s/it]data 188:  37%|███▋      | 190/512 [03:19<06:24,  1.19s/it]data 188:  39%|███▉      | 200/512 [03:30<06:02,  1.16s/it]data 188:  41%|████      | 210/512 [03:40<05:29,  1.09s/it]data 188:  43%|████▎     | 220/512 [03:49<05:09,  1.06s/it]data 188:  45%|████▍     | 230/512 [03:59<04:49,  1.03s/it]data 188:  47%|████▋     | 240/512 [04:09<04:33,  1.01s/it]data 188:  49%|████▉     | 250/512 [04:17<04:14,  1.03it/s]data 188:  51%|█████     | 260/512 [04:26<03:52,  1.08it/s]data 188:  53%|█████▎    | 270/512 [04:33<03:29,  1.15it/s]data 188:  55%|█████▍    | 280/512 [04:41<03:18,  1.17it/s]data 188:  57%|█████▋    | 290/512 [04:50<03:12,  1.15it/s]data 188:  59%|█████▊    | 300/512 [05:00<03:10,  1.11it/s]data 188:  61%|██████    | 310/512 [09:15<27:50,  8.27s/it]data 188:  62%|██████▎   | 320/512 [09:28<19:47,  6.19s/it]data 188:  64%|██████▍   | 330/512 [09:43<14:32,  4.79s/it]data 188:  66%|██████▋   | 340/512 [09:56<10:44,  3.75s/it]data 188:  68%|██████▊   | 350/512 [10:10<08:09,  3.02s/it]data 188:  70%|███████   | 360/512 [10:21<06:13,  2.46s/it]data 188:  72%|███████▏  | 370/512 [10:30<04:42,  1.99s/it]data 188:  74%|███████▍  | 380/512 [10:40<03:41,  1.68s/it]data 188:  76%|███████▌  | 390/512 [10:49<02:57,  1.46s/it]data 188:  78%|███████▊  | 400/512 [11:00<02:31,  1.35s/it]data 188:  80%|████████  | 410/512 [11:13<02:15,  1.33s/it]data 188:  82%|████████▏ | 420/512 [11:25<02:00,  1.31s/it]data 188:  84%|████████▍ | 430/512 [11:36<01:41,  1.24s/it]data 188:  86%|████████▌ | 440/512 [11:46<01:24,  1.17s/it]data 188:  88%|████████▊ | 450/512 [11:54<01:05,  1.06s/it]data 188:  90%|████████▉ | 460/512 [15:03<05:33,  6.42s/it]data 188:  92%|█████████▏| 470/512 [15:13<03:20,  4.77s/it]data 188:  94%|█████████▍| 480/512 [15:22<01:55,  3.61s/it]data 188:  96%|█████████▌| 490/512 [15:30<01:00,  2.77s/it]data 188:  98%|█████████▊| 500/512 [15:38<00:26,  2.17s/it]data 188: 100%|█████████▉| 510/512 [15:48<00:03,  1.82s/it]data 188: 100%|█████████▉| 510/512 [15:50<00:03,  1.86s/it]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    import os
+    import socket
+    import struct
+    import platform
+    import subprocess as s
+    import sys
+    import time
+    import errno
+    import select
+    from sshuttle.ssnet import GenericSocketWrapper
+    from sshuttle.helpers import log, debug1, debug2, debug3, Fatal, islocal, \
+     resolvconf_nameservers, which
+    from sshuttle.methods import get_method, Features
+    from sshuttle import __version__
+    from sshuttle import methods
+
+    def parse_hostport(rhostport):
+        """
+        Parse the given rhostport variable looking like [username[:password]@]host[:port]. If only host is given, can be a hostname, IPv4/v6 address or a alias alias from ~/.ssh/config. It returns a tuple containing username, password, port, and host. It first checks if the rhostport is empty and None for all values, Then, it parses the rhostport and extracts the username, password, port, and host based on the given format.
+        :param rhostport. str. The input rhostport variable to be parsed.
+        :return. Tuple. A tuple containing username, password, port, and host.
+        """
+        import os
+        import socket
+        import struct
+        import platform
+        import subprocess as s
+        import sys
+        import time
+        import errno
+        import select
+        from sshuttle.ssnet import GenericSocketWrapper
+        from sshuttle.helpers import log, debug1, debug2, debug3, Fatal, islocal, \
+         resolvconf_nameservers, which
+        from sshuttle.methods import get_method, Features
+        from sshuttle import __version__
+        from sshuttle import methods
+
+        def parse_hostport(rhostport):
+            """
+            Parse the given rhostport variable looking like [username[:password]@]host[:port]. If only host is given, can be a hostname, IPv4/v6 address or a alias alias from ~/.ssh/config. It returns a tuple containing username, password, port, and host. It first checks if the rhostport is empty and None for all values, Then, it parses the rhostport and extracts the username, password, port, and host based on the given format.
+            :param rhostport. str. The input rhostport variable to be parsed.
+            :return. Tuple. A tuple containing username, password, port, and
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5032
+INFO:root:max position: 9120
+INFO:root:context_num: 240
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:09<08:15,  1.01it/s]data 188:   4%|▍         | 20/512 [00:21<08:48,  1.08s/it]data 188:   6%|▌         | 30/512 [00:31<08:22,  1.04s/it]data 188:   8%|▊         | 40/512 [00:39<07:39,  1.03it/s]data 188:  10%|▉         | 50/512 [00:47<06:55,  1.11it/s]data 188:  12%|█▏        | 60/512 [00:55<06:34,  1.15it/s]data 188:  14%|█▎        | 70/512 [01:05<06:44,  1.09it/s]data 188:  16%|█▌        | 80/512 [01:14<06:23,  1.13it/s]data 188:  18%|█▊        | 90/512 [01:21<05:56,  1.18it/s]data 188:  20%|█▉        | 100/512 [01:28<05:29,  1.25it/s]data 188:  21%|██▏       | 110/512 [01:37<05:32,  1.21it/s]data 188:  21%|██▏       | 110/512 [01:42<06:12,  1.08it/s]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    parts = rhostport.split(':')
+    if len(parts) == 2:
+        host, port = parts
+        username = None
+        password = None
+    elif len(parts) == 3:
+        username, password, host = parts
+        port = None
+    else:
+        raise ValueError("Invalid rhostport format")
+
+    if not host:
+        raise ValueError("Invalid rhostport format")
+
+    return username, password, port, host
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3168
+INFO:root:max position: 6435
+INFO:root:context_num: 184
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:09<07:52,  1.06it/s]data 188:   4%|▍         | 20/512 [00:21<09:01,  1.10s/it]data 188:   6%|▌         | 30/512 [00:31<08:24,  1.05s/it]data 188:   8%|▊         | 40/512 [00:39<07:23,  1.07it/s]data 188:  10%|▉         | 50/512 [00:46<06:45,  1.14it/s]data 188:  12%|█▏        | 60/512 [00:56<06:50,  1.10it/s]data 188:  14%|█▎        | 70/512 [01:06<06:55,  1.06it/s]data 188:  16%|█▌        | 80/512 [01:15<06:43,  1.07it/s]data 188:  18%|█▊        | 90/512 [01:23<06:10,  1.14it/s]data 188:  20%|█▉        | 100/512 [01:32<06:03,  1.13it/s]data 188:  21%|██▏       | 110/512 [01:41<05:59,  1.12it/s]data 188:  21%|██▏       | 110/512 [01:46<06:28,  1.03it/s]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    parts = rhostport.split(':')
+    host = parts[-1]
+    port = None
+
+    if len(parts) > 2:
+        port = parts[-2]
+
+    parts = parts[:-2]
+
+    if parts:
+        username_password = parts[0].split('@')
+        username = username_password[0]
+        password = username_password[1] if len(username_password) > 1 else None
+
+    return username, password, port, host
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2908
+INFO:root:max position: 5843
+INFO:root:context_num: 182
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+data 188:   0%|          | 0/512 [00:00<?, ?it/s]data 188:   2%|▏         | 10/512 [00:09<08:01,  1.04it/s]data 188:   4%|▍         | 20/512 [00:22<09:14,  1.13s/it]data 188:   6%|▌         | 30/512 [00:31<08:34,  1.07s/it]data 188:   8%|▊         | 40/512 [00:39<07:20,  1.07it/s]data 188:  10%|▉         | 50/512 [00:48<07:06,  1.08it/s]data 188:  12%|█▏        | 60/512 [00:56<06:46,  1.11it/s]data 188:  14%|█▎        | 70/512 [01:04<06:21,  1.16it/s]data 188:  16%|█▌        | 80/512 [01:13<06:17,  1.14it/s]data 188:  18%|█▊        | 90/512 [01:20<05:39,  1.24it/s]data 188:  20%|█▉        | 100/512 [01:28<05:35,  1.23it/s]data 188:  21%|██▏       | 110/512 [01:37<05:35,  1.20it/s]data 188:  23%|██▎       | 120/512 [01:45<05:21,  1.22it/s]data 188:  25%|██▌       | 130/512 [01:53<05:14,  1.22it/s]data 188:  25%|██▌       | 130/512 [01:59<05:51,  1.09it/s]
+INFO:root:函数头: 
+def parse_hostport(rhostport):
+
+INFO:root:目标函数体: 
+    
+    # leave use of default port to ssh command to prevent overwriting
+    # ports configured in ~/.ssh/config when no port is given
+    if rhostport is None or len(rhostport) == 0:
+        return None, None, None, None
+    port = None
+    username = None
+    password = None
+    host = rhostport
+
+    if "@" in host:
+        # split username (and possible password) from the host[:port]
+        username, host = host.rsplit("@", 1)
+        # Fix #410 bad username error detect
+        if ":" in username:
+            # this will even allow for the username to be empty
+            username, password = username.split(":")
+
+    if ":" in host:
+        # IPv6 address and/or got a port specified
+
+        try:
+            # try to parse host as an IP address,
+            # if that works it is an IPv6 address
+            host = str(ipaddress.ip_address(host))
+        except ValueError:
+            # if that fails parse as URL to get the port
+            parsed = urlparse('//{}'.format(host))
+            try:
+                host = str(ipaddress.ip_address(parsed.hostname))
+            except ValueError:
+                # else if both fails, we have a hostname with port
+                host = parsed.hostname
+            port = parsed.port
+
+    if password is None or len(password) == 0:
+        password = None
+
+    return username, password, port, host
+
+INFO:root:生成结果: 
+    if not rhostport:
+        return None, None, None, None
+
+    parts = rhostport.split(':')
+    host = parts[-1]
+    if len(parts) > 2:
+        port = parts[-1]
+        parts = parts[:-2]
+    else:
+        port = None
+
+    if len(parts) > 0:
+        username_password = parts[0].split('@')
+        username = username_password[0]
+        password = username_password[1] if len(username_password) > 1 else None
+    else:
+        username = None
+        password = None
+
+    return username, password, port, host
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3038
+INFO:root:max position: 5843
+INFO:root:context_num: 204
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.ssh<file>.parse_hostport<func>
+INFO:root:****************************************
+INFO:root:--------data 189--------
+data 189:   0%|          | 0/512 [00:00<?, ?it/s]data 189:   2%|▏         | 10/512 [00:16<13:28,  1.61s/it]data 189:   4%|▍         | 20/512 [00:30<12:21,  1.51s/it]data 189:   6%|▌         | 30/512 [00:43<11:14,  1.40s/it]data 189:   6%|▌         | 30/512 [00:44<11:49,  1.47s/it]
+INFO:root:函数头: 
+def stringified_dict_contains_value(key, value, str_dict):
+
+INFO:root:目标函数体: 
+    
+    if not str_dict:
+        return False
+    value = str(value)
+    try:
+        # + 3 for key right quote, one for colon and one for space
+        key_index = str_dict.index(key) + len(key) + 3
+    except ValueError:
+        return False
+    try:
+        comma_index = str_dict.index(',', key_index)
+    except ValueError:
+        # last value in dict
+        comma_index = str_dict.index('}', key_index)
+    return str(value) == str_dict[key_index:comma_index].strip('"\'')
+
+INFO:root:生成结果: 
+    try:
+        dict_obj = eval(str_dict)
+        return dict_obj.get(key) == value
+    except Exception:
+        return False
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1799
+INFO:root:max position: 5356
+INFO:root:context_num: 100
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.search<file>.stringified_dict_contains_value<func>
+INFO:root:****************************************
+data 189:   0%|          | 0/512 [00:00<?, ?it/s]data 189:   2%|▏         | 10/512 [00:12<10:30,  1.26s/it]data 189:   4%|▍         | 20/512 [00:24<09:58,  1.22s/it]data 189:   6%|▌         | 30/512 [00:35<09:16,  1.15s/it]data 189:   8%|▊         | 40/512 [00:52<10:57,  1.39s/it]data 189:  10%|▉         | 50/512 [01:06<10:38,  1.38s/it]data 189:  12%|█▏        | 60/512 [01:18<09:53,  1.31s/it]data 189:  14%|█▎        | 70/512 [01:30<09:32,  1.30s/it]data 189:  14%|█▎        | 70/512 [01:41<10:43,  1.46s/it]
+INFO:root:函数头: 
+def stringified_dict_contains_value(key, value, str_dict):
+
+INFO:root:目标函数体: 
+    
+    if not str_dict:
+        return False
+    value = str(value)
+    try:
+        # + 3 for key right quote, one for colon and one for space
+        key_index = str_dict.index(key) + len(key) + 3
+    except ValueError:
+        return False
+    try:
+        comma_index = str_dict.index(',', key_index)
+    except ValueError:
+        # last value in dict
+        comma_index = str_dict.index('}', key_index)
+    return str(value) == str_dict[key_index:comma_index].strip('"\'')
+
+INFO:root:生成结果: 
+    try:
+        # Convert the string dictionary to a dictionary object
+        dict_obj = eval(str_dict)
+        # Check if the key/value pair exists in the dictionary
+        return dict_obj.get(key) == value
+    except Exception as e:
+        # Handle any exceptions that may occur during evaluation
+        print(f"Error evaluating dictionary: {e}")
+        return False
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2146
+INFO:root:max position: 6300
+INFO:root:context_num: 116
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.search<file>.stringified_dict_contains_value<func>
+INFO:root:****************************************
+data 189:   0%|          | 0/512 [00:00<?, ?it/s]data 189:   2%|▏         | 10/512 [00:10<08:36,  1.03s/it]data 189:   4%|▍         | 20/512 [00:20<08:19,  1.01s/it]data 189:   6%|▌         | 30/512 [00:30<08:14,  1.03s/it]data 189:   8%|▊         | 40/512 [00:40<07:55,  1.01s/it]data 189:  10%|▉         | 50/512 [00:50<07:38,  1.01it/s]data 189:  12%|█▏        | 60/512 [01:01<07:43,  1.03s/it]data 189:  14%|█▎        | 70/512 [01:12<07:47,  1.06s/it]data 189:  14%|█▎        | 70/512 [01:22<08:41,  1.18s/it]
+INFO:root:函数头: 
+def stringified_dict_contains_value(key, value, str_dict):
+
+INFO:root:目标函数体: 
+    
+    if not str_dict:
+        return False
+    value = str(value)
+    try:
+        # + 3 for key right quote, one for colon and one for space
+        key_index = str_dict.index(key) + len(key) + 3
+    except ValueError:
+        return False
+    try:
+        comma_index = str_dict.index(',', key_index)
+    except ValueError:
+        # last value in dict
+        comma_index = str_dict.index('}', key_index)
+    return str(value) == str_dict[key_index:comma_index].strip('"\'')
+
+INFO:root:生成结果: 
+    try:
+        # Implement the function body based on the provided code prefix and other resources in safe manner without generating/search.py).
+        pass
+    except_dict = parse_search_terms(search_terms)
+    for term in terms:
+        if term.startswith('result'):
+            result_key = term[6:]
+            if result_key in task_result:
+                task_results in task_result[result_key]:
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2669
+INFO:root:max position: 5430
+INFO:root:context_num: 116
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.search<file>.stringified_dict_contains_value<func>
+INFO:root:****************************************
+data 189:   0%|          | 0/512 [00:00<?, ?it/s]data 189:   2%|▏         | 10/512 [00:10<08:31,  1.02s/it]data 189:   4%|▍         | 20/512 [00:19<07:56,  1.03it/s]data 189:   6%|▌         | 30/512 [00:29<07:48,  1.03it/s]data 189:   8%|▊         | 40/512 [00:40<08:00,  1.02s/it]data 189:  10%|▉         | 50/512 [00:50<07:49,  1.02s/it]data 189:  12%|█▏        | 60/512 [01:01<08:00,  1.06s/it]data 189:  14%|█▎        | 70/512 [01:13<08:05,  1.10s/it]data 189:  16%|█▌        | 80/512 [01:23<07:37,  1.06s/it]data 189:  16%|█▌        | 80/512 [01:30<08:08,  1.13s/it]
+INFO:root:函数头: 
+def stringified_dict_contains_value(key, value, str_dict):
+
+INFO:root:目标函数体: 
+    
+    if not str_dict:
+        return False
+    value = str(value)
+    try:
+        # + 3 for key right quote, one for colon and one for space
+        key_index = str_dict.index(key) + len(key) + 3
+    except ValueError:
+        return False
+    try:
+        comma_index = str_dict.index(',', key_index)
+    except ValueError:
+        # last value in dict
+        comma_index = str_dict.index('}', key_index)
+    return str(value) == str_dict[key_index:comma_index].strip('"\'')
+
+INFO:root:生成结果: 
+    try:
+        parsed_dict = json.loads(str_dict)
+        parsed_dict.update(parse_search_terms(parsed_dict))
+        parsed_search_terms = parse_search_terms(parsed_dict)
+        parsed_dict.update(parsed_search_terms)
+        parsed_dict =        parsed_dict.update(parsed_search_terms)
+        if parsed_dict.get(key) == value:
+            return True
+        else:
+            return False
+    except json.JSONDecodeError:
+        return False
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2082
+INFO:root:max position: 5939
+INFO:root:context_num: 115
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.search<file>.stringified_dict_contains_value<func>
+INFO:root:****************************************
+data 189:   0%|          | 0/512 [00:00<?, ?it/s]data 189:   2%|▏         | 10/512 [00:10<08:27,  1.01s/it]data 189:   4%|▍         | 20/512 [00:20<08:16,  1.01s/it]data 189:   6%|▌         | 30/512 [00:30<08:06,  1.01s/it]data 189:   8%|▊         | 40/512 [00:40<07:56,  1.01s/it]data 189:  10%|▉         | 50/512 [00:49<07:38,  1.01it/s]data 189:  12%|█▏        | 60/512 [00:59<07:25,  1.01it/s]data 189:  14%|█▎        | 70/512 [01:10<07:22,  1.00s/it]data 189:  14%|█▎        | 70/512 [01:17<08:06,  1.10s/it]
+INFO:root:函数头: 
+def stringified_dict_contains_value(key, value, str_dict):
+
+INFO:root:目标函数体: 
+    
+    if not str_dict:
+        return False
+    value = str(value)
+    try:
+        # + 3 for key right quote, one for colon and one for space
+        key_index = str_dict.index(key) + len(key) + 3
+    except ValueError:
+        return False
+    try:
+        comma_index = str_dict.index(',', key_index)
+    except ValueError:
+        # last value in dict
+        comma_index = str_dict.index('}', key_index)
+    return str(value) == str_dict[key_index:comma_index].strip('"\'')
+
+INFO:root:生成结果: 
+    try:
+        # Convert the string dictionary to a dictionary object
+        dict_obj = eval(str_dict)
+        # Check if the key/value pair exists in the dictionary object
+        return dict_obj.get(key)strip() == value.strip()
+    except (SyntaxError, ValueError):
+        # If the string dictionary is not valid, return False
+        return False
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1932
+INFO:root:max position: 5624
+INFO:root:context_num: 108
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.search<file>.stringified_dict_contains_value<func>
+INFO:root:****************************************
+INFO:root:已生成189条结果
+INFO:root:--------data 190--------
+data 190:   0%|          | 0/512 [00:00<?, ?it/s]data 190:   2%|▏         | 10/512 [00:11<09:47,  1.17s/it]data 190:   4%|▍         | 20/512 [00:25<10:33,  1.29s/it]data 190:   6%|▌         | 30/512 [00:38<10:36,  1.32s/it]data 190:   8%|▊         | 40/512 [00:51<10:11,  1.30s/it]data 190:  10%|▉         | 50/512 [01:03<09:36,  1.25s/it]data 190:  10%|▉         | 50/512 [01:09<10:46,  1.40s/it]
+INFO:root:函数头: 
+def abs_path(path):
+
+INFO:root:目标函数体: 
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        cwd = os.environ.get('PWD') or os.getcwd()
+        path = os.path.join(cwd, path)
+    return path
+
+INFO:root:生成结果: 
+    import os
+    import sys
+    import posixpath
+    import posixutil
+
+    path = posixpath.expanduser(path)
+    if not os.path.isabs(path):
+        path = posixpath.join(posixutil.getcwd(), path)
+    return path
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1940
+INFO:root:max position: 4713
+INFO:root:context_num: 91
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.abs_path<func>
+INFO:root:****************************************
+data 190:   0%|          | 0/512 [00:00<?, ?it/s]data 190:   2%|▏         | 10/512 [00:10<08:48,  1.05s/it]data 190:   4%|▍         | 20/512 [00:21<08:50,  1.08s/it]data 190:   6%|▌         | 30/512 [00:31<08:30,  1.06s/it]data 190:   8%|▊         | 40/512 [00:41<08:08,  1.04s/it]data 190:   8%|▊         | 40/512 [00:51<10:05,  1.28s/it]
+INFO:root:函数头: 
+def abs_path(path):
+
+INFO:root:目标函数体: 
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        cwd = os.environ.get('PWD') or os.getcwd()
+        path = os.path.join(cwd, path)
+    return path
+
+INFO:root:生成结果: 
+    import os
+    import os.path
+    import sys
+
+    path = os.path.expanduser(path)
+    if os.path.isabs(path):
+        return path
+    else:
+        return os.path.join(os.getcwd(), path)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1742
+INFO:root:max position: 4892
+INFO:root:context_num: 94
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.abs_path<func>
+INFO:root:****************************************
+data 190:   0%|          | 0/512 [00:00<?, ?it/s]data 190:   2%|▏         | 10/512 [00:08<07:15,  1.15it/s]data 190:   4%|▍         | 20/512 [00:18<07:32,  1.09it/s]data 190:   6%|▌         | 30/512 [00:28<07:41,  1.04it/s]data 190:   8%|▊         | 40/512 [00:38<07:41,  1.02it/s]data 190:  10%|▉         | 50/512 [00:48<07:43,  1.00s/it]data 190:  10%|▉         | 50/512 [00:53<08:17,  1.08s/it]
+INFO:root:函数头: 
+def abs_path(path):
+
+INFO:root:目标函数体: 
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        cwd = os.environ.get('PWD') or os.getcwd()
+        path = os.path.join(cwd, path)
+    return path
+
+INFO:root:生成结果: 
+    import os
+    import os.path
+
+    expanded_path_path = os.path.expanduser(path)
+    if os.path.isabs(expanded_path_path):
+        return expanded_path_path
+    else:
+        return os.path.join(os.getcwd(), expanded_path_path)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1799
+INFO:root:max position: 5121
+INFO:root:context_num: 90
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.abs_path<func>
+INFO:root:****************************************
+data 190:   0%|          | 0/512 [00:00<?, ?it/s]data 190:   2%|▏         | 10/512 [00:09<08:07,  1.03it/s]data 190:   4%|▍         | 20/512 [00:19<07:52,  1.04it/s]data 190:   6%|▌         | 30/512 [00:28<07:33,  1.06it/s]data 190:   8%|▊         | 40/512 [00:38<07:30,  1.05it/s]data 190:   8%|▊         | 40/512 [00:39<07:43,  1.02it/s]
+INFO:root:函数头: 
+def abs_path(path):
+
+INFO:root:目标函数体: 
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        cwd = os.environ.get('PWD') or os.getcwd()
+        path = os.path.join(cwd, path)
+    return path
+
+INFO:root:生成结果: 
+    import os
+    path = os.path.expandvars.expandvars(path)
+    if not os.path.isabs(path):
+        path = os.path.join(os.getcwd(), path)
+    return path
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1662
+INFO:root:max position: 5219
+INFO:root:context_num: 91
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.abs_path<func>
+INFO:root:****************************************
+data 190:   0%|          | 0/512 [00:00<?, ?it/s]data 190:   2%|▏         | 10/512 [00:09<07:38,  1.09it/s]data 190:   4%|▍         | 20/512 [00:20<08:19,  1.02s/it]data 190:   6%|▌         | 30/512 [00:30<08:12,  1.02s/it]data 190:   8%|▊         | 40/512 [00:39<07:39,  1.03it/s]data 190:  10%|▉         | 50/512 [00:49<07:42,  1.00s/it]data 190:  12%|█▏        | 60/512 [01:00<07:48,  1.04s/it]data 190:  14%|█▎        | 70/512 [01:13<08:04,  1.10s/it]data 190:  16%|█▌        | 80/512 [01:25<08:11,  1.14s/it]data 190:  18%|█▊        | 90/512 [01:39<08:40,  1.23s/it]data 190:  20%|█▉        | 100/512 [01:51<08:26,  1.23s/it]data 190:  21%|██▏       | 110/512 [02:02<07:52,  1.18s/it]data 190:  23%|██▎       | 120/512 [02:12<07:16,  1.11s/it]data 190:  23%|██▎       | 120/512 [02:18<07:33,  1.16s/it]
+INFO:root:函数头: 
+def abs_path(path):
+
+INFO:root:目标函数体: 
+    path = os.path.expanduser(path)
+    if not os.path.isabs(path):
+        cwd = os.environ.get('PWD') or os.getcwd()
+        path = os.path.join(cwd, path)
+    return path
+
+INFO:root:生成结果: 
+    import os.path
+    import os
+    import os.path
+    import os.path
+    import os.path.expanduser
+    import os.path.join
+    import os.path.abspath
+    import os.path.isabs
+    import os.path.dirname
+    import os.path.basename
+    import os.path.exists
+    import os.path.isfile
+    import os.path.isdir
+    import os.path.islink
+    import os.path.ismount
+    import os.path.isdir
+    import os.path.isfile
+    import os.path.isdir
+    import os.path.ismount
+    import os.path.ismount
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1767
+INFO:root:max position: 5909
+INFO:root:context_num: 119
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.abs_path<func>
+INFO:root:****************************************
+INFO:root:--------data 191--------
+data 191:   0%|          | 0/512 [00:00<?, ?it/s]data 191:   2%|▏         | 10/512 [00:15<13:06,  1.57s/it]data 191:   4%|▍         | 20/512 [00:31<12:43,  1.55s/it]data 191:   6%|▌         | 30/512 [00:46<12:26,  1.55s/it]data 191:   8%|▊         | 40/512 [00:59<11:16,  1.43s/it]data 191:  10%|▉         | 50/512 [01:13<11:04,  1.44s/it]data 191:  12%|█▏        | 60/512 [01:24<09:50,  1.31s/it]data 191:  14%|█▎        | 70/512 [01:36<09:23,  1.27s/it]data 191:  14%|█▎        | 70/512 [01:44<11:02,  1.50s/it]
+INFO:root:函数头: 
+def strtobool(val):
+
+INFO:root:目标函数体: 
+    
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return 1
+    if val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return 0
+    raise ValueError(f"invalid truth value {val!r}")
+
+INFO:root:生成结果: 
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return 1
+    elif val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return 0
+    else:
+        raise ValueError(f"invalid truth value '{val}'")
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2126
+INFO:root:max position: 6501
+INFO:root:context_num: 130
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.strtobool<func>
+INFO:root:****************************************
+data 191:   0%|          | 0/512 [00:00<?, ?it/s]data 191:   2%|▏         | 10/512 [00:10<08:47,  1.05s/it]data 191:   4%|▍         | 20/512 [00:20<08:34,  1.05s/it]data 191:   6%|▌         | 30/512 [00:31<08:26,  1.05s/it]data 191:   8%|▊         | 40/512 [00:41<08:04,  1.03s/it]data 191:  10%|▉         | 50/512 [00:52<08:13,  1.07s/it]data 191:  12%|█▏        | 60/512 [01:01<07:33,  1.00s/it]data 191:  12%|█▏        | 60/512 [01:07<08:26,  1.12s/it]
+INFO:root:函数头: 
+def strtobool(val):
+
+INFO:root:目标函数体: 
+    
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return 1
+    if val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return 0
+    raise ValueError(f"invalid truth value {val!r}")
+
+INFO:root:生成结果: 
+    import logging
+    import re
+
+    logger = logging.getLogger(__name__)
+
+    truthy = {'yes': True, 'true': True, 'on': True, '1': True}
+    falsy = {'no': False, 'false': False, 'off': False, '0': False}
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2180
+INFO:root:max position: 5367
+INFO:root:context_num: 110
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.strtobool<func>
+INFO:root:****************************************
+data 191:   0%|          | 0/512 [00:00<?, ?it/s]data 191:   2%|▏         | 10/512 [00:09<08:13,  1.02it/s]data 191:   2%|▏         | 10/512 [00:18<15:24,  1.84s/it]
+INFO:root:函数头: 
+def strtobool(val):
+
+INFO:root:目标函数体: 
+    
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return 1
+    if val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return 0
+    raise ValueError(f"invalid truth value {val!r}")
+
+INFO:root:生成结果: 
+    import os
+    import sys
+    import logging
+    return False
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1188
+INFO:root:max position: 6383
+INFO:root:context_num: 54
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.strtobool<func>
+INFO:root:****************************************
+data 191:   0%|          | 0/512 [00:00<?, ?it/s]data 191:   2%|▏         | 10/512 [00:10<08:33,  1.02s/it]data 191:   4%|▍         | 20/512 [00:22<09:17,  1.13s/it]data 191:   6%|▌         | 30/512 [00:33<09:11,  1.15s/it]data 191:   8%|▊         | 40/512 [00:44<08:35,  1.09s/it]data 191:  10%|▉         | 50/512 [00:54<08:09,  1.06s/it]data 191:  12%|█▏        | 60/512 [01:04<07:55,  1.05s/it]data 191:  14%|█▎        | 70/512 [01:16<08:02,  1.09s/it]data 191:  16%|█▌        | 80/512 [01:27<07:57,  1.11s/it]data 191:  18%|█▊        | 90/512 [01:40<08:07,  1.15s/it]data 191:  20%|█▉        | 100/512 [01:51<07:55,  1.15s/it]data 191:  21%|██▏       | 110/512 [02:04<08:03,  1.20s/it]data 191:  23%|██▎       | 120/512 [02:18<08:15,  1.26s/it]data 191:  25%|██▌       | 130/512 [02:34<08:36,  1.35s/it]data 191:  27%|██▋       | 140/512 [02:46<08:11,  1.32s/it]data 191:  29%|██▉       | 150/512 [02:59<07:51,  1.30s/it]data 191:  31%|███▏      | 160/512 [03:12<07:35,  1.29s/it]data 191:  33%|███▎      | 170/512 [03:24<07:20,  1.29s/it]data 191:  35%|███▌      | 180/512 [03:34<06:34,  1.19s/it]data 191:  37%|███▋      | 190/512 [03:45<06:12,  1.16s/it]data 191:  39%|███▉      | 200/512 [03:58<06:18,  1.21s/it]data 191:  41%|████      | 210/512 [04:10<06:02,  1.20s/it]data 191:  43%|████▎     | 220/512 [04:24<06:04,  1.25s/it]data 191:  45%|████▍     | 230/512 [04:35<05:42,  1.21s/it]data 191:  45%|████▍     | 230/512 [04:40<05:43,  1.22s/it]
+INFO:root:函数头: 
+def strtobool(val):
+
+INFO:root:目标函数体: 
+    
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return 1
+    if val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return 0
+    raise ValueError(f"invalid truth value {val!r}")
+
+INFO:root:生成结果: 
+    try:
+        val_lower = val.lower()
+        if val_lower in ('yes', 'true', 'on', '1'):
+            return 1
+        elif val_lower in ('no', ' false', 'off', '0'):
+            return {
+                'user': user,
+                'task_id': task_id,
+                'status': status,
+                'queue': port,
+                'queue': queue,
+                'workername': workername,
+                'workerhostname': workerhostname,
+                'workerinfo': workerinfo,
+                'workerinfo_json': taskinfo_json,
+                'taskinfo_json_raw': taskinfo_json_raw,
+                'taskinfo_json_raw_json': taskinfo_json_raw_json,
+                'taskinfo_json_raw_json_json_json': taskinfo_json_raw_json_json_json,
+                'taskinfo_json_raw_json_json_json_json': taskinfo_json_raw_json_json_json_json_json,
+                'taskinfo_json_raw_json_json_json_json_json': val.lower() == 'true'
+            return True
+        else:
+            raise ValueError(f"Invalid boolean value: {val}")
+    except Exception as e:
+        raise e
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2598
+INFO:root:max position: 6396
+INFO:root:context_num: 173
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.strtobool<func>
+INFO:root:****************************************
+data 191:   0%|          | 0/512 [00:00<?, ?it/s]data 191:   2%|▏         | 10/512 [00:11<09:50,  1.18s/it]data 191:   4%|▍         | 20/512 [00:22<09:15,  1.13s/it]data 191:   6%|▌         | 30/512 [00:33<08:46,  1.09s/it]data 191:   8%|▊         | 40/512 [00:44<08:45,  1.11s/it]data 191:  10%|▉         | 50/512 [00:56<08:42,  1.13s/it]data 191:  12%|█▏        | 60/512 [01:07<08:32,  1.13s/it]data 191:  14%|█▎        | 70/512 [01:17<07:57,  1.08s/it]data 191:  16%|█▌        | 80/512 [01:28<07:51,  1.09s/it]data 191:  18%|█▊        | 90/512 [01:41<08:02,  1.14s/it]data 191:  20%|█▉        | 100/512 [01:54<08:11,  1.19s/it]data 191:  21%|██▏       | 110/512 [02:07<08:21,  1.25s/it]data 191:  23%|██▎       | 120/512 [02:22<08:32,  1.31s/it]data 191:  25%|██▌       | 130/512 [02:36<08:27,  1.33s/it]data 191:  27%|██▋       | 140/512 [02:49<08:18,  1.34s/it]data 191:  29%|██▉       | 150/512 [03:03<08:10,  1.35s/it]data 191:  31%|███▏      | 160/512 [03:18<08:15,  1.41s/it]data 191:  33%|███▎      | 170/512 [03:32<07:53,  1.38s/it]data 191:  35%|███▌      | 180/512 [03:41<06:54,  1.25s/it]data 191:  37%|███▋      | 190/512 [03:52<06:23,  1.19s/it]data 191:  39%|███▉      | 200/512 [04:02<05:57,  1.15s/it]data 191:  41%|████      | 210/512 [04:12<05:36,  1.11s/it]data 191:  43%|████▎     | 220/512 [04:25<05:39,  1.16s/it]data 191:  45%|████▍     | 230/512 [04:40<05:50,  1.24s/it]data 191:  47%|████▋     | 240/512 [04:53<05:48,  1.28s/it]data 191:  49%|████▉     | 250/512 [05:07<05:44,  1.32s/it]data 191:  51%|█████     | 260/512 [05:21<05:36,  1.34s/it]data 191:  53%|█████▎    | 270/512 [05:36<05:34,  1.38s/it]data 191:  55%|█████▍    | 280/512 [05:52<05:35,  1.45s/it]data 191:  57%|█████▋    | 290/512 [06:06<05:21,  1.45s/it]data 191:  59%|█████▊    | 300/512 [06:19<04:55,  1.39s/it]data 191:  61%|██████    | 310/512 [06:32<04:32,  1.35s/it]data 191:  62%|██████▎   | 320/512 [06:42<04:03,  1.27s/it]data 191:  64%|██████▍   | 330/512 [06:54<03:43,  1.23s/it]data 191:  66%|██████▋   | 340/512 [08:07<08:45,  3.06s/it]data 191:  68%|██████▊   | 350/512 [08:20<06:48,  2.52s/it]data 191:  70%|███████   | 360/512 [08:32<05:27,  2.15s/it]data 191:  72%|███████▏  | 370/512 [08:44<04:23,  1.85s/it]data 191:  74%|███████▍  | 380/512 [08:56<03:40,  1.67s/it]data 191:  76%|███████▌  | 390/512 [09:08<03:04,  1.51s/it]data 191:  78%|███████▊  | 400/512 [09:19<02:37,  1.41s/it]data 191:  80%|████████  | 410/512 [09:30<02:13,  1.31s/it]data 191:  82%|████████▏ | 420/512 [09:42<01:55,  1.26s/it]data 191:  84%|████████▍ | 430/512 [09:52<01:37,  1.19s/it]data 191:  86%|████████▌ | 440/512 [10:03<01:22,  1.15s/it]data 191:  88%|████████▊ | 450/512 [10:13<01:09,  1.11s/it]data 191:  90%|████████▉ | 460/512 [10:24<00:58,  1.13s/it]data 191:  92%|█████████▏| 470/512 [10:39<00:51,  1.22s/it]data 191:  94%|█████████▍| 480/512 [10:53<00:40,  1.26s/it]data 191:  96%|█████████▌| 490/512 [11:05<00:27,  1.26s/it]data 191:  98%|█████████▊| 500/512 [11:17<00:15,  1.25s/it]data 191: 100%|█████████▉| 510/512 [11:31<00:02,  1.28s/it]data 191: 100%|█████████▉| 510/512 [11:35<00:02,  1.36s/it]
+INFO:root:函数头: 
+def strtobool(val):
+
+INFO:root:目标函数体: 
+    
+    val = val.lower()
+    if val in ('y', 'yes', 't', 'true', 'on', '1'):
+        return 1
+    if val in ('n', 'no', 'f', 'false', 'off', '0'):
+        return 0
+    raise ValueError(f"invalid truth value {val!r}")
+
+INFO:root:生成结果: 
+    truthy_values = {'y', 'yes', 't', 'true', 'on', '1 mher.movsisyan@gmail.com', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower', 'flower
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2887
+INFO:root:max position: 8587
+INFO:root:context_num: 182
+INFO:root:target_namespace: flower.flower<folder>.utils<folder>.__init__<file>.strtobool<func>
+INFO:root:****************************************
+INFO:root:已生成191条结果
+INFO:root:--------data 192--------
+data 192:   0%|          | 0/512 [00:00<?, ?it/s]data 192:   2%|▏         | 10/512 [00:28<24:14,  2.90s/it]data 192:   4%|▍         | 20/512 [00:49<19:29,  2.38s/it]data 192:   6%|▌         | 30/512 [01:07<17:02,  2.12s/it]data 192:   6%|▌         | 30/512 [01:16<20:21,  2.53s/it]
+INFO:root:函数头: 
+def get_method(method_name):
+
+INFO:root:目标函数体: 
+    module = importlib.import_module("sshuttle.methods.%s" % method_name)
+    return module.Method(method_name)
+
+INFO:root:生成结果: 
+    module_name = f'sshuttle.methods.{method_name}'
+    module = __import__(module_name)
+    method_class = module.Method
+    return method_class()
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2161
+INFO:root:max position: 9329
+INFO:root:context_num: 108
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.methods<folder>.__init__<file>.get_method<func>
+INFO:root:****************************************
+data 192:   0%|          | 0/512 [00:00<?, ?it/s]data 192:   2%|▏         | 10/512 [00:21<17:45,  2.12s/it]data 192:   4%|▍         | 20/512 [00:41<17:05,  2.08s/it]data 192:   6%|▌         | 30/512 [00:56<14:29,  1.80s/it]data 192:   8%|▊         | 40/512 [01:12<13:36,  1.73s/it]data 192:  10%|▉         | 50/512 [01:33<14:24,  1.87s/it]data 192:  10%|▉         | 50/512 [01:44<16:08,  2.10s/it]
+INFO:root:函数头: 
+def get_method(method_name):
+
+INFO:root:目标函数体: 
+    module = importlib.import_module("sshuttle.methods.%s" % method_name)
+    return module.Method(method_name)
+
+INFO:root:生成结果: 
+    try:
+        module_name = f"sshuttle.methods.{method_name}"
+        module = importlib.import_module(module_name)
+        return module.Method()
+    except ImportError as e:
+        raise Fatal(f"Method '{method_name}' not found: {e}")
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2898
+INFO:root:max position: 9418
+INFO:root:context_num: 143
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.methods<folder>.__init__<file>.get_method<func>
+INFO:root:****************************************
+data 192:   0%|          | 0/512 [00:00<?, ?it/s]data 192:   2%|▏         | 10/512 [00:17<14:25,  1.72s/it]data 192:   4%|▍         | 20/512 [00:35<14:42,  1.79s/it]data 192:   6%|▌         | 30/512 [01:50<35:14,  4.39s/it]data 192:   8%|▊         | 40/512 [02:05<25:37,  3.26s/it]data 192:  10%|▉         | 50/512 [02:22<20:46,  2.70s/it]data 192:  10%|▉         | 50/512 [02:34<23:44,  3.08s/it]
+INFO:root:函数头: 
+def get_method(method_name):
+
+INFO:root:目标函数体: 
+    module = importlib.import_module("sshuttle.methods.%s" % method_name)
+    return module.Method(method_name)
+
+INFO:root:生成结果: 
+    module_name = f'sshuttle.methods.{method_name}'
+    try:
+        module = importlib.import_module(module_name)
+        return module.ProxyMethod()
+    except ImportError as e:
+        raise Fatal(f'Method {method_name} not found: {e}')
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2721
+INFO:root:max position: 9415
+INFO:root:context_num: 128
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.methods<folder>.__init__<file>.get_method<func>
+INFO:root:****************************************
+data 192:   0%|          | 0/512 [00:00<?, ?it/s]data 192:   2%|▏         | 10/512 [00:15<12:59,  1.55s/it]data 192:   4%|▍         | 20/512 [00:32<13:11,  1.61s/it]data 192:   6%|▌         | 30/512 [00:47<12:34,  1.57s/it]data 192:   8%|▊         | 40/512 [00:59<11:23,  1.45s/it]data 192:  10%|▉         | 50/512 [01:17<12:01,  1.56s/it]data 192:  12%|█▏        | 60/512 [01:34<12:01,  1.60s/it]data 192:  14%|█▎        | 70/512 [01:50<11:45,  1.60s/it]data 192:  16%|█▌        | 80/512 [02:03<10:58,  1.52s/it]data 192:  16%|█▌        | 80/512 [02:18<12:26,  1.73s/it]
+INFO:root:函数头: 
+def get_method(method_name):
+
+INFO:root:目标函数体: 
+    module = importlib.import_module("sshuttle.methods.%s" % method_name)
+    return module.Method(method_name)
+
+INFO:root:生成结果: 
+    module_name = f'sshuttle.methods.{method_name}'
+    try:
+        # Import the module dynamically
+        module = importlib.import_module(module_name)
+        # Get the Method class from the module
+        MethodClass = module.Method
+        # Create an instance of the Method class
+        return MethodClass()
+    except ImportError as e:
+        raise Exception(f'Module {module_name} not found') from e
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3134
+INFO:root:max position: 7733
+INFO:root:context_num: 175
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.methods<folder>.__init__<file>.get_method<func>
+INFO:root:****************************************
+data 192:   0%|          | 0/512 [00:00<?, ?it/s]data 192:   2%|▏         | 10/512 [00:14<12:18,  1.47s/it]data 192:   4%|▍         | 20/512 [00:31<13:03,  1.59s/it]data 192:   6%|▌         | 30/512 [00:46<12:21,  1.54s/it]data 192:   8%|▊         | 40/512 [00:59<11:28,  1.46s/it]data 192:   8%|▊         | 40/512 [01:08<13:31,  1.72s/it]
+INFO:root:函数头: 
+def get_method(method_name):
+
+INFO:root:目标函数体: 
+    module = importlib.import_module("sshuttle.methods.%s" % method_name)
+    return module.Method(method_name)
+
+INFO:root:生成结果: 
+    try:
+        module = __import__("sshuttle.methods." + method_name)
+        return module.Method()
+    except ImportError as e:
+        raise ImportError(f"Method '{method_name}' not found: {e}")
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3917
+INFO:root:max position: 7646
+INFO:root:context_num: 130
+INFO:root:target_namespace: sshuttle.sshuttle<folder>.methods<folder>.__init__<file>.get_method<func>
+INFO:root:****************************************
+INFO:root:--------data 193--------
+data 193:   0%|          | 0/512 [00:00<?, ?it/s]data 193:   2%|▏         | 10/512 [00:10<08:44,  1.04s/it]data 193:   4%|▍         | 20/512 [00:22<09:13,  1.12s/it]data 193:   6%|▌         | 30/512 [00:34<09:14,  1.15s/it]data 193:   8%|▊         | 40/512 [00:46<09:22,  1.19s/it]data 193:   8%|▊         | 40/512 [00:49<09:38,  1.23s/it]
+INFO:root:函数头: 
+def all_known_iam_permissions():
+
+INFO:root:目标函数体: 
+    "Return a list of all known IAM actions"
+    with open(os.path.join(os.path.dirname(__file__), 'known-iam-actions.txt'), encoding="UTF-8") as iam_file:
+        return {line.rstrip('\n') for line in iam_file.readlines()}
+
+INFO:root:生成结果: 
+    known_actions_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__), "known-iam-actions.txt")
+    known_actions_file = open(known_actions_file_path, "r")
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1534
+INFO:root:max position: 3602
+INFO:root:context_num: 62
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.iam<file>.all_known_iam_permissions<func>
+INFO:root:****************************************
+data 193:   0%|          | 0/512 [00:00<?, ?it/s]data 193:   2%|▏         | 10/512 [00:09<07:38,  1.09it/s]data 193:   4%|▍         | 20/512 [00:20<08:46,  1.07s/it]data 193:   6%|▌         | 30/512 [00:34<09:28,  1.18s/it]data 193:   8%|▊         | 40/512 [00:45<09:15,  1.18s/it]data 193:  10%|▉         | 50/512 [00:57<09:00,  1.17s/it]data 193:  12%|█▏        | 60/512 [01:06<08:07,  1.08s/it]data 193:  14%|█▎        | 70/512 [01:14<07:24,  1.01s/it]data 193:  16%|█▌        | 80/512 [01:24<07:15,  1.01s/it]data 193:  18%|█▊        | 90/512 [01:35<07:08,  1.02s/it]data 193:  20%|█▉        | 100/512 [01:45<06:59,  1.02s/it]data 193:  21%|██▏       | 110/512 [01:54<06:28,  1.03it/s]data 193:  21%|██▏       | 110/512 [02:01<07:23,  1.10s/it]
+INFO:root:函数头: 
+def all_known_iam_permissions():
+
+INFO:root:目标函数体: 
+    "Return a list of all known IAM actions"
+    with open(os.path.join(os.path.dirname(__file__), 'known-iam-actions.txt'), encoding="UTF-8") as iam_file:
+        return {line.rstrip('\n') for line in iam_file.readlines()}
+
+INFO:root:生成结果: 
+    import os
+    import os.path
+    import sys
+
+    # Get the directory of the current script script
+    script_dir = os.path.dirname(os.path.abspath(sys.argv))
+
+    # Get the path to known-iam-actions.txt file
+    policy_file_path = os.path.join(action_dir, 'known-iam-actions.txt')
+
+    # Read lines from known-iam-actions.txt file and return them as a set
+    with open(policy_file_path, 'r') as policy_file:
+        known_actions = set(policy_file.read().splitlines())
+
+    return known_actions
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1597
+INFO:root:max position: 3937
+INFO:root:context_num: 79
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.iam<file>.all_known_iam_permissions<func>
+INFO:root:****************************************
+data 193:   0%|          | 0/512 [00:00<?, ?it/s]data 193:   2%|▏         | 10/512 [00:08<07:20,  1.14it/s]data 193:   4%|▍         | 20/512 [00:19<07:54,  1.04it/s]data 193:   6%|▌         | 30/512 [00:29<08:10,  1.02s/it]data 193:   8%|▊         | 40/512 [00:39<07:56,  1.01s/it]data 193:  10%|▉         | 50/512 [00:48<07:28,  1.03it/s]data 193:  12%|█▏        | 60/512 [00:58<07:12,  1.04it/s]data 193:  14%|█▎        | 70/512 [01:07<07:06,  1.04it/s]data 193:  14%|█▎        | 70/512 [01:13<07:46,  1.05s/it]
+INFO:root:函数头: 
+def all_known_iam_permissions():
+
+INFO:root:目标函数体: 
+    "Return a list of all known IAM actions"
+    with open(os.path.join(os.path.dirname(__file__), 'known-iam-actions.txt'), encoding="UTF-8") as iam_file:
+        return {line.rstrip('\n') for line in iam_file.readlines()}
+
+INFO:root:生成结果: 
+    this function returns, dict of statement effects and their actions
+    It uses all_known_iam_permissions to filter statements based on their actions.
+    """
+    effects = {}
+    for statement in statements:
+        effects = statement.Effect
+        actions = statement.Action
+        for action in actions:
+            return action.lower() in known_actions(prefix)
+        return False
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1355
+INFO:root:max position: 3640
+INFO:root:context_num: 69
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.iam<file>.all_known_iam_permissions<func>
+INFO:root:****************************************
+data 193:   0%|          | 0/512 [00:00<?, ?it/s]data 193:   2%|▏         | 10/512 [00:08<07:11,  1.16it/s]data 193:   4%|▍         | 20/512 [00:18<07:42,  1.06it/s]data 193:   6%|▌         | 30/512 [00:28<07:46,  1.03it/s]data 193:   8%|▊         | 40/512 [00:39<08:03,  1.02s/it]data 193:  10%|▉         | 50/512 [00:49<07:40,  1.00it/s]data 193:  12%|█▏        | 60/512 [00:57<07:12,  1.04it/s]data 193:  14%|█▎        | 70/512 [01:06<06:53,  1.07it/s]data 193:  16%|█▌        | 80/512 [01:16<06:47,  1.06it/s]data 193:  18%|█▊        | 90/512 [01:25<06:35,  1.07it/s]data 193:  20%|█▉        | 100/512 [01:35<06:34,  1.05it/s]data 193:  20%|█▉        | 100/512 [01:43<07:07,  1.04s/it]
+INFO:root:函数头: 
+def all_known_iam_permissions():
+
+INFO:root:目标函数体: 
+    "Return a list of all known IAM actions"
+    with open(os.path.join(os.path.dirname(__file__), 'known-iam-actions.txt'), encoding="UTF-8") as iam_file:
+        return {line.rstrip('\n') for line in iam_file.readlines()}
+
+INFO:root:生成结果: 
+    This function returns a dict with keys 'Action', 'Resource', 'Effect', 'effect': 'Allow'.
+    self._action_(): return f'action={self.Action}, resources={self.resources}, effect={self.effect}'
+    def merge_with(self, other):
+        if 'Action' in other:
+            self.Action = other.Action
+        if 'resources' in known_permissions:
+            self.resources = known_permissions['resources']
+        if 'effect' in other:
+            self.effect = other.effect
+        return self
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1397
+INFO:root:max position: 3672
+INFO:root:context_num: 73
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.iam<file>.all_known_iam_permissions<func>
+INFO:root:****************************************
+data 193:   0%|          | 0/512 [00:00<?, ?it/s]data 193:   2%|▏         | 10/512 [00:09<07:46,  1.08it/s]data 193:   4%|▍         | 20/512 [00:20<08:47,  1.07s/it]data 193:   6%|▌         | 30/512 [00:31<08:32,  1.06s/it]data 193:   8%|▊         | 40/512 [00:41<08:12,  1.04s/it]data 193:  10%|▉         | 50/512 [00:50<07:31,  1.02it/s]data 193:  10%|▉         | 50/512 [00:55<08:37,  1.12s/it]
+INFO:root:函数头: 
+def all_known_iam_permissions():
+
+INFO:root:目标函数体: 
+    "Return a list of all known IAM actions"
+    with open(os.path.join(os.path.dirname(__file__), 'known-iam-actions.txt'), encoding="UTF-8") as iam_file:
+        return {line.rstrip('\n') for line in iam_file.readlines()}
+
+INFO:root:生成结果: 
+    return pipe(
+        statement['Effect'] == 'Allow', lambda effect: effect),
+        lambda effect: Statement(Action=action['Action'], Effect=statement['Effect'], Resource=action.get('Resource', '*')),
+    lambda statement: statement.json_repr()
+    )
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1478
+INFO:root:max position: 3579
+INFO:root:context_num: 66
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.iam<file>.all_known_iam_permissions<func>
+INFO:root:****************************************
+INFO:root:已生成193条结果
+INFO:root:--------data 194--------
+data 194:   0%|          | 0/512 [00:00<?, ?it/s]data 194:   2%|▏         | 10/512 [00:09<08:08,  1.03it/s]data 194:   4%|▍         | 20/512 [00:20<08:27,  1.03s/it]data 194:   4%|▍         | 20/512 [00:27<11:16,  1.38s/it]
+INFO:root:函数头: 
+def parse_records(json_records):
+
+INFO:root:目标函数体: 
+    
+    parsed_records = [_parse_record(record) for record in json_records]
+    return [r for r in parsed_records if r is not None]
+
+INFO:root:生成结果: 
+    parsed_records = [_parse_record(record) for record in json_records if _parse_record(record)]
+    return parsed_records
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1780
+INFO:root:max position: 3979
+INFO:root:context_num: 57
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.cloudtrail<file>.parse_records<func>
+INFO:root:****************************************
+data 194:   0%|          | 0/512 [00:00<?, ?it/s]data 194:   2%|▏         | 10/512 [00:08<06:47,  1.23it/s]data 194:   4%|▍         | 20/512 [00:17<07:11,  1.14it/s]data 194:   6%|▌         | 30/512 [00:27<07:26,  1.08it/s]data 194:   6%|▌         | 30/512 [00:37<10:02,  1.25s/it]
+INFO:root:函数头: 
+def parse_records(json_records):
+
+INFO:root:目标函数体: 
+    
+    parsed_records = [_parse_record(record) for record in json_records]
+    return [r for r in parsed_records if r is not None]
+
+INFO:root:生成结果: 
+    parsed_records = []
+    for json_record in json_records:
+        record = _parse_record(json_record)
+        if record:
+            parsed_records.append(record)
+    return parsed_records
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1614
+INFO:root:max position: 3995
+INFO:root:context_num: 50
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.cloudtrail<file>.parse_records<func>
+INFO:root:****************************************
+data 194:   0%|          | 0/512 [00:00<?, ?it/s]data 194:   2%|▏         | 10/512 [00:07<06:26,  1.30it/s]data 194:   4%|▍         | 20/512 [00:16<06:58,  1.17it/s]data 194:   6%|▌         | 30/512 [00:26<07:12,  1.11it/s]data 194:   6%|▌         | 30/512 [00:32<08:35,  1.07s/it]
+INFO:root:函数头: 
+def parse_records(json_records):
+
+INFO:root:目标函数体: 
+    
+    parsed_records = [_parse_record(record) for record in json_records]
+    return [r for r in parsed_records if r is not None]
+
+INFO:root:生成结果: 
+    parsed_records = []
+    for record in json_records:
+        parsed_record = _parse_record(record)
+        if parsed_record:
+            parsed_records.append parsed_record
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1744
+INFO:root:max position: 4017
+INFO:root:context_num: 61
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.cloudtrail<file>.parse_records<func>
+INFO:root:****************************************
+data 194:   0%|          | 0/512 [00:00<?, ?it/s]data 194:   2%|▏         | 10/512 [00:08<06:46,  1.23it/s]data 194:   4%|▍         | 20/512 [00:16<06:59,  1.17it/s]data 194:   6%|▌         | 30/512 [00:28<07:55,  1.01it/s]data 194:   6%|▌         | 30/512 [00:34<09:12,  1.15s/it]
+INFO:root:函数头: 
+def parse_records(json_records):
+
+INFO:root:目标函数体: 
+    
+    parsed_records = [_parse_record(record) for record in json_records]
+    return [r for r in parsed_records if r is not None]
+
+INFO:root:生成结果: 
+    records = []
+    for json_record in json_records:
+        record = _parse_record(json_record)
+        if record:
+            records.append(record)
+    return records
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1718
+INFO:root:max position: 4024
+INFO:root:context_num: 62
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.cloudtrail<file>.parse_records<func>
+INFO:root:****************************************
+data 194:   0%|          | 0/512 [00:00<?, ?it/s]data 194:   2%|▏         | 10/512 [00:07<05:59,  1.39it/s]data 194:   4%|▍         | 20/512 [00:15<06:23,  1.28it/s]data 194:   6%|▌         | 30/512 [00:25<07:03,  1.14it/s]data 194:   6%|▌         | 30/512 [00:31<08:31,  1.06s/it]
+INFO:root:函数头: 
+def parse_records(json_records):
+
+INFO:root:目标函数体: 
+    
+    parsed_records = [_parse_record(record) for record in json_records]
+    return [r for r in parsed_records if r is not None]
+
+INFO:root:生成结果: 
+    records = []
+    for record in json_records:
+        parsed_record = _parse_record(record)
+        if parsed_record:
+            records.append(parsed_record)
+    return records
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 1902
+INFO:root:max position: 4001
+INFO:root:context_num: 59
+INFO:root:target_namespace: trailscraper.trailscraper<folder>.cloudtrail<file>.parse_records<func>
+INFO:root:****************************************
+INFO:root:--------data 195--------
+data 195:   0%|          | 0/512 [00:00<?, ?it/s]data 195:   2%|▏         | 10/512 [00:33<27:52,  3.33s/it]data 195:   4%|▍         | 20/512 [01:08<28:07,  3.43s/it]data 195:   6%|▌         | 30/512 [03:41<1:11:04,  8.85s/it]data 195:   6%|▌         | 30/512 [03:53<1:02:38,  7.80s/it]
+INFO:root:函数头: 
+    @classmethod
+    def int_to_script_bytes(class_, v):
+
+INFO:root:目标函数体: 
+        if v == 0:
+            return b''
+        is_negative = (v < 0)
+        if is_negative:
+            v = -v
+        ba = bytearray()
+        while v >= 256:
+            ba.append(v & 0xff)
+            v >>= 8
+        ba.append(v & 0xff)
+        if ba[-1] >= 128:
+            ba.append(0x80 if is_negative else 0)
+        elif is_negative:
+            ba[-1] |= 0x80
+        return bytes(ba)
+
+INFO:root:生成结果: 
+        if v == 0:
+            return b""
+        if v < 0:
+            v = -v
+        return bytes(bytearray(v))
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2983
+INFO:root:max position: 5860
+INFO:root:context_num: 232
+INFO:root:target_namespace: pycoin.pycoin<folder>.satoshi<folder>.IntStreamer<file>.IntStreamer<class>.int_to_script_bytes<func>
+INFO:root:****************************************
+data 195:   0%|          | 0/512 [00:00<?, ?it/s]data 195:   2%|▏         | 10/512 [00:28<24:07,  2.88s/it]data 195:   4%|▍         | 20/512 [00:56<23:12,  2.83s/it]data 195:   6%|▌         | 30/512 [01:24<22:32,  2.81s/it]data 195:   6%|▌         | 30/512 [01:56<31:05,  3.87s/it]
+INFO:root:函数头: 
+    @classmethod
+    def int_to_script_bytes(class_, v):
+
+INFO:root:目标函数体: 
+        if v == 0:
+            return b''
+        is_negative = (v < 0)
+        if is_negative:
+            v = -v
+        ba = bytearray()
+        while v >= 256:
+            ba.append(v & 0xff)
+            v >>= 8
+        ba.append(v & 0xff)
+        if ba[-1] >= 128:
+            ba.append(0x80 if is_negative else 0)
+        elif is_negative:
+            ba[-1] |= 0x80
+        return bytes(ba)
+
+INFO:root:生成结果: 
+        if v == 0:
+            return b""
+        elif v < 0:
+            v = - v
+        return v & ((1 << 32) -1)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 3018
+INFO:root:max position: 6779
+INFO:root:context_num: 204
+INFO:root:target_namespace: pycoin.pycoin<folder>.satoshi<folder>.IntStreamer<file>.IntStreamer<class>.int_to_script_bytes<func>
+INFO:root:****************************************
+data 195:   0%|          | 0/512 [00:00<?, ?it/s]data 195:   2%|▏         | 10/512 [00:24<20:35,  2.46s/it]data 195:   4%|▍         | 20/512 [00:50<20:50,  2.54s/it]data 195:   6%|▌         | 30/512 [01:19<21:45,  2.71s/it]data 195:   8%|▊         | 40/512 [01:45<20:48,  2.65s/it]data 195:  10%|▉         | 50/512 [02:09<19:53,  2.58s/it]data 195:  12%|█▏        | 60/512 [02:33<18:59,  2.52s/it]data 195:  14%|█▎        | 70/512 [03:01<19:02,  2.58s/it]data 195:  16%|█▌        | 80/512 [03:23<17:44,  2.46s/it]data 195:  18%|█▊        | 90/512 [03:46<17:04,  2.43s/it]data 195:  20%|█▉        | 100/512 [04:11<16:45,  2.44s/it]data 195:  21%|██▏       | 110/512 [04:35<16:16,  2.43s/it]data 195:  21%|██▏       | 110/512 [04:45<17:22,  2.59s/it]
+INFO:root:函数头: 
+    @classmethod
+    def int_to_script_bytes(class_, v):
+
+INFO:root:目标函数体: 
+        if v == 0:
+            return b''
+        is_negative = (v < 0)
+        if is_negative:
+            v = -v
+        ba = bytearray()
+        while v >= 256:
+            ba.append(v & 0xff)
+            v >>= 8
+        ba.append(v & 0xff)
+        if ba[-1] >= 128:
+            ba.append(0x80 if is_negative else 0)
+        elif is_negative:
+            ba[-1] |= 0x80
+        return bytes(ba)
+
+INFO:root:生成结果: 
+        if v == 0:
+            return b""
+        if v <  pycoin.satoshi.satoshi_constants.MIN_SCRIPT_LEN:
+            raise RuntimeError("script too short")
+        if v > pycoin.satoshi.satoshi_constants.MAX_SCRIPT_LEN:
+            raise RuntimeError("script too long")
+        if v & 0x80:
+            raise RuntimeError("script too long")
+        v = abs(v)
+        v = v.to_bytes((v.bit_length() + 7) // 8, "little")
+        return v
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2935
+INFO:root:max position: 7388
+INFO:root:context_num: 324
+INFO:root:target_namespace: pycoin.pycoin<folder>.satoshi<folder>.IntStreamer<file>.IntStreamer<class>.int_to_script_bytes<func>
+INFO:root:****************************************
+data 195:   0%|          | 0/512 [00:00<?, ?it/s]data 195:   2%|▏         | 10/512 [00:25<21:44,  2.60s/it]data 195:   4%|▍         | 20/512 [00:47<19:19,  2.36s/it]data 195:   6%|▌         | 30/512 [01:14<19:56,  2.48s/it]data 195:   8%|▊         | 40/512 [01:41<20:11,  2.57s/it]data 195:   8%|▊         | 40/512 [01:50<21:43,  2.76s/it]
+INFO:root:函数头: 
+    @classmethod
+    def int_to_script_bytes(class_, v):
+
+INFO:root:目标函数体: 
+        if v == 0:
+            return b''
+        is_negative = (v < 0)
+        if is_negative:
+            v = -v
+        ba = bytearray()
+        while v >= 256:
+            ba.append(v & 0xff)
+            v >>= 8
+        ba.append(v & 0xff)
+        if ba[-1] >= 128:
+            ba.append(0x80 if is_negative else 0)
+        elif is_negative:
+            ba[-1] |= 0x80
+        return bytes(ba)
+
+INFO:root:生成结果: 
+        if v == 0:
+            return b""
+        if v < 0:
+        v = abs(v)
+        return v.to_bytes((v.bit_length() + 7) // 8
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 2945
+INFO:root:max position: 6990
+INFO:root:context_num: 241
+INFO:root:target_namespace: pycoin.pycoin<folder>.satoshi<folder>.IntStreamer<file>.IntStreamer<class>.int_to_script_bytes<func>
+INFO:root:****************************************
+data 195:   0%|          | 0/512 [00:00<?, ?it/s]data 195:   2%|▏         | 10/512 [03:26<2:52:54, 20.67s/it]data 195:   2%|▏         | 10/512 [03:33<2:58:54, 21.38s/it]
+Traceback (most recent call last):
+  File "/home/qikahh/projects/Structured_Code_Context/test_hierarchical_model.py", line 286, in <module>
+    info_dict = hierarchical_model.generate_step(target_namespace=target_namespace,input_ids=input_ids, prefix_kv=prefix_kv, init_context_nodes=init_context)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 973, in generate_step
+    key_tensor, value_tensor, extend_list = self.encode_nodeseq(encode_extend_part, begin_layer=start_layer_idx, end_layer=end_layer_idx-1, now_pos=0)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 400, in encode_nodeseq
+    all_key, all_value, node_list = self.get_node_kv(node_list, begin_layer, end_layer) # 节点本身内容对应的向量
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 249, in get_node_kv
+    all_key, all_value, all_hidden = self.encode_by_layer(last_hidden, enc_layer_idx+1, end_layer, begin_pos)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 148, in encode_by_layer
+    layer_outputs = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 629, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+                                                          ^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/miniconda3/lib/python3.11/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 319, in forward
+    attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 82.00 MiB. GPU 

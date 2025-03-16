@@ -1,0 +1,985 @@
+INFO:root:time: 2025年 03月 16日 星期日 20:42:04 CST
+
+INFO:root:pid: 61390
+INFO:root:seed: 21
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.17s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.49it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.34it/s]
+INFO:root:--------data 514--------
+data 514:   0%|          | 0/164 [00:00<?, ?it/s]data 514:   6%|▌         | 10/164 [01:01<15:44,  6.14s/it]data 514:  12%|█▏        | 20/164 [02:04<15:00,  6.26s/it]data 514:  18%|█▊        | 30/164 [03:11<14:20,  6.42s/it]data 514:  24%|██▍       | 40/164 [04:17<13:25,  6.50s/it]data 514:  30%|███       | 50/164 [05:20<12:13,  6.43s/it]data 514:  30%|███       | 50/164 [06:21<14:29,  7.63s/it]
+INFO:root:函数头: 
+    def remove(self, category_name, discriminator):
+
+INFO:root:目标函数体: 
+        intr = self.get(category_name, discriminator)
+        if intr is None:
+            return
+        L = self._refs.pop(intr, [])
+        for d in L:
+            L2 = self._refs[d]
+            L2.remove(intr)
+        category = self._categories[intr.category_name]
+        del category[intr.discriminator]
+        del category[intr.discriminator_hash]
+
+INFO:root:生成结果: 
+        category = self._categories.get(category_name)
+        if category is None:
+            return
+        intr = category.get(discriminator)
+        if intr is None:
+            return
+        del category[discriminator]
+        del self._refs[intr]
+        del intr.order
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9014
+INFO:root:max position: 29526
+INFO:root:context_num: 635
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspector<class>.remove<func>
+INFO:root:time: 2025年 03月 16日 星期日 20:48:37 CST
+
+INFO:root:****************************************
+data 514:   0%|          | 0/164 [00:00<?, ?it/s]data 514:   6%|▌         | 10/164 [01:00<15:31,  6.05s/it]data 514:  12%|█▏        | 20/164 [02:07<15:24,  6.42s/it]data 514:  18%|█▊        | 30/164 [03:13<14:35,  6.53s/it]data 514:  24%|██▍       | 40/164 [04:18<13:28,  6.52s/it]data 514:  30%|███       | 50/164 [05:25<12:26,  6.55s/it]data 514:  37%|███▋      | 60/164 [06:35<11:40,  6.73s/it]data 514:  43%|████▎     | 70/164 [07:44<10:35,  6.77s/it]data 514:  49%|████▉     | 80/164 [08:49<09:22,  6.70s/it]data 514:  55%|█████▍    | 90/164 [09:57<08:17,  6.72s/it]data 514:  61%|██████    | 100/164 [11:05<07:12,  6.75s/it]data 514:  67%|██████▋   | 110/164 [12:06<05:53,  6.55s/it]data 514:  73%|███████▎  | 120/164 [13:08<04:44,  6.45s/it]data 514:  79%|███████▉  | 130/164 [14:12<03:38,  6.43s/it]data 514:  85%|████████▌ | 140/164 [15:22<02:38,  6.59s/it]data 514:  91%|█████████▏| 150/164 [16:33<01:34,  6.74s/it]data 514:  98%|█████████▊| 160/164 [17:41<00:27,  6.77s/it]data 514:  98%|█████████▊| 160/164 [18:15<00:27,  6.85s/it]
+INFO:root:函数头: 
+    def remove(self, category_name, discriminator):
+
+INFO:root:目标函数体: 
+        intr = self.get(category_name, discriminator)
+        if intr is None:
+            return
+        L = self._refs.pop(intr, [])
+        for d in L:
+            L2 = self._refs[d]
+            L2.remove(intr)
+        category = self._categories[intr.category_name]
+        del category[intr.discriminator]
+        del category[intr.discriminator_hash]
+
+INFO:root:生成结果: 
+        category = self._categories.get(category_name)
+        if category is not None:
+            intr = category.get(discriminator)
+            if intr is not None:
+                del category[discriminator]
+                del self._refs[intr]
+                del intr.order
+                del intr.category_name
+                del intr.discriminator
+                del intr.discriminator_hash
+                del intr.name
+                del intr.module
+                del intr.interface
+                del intr.view_attr
+                del intr.view_info
+                del intr.view_callable
+                del intr.view_name
+                del intr.view_info
+                del intr.view_callable
+                del intr.view_name
+                del intr.view_info
+                del intr.view_callable
+                del intr.view_name
+                del intr.view_info
+                del intr.view_callable
+                del intr
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10084
+INFO:root:max position: 29724
+INFO:root:context_num: 1089
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspector<class>.remove<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:06:53 CST
+
+INFO:root:****************************************
+data 514:   0%|          | 0/164 [00:00<?, ?it/s]data 514:   6%|▌         | 10/164 [00:57<14:44,  5.74s/it]data 514:  12%|█▏        | 20/164 [02:04<15:11,  6.33s/it]data 514:  18%|█▊        | 30/164 [03:13<14:43,  6.59s/it]data 514:  24%|██▍       | 40/164 [04:25<14:06,  6.83s/it]data 514:  30%|███       | 50/164 [05:36<13:09,  6.93s/it]data 514:  30%|███       | 50/164 [06:04<13:49,  7.28s/it]
+INFO:root:函数头: 
+    def remove(self, category_name, discriminator):
+
+INFO:root:目标函数体: 
+        intr = self.get(category_name, discriminator)
+        if intr is None:
+            return
+        L = self._refs.pop(intr, [])
+        for d in L:
+            L2 = self._refs[d]
+            L2.remove(intr)
+        category = self._categories[intr.category_name]
+        del category[intr.discriminator]
+        del category[intr.discriminator_hash]
+
+INFO:root:生成结果: 
+        category = self._categories.get(category_name)
+        if category is not None:
+            intr = category.get(discriminator)
+            if intr is not None:
+                del category[discriminator]
+                del self._refs[intr]
+                del intr
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9554
+INFO:root:max position: 29682
+INFO:root:context_num: 685
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspector<class>.remove<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:12:57 CST
+
+INFO:root:****************************************
+INFO:root:--------data 515--------
+INFO:root:file too long mrjob.mrjob<folder>.job<file>.MRJob<class>.set_status<func>, cut 1/96 nodes
+data 515:   0%|          | 0/128 [00:00<?, ?it/s]data 515:   8%|▊         | 10/128 [00:43<08:34,  4.36s/it]data 515:  16%|█▌        | 20/128 [01:28<08:00,  4.45s/it]data 515:  23%|██▎       | 30/128 [02:14<07:21,  4.50s/it]data 515:  31%|███▏      | 40/128 [02:58<06:34,  4.48s/it]data 515:  31%|███▏      | 40/128 [03:24<07:30,  5.12s/it]
+INFO:root:函数头: 
+    def set_status(self, msg):
+
+INFO:root:目标函数体: 
+        
+        line = 'reporter:status:%s\n' % (msg,)
+        if not isinstance(line, bytes):
+            line = line.encode('utf_8')
+
+        self.stderr.write(line)
+        self.stderr.flush()
+
+INFO:root:生成结果: 
+        line = 'reporter:status:%s\n' % msg
+        if not isinstance(line, bytes):
+            line = line.encode('utf_8')
+        self.stderr.write(line)
+        self.stderr.flush()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7992
+INFO:root:max position: 19912
+INFO:root:context_num: 348
+INFO:root:target_namespace: mrjob.mrjob<folder>.job<file>.MRJob<class>.set_status<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:16:21 CST
+
+INFO:root:****************************************
+data 515:   0%|          | 0/128 [00:00<?, ?it/s]data 515:   8%|▊         | 10/128 [00:44<08:40,  4.41s/it]data 515:  16%|█▌        | 20/128 [01:30<08:12,  4.56s/it]data 515:  23%|██▎       | 30/128 [02:15<07:21,  4.50s/it]data 515:  31%|███▏      | 40/128 [02:59<06:34,  4.48s/it]data 515:  31%|███▏      | 40/128 [03:26<07:34,  5.16s/it]
+INFO:root:函数头: 
+    def set_status(self, msg):
+
+INFO:root:目标函数体: 
+        
+        line = 'reporter:status:%s\n' % (msg,)
+        if not isinstance(line, bytes):
+            line = line.encode('utf_8')
+
+        self.stderr.write(line)
+        self.stderr.flush()
+
+INFO:root:生成结果: 
+        line = 'reporter:status:%s\n' % msg
+        if not isinstance(line, bytes):
+            line = line.encode('utf_8')
+        self.stderr.write(line)
+        self.stderr.flush()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8469
+INFO:root:max position: 19768
+INFO:root:context_num: 350
+INFO:root:target_namespace: mrjob.mrjob<folder>.job<file>.MRJob<class>.set_status<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:19:48 CST
+
+INFO:root:****************************************
+data 515:   0%|          | 0/128 [00:00<?, ?it/s]data 515:   8%|▊         | 10/128 [00:43<08:30,  4.33s/it]data 515:  16%|█▌        | 20/128 [01:30<08:15,  4.59s/it]data 515:  23%|██▎       | 30/128 [02:16<07:27,  4.56s/it]data 515:  31%|███▏      | 40/128 [03:00<06:37,  4.52s/it]data 515:  31%|███▏      | 40/128 [03:27<07:36,  5.18s/it]
+INFO:root:函数头: 
+    def set_status(self, msg):
+
+INFO:root:目标函数体: 
+        
+        line = 'reporter:status:%s\n' % (msg,)
+        if not isinstance(line, bytes):
+            line = line.encode('utf_8')
+
+        self.stderr.write(line)
+        self.stderr.flush()
+
+INFO:root:生成结果: 
+        line = 'reporter:status:%s\n' % msg
+        if not isinstance(line, bytes):
+            line = line.encode('utf_8')
+        self.stderr.write(line)
+        self.stderr.flush()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7700
+INFO:root:max position: 19241
+INFO:root:context_num: 344
+INFO:root:target_namespace: mrjob.mrjob<folder>.job<file>.MRJob<class>.set_status<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:23:15 CST
+
+INFO:root:****************************************
+INFO:root:已生成515条结果
+INFO:root:--------data 516--------
+data 516:   0%|          | 0/344 [00:00<?, ?it/s]data 516:   3%|▎         | 10/344 [01:04<35:52,  6.44s/it]data 516:   6%|▌         | 20/344 [02:11<35:39,  6.60s/it]data 516:   9%|▊         | 30/344 [03:18<34:44,  6.64s/it]data 516:  12%|█▏        | 40/344 [04:21<33:03,  6.53s/it]data 516:  12%|█▏        | 40/344 [04:27<33:49,  6.68s/it]
+INFO:root:函数头: 
+    @classmethod
+    def make_property(cls, callable, name=None, reify=False):
+
+INFO:root:目标函数体: 
+        
+
+        if name is None:
+            if not hasattr(callable, '__name__'):
+                raise ValueError(
+                    'missing __name__, must specify "name" for property'
+                )
+            name = callable.__name__
+        name = get_callable_name(name)
+        is_data_descriptor = inspect.isdatadescriptor(callable)
+        if reify and is_data_descriptor:
+            raise ValueError('cannot reify a data descriptor')
+        if is_data_descriptor:
+            fn = callable
+        else:
+            wrapped = lambda this: callable(this)
+            wrapped.__name__ = name
+            wrapped.__doc__ = callable.__doc__
+
+            if reify:
+                import pyramid.decorator  # avoid circular import
+
+                fn = pyramid.decorator.reify(wrapped)
+            else:
+                fn = SettableProperty(wrapped)
+
+        return name, fn
+
+INFO:root:生成结果: 
+        if name is None:
+            name = callable.__name__
+
+        if reify:
+            return cls.reify(name, callable)
+        else:
+            return cls.property(name, callable)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7629
+INFO:root:max position: 29218
+INFO:root:context_num: 523
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.util<file>.InstancePropertyHelper<class>.make_property<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:27:42 CST
+
+INFO:root:****************************************
+data 516:   0%|          | 0/344 [00:00<?, ?it/s]data 516:   3%|▎         | 10/344 [01:12<40:28,  7.27s/it]data 516:   6%|▌         | 20/344 [02:19<37:14,  6.90s/it]data 516:   9%|▊         | 30/344 [03:26<35:43,  6.83s/it]data 516:  12%|█▏        | 40/344 [04:30<33:48,  6.67s/it]data 516:  12%|█▏        | 40/344 [05:24<41:09,  8.12s/it]
+INFO:root:函数头: 
+    @classmethod
+    def make_property(cls, callable, name=None, reify=False):
+
+INFO:root:目标函数体: 
+        
+
+        if name is None:
+            if not hasattr(callable, '__name__'):
+                raise ValueError(
+                    'missing __name__, must specify "name" for property'
+                )
+            name = callable.__name__
+        name = get_callable_name(name)
+        is_data_descriptor = inspect.isdatadescriptor(callable)
+        if reify and is_data_descriptor:
+            raise ValueError('cannot reify a data descriptor')
+        if is_data_descriptor:
+            fn = callable
+        else:
+            wrapped = lambda this: callable(this)
+            wrapped.__name__ = name
+            wrapped.__doc__ = callable.__doc__
+
+            if reify:
+                import pyramid.decorator  # avoid circular import
+
+                fn = pyramid.decorator.reify(wrapped)
+            else:
+                fn = SettableProperty(wrapped)
+
+        return name, fn
+
+INFO:root:生成结果: 
+        if name is None:
+            name = callable.__name__
+        if reify:
+            return cls._make_reified_property(callable, name)
+        else:
+            return cls._make_standard_property(callable, name)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9165
+INFO:root:max position: 30610
+INFO:root:context_num: 654
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.util<file>.InstancePropertyHelper<class>.make_property<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:33:07 CST
+
+INFO:root:****************************************
+data 516:   0%|          | 0/344 [00:00<?, ?it/s]data 516:   3%|▎         | 10/344 [01:07<37:42,  6.77s/it]data 516:   6%|▌         | 20/344 [02:08<34:26,  6.38s/it]data 516:   9%|▊         | 30/344 [03:12<33:17,  6.36s/it]data 516:  12%|█▏        | 40/344 [04:16<32:24,  6.40s/it]data 516:  12%|█▏        | 40/344 [04:21<33:08,  6.54s/it]
+INFO:root:函数头: 
+    @classmethod
+    def make_property(cls, callable, name=None, reify=False):
+
+INFO:root:目标函数体: 
+        
+
+        if name is None:
+            if not hasattr(callable, '__name__'):
+                raise ValueError(
+                    'missing __name__, must specify "name" for property'
+                )
+            name = callable.__name__
+        name = get_callable_name(name)
+        is_data_descriptor = inspect.isdatadescriptor(callable)
+        if reify and is_data_descriptor:
+            raise ValueError('cannot reify a data descriptor')
+        if is_data_descriptor:
+            fn = callable
+        else:
+            wrapped = lambda this: callable(this)
+            wrapped.__name__ = name
+            wrapped.__doc__ = callable.__doc__
+
+            if reify:
+                import pyramid.decorator  # avoid circular import
+
+                fn = pyramid.decorator.reify(wrapped)
+            else:
+                fn = SettableProperty(wrapped)
+
+        return name, fn
+
+INFO:root:生成结果: 
+        if name is None:
+            name = callable.__name__
+
+        if reify:
+            return cls.reify(name, callable)
+        else:
+            return cls.property(name, callable)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8411
+INFO:root:max position: 29836
+INFO:root:context_num: 533
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.util<file>.InstancePropertyHelper<class>.make_property<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:37:29 CST
+
+INFO:root:****************************************
+INFO:root:--------data 517--------
+INFO:root:file too long falcon.falcon<folder>.request<file>.Request<class>.client_prefers<func>, cut 85/151 nodes
+data 517:   0%|          | 0/134 [00:00<?, ?it/s]data 517:   7%|▋         | 10/134 [00:52<10:47,  5.22s/it]data 517:  15%|█▍        | 20/134 [01:48<10:22,  5.46s/it]data 517:  22%|██▏       | 30/134 [02:39<09:09,  5.28s/it]data 517:  30%|██▉       | 40/134 [03:30<08:11,  5.22s/it]data 517:  37%|███▋      | 50/134 [04:18<07:06,  5.08s/it]data 517:  45%|████▍     | 60/134 [05:06<06:08,  4.97s/it]data 517:  52%|█████▏    | 70/134 [05:54<05:15,  4.93s/it]data 517:  60%|█████▉    | 80/134 [06:48<04:33,  5.07s/it]data 517:  67%|██████▋   | 90/134 [07:41<03:45,  5.13s/it]data 517:  75%|███████▍  | 100/134 [08:35<02:57,  5.22s/it]data 517:  82%|████████▏ | 110/134 [09:31<02:08,  5.34s/it]data 517:  90%|████████▉ | 120/134 [10:24<01:14,  5.33s/it]data 517:  97%|█████████▋| 130/134 [11:14<00:20,  5.24s/it]data 517:  97%|█████████▋| 130/134 [11:40<00:21,  5.39s/it]
+INFO:root:函数头: 
+    def client_prefers(self, media_types):
+
+INFO:root:目标函数体: 
+        
+
+        try:
+            # NOTE(kgriffs): best_match will return '' if no match is found
+            preferred_type = mimeparse.best_match(media_types, self.accept)
+        except ValueError:
+            # Value for the accept header was not formatted correctly
+            preferred_type = ''
+
+        return preferred_type if preferred_type else None
+
+INFO:root:生成结果: 
+        accept = self.accept
+
+        # If Accept header is not present, return None
+        if accept is None:
+            return None
+
+        # If Accept header is '*', return the first media type in the list
+        if accept == '*/*':
+            return media_types[0] if media_types else None
+
+        # If Accept header contains '*/*', return the first media type in the list that matches '*/*'
+        if '*' in accept:
+            for media_type in media_types:
+                if media_type == '*/*':
+                    return media_type
+            return media_types[0] if media_types else None
+
+        # If Accept header contains media types
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10336
+INFO:root:max position: 22395
+INFO:root:context_num: 739
+INFO:root:target_namespace: falcon.falcon<folder>.request<file>.Request<class>.client_prefers<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:49:10 CST
+
+INFO:root:****************************************
+data 517:   0%|          | 0/134 [00:00<?, ?it/s]data 517:   7%|▋         | 10/134 [00:49<10:11,  4.93s/it]data 517:  15%|█▍        | 20/134 [01:42<09:45,  5.13s/it]data 517:  22%|██▏       | 30/134 [02:33<08:55,  5.14s/it]data 517:  30%|██▉       | 40/134 [03:24<08:00,  5.11s/it]data 517:  37%|███▋      | 50/134 [04:14<07:06,  5.08s/it]data 517:  45%|████▍     | 60/134 [05:03<06:12,  5.03s/it]data 517:  52%|█████▏    | 70/134 [05:53<05:20,  5.01s/it]data 517:  60%|█████▉    | 80/134 [06:41<04:27,  4.95s/it]data 517:  67%|██████▋   | 90/134 [07:32<03:39,  4.99s/it]data 517:  67%|██████▋   | 90/134 [08:00<03:54,  5.34s/it]
+INFO:root:函数头: 
+    def client_prefers(self, media_types):
+
+INFO:root:目标函数体: 
+        
+
+        try:
+            # NOTE(kgriffs): best_match will return '' if no match is found
+            preferred_type = mimeparse.best_match(media_types, self.accept)
+        except ValueError:
+            # Value for the accept header was not formatted correctly
+            preferred_type = ''
+
+        return preferred_type if preferred_type else None
+
+INFO:root:生成结果: 
+        accept_header = self.env.get('HTTP_ACCEPT', '*/*')
+        accept_types = accept_header.split(', ')
+
+        # Sort accept types by quality value
+        accept_types.sort(key=lambda x: float(x.split(';')[0].strip()))
+
+        # Check each accept type against the media types provided
+        for accept_type in accept_types:
+            accept_type = accept_type.strip()
+            if accept_type in media_types:
+                return accept_type
+
+        return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9062
+INFO:root:max position: 21396
+INFO:root:context_num: 706
+INFO:root:target_namespace: falcon.falcon<folder>.request<file>.Request<class>.client_prefers<func>
+INFO:root:time: 2025年 03月 16日 星期日 21:57:10 CST
+
+INFO:root:****************************************
+data 517:   0%|          | 0/134 [00:00<?, ?it/s]data 517:   7%|▋         | 10/134 [00:48<09:57,  4.82s/it]data 517:  15%|█▍        | 20/134 [01:43<09:56,  5.23s/it]data 517:  22%|██▏       | 30/134 [02:34<08:59,  5.18s/it]data 517:  30%|██▉       | 40/134 [03:26<08:08,  5.20s/it]data 517:  37%|███▋      | 50/134 [04:20<07:22,  5.27s/it]data 517:  45%|████▍     | 60/134 [05:14<06:33,  5.31s/it]data 517:  52%|█████▏    | 70/134 [06:04<05:31,  5.19s/it]data 517:  60%|█████▉    | 80/134 [06:56<04:41,  5.22s/it]data 517:  67%|██████▋   | 90/134 [07:49<03:50,  5.23s/it]data 517:  75%|███████▍  | 100/134 [08:40<02:56,  5.20s/it]data 517:  82%|████████▏ | 110/134 [09:36<02:07,  5.31s/it]data 517:  90%|████████▉ | 120/134 [10:29<01:14,  5.32s/it]data 517:  97%|█████████▋| 130/134 [11:21<00:21,  5.28s/it]data 517:  97%|█████████▋| 130/134 [11:49<00:21,  5.46s/it]
+INFO:root:函数头: 
+    def client_prefers(self, media_types):
+
+INFO:root:目标函数体: 
+        
+
+        try:
+            # NOTE(kgriffs): best_match will return '' if no match is found
+            preferred_type = mimeparse.best_match(media_types, self.accept)
+        except ValueError:
+            # Value for the accept header was not formatted correctly
+            preferred_type = ''
+
+        return preferred_type if preferred_type else None
+
+INFO:root:生成结果: 
+        accept = self.accept
+
+        # If Accept header is not present, return None
+        if accept is None:
+            return None
+
+        # If Accept header is '*', return the first type in media_types
+        if accept == '*/*':
+            return media_types[0] if media_types else None
+
+        # If Accept header contains '*/*', return the first type in media_types
+        if '*' in accept:
+            accept_types = accept.split(',')
+            accept_types = [t.strip() for t in accept_types if t.strip()]
+            accept_types.sort(key=lambda x: x.split('/')[0])
+            accept_types = [t.split('/')[1] for
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9591
+INFO:root:max position: 23135
+INFO:root:context_num: 730
+INFO:root:target_namespace: falcon.falcon<folder>.request<file>.Request<class>.client_prefers<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:09:00 CST
+
+INFO:root:****************************************
+INFO:root:已生成517条结果
+INFO:root:--------data 518--------
+data 518:   0%|          | 0/400 [00:00<?, ?it/s]data 518:   2%|▎         | 10/400 [00:54<35:38,  5.48s/it]data 518:   5%|▌         | 20/400 [01:52<35:49,  5.66s/it]data 518:   8%|▊         | 30/400 [02:56<36:56,  5.99s/it]data 518:  10%|█         | 40/400 [03:59<36:35,  6.10s/it]data 518:  12%|█▎        | 50/400 [04:57<34:56,  5.99s/it]data 518:  12%|█▎        | 50/400 [05:08<35:58,  6.17s/it]
+INFO:root:函数头: 
+    @property
+    def content_length(self):
+
+INFO:root:目标函数体: 
+        try:
+            value = self.env['CONTENT_LENGTH']
+        except KeyError:
+            return None
+
+        # NOTE(kgriffs): Normalize an empty value to behave as if
+        # the header were not included; wsgiref, at least, inserts
+        # an empty CONTENT_LENGTH value if the request does not
+        # set the header. Gunicorn and uWSGI do not do this, but
+        # others might if they are trying to match wsgiref's
+        # behavior too closely.
+        if not value:
+            return None
+
+        try:
+            value_as_int = int(value)
+        except ValueError:
+            msg = 'The value of the header must be a number.'
+            raise errors.HTTPInvalidHeader(msg, 'Content-Length')
+
+        if value_as_int < 0:
+            msg = 'The value of the header must be a positive number.'
+            raise errors.HTTPInvalidHeader(msg, 'Content-Length')
+
+        return value_as_int
+
+INFO:root:生成结果: 
+        try:
+            content_length = int(self.env['HTTP_CONTENT_LENGTH'])
+            if content_length < 0:
+                raise ValueError("Content length cannot be negative")
+            return content_length
+        except (KeyError, ValueError):
+            return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8695
+INFO:root:max position: 23031
+INFO:root:context_num: 424
+INFO:root:target_namespace: falcon.falcon<folder>.request<file>.Request<class>.content_length<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:14:09 CST
+
+INFO:root:****************************************
+data 518:   0%|          | 0/400 [00:00<?, ?it/s]data 518:   2%|▎         | 10/400 [00:53<34:58,  5.38s/it]data 518:   5%|▌         | 20/400 [01:51<35:27,  5.60s/it]data 518:   8%|▊         | 30/400 [02:53<36:08,  5.86s/it]data 518:  10%|█         | 40/400 [03:54<35:56,  5.99s/it]data 518:  12%|█▎        | 50/400 [04:52<34:27,  5.91s/it]data 518:  12%|█▎        | 50/400 [04:57<34:45,  5.96s/it]
+INFO:root:函数头: 
+    @property
+    def content_length(self):
+
+INFO:root:目标函数体: 
+        try:
+            value = self.env['CONTENT_LENGTH']
+        except KeyError:
+            return None
+
+        # NOTE(kgriffs): Normalize an empty value to behave as if
+        # the header were not included; wsgiref, at least, inserts
+        # an empty CONTENT_LENGTH value if the request does not
+        # set the header. Gunicorn and uWSGI do not do this, but
+        # others might if they are trying to match wsgiref's
+        # behavior too closely.
+        if not value:
+            return None
+
+        try:
+            value_as_int = int(value)
+        except ValueError:
+            msg = 'The value of the header must be a number.'
+            raise errors.HTTPInvalidHeader(msg, 'Content-Length')
+
+        if value_as_int < 0:
+            msg = 'The value of the header must be a positive number.'
+            raise errors.HTTPInvalidHeader(msg, 'Content-Length')
+
+        return value_as_int
+
+INFO:root:生成结果: 
+        try:
+            content_length = int(self.env['CONTENT_LENGTH'])
+            if content_length < 0:
+                raise ValueError('Content length cannot be negative')
+            return content_length
+        except (KeyError, ValueError):
+            return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8515
+INFO:root:max position: 22023
+INFO:root:context_num: 424
+INFO:root:target_namespace: falcon.falcon<folder>.request<file>.Request<class>.content_length<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:19:06 CST
+
+INFO:root:****************************************
+data 518:   0%|          | 0/400 [00:00<?, ?it/s]data 518:   2%|▎         | 10/400 [00:52<34:24,  5.29s/it]data 518:   5%|▌         | 20/400 [01:50<35:12,  5.56s/it]data 518:   8%|▊         | 30/400 [03:02<38:59,  6.32s/it]data 518:  10%|█         | 40/400 [04:04<37:33,  6.26s/it]data 518:  12%|█▎        | 50/400 [05:01<35:26,  6.08s/it]data 518:  12%|█▎        | 50/400 [05:12<36:30,  6.26s/it]
+INFO:root:函数头: 
+    @property
+    def content_length(self):
+
+INFO:root:目标函数体: 
+        try:
+            value = self.env['CONTENT_LENGTH']
+        except KeyError:
+            return None
+
+        # NOTE(kgriffs): Normalize an empty value to behave as if
+        # the header were not included; wsgiref, at least, inserts
+        # an empty CONTENT_LENGTH value if the request does not
+        # set the header. Gunicorn and uWSGI do not do this, but
+        # others might if they are trying to match wsgiref's
+        # behavior too closely.
+        if not value:
+            return None
+
+        try:
+            value_as_int = int(value)
+        except ValueError:
+            msg = 'The value of the header must be a number.'
+            raise errors.HTTPInvalidHeader(msg, 'Content-Length')
+
+        if value_as_int < 0:
+            msg = 'The value of the header must be a positive number.'
+            raise errors.HTTPInvalidHeader(msg, 'Content-Length')
+
+        return value_as_int
+
+INFO:root:生成结果: 
+        try:
+            content_length = int(self.env['HTTP_CONTENT_LENGTH'])
+            if content_length < 0:
+                raise ValueError("Content length cannot be negative")
+            return content_length
+        except (KeyError, ValueError):
+            return None
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8570
+INFO:root:max position: 22352
+INFO:root:context_num: 422
+INFO:root:target_namespace: falcon.falcon<folder>.request<file>.Request<class>.content_length<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:24:19 CST
+
+INFO:root:****************************************
+INFO:root:--------data 519--------
+data 519:   0%|          | 0/128 [00:00<?, ?it/s]data 519:   8%|▊         | 10/128 [01:03<12:33,  6.39s/it]data 519:  16%|█▌        | 20/128 [02:10<11:46,  6.54s/it]data 519:  16%|█▌        | 20/128 [02:29<13:25,  7.46s/it]
+INFO:root:函数头: 
+    @property
+    def discriminator_hash(self):
+
+INFO:root:目标函数体: 
+        self._assert_resolved()
+        return hash(self.discriminator)
+
+INFO:root:生成结果: 
+        import hashlib
+        return hashlib.sha256(str(self.discriminator).encode()).hexdigest()
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8232
+INFO:root:max position: 29847
+INFO:root:context_num: 433
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspectable<class>.discriminator_hash<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:26:49 CST
+
+INFO:root:****************************************
+data 519:   0%|          | 0/128 [00:00<?, ?it/s]data 519:   0%|          | 0/128 [01:00<?, ?it/s]
+INFO:root:函数头: 
+    @property
+    def discriminator_hash(self):
+
+INFO:root:目标函数体: 
+        self._assert_resolved()
+        return hash(self.discriminator)
+
+INFO:root:生成结果: 
+        return hash(self.discriminator)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7426
+INFO:root:max position: 30018
+INFO:root:context_num: 246
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspectable<class>.discriminator_hash<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:27:49 CST
+
+INFO:root:****************************************
+data 519:   0%|          | 0/128 [00:00<?, ?it/s]data 519:   8%|▊         | 10/128 [01:01<12:03,  6.13s/it]data 519:  16%|█▌        | 20/128 [02:07<11:36,  6.45s/it]data 519:  16%|█▌        | 20/128 [02:13<11:59,  6.67s/it]
+INFO:root:函数头: 
+    @property
+    def discriminator_hash(self):
+
+INFO:root:目标函数体: 
+        self._assert_resolved()
+        return hash(self.discriminator)
+
+INFO:root:生成结果: 
+        import hashlib
+        return hashlib.sha256(self.discriminator.encode()).hexdigest()
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8262
+INFO:root:max position: 29573
+INFO:root:context_num: 408
+INFO:root:target_namespace: pyramid.src<folder>.pyramid<folder>.registry<file>.Introspectable<class>.discriminator_hash<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:30:03 CST
+
+INFO:root:****************************************
+INFO:root:已生成519条结果
+INFO:root:--------data 520--------
+data 520:   0%|          | 0/350 [00:00<?, ?it/s]Token indices sequence length is longer than the specified maximum sequence length for this model (318007 > 32768). Running this sequence through the model will result in indexing errors
+data 520:   3%|▎         | 10/350 [00:24<13:38,  2.41s/it]data 520:   6%|▌         | 20/350 [00:51<14:13,  2.59s/it]data 520:   9%|▊         | 30/350 [01:17<14:00,  2.63s/it]data 520:  11%|█▏        | 40/350 [01:44<13:42,  2.65s/it]data 520:  14%|█▍        | 50/350 [02:12<13:28,  2.70s/it]data 520:  17%|█▋        | 60/350 [02:40<13:07,  2.72s/it]data 520:  20%|██        | 70/350 [03:07<12:41,  2.72s/it]data 520:  23%|██▎       | 80/350 [03:34<12:08,  2.70s/it]data 520:  26%|██▌       | 90/350 [04:00<11:41,  2.70s/it]data 520:  29%|██▊       | 100/350 [04:28<11:20,  2.72s/it]data 520:  31%|███▏      | 110/350 [04:55<10:49,  2.71s/it]data 520:  34%|███▍      | 120/350 [05:22<10:23,  2.71s/it]data 520:  37%|███▋      | 130/350 [05:49<09:56,  2.71s/it]data 520:  40%|████      | 140/350 [06:17<09:33,  2.73s/it]data 520:  43%|████▎     | 150/350 [06:44<09:02,  2.71s/it]data 520:  46%|████▌     | 160/350 [07:10<08:29,  2.68s/it]data 520:  49%|████▊     | 170/350 [07:35<07:56,  2.65s/it]data 520:  51%|█████▏    | 180/350 [08:02<07:31,  2.66s/it]data 520:  54%|█████▍    | 190/350 [08:29<07:04,  2.65s/it]data 520:  57%|█████▋    | 200/350 [08:55<06:37,  2.65s/it]data 520:  60%|██████    | 210/350 [09:22<06:12,  2.66s/it]data 520:  63%|██████▎   | 220/350 [09:49<05:46,  2.66s/it]data 520:  66%|██████▌   | 230/350 [10:17<05:25,  2.71s/it]data 520:  69%|██████▊   | 240/350 [10:46<05:03,  2.76s/it]data 520:  71%|███████▏  | 250/350 [11:12<04:31,  2.72s/it]data 520:  74%|███████▍  | 260/350 [11:37<03:58,  2.65s/it]data 520:  77%|███████▋  | 270/350 [12:04<03:33,  2.67s/it]data 520:  80%|████████  | 280/350 [12:30<03:04,  2.64s/it]data 520:  83%|████████▎ | 290/350 [12:56<02:38,  2.64s/it]data 520:  86%|████████▌ | 300/350 [13:22<02:11,  2.63s/it]data 520:  89%|████████▊ | 310/350 [13:49<01:45,  2.65s/it]data 520:  91%|█████████▏| 320/350 [14:15<01:19,  2.63s/it]data 520:  94%|█████████▍| 330/350 [14:41<00:52,  2.63s/it]data 520:  97%|█████████▋| 340/350 [15:08<00:26,  2.64s/it]data 520: 100%|██████████| 350/350 [15:34<00:00,  2.65s/it]data 520: 100%|██████████| 350/350 [15:37<00:00,  2.68s/it]
+INFO:root:函数头: 
+def regex_guesses(match):
+
+INFO:root:目标函数体: 
+    char_class_bases = {
+        'alpha_lower': 26,
+        'alpha_upper': 26,
+        'alpha': 52,
+        'alphanumeric': 62,
+        'digits': 10,
+        'symbols': 33,
+    }
+    if match['regex_name'] in char_class_bases:
+        return char_class_bases[match['regex_name']] ** len(match['token'])
+    elif match['regex_name'] == 'recent_year':
+        # conservative estimate of year space: num years from REFERENCE_YEAR.
+        # if year is close to REFERENCE_YEAR, estimate a year space of
+        # MIN_YEAR_SPACE.
+        year_space = abs(int(match['regex_match'].group(0)) - REFERENCE_YEAR)
+        year_space = max(year_space, MIN_YEAR_SPACE)
+
+        return year_space
+
+INFO:root:生成结果: 
+    # Import necessary modules from other files
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from zxcvbn.sc scoring import estimate_guesses
+    from z
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 9996
+INFO:root:max position: 10006
+INFO:root:context_num: 45
+INFO:root:target_namespace: zxcvbn-python.zxcvbn<folder>.scoring<file>.regex_guesses<func>
+INFO:root:time: 2025年 03月 16日 星期日 22:45:40 CST
+
+INFO:root:****************************************
+data 520:   0%|          | 0/350 [00:00<?, ?it/s]data 520:   3%|▎         | 10/350 [00:24<13:37,  2.40s/it]data 520:   6%|▌         | 20/350 [00:50<13:58,  2.54s/it]data 520:   9%|▊         | 30/350 [01:17<13:54,  2.61s/it]data 520:  11%|█▏        | 40/350 [01:43<13:34,  2.63s/it]data 520:  14%|█▍        | 50/350 [02:10<13:07,  2.62s/it]data 520:  17%|█▋        | 60/350 [02:36<12:41,  2.63s/it]data 520:  20%|██        | 70/350 [03:04<12:36,  2.70s/it]data 520:  23%|██▎       | 80/350 [03:34<12:31,  2.78s/it]data 520:  26%|██▌       | 90/350 [04:06<12:34,  2.90s/it]data 520:  29%|██▊       | 100/350 [04:34<12:04,  2.90s/it]data 520:  31%|███▏      | 110/350 [05:02<11:28,  2.87s/it]data 520:  34%|███▍      | 120/350 [05:30<10:54,  2.85s/it]data 520:  37%|███▋      | 130/350 [05:59<10:27,  2.85s/it]data 520:  40%|████      | 140/350 [06:28<09:58,  2.85s/it]data 520:  43%|████▎     | 150/350 [06:56<09:30,  2.85s/it]data 520:  46%|████▌     | 160/350 [07:24<08:56,  2.82s/it]data 520:  49%|████▊     | 170/350 [07:51<08:22,  2.79s/it]data 520:  51%|█████▏    | 180/350 [08:17<07:48,  2.75s/it]data 520:  54%|█████▍    | 190/350 [08:45<07:20,  2.75s/it]data 520:  57%|█████▋    | 200/350 [09:11<06:47,  2.72s/it]data 520:  60%|██████    | 210/350 [09:38<06:20,  2.72s/it]data 520:  63%|██████▎   | 220/350 [10:05<05:49,  2.69s/it]data 520:  66%|██████▌   | 230/350 [10:31<05:21,  2.68s/it]data 520:  69%|██████▊   | 240/350 [10:57<04:52,  2.66s/it]data 520:  71%|███████▏  | 250/350 [11:24<04:26,  2.66s/it]data 520:  74%|███████▍  | 260/350 [11:50<03:57,  2.64s/it]data 520:  77%|███████▋  | 270/350 [12:17<03:33,  2.66s/it]data 520:  80%|████████  | 280/350 [12:44<03:07,  2.68s/it]data 520:  83%|████████▎ | 290/350 [13:11<02:40,  2.68s/it]data 520:  86%|████████▌ | 300/350 [13:39<02:15,  2.71s/it]data 520:  89%|████████▊ | 310/350 [14:07<01:49,  2.73s/it]data 520:  91%|█████████▏| 320/350 [14:34<01:21,  2.71s/it]data 520:  94%|█████████▍| 330/350 [15:02<00:54,  2.74s/it]data 520:  97%|█████████▋| 340/350 [15:29<00:27,  2.73s/it]data 520: 100%|██████████| 350/350 [15:57<00:00,  2.75s/it]data 520: 100%|██████████| 350/350 [15:59<00:00,  2.74s/it]
+INFO:root:函数头: 
+def regex_guesses(match):
+
+INFO:root:目标函数体: 
+    char_class_bases = {
+        'alpha_lower': 26,
+        'alpha_upper': 26,
+        'alpha': 52,
+        'alphanumeric': 62,
+        'digits': 10,
+        'symbols': 33,
+    }
+    if match['regex_name'] in char_class_bases:
+        return char_class_bases[match['regex_name']] ** len(match['token'])
+    elif match['regex_name'] == 'recent_year':
+        # conservative estimate of year space: num years from REFERENCE_YEAR.
+        # if year is close to REFERENCE_YEAR, estimate a year space of
+        # MIN_YEAR_SPACE.
+        year_space = abs(int(match['regex_match'].group(0)) - REFERENCE_YEAR)
+        year_space = max(year_space, MIN_YEAR_SPACE)
+
+        return year_space
+
+INFO:root:生成结果: 
+    # Import necessary modules from other files
+    from .frequency_lists import FREQUENCY_LISTS
+    from .frequency_graphs import FrequencyGraphs
+    from .frequency_graphs import frequency_graphs
+
+    # Define character class bases
+    character_class_bases = {
+        'lowercase': len(FrequencyGraphs.lowercase),
+        'uppercase': len(FrequencyGraphs.uppercase),
+        'digits': len(FrequencyGraphs digits),
+        'special': len(FrequencyGraphs.special),
+        'common': len(FrequencyGraphs.common),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs.r rare),
+        ' uncommon': len(FrequencyGraphs.uncommon),
+        ' rare': len(FrequencyGraphs
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10087
+INFO:root:max position: 10098
+INFO:root:context_num: 45
+INFO:root:target_namespace: zxcvbn-python.zxcvbn<folder>.scoring<file>.regex_guesses<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:01:40 CST
+
+INFO:root:****************************************
+data 520:   0%|          | 0/350 [00:00<?, ?it/s]data 520:   3%|▎         | 10/350 [00:24<13:41,  2.42s/it]data 520:   6%|▌         | 20/350 [00:51<14:10,  2.58s/it]data 520:   9%|▊         | 30/350 [01:18<14:15,  2.67s/it]data 520:  11%|█▏        | 40/350 [01:44<13:35,  2.63s/it]data 520:  14%|█▍        | 50/350 [02:10<13:07,  2.63s/it]data 520:  17%|█▋        | 60/350 [02:38<13:00,  2.69s/it]data 520:  20%|██        | 70/350 [03:07<12:44,  2.73s/it]data 520:  23%|██▎       | 80/350 [03:34<12:21,  2.75s/it]data 520:  26%|██▌       | 90/350 [04:04<12:11,  2.81s/it]data 520:  29%|██▊       | 100/350 [04:33<11:47,  2.83s/it]data 520:  31%|███▏      | 110/350 [04:58<10:58,  2.75s/it]data 520:  34%|███▍      | 120/350 [05:24<10:19,  2.69s/it]data 520:  37%|███▋      | 130/350 [05:50<09:48,  2.67s/it]data 520:  40%|████      | 140/350 [06:16<09:15,  2.64s/it]data 520:  43%|████▎     | 150/350 [06:42<08:44,  2.62s/it]data 520:  46%|████▌     | 160/350 [07:10<08:31,  2.69s/it]data 520:  49%|████▊     | 170/350 [07:36<07:59,  2.67s/it]data 520:  51%|█████▏    | 180/350 [08:02<07:28,  2.64s/it]data 520:  54%|█████▍    | 190/350 [08:27<06:55,  2.59s/it]data 520:  57%|█████▋    | 200/350 [08:54<06:34,  2.63s/it]data 520:  60%|██████    | 210/350 [09:20<06:07,  2.62s/it]data 520:  63%|██████▎   | 220/350 [09:46<05:38,  2.61s/it]data 520:  66%|██████▌   | 230/350 [10:12<05:13,  2.61s/it]data 520:  69%|██████▊   | 240/350 [10:38<04:45,  2.59s/it]data 520:  71%|███████▏  | 250/350 [11:05<04:23,  2.64s/it]data 520:  74%|███████▍  | 260/350 [11:32<03:58,  2.66s/it]data 520:  77%|███████▋  | 270/350 [11:58<03:31,  2.64s/it]data 520:  80%|████████  | 280/350 [12:23<03:02,  2.61s/it]data 520:  83%|████████▎ | 290/350 [12:49<02:35,  2.60s/it]data 520:  86%|████████▌ | 300/350 [13:15<02:10,  2.61s/it]data 520:  89%|████████▊ | 310/350 [13:39<01:41,  2.54s/it]data 520:  91%|█████████▏| 320/350 [14:12<01:23,  2.77s/it]data 520:  94%|█████████▍| 330/350 [14:39<00:54,  2.73s/it]data 520:  97%|█████████▋| 340/350 [15:06<00:27,  2.72s/it]data 520: 100%|██████████| 350/350 [15:31<00:00,  2.68s/it]data 520: 100%|██████████| 350/350 [15:34<00:00,  2.67s/it]
+INFO:root:函数头: 
+def regex_guesses(match):
+
+INFO:root:目标函数体: 
+    char_class_bases = {
+        'alpha_lower': 26,
+        'alpha_upper': 26,
+        'alpha': 52,
+        'alphanumeric': 62,
+        'digits': 10,
+        'symbols': 33,
+    }
+    if match['regex_name'] in char_class_bases:
+        return char_class_bases[match['regex_name']] ** len(match['token'])
+    elif match['regex_name'] == 'recent_year':
+        # conservative estimate of year space: num years from REFERENCE_YEAR.
+        # if year is close to REFERENCE_YEAR, estimate a year space of
+        # MIN_YEAR_SPACE.
+        year_space = abs(int(match['regex_match'].group(0)) - REFERENCE_YEAR)
+        year_space = max(year_space, MIN_YEAR_SPACE)
+
+        return year_space
+
+INFO:root:生成结果: 
+    # Import necessary modules from other files
+    from zxcvbn.sc scoring import MIN guesses_BEFORE growing sequence, MIN guesses_MULTI_CHAR
+
+    # Define dictionary of character class bases
+    character_class_bases = {
+        'lowercase': 26,
+        'uppercase': 26,
+        'digits': 10,
+        'special': 33  # Includes !@#$%^&*()_+-=[]{}|;:,.<>?/~`'
+    }
+
+    # Check the type of the regular match
+    match_type = match.get('type', 'unknown')
+
+    # Calculate the number of guesses based on the match type
+    if match_type == 'sequence':
+        # Sequence match: calculate guesses based on the length of the sequence
+        sequence_length = len(match['token'])
+        guesses = sequence_length ** character_class_bases['lowercase']
+    elif match_type == 'dictionary':
+        # Dictionary match: calculate guesses based on the rank of the dictionary entry
+        rank = match.get('rank', 1)
+        guesses = rank ** character_class_bases['lowercase']
+    elif match_type == 'date':
+        # Date match: calculate guesses based on the number of years between the date and the current date
+        current_year = datetime.now().year
+        date_year = int(match['token'])
+        years_between = current_year - date_year
+        guesses = years_between ** character_class_bases['lowercase']
+    elif match_type == 'regex':
+        # Regex match: calculate guesses based on the complexity of the regex pattern
+        complexity = match.get('complexity', 1)
+        guesses = complexity ** character_class_bases['lowercase']
+    else:
+        #
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10147
+INFO:root:max position: 10158
+INFO:root:context_num: 45
+INFO:root:target_namespace: zxcvbn-python.zxcvbn<folder>.scoring<file>.regex_guesses<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:17:14 CST
+
+INFO:root:****************************************
+INFO:root:--------data 521--------
+INFO:root:file too long zulip-term.zulipterminal<folder>.ui_tools<folder>.boxes<file>.WriteBox<class>.stream_box_view<func>, cut 23/63 nodes
+data 521:   0%|          | 0/304 [00:00<?, ?it/s]data 521:   3%|▎         | 10/304 [01:16<37:42,  7.70s/it]data 521:   7%|▋         | 20/304 [01:52<25:00,  5.28s/it]data 521:  10%|▉         | 30/304 [02:26<20:08,  4.41s/it]data 521:  13%|█▎        | 40/304 [03:00<17:38,  4.01s/it]data 521:  16%|█▋        | 50/304 [03:37<16:26,  3.88s/it]data 521:  20%|█▉        | 60/304 [04:12<15:18,  3.76s/it]data 521:  23%|██▎       | 70/304 [04:46<14:13,  3.65s/it]data 521:  26%|██▋       | 80/304 [05:20<13:17,  3.56s/it]data 521:  30%|██▉       | 90/304 [05:55<12:38,  3.54s/it]data 521:  33%|███▎      | 100/304 [06:29<11:55,  3.51s/it]data 521:  36%|███▌      | 110/304 [07:05<11:25,  3.53s/it]data 521:  39%|███▉      | 120/304 [07:40<10:49,  3.53s/it]data 521:  43%|████▎     | 130/304 [08:15<10:10,  3.51s/it]data 521:  46%|████▌     | 140/304 [08:52<09:47,  3.58s/it]data 521:  49%|████▉     | 150/304 [09:27<09:06,  3.55s/it]data 521:  53%|█████▎    | 160/304 [10:02<08:28,  3.53s/it]data 521:  56%|█████▌    | 170/304 [10:36<07:48,  3.50s/it]data 521:  59%|█████▉    | 180/304 [11:13<07:19,  3.54s/it]data 521:  62%|██████▎   | 190/304 [11:47<06:39,  3.51s/it]data 521:  66%|██████▌   | 200/304 [12:22<06:03,  3.49s/it]data 521:  69%|██████▉   | 210/304 [12:56<05:28,  3.49s/it]data 521:  72%|███████▏  | 220/304 [13:30<04:50,  3.46s/it]data 521:  76%|███████▌  | 230/304 [14:04<04:13,  3.43s/it]data 521:  79%|███████▉  | 240/304 [14:38<03:39,  3.43s/it]data 521:  82%|████████▏ | 250/304 [15:12<03:04,  3.42s/it]data 521:  86%|████████▌ | 260/304 [15:46<02:30,  3.42s/it]data 521:  89%|████████▉ | 270/304 [16:20<01:56,  3.42s/it]data 521:  92%|█████████▏| 280/304 [16:55<01:22,  3.43s/it]data 521:  95%|█████████▌| 290/304 [17:30<00:48,  3.45s/it]data 521:  99%|█████████▊| 300/304 [18:05<00:13,  3.46s/it]data 521:  99%|█████████▊| 300/304 [18:23<00:14,  3.68s/it]
+INFO:root:函数头: 
+    def stream_box_view(
+        self, stream_id: int, caption: str = "", title: str = ""
+    ) -> None:
+
+INFO:root:目标函数体: 
+        self.stream_write_box = ReadlineEdit(
+            edit_text=caption, max_char=self.model.max_stream_name_length
+        )
+        self.stream_write_box.enable_autocomplete(
+            func=self._stream_box_autocomplete,
+            key=primary_key_for_command("AUTOCOMPLETE"),
+            key_reverse=primary_key_for_command("AUTOCOMPLETE_REVERSE"),
+        )
+        self.stream_write_box.set_completer_delims("")
+        self._setup_common_stream_compose(stream_id, caption, title)
+
+        # Use and set a callback to set the stream marker
+        self._set_stream_write_box_style(None, caption)
+        urwid.connect_signal(
+            self.stream_write_box, "change", self._set_stream_write_box_style
+        )
+
+INFO:root:生成结果: 
+        from zulipterminal.config.config import CONFIG
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zulipterminal.ui_tools.boxes import StreamInfoView
+        from zulipterminal.ui_tools.boxes import StreamMembersView
+        from zul
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 10088
+INFO:root:max position: 17372
+INFO:root:context_num: 388
+INFO:root:target_namespace: zulip-term.zulipterminal<folder>.ui_tools<folder>.boxes<file>.WriteBox<class>.stream_box_view<func>
+INFO:root:time: 2025年 03月 16日 星期日 23:35:38 CST
+
+INFO:root:****************************************
+data 521:   0%|          | 0/304 [00:00<?, ?it/s]data 521:   3%|▎         | 10/304 [00:36<17:50,  3.64s/it]data 521:   7%|▋         | 20/304 [01:11<16:52,  3.56s/it]data 521:  10%|▉         | 30/304 [01:48<16:30,  3.61s/it]data 521:  13%|█▎        | 40/304 [02:23<15:49,  3.60s/it]data 521:  16%|█▋        | 50/304 [02:58<15:05,  3.56s/it]data 521:  20%|█▉        | 60/304 [03:34<14:27,  3.56s/it]data 521:  23%|██▎       | 70/304 [04:08<13:42,  3.51s/it]data 521:  26%|██▋       | 80/304 [04:43<13:06,  3.51s/it]data 521:  30%|██▉       | 90/304 [05:19<12:36,  3.53s/it]data 521:  33%|███▎      | 100/304 [05:54<12:00,  3.53s/it]data 521:  36%|███▌      | 110/304 [06:32<11:36,  3.59s/it]data 521:  39%|███▉      | 120/304 [07:06<10:51,  3.54s/it]data 521:  43%|████▎     | 130/304 [07:40<10:09,  3.50s/it]data 521:  46%|████▌     | 140/304 [08:14<09:28,  3.46s/it]data 521:  49%|████▉     | 150/304 [08:49<08:56,  3.48s/it]data 521:  53%|█████▎    | 160/304 [09:27<08:34,  3.58s/it]data 521:  56%|█████▌    | 170/304 [10:01<07:51,  3.52s/it]data 521:  59%|█████▉    | 180/304 [10:36<07:16,  3.52s/it]data 521:  62%|██████▎   | 190/304 [11:11<06:39,  3.51s/it]data 521:  66%|██████▌   | 200/304 [11:45<06:02,  3.48s/it]data 521:  69%|██████▉   | 210/304 [12:19<05:24,  3.46s/it]data 521:  72%|███████▏  | 220/304 [12:52<04:46,  3.41s/it]data 521:  76%|███████▌  | 230/304 [13:26<04:11,  3.40s/it]

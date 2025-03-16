@@ -1,0 +1,502 @@
+INFO:root:time: 2025年 03月 13日 星期四 05:49:56 CST
+
+INFO:root:pid: 1115483
+INFO:root:seed: 483
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.15s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.50it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.36it/s]
+INFO:root:--------data 182--------
+data 182:   0%|          | 0/512 [00:00<?, ?it/s]data 182:   2%|▏         | 10/512 [01:10<58:55,  7.04s/it]data 182:   4%|▍         | 20/512 [02:16<55:29,  6.77s/it]data 182:   4%|▍         | 20/512 [03:04<1:15:46,  9.24s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_cwd():
+
+INFO:root:目标函数体: 
+    
+    original_cwd = os.getcwd()
+
+    try:
+        yield
+
+    finally:
+        os.chdir(original_cwd)
+
+INFO:root:生成结果: 
+    original_cwd = os.getcwd()
+    try:
+        yield original_cwd
+    finally:
+        os.chdir(original_cwd)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6304
+INFO:root:max position: 13583
+INFO:root:context_num: 184
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_cwd<func>
+INFO:root:****************************************
+data 182:   0%|          | 0/512 [00:00<?, ?it/s]data 182:   2%|▏         | 10/512 [00:51<43:04,  5.15s/it]data 182:   4%|▍         | 20/512 [01:40<41:02,  5.00s/it]data 182:   4%|▍         | 20/512 [02:03<50:38,  6.18s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_cwd():
+
+INFO:root:目标函数体: 
+    
+    original_cwd = os.getcwd()
+
+    try:
+        yield
+
+    finally:
+        os.chdir(original_cwd)
+
+INFO:root:生成结果: 
+    cwd = os.getcwd()
+    try:
+        yield cwd
+    finally:
+        os.chdir(cwd)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5240
+INFO:root:max position: 14279
+INFO:root:context_num: 166
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_cwd<func>
+INFO:root:****************************************
+data 182:   0%|          | 0/512 [00:00<?, ?it/s]data 182:   2%|▏         | 10/512 [00:44<36:49,  4.40s/it]data 182:   4%|▍         | 20/512 [01:30<37:27,  4.57s/it]data 182:   4%|▍         | 20/512 [02:00<49:36,  6.05s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_cwd():
+
+INFO:root:目标函数体: 
+    
+    original_cwd = os.getcwd()
+
+    try:
+        yield
+
+    finally:
+        os.chdir(original_cwd)
+
+INFO:root:生成结果: 
+    oldcwd = os.getcwd()
+    try:
+        yield oldcwd
+    finally:
+        os.chdir(oldcwd)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6654
+INFO:root:max position: 13432
+INFO:root:context_num: 167
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_cwd<func>
+INFO:root:****************************************
+data 182:   0%|          | 0/512 [00:00<?, ?it/s]data 182:   2%|▏         | 10/512 [00:46<39:09,  4.68s/it]data 182:   4%|▍         | 20/512 [01:34<38:45,  4.73s/it]data 182:   4%|▍         | 20/512 [03:20<1:22:20, 10.04s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_cwd():
+
+INFO:root:目标函数体: 
+    
+    original_cwd = os.getcwd()
+
+    try:
+        yield
+
+    finally:
+        os.chdir(original_cwd)
+
+INFO:root:生成结果: 
+    original_cwd = os.getcwd()
+    try:
+        yield original_cwd
+    finally:
+        os.chdir(original_cwd)
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6169
+INFO:root:max position: 14137
+INFO:root:context_num: 187
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_cwd<func>
+INFO:root:****************************************
+data 182:   0%|          | 0/512 [00:00<?, ?it/s]data 182:   2%|▏         | 10/512 [00:43<36:42,  4.39s/it]data 182:   4%|▍         | 20/512 [01:26<35:25,  4.32s/it]data 182:   6%|▌         | 30/512 [02:10<34:46,  4.33s/it]data 182:   8%|▊         | 40/512 [02:56<35:12,  4.47s/it]data 182:   8%|▊         | 40/512 [03:10<37:26,  4.76s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_cwd():
+
+INFO:root:目标函数体: 
+    
+    original_cwd = os.getcwd()
+
+    try:
+        yield
+
+    finally:
+        os.chdir(original_cwd)
+
+INFO:root:生成结果: 
+    import os
+    import contextlib
+    import os.path
+
+    original_cwd = os.getcwd()
+
+    try:
+        yield original_cwd
+    finally:
+        os.chdir(original_cwd)
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 4813
+INFO:root:max position: 12675
+INFO:root:context_num: 214
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_cwd<func>
+INFO:root:****************************************
+INFO:root:--------data 183--------
+data 183:   0%|          | 0/512 [00:00<?, ?it/s]data 183:   2%|▏         | 10/512 [01:04<54:19,  6.49s/it]data 183:   4%|▍         | 20/512 [02:00<48:54,  5.96s/it]data 183:   6%|▌         | 30/512 [02:52<45:00,  5.60s/it]data 183:   8%|▊         | 40/512 [03:52<45:10,  5.74s/it]data 183:  10%|▉         | 50/512 [04:47<43:35,  5.66s/it]data 183:  12%|█▏        | 60/512 [05:44<42:41,  5.67s/it]data 183:  14%|█▎        | 70/512 [06:31<39:37,  5.38s/it]data 183:  16%|█▌        | 80/512 [07:23<38:07,  5.30s/it]data 183:  18%|█▊        | 90/512 [08:13<36:38,  5.21s/it]data 183:  20%|█▉        | 100/512 [09:05<35:47,  5.21s/it]data 183:  21%|██▏       | 110/512 [09:55<34:24,  5.14s/it]data 183:  23%|██▎       | 120/512 [10:43<32:51,  5.03s/it]data 183:  25%|██▌       | 130/512 [11:35<32:27,  5.10s/it]data 183:  27%|██▋       | 140/512 [12:27<31:48,  5.13s/it]data 183:  29%|██▉       | 150/512 [13:12<29:51,  4.95s/it]data 183:  29%|██▉       | 150/512 [13:26<32:26,  5.38s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_sys_std():
+
+INFO:root:目标函数体: 
+    
+
+    stdin, stdout, stderr = sys.stdin, sys.stdout, sys.stderr
+
+    try:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+        yield
+
+        # at this point, sys.stdout/stderr may have been patched. Don't
+        # raise an exception if flush() fails
+        try:
+            sys.stdout.flush()
+        except:
+            pass
+
+        try:
+            sys.stderr.flush()
+        except:
+            pass
+    finally:
+        sys.stdin, sys.stdout, sys.stderr = stdin, stdout, stderr
+
+INFO:root:生成结果: 
+    # Save the current sys.stdin, sys.stdout, sys.stderr
+    saved_stdin = sys.stdin
+    saved_stdout = sys.stdout
+    saved_stderr = sys.stderr
+
+    try:
+        yield saved_stdin, saved_stdout, saved_stderr
+
+        # Flush the saved sys.stdout and sys.stderr before switching them out
+        saved_stdout.flush()
+        saved_stderr.flush()
+
+        # Switch sys.stdin, sys.stdout, sys.stderr to the saved ones
+        sys.stdin = saved_stdin
+        sys.stdout = saved_stdout
+        sys.stderr = saved_stderr
+
+    finally:
+        # Restore sys.stdin, sys.stdout, sys.stderr
+        sys.stdin = saved_stdin
+        sys.stdout = saved_stdout
+        sys.stderr = saved_stderr
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6824
+INFO:root:max position: 16700
+INFO:root:context_num: 456
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_sys_std<func>
+INFO:root:****************************************
+data 183:   0%|          | 0/512 [00:00<?, ?it/s]data 183:   2%|▏         | 10/512 [00:36<30:20,  3.63s/it]data 183:   4%|▍         | 20/512 [01:13<30:23,  3.71s/it]data 183:   6%|▌         | 30/512 [01:52<30:17,  3.77s/it]data 183:   8%|▊         | 40/512 [02:30<29:39,  3.77s/it]data 183:  10%|▉         | 50/512 [03:03<27:49,  3.61s/it]data 183:  12%|█▏        | 60/512 [03:36<26:20,  3.50s/it]data 183:  14%|█▎        | 70/512 [04:09<25:24,  3.45s/it]data 183:  14%|█▎        | 70/512 [04:42<29:45,  4.04s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_sys_std():
+
+INFO:root:目标函数体: 
+    
+
+    stdin, stdout, stderr = sys.stdin, sys.stdout, sys.stderr
+
+    try:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+        yield
+
+        # at this point, sys.stdout/stderr may have been patched. Don't
+        # raise an exception if flush() fails
+        try:
+            sys.stdout.flush()
+        except:
+            pass
+
+        try:
+            sys.stderr.flush()
+        except:
+            pass
+    finally:
+        sys.stdin, sys.stdout, sys.stderr = stdin, stdout, stderr
+
+INFO:root:生成结果: 
+    original_stdin = sys.stdin
+    original_stdout = sys.stdout
+    original_stderr = sys.stderr
+
+    try:
+        yield original_stdin, original_stdout, original_stderr
+    finally:
+        sys.stdin = original_stdin
+        sys.stdout = original_stdout
+        sys.stderr = original_stderr
+        original_stdin.flush()
+        original_stdout.flush()
+        original_stderr.flush()
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5872
+INFO:root:max position: 12962
+INFO:root:context_num: 305
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_sys_std<func>
+INFO:root:****************************************
+data 183:   0%|          | 0/512 [00:00<?, ?it/s]data 183:   2%|▏         | 10/512 [00:32<27:24,  3.27s/it]data 183:   4%|▍         | 20/512 [01:10<29:12,  3.56s/it]data 183:   6%|▌         | 30/512 [01:45<28:19,  3.53s/it]data 183:   8%|▊         | 40/512 [02:21<28:05,  3.57s/it]data 183:  10%|▉         | 50/512 [02:55<26:54,  3.50s/it]data 183:  12%|█▏        | 60/512 [03:26<25:22,  3.37s/it]data 183:  14%|█▎        | 70/512 [03:59<24:41,  3.35s/it]data 183:  14%|█▎        | 70/512 [04:32<28:43,  3.90s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_sys_std():
+
+INFO:root:目标函数体: 
+    
+
+    stdin, stdout, stderr = sys.stdin, sys.stdout, sys.stderr
+
+    try:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+        yield
+
+        # at this point, sys.stdout/stderr may have been patched. Don't
+        # raise an exception if flush() fails
+        try:
+            sys.stdout.flush()
+        except:
+            pass
+
+        try:
+            sys.stderr.flush()
+        except:
+            pass
+    finally:
+        sys.stdin, sys.stdout, sys.stderr = stdin, stdout, stderr
+
+INFO:root:生成结果: 
+    old_stdin = sys.stdin
+    old_stdout = sys.stdout
+    old_stderr = sys.stderr
+
+    try:
+        yield old_stdin, old_stdout, old_stderr
+    finally:
+        sys.stdin = old_stdin
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+        old_stdin.flush()
+        old_stdout.flush()
+        old_stderr.flush()
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6256
+INFO:root:max position: 15221
+INFO:root:context_num: 304
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_sys_std<func>
+INFO:root:****************************************
+data 183:   0%|          | 0/512 [00:00<?, ?it/s]data 183:   2%|▏         | 10/512 [00:39<32:47,  3.92s/it]data 183:   4%|▍         | 20/512 [01:20<33:14,  4.05s/it]data 183:   6%|▌         | 30/512 [01:56<30:43,  3.82s/it]data 183:   8%|▊         | 40/512 [02:35<30:22,  3.86s/it]data 183:  10%|▉         | 50/512 [03:12<29:26,  3.82s/it]data 183:  12%|█▏        | 60/512 [03:47<27:51,  3.70s/it]data 183:  14%|█▎        | 70/512 [04:18<25:48,  3.50s/it]data 183:  16%|█▌        | 80/512 [04:51<24:50,  3.45s/it]data 183:  18%|█▊        | 90/512 [05:29<24:58,  3.55s/it]data 183:  20%|█▉        | 100/512 [06:10<25:36,  3.73s/it]data 183:  21%|██▏       | 110/512 [06:50<25:26,  3.80s/it]data 183:  23%|██▎       | 120/512 [07:28<24:49,  3.80s/it]data 183:  25%|██▌       | 130/512 [08:13<25:31,  4.01s/it]data 183:  27%|██▋       | 140/512 [08:57<25:34,  4.13s/it]data 183:  29%|██▉       | 150/512 [09:43<25:44,  4.27s/it]data 183:  31%|███▏      | 160/512 [10:28<25:32,  4.35s/it]data 183:  31%|███▏      | 160/512 [10:54<23:58,  4.09s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_sys_std():
+
+INFO:root:目标函数体: 
+    
+
+    stdin, stdout, stderr = sys.stdin, sys.stdout, sys.stderr
+
+    try:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+        yield
+
+        # at this point, sys.stdout/stderr may have been patched. Don't
+        # raise an exception if flush() fails
+        try:
+            sys.stdout.flush()
+        except:
+            pass
+
+        try:
+            sys.stderr.flush()
+        except:
+            pass
+    finally:
+        sys.stdin, sys.stdout, sys.stderr = stdin, stdout, stderr
+
+INFO:root:生成结果: 
+    # Implement the function body based on the provided code prefix and other resources in the project, without generating any additional content! The current function is located in file mrjob/util.py, cyclic calling the current function! You use use resources in the project, and you MUST write imports statements FIRST to call the corresponding resource.
+    import sys
+    import io
+
+    old_stdin = sys.stdin
+    old_stdout = sys.stdout
+    old_stderr = sys.stderr
+
+    try:
+        sys.stdin = io.StringIO()
+        sys.stdout = io.StringIO()
+        sys.stderr = io.StringIO()
+
+        yield
+
+    finally:
+        sys.stdin = old_stdin
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+        sys.stdin.flush()
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5951
+INFO:root:max position: 16590
+INFO:root:context_num: 460
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_sys_std<func>
+INFO:root:****************************************
+data 183:   0%|          | 0/512 [00:00<?, ?it/s]data 183:   2%|▏         | 10/512 [00:33<28:11,  3.37s/it]data 183:   4%|▍         | 20/512 [01:09<28:37,  3.49s/it]data 183:   6%|▌         | 30/512 [01:43<27:44,  3.45s/it]data 183:   8%|▊         | 40/512 [02:18<27:16,  3.47s/it]data 183:  10%|▉         | 50/512 [02:49<25:38,  3.33s/it]data 183:  12%|█▏        | 60/512 [03:20<24:35,  3.27s/it]data 183:  12%|█▏        | 60/512 [03:32<26:42,  3.55s/it]
+INFO:root:函数头: 
+@contextmanager
+def save_sys_std():
+
+INFO:root:目标函数体: 
+    
+
+    stdin, stdout, stderr = sys.stdin, sys.stdout, sys.stderr
+
+    try:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+        yield
+
+        # at this point, sys.stdout/stderr may have been patched. Don't
+        # raise an exception if flush() fails
+        try:
+            sys.stdout.flush()
+        except:
+            pass
+
+        try:
+            sys.stderr.flush()
+        except:
+            pass
+    finally:
+        sys.stdin, sys.stdout, sys.stderr = stdin, stdout, stderr
+
+INFO:root:生成结果: 
+    old_stdin = sys.stdin
+    old_stdout = sys.stdout
+    old_stderr = sys.stderr
+    try:
+        yield old_stdin, old_stdout, old_stderr
+    finally:
+        sys.stdin = old_stdin
+        sys.stdout = old_stdout
+        sys.stderr = old_stderr
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 5897
+INFO:root:max position: 14106
+INFO:root:context_num: 264
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.save_sys_std<func>
+INFO:root:****************************************
+INFO:root:已生成183条结果
+INFO:root:--------data 184--------
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [00:58<48:53,  5.84s/it]data 184:   4%|▍         | 20/512 [01:57<48:10,  5.87s/it]data 184:   6%|▌         | 30/512 [03:00<48:40,  6.06s/it]data 184:   8%|▊         | 40/512 [04:03<48:28,  6.16s/it]data 184:  10%|▉         | 50/512 [05:02<46:40,  6.06s/it]data 184:  12%|█▏        | 60/512 [07:01<1:00:48,  8.07s/it]data 184:  14%|█▎        | 70/512 [08:02<54:28,  7.40s/it]  data 184:  16%|█▌        | 80/512 [08:55<48:36,  6.75s/it]data 184:  18%|█▊        | 90/512 [09:52<45:03,  6.41s/it]data 184:  20%|█▉        | 100/512 [10:44<41:32,  6.05s/it]data 184:  21%|██▏       | 110/512 [11:41<39:44,  5.93s/it]data 184:  23%|██▎       | 120/512 [12:43<39:14,  6.01s/it]data 184:  25%|██▌       | 130/512 [13:32<36:15,  5.69s/it]data 184:  27%|██▋       | 140/512 [14:21<33:50,  5.46s/it]data 184:  27%|██▋       | 140/512 [14:54<39:36,  6.39s/it]
+INFO:root:函数头: 
+def unarchive(archive_path, dest):
+
+INFO:root:目标函数体: 
+    
+    if tarfile.is_tarfile(archive_path):
+        with tarfile.open(archive_path, 'r') as archive:
+            archive.extractall(dest)
+    elif is_zipfile(archive_path):
+        with ZipFile(archive_path, 'r') as archive:
+            for name in archive.namelist():
+                # the zip spec specifies that front slashes are always
+                # used as directory separators
+                dest_path = os.path.join(dest, *name.split('/'))
+
+                # now, split out any dirname and filename and create
+                # one and/or the other
+                dirname, filename = os.path.split(dest_path)
+                if dirname and not os.path.exists(dirname):
+                    os.makedirs(dirname)
+                if filename:
+                    with open(dest_path, 'wb') as dest_file:
+                        dest_file.write(archive.read(name))
+    else:
+        raise IOError('Unknown archive type: %s' % (archive_path,))
+
+INFO:root:生成结果: 
+    import tarfile
+    import zipfile
+    import os
+
+    archive_type = archive_path.split('.')[-1].lower()
+    dest = os.path.expanduser(dest)
+
+    if archive_type == 'tar':
+        if archive_path.endswith('.gz'):
+            archive_type = 'tar.gz'
+        elif archive_path.endswith('.bz2'):
+            archive_type = 'tar.bz2'
+
+        with tarfile.open(archive_path, archive_type) as tar:
+            tar.extractall(dest)
+    elif archive_type == 'zip':
+        with zipfile.ZipFile(archive_path, 'r') as zip_ref:
+            zip_ref.extractall(dest)
+    else:
+        raise ValueError(f'Unknown archive type: {archive_type}')
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 6732
+INFO:root:max position: 20064
+INFO:root:context_num: 576
+INFO:root:target_namespace: mrjob.mrjob<folder>.util<file>.unarchive<func>
+INFO:root:****************************************
+data 184:   0%|          | 0/512 [00:00<?, ?it/s]data 184:   2%|▏         | 10/512 [00:38<32:12,  3.85s/it]data 184:   4%|▍         | 20/512 [01:24<35:16,  4.30s/it]data 184:   6%|▌         | 30/512 [02:10<35:28,  4.42s/it]data 184:   8%|▊         | 40/512 [02:57<35:40,  4.53s/it]data 184:  10%|▉         | 50/512 [03:42<34:48,  4.52s/it]data 184:  12%|█▏        | 60/512 [04:31<35:00,  4.65s/it]data 184:  14%|█▎        | 70/512 [05:15<33:37,  4.56s/it]

@@ -1,0 +1,688 @@
+INFO:root:time: 2025年 03月 15日 星期六 23:39:30 CST
+
+INFO:root:pid: 2297886
+INFO:root:seed: 38
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.14s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.33it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.23it/s]
+INFO:root:--------data 502--------
+data 502:   0%|          | 0/128 [00:00<?, ?it/s]data 502:   8%|▊         | 10/128 [00:31<06:14,  3.17s/it]data 502:  16%|█▌        | 20/128 [01:06<06:00,  3.34s/it]data 502:  23%|██▎       | 30/128 [01:42<05:40,  3.47s/it]data 502:  23%|██▎       | 30/128 [02:09<07:02,  4.31s/it]
+INFO:root:函数头: 
+    def setmaxsize(self, maxsize):
+
+INFO:root:目标函数体: 
+        self.maxsize = maxsize
+        self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)
+
+INFO:root:生成结果: 
+        self.maxsize = maxsize
+        self._msgsize_maxsize = len(str(maxsize)) + 1  # len(str(maxsize)) + 1
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8372
+INFO:root:max position: 16680
+INFO:root:context_num: 344
+INFO:root:target_namespace: boltons.boltons<folder>.socketutils<file>.NetstringSocket<class>.setmaxsize<func>
+INFO:root:****************************************
+data 502:   0%|          | 0/128 [00:00<?, ?it/s]data 502:   8%|▊         | 10/128 [00:31<06:07,  3.11s/it]data 502:  16%|█▌        | 20/128 [01:03<05:46,  3.20s/it]data 502:  23%|██▎       | 30/128 [01:41<05:37,  3.44s/it]data 502:  23%|██▎       | 30/128 [02:18<07:33,  4.63s/it]
+INFO:root:函数头: 
+    def setmaxsize(self, maxsize):
+
+INFO:root:目标函数体: 
+        self.maxsize = maxsize
+        self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)
+
+INFO:root:生成结果: 
+        self.maxsize = maxsize
+        self._msgsize_maxsize = len(str(maxsize)) + 1  # len(str(maxsize)) == log10(maxsize)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8429
+INFO:root:max position: 16361
+INFO:root:context_num: 308
+INFO:root:target_namespace: boltons.boltons<folder>.socketutils<file>.NetstringSocket<class>.setmaxsize<func>
+INFO:root:****************************************
+data 502:   0%|          | 0/128 [00:00<?, ?it/s]data 502:   8%|▊         | 10/128 [00:30<05:57,  3.03s/it]data 502:  16%|█▌        | 20/128 [01:04<05:53,  3.28s/it]data 502:  23%|██▎       | 30/128 [01:40<05:36,  3.43s/it]data 502:  31%|███▏      | 40/128 [02:19<05:16,  3.59s/it]data 502:  31%|███▏      | 40/128 [02:38<05:49,  3.97s/it]
+INFO:root:函数头: 
+    def setmaxsize(self, maxsize):
+
+INFO:root:目标函数体: 
+        self.maxsize = maxsize
+        self._msgsize_maxsize = self._calc_msgsize_maxsize(maxsize)
+
+INFO:root:生成结果: 
+        self.maxsize = maxsize
+        self._msg_size_maxsize = len(str(maxsize)) + 1  # Calculate the maximum size for a netstring message based on the new maxsize value.
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8169
+INFO:root:max position: 16424
+INFO:root:context_num: 322
+INFO:root:target_namespace: boltons.boltons<folder>.socketutils<file>.NetstringSocket<class>.setmaxsize<func>
+INFO:root:****************************************
+INFO:root:--------data 503--------
+data 503:   0%|          | 0/128 [00:00<?, ?it/s]data 503:   8%|▊         | 10/128 [00:49<09:49,  5.00s/it]data 503:   8%|▊         | 10/128 [00:59<11:47,  6.00s/it]
+INFO:root:函数头: 
+def connect_to_region(region_name, **kw_params):
+
+INFO:root:目标函数体: 
+    from boto.regioninfo import connect
+    from boto.datapipeline.layer1 import DataPipelineConnection
+    return connect('datapipeline', region_name,
+                   connection_cls=DataPipelineConnection, **kw_params)
+
+INFO:root:生成结果: 
+    return connect(region_name, **kw_params)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7231
+INFO:root:max position: 23937
+INFO:root:context_num: 346
+INFO:root:target_namespace: boto.boto<folder>.datapipeline<folder>.__init__<file>.connect_to_region<func>
+INFO:root:****************************************
+data 503:   0%|          | 0/128 [00:00<?, ?it/s]data 503:   8%|▊         | 10/128 [00:49<09:46,  4.97s/it]data 503:   8%|▊         | 10/128 [01:44<20:36, 10.48s/it]
+INFO:root:函数头: 
+def connect_to_region(region_name, **kw_params):
+
+INFO:root:目标函数体: 
+    from boto.regioninfo import connect
+    from boto.datapipeline.layer1 import DataPipelineConnection
+    return connect('datapipeline', region_name,
+                   connection_cls=DataPipelineConnection, **kw_params)
+
+INFO:root:生成结果: 
+    return get_region(region_name, connection_cls=DataPipelineConnection, **kw_params)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7304
+INFO:root:max position: 23945
+INFO:root:context_num: 451
+INFO:root:target_namespace: boto.boto<folder>.datapipeline<folder>.__init__<file>.connect_to_region<func>
+INFO:root:****************************************
+data 503:   0%|          | 0/128 [00:00<?, ?it/s]data 503:   8%|▊         | 10/128 [00:48<09:32,  4.85s/it]data 503:  16%|█▌        | 20/128 [01:43<09:23,  5.22s/it]data 503:  16%|█▌        | 20/128 [02:27<13:14,  7.36s/it]
+INFO:root:函数头: 
+def connect_to_region(region_name, **kw_params):
+
+INFO:root:目标函数体: 
+    from boto.regioninfo import connect
+    from boto.datapipeline.layer1 import DataPipelineConnection
+    return connect('datapipeline', region_name,
+                   connection_cls=DataPipelineConnection, **kw_params)
+
+INFO:root:生成结果: 
+    region = RegionInfo(name=region_name, continent=None)
+    return DataPipelineConnection(region=region, **kw_params)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7643
+INFO:root:max position: 24727
+INFO:root:context_num: 591
+INFO:root:target_namespace: boto.boto<folder>.datapipeline<folder>.__init__<file>.connect_to_region<func>
+INFO:root:****************************************
+INFO:root:已生成503条结果
+INFO:root:--------data 504--------
+data 504:   0%|          | 0/172 [00:00<?, ?it/s]data 504:   6%|▌         | 10/172 [00:24<06:35,  2.44s/it]data 504:  12%|█▏        | 20/172 [00:49<06:16,  2.48s/it]data 504:  17%|█▋        | 30/172 [01:16<06:03,  2.56s/it]data 504:  23%|██▎       | 40/172 [01:43<05:49,  2.65s/it]data 504:  29%|██▉       | 50/172 [02:13<05:38,  2.78s/it]data 504:  35%|███▍      | 60/172 [02:40<05:07,  2.75s/it]data 504:  35%|███▍      | 60/172 [02:51<05:19,  2.85s/it]
+INFO:root:函数头: 
+    def __str__(self):
+
+INFO:root:目标函数体: 
+        lines = []
+        kmax = max(len(k) for k in self.settings)
+        for k in sorted(self.settings):
+            v = self.settings[k].value
+            if callable(v):
+                v = "<{}()>".format(v.__qualname__)
+            lines.append("{k:{kmax}} = {v}".format(k=k, v=v, kmax=kmax))
+        return "\n".join(lines)
+
+INFO:root:生成结果: 
+        lines = []
+        for key, value in sorted(self.settings.items()):
+            if callable(value):
+                lines.append(f"<{key}>({value})")
+            else:
+                lines.append(f"{key:{len(max(self.settings.keys()))}} = {value}")
+        return '\n'.join(lines)
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6046
+INFO:root:max position: 16147
+INFO:root:context_num: 303
+INFO:root:target_namespace: gunicorn.gunicorn<folder>.config<file>.Config<class>.__str__<func>
+INFO:root:****************************************
+data 504:   0%|          | 0/172 [00:00<?, ?it/s]data 504:   6%|▌         | 10/172 [00:23<06:14,  2.31s/it]data 504:  12%|█▏        | 20/172 [00:49<06:17,  2.48s/it]data 504:  17%|█▋        | 30/172 [01:15<06:03,  2.56s/it]data 504:  23%|██▎       | 40/172 [01:42<05:44,  2.61s/it]data 504:  29%|██▉       | 50/172 [02:13<05:39,  2.78s/it]data 504:  29%|██▉       | 50/172 [02:33<06:13,  3.06s/it]
+INFO:root:函数头: 
+    def __str__(self):
+
+INFO:root:目标函数体: 
+        lines = []
+        kmax = max(len(k) for k in self.settings)
+        for k in sorted(self.settings):
+            v = self.settings[k].value
+            if callable(v):
+                v = "<{}()>".format(v.__qualname__)
+            lines.append("{k:{kmax}} = {v}".format(k=k, v=v, kmax=kmax))
+        return "\n".join(lines)
+
+INFO:root:生成结果: 
+        lines = []
+        key_max_length = max(len(str(key)) for key in self.settings.keys())
+        for key, value in self.settings.items():
+            lines.append(f"{key:{key_max_length}} = {value}")
+        return "\n".join(lines)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6335
+INFO:root:max position: 17233
+INFO:root:context_num: 300
+INFO:root:target_namespace: gunicorn.gunicorn<folder>.config<file>.Config<class>.__str__<func>
+INFO:root:****************************************
+data 504:   0%|          | 0/172 [00:00<?, ?it/s]data 504:   6%|▌         | 10/172 [00:23<06:26,  2.39s/it]data 504:  12%|█▏        | 20/172 [00:49<06:21,  2.51s/it]data 504:  17%|█▋        | 30/172 [01:15<06:01,  2.55s/it]data 504:  23%|██▎       | 40/172 [01:42<05:42,  2.60s/it]data 504:  29%|██▉       | 50/172 [02:09<05:19,  2.62s/it]data 504:  35%|███▍      | 60/172 [02:48<05:44,  3.07s/it]data 504:  41%|████      | 70/172 [03:24<05:31,  3.25s/it]data 504:  41%|████      | 70/172 [03:38<05:18,  3.12s/it]
+INFO:root:函数头: 
+    def __str__(self):
+
+INFO:root:目标函数体: 
+        lines = []
+        kmax = max(len(k) for k in self.settings)
+        for k in sorted(self.settings):
+            v = self.settings[k].value
+            if callable(v):
+                v = "<{}()>".format(v.__qualname__)
+            lines.append("{k:{kmax}} = {v}".format(k=k, v=v, kmax=kmax))
+        return "\n".join(lines)
+
+INFO:root:生成结果: 
+        lines = []
+        key_max_length = max(len(str(k)) for k in self.settings.keys())
+        for key, value in sorted(self.settings.items()):
+            if callable(value):
+                lines.append(f"<{key}>()")
+            else:
+                lines.append(f"{key:{key_max_length}} = {value}")
+        return '\n'.join(lines)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7108
+INFO:root:max position: 17559
+INFO:root:context_num: 325
+INFO:root:target_namespace: gunicorn.gunicorn<folder>.config<file>.Config<class>.__str__<func>
+INFO:root:****************************************
+INFO:root:--------data 505--------
+data 505:   0%|          | 0/128 [00:00<?, ?it/s]data 505:   8%|▊         | 10/128 [00:32<06:25,  3.26s/it]data 505:  16%|█▌        | 20/128 [01:05<05:52,  3.26s/it]data 505:  23%|██▎       | 30/128 [01:40<05:30,  3.37s/it]data 505:  23%|██▎       | 30/128 [01:50<05:59,  3.67s/it]
+INFO:root:函数头: 
+    def get(self, key, default=None):
+        # get does not use __getitem__ by default so we must override it as well
+
+INFO:root:目标函数体: 
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            return default
+
+INFO:root:生成结果: 
+        if key in self:
+            return super().get(key, default)
+        else:
+            self._mark_as_changed(key)
+            return default
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7774
+INFO:root:max position: 18258
+INFO:root:context_num: 226
+INFO:root:target_namespace: mongoengine.mongoengine<folder>.base<folder>.datastructures<file>.BaseDict<class>.get<func>
+INFO:root:****************************************
+data 505:   0%|          | 0/128 [00:00<?, ?it/s]data 505:   8%|▊         | 10/128 [00:31<06:12,  3.15s/it]data 505:  16%|█▌        | 20/128 [01:05<05:54,  3.28s/it]data 505:  16%|█▌        | 20/128 [01:12<06:28,  3.60s/it]
+INFO:root:函数头: 
+    def get(self, key, default=None):
+        # get does not use __getitem__ by default so we must override it as well
+
+INFO:root:目标函数体: 
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            return default
+
+INFO:root:生成结果: 
+        try:
+            return super().get(key, default)
+        except AttributeError:
+            return default
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7417
+INFO:root:max position: 17361
+INFO:root:context_num: 202
+INFO:root:target_namespace: mongoengine.mongoengine<folder>.base<folder>.datastructures<file>.BaseDict<class>.get<func>
+INFO:root:****************************************
+data 505:   0%|          | 0/128 [00:00<?, ?it/s]data 505:   8%|▊         | 10/128 [00:32<06:27,  3.28s/it]data 505:  16%|█▌        | 20/128 [01:06<05:58,  3.32s/it]data 505:  23%|██▎       | 30/128 [01:39<05:26,  3.33s/it]data 505:  23%|██▎       | 30/128 [02:08<07:01,  4.30s/it]
+INFO:root:函数头: 
+    def get(self, key, default=None):
+        # get does not use __getitem__ by default so we must override it as well
+
+INFO:root:目标函数体: 
+        try:
+            return self.__getitem__(key)
+        except KeyError:
+            return default
+
+INFO:root:生成结果: 
+        value = super().get(key, default)
+        if value is None and self._instance:
+            value = self._instance._get_document_value(key)
+        return value
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8129
+INFO:root:max position: 18602
+INFO:root:context_num: 247
+INFO:root:target_namespace: mongoengine.mongoengine<folder>.base<folder>.datastructures<file>.BaseDict<class>.get<func>
+INFO:root:****************************************
+INFO:root:已生成505条结果
+INFO:root:--------data 506--------
+data 506:   0%|          | 0/372 [00:00<?, ?it/s]data 506:   3%|▎         | 10/372 [00:24<15:03,  2.50s/it]data 506:   5%|▌         | 20/372 [00:51<15:01,  2.56s/it]data 506:   8%|▊         | 30/372 [01:18<15:07,  2.65s/it]data 506:  11%|█         | 40/372 [01:44<14:36,  2.64s/it]data 506:  13%|█▎        | 50/372 [02:10<13:56,  2.60s/it]data 506:  16%|█▌        | 60/372 [02:36<13:35,  2.62s/it]data 506:  19%|█▉        | 70/372 [03:04<13:30,  2.68s/it]data 506:  22%|██▏       | 80/372 [03:32<13:07,  2.70s/it]data 506:  24%|██▍       | 90/372 [04:00<12:55,  2.75s/it]data 506:  27%|██▋       | 100/372 [04:28<12:33,  2.77s/it]data 506:  30%|██▉       | 110/372 [04:55<11:54,  2.73s/it]data 506:  30%|██▉       | 110/372 [05:05<12:07,  2.78s/it]
+INFO:root:函数头: 
+def int_to_note(note_int, accidentals="#"):
+
+INFO:root:目标函数体: 
+    
+    from mingus.core.mt_exceptions import RangeError
+    from mingus.core.mt_exceptions import FormatError
+    if note_int not in range(12):
+        raise RangeError("int out of bounds (0-11): %d" % note_int)
+    ns = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    nf = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
+    if accidentals == "#":
+        return ns[note_int]
+    elif accidentals == "b":
+        return nf[note_int]
+    else:
+        raise FormatError("'%s' not valid as accidental" % accidentals)
+
+INFO:root:生成结果: 
+    if note_int < 0 or note_int > 11:
+        raise RangeError("Note integer must be in the range of 0-11")
+    accidentals = accidentals.upper()
+    notes = ["C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "B", "B#"]
+    return notes[note_int] + accidentals
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7891
+INFO:root:max position: 16002
+INFO:root:context_num: 363
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.notes<file>.int_to_note<func>
+INFO:root:****************************************
+data 506:   0%|          | 0/372 [00:00<?, ?it/s]data 506:   3%|▎         | 10/372 [00:25<15:06,  2.51s/it]data 506:   5%|▌         | 20/372 [00:51<15:14,  2.60s/it]data 506:   8%|▊         | 30/372 [01:20<15:31,  2.72s/it]data 506:  11%|█         | 40/372 [01:46<14:51,  2.69s/it]data 506:  13%|█▎        | 50/372 [02:11<14:05,  2.62s/it]data 506:  16%|█▌        | 60/372 [02:39<13:54,  2.67s/it]data 506:  19%|█▉        | 70/372 [03:07<13:38,  2.71s/it]data 506:  22%|██▏       | 80/372 [03:36<13:26,  2.76s/it]data 506:  24%|██▍       | 90/372 [04:04<13:09,  2.80s/it]data 506:  27%|██▋       | 100/372 [04:39<13:35,  3.00s/it]data 506:  30%|██▉       | 110/372 [05:09<13:05,  3.00s/it]data 506:  32%|███▏      | 120/372 [05:40<12:41,  3.02s/it]data 506:  35%|███▍      | 130/372 [06:07<11:48,  2.93s/it]data 506:  38%|███▊      | 140/372 [06:35<11:09,  2.89s/it]data 506:  40%|████      | 150/372 [07:01<10:27,  2.82s/it]data 506:  43%|████▎     | 160/372 [07:27<09:43,  2.75s/it]data 506:  46%|████▌     | 170/372 [07:56<09:21,  2.78s/it]data 506:  46%|████▌     | 170/372 [08:04<09:35,  2.85s/it]
+INFO:root:函数头: 
+def int_to_note(note_int, accidentals="#"):
+
+INFO:root:目标函数体: 
+    
+    from mingus.core.mt_exceptions import RangeError
+    from mingus.core.mt_exceptions import FormatError
+    if note_int not in range(12):
+        raise RangeError("int out of bounds (0-11): %d" % note_int)
+    ns = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    nf = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
+    if accidentals == "#":
+        return ns[note_int]
+    elif accidentals == "b":
+        return nf[note_int]
+    else:
+        raise FormatError("'%s' not valid as accidental" % accidentals)
+
+INFO:root:生成结果: 
+    if note_int not in range(12):
+        raise NoteFormatError("Note integer must be in range 0-11")
+    accidentals = accidentals.upper() if accidentals else "#"
+    note_dict = {"C": 0, "Db": 1, "D": 2, "Eb": 3, "E": 4, "F": 5, "Gb": 6, "G": 7, "Ab": 8, "A": 9, "Bb": 10, "B": 11}
+    note_name = list(note_dict.keys())[note_dict[note_int]]
+    if accidentals == "#":
+        note_name += accidentals
+    elif accidentals == "b":
+        note_name += accidentals
+    return note_name
+
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 8058
+INFO:root:max position: 18768
+INFO:root:context_num: 392
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.notes<file>.int_to_note<func>
+INFO:root:****************************************
+data 506:   0%|          | 0/372 [00:00<?, ?it/s]data 506:   3%|▎         | 10/372 [00:24<14:31,  2.41s/it]data 506:   5%|▌         | 20/372 [00:49<14:39,  2.50s/it]data 506:   8%|▊         | 30/372 [01:18<15:07,  2.65s/it]data 506:  11%|█         | 40/372 [01:44<14:44,  2.66s/it]data 506:  13%|█▎        | 50/372 [02:09<13:55,  2.59s/it]data 506:  16%|█▌        | 60/372 [02:37<13:48,  2.65s/it]data 506:  19%|█▉        | 70/372 [03:06<13:47,  2.74s/it]data 506:  22%|██▏       | 80/372 [03:34<13:27,  2.77s/it]data 506:  24%|██▍       | 90/372 [04:02<13:00,  2.77s/it]data 506:  27%|██▋       | 100/372 [04:28<12:19,  2.72s/it]data 506:  27%|██▋       | 100/372 [04:30<12:16,  2.71s/it]
+INFO:root:函数头: 
+def int_to_note(note_int, accidentals="#"):
+
+INFO:root:目标函数体: 
+    
+    from mingus.core.mt_exceptions import RangeError
+    from mingus.core.mt_exceptions import FormatError
+    if note_int not in range(12):
+        raise RangeError("int out of bounds (0-11): %d" % note_int)
+    ns = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    nf = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
+    if accidentals == "#":
+        return ns[note_int]
+    elif accidentals == "b":
+        return nf[note_int]
+    else:
+        raise FormatError("'%s' not valid as accidental" % accidentals)
+
+INFO:root:生成结果: 
+    if note_int < 0 or note_int > 11:
+        raise RangeError("Note integer must be in the range of 0-11")
+    acc = accidentals.upper() if accidentals else "#"
+    notes = ["C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab"]
+    return notes[note_int] + acc
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 7888
+INFO:root:max position: 16055
+INFO:root:context_num: 352
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.notes<file>.int_to_note<func>
+INFO:root:****************************************
+INFO:root:--------data 507--------
+data 507:   0%|          | 0/242 [00:00<?, ?it/s]data 507:   4%|▍         | 10/242 [00:20<07:57,  2.06s/it]data 507:   8%|▊         | 20/242 [00:44<08:18,  2.24s/it]data 507:  12%|█▏        | 30/242 [01:09<08:23,  2.37s/it]data 507:  17%|█▋        | 40/242 [01:34<08:09,  2.43s/it]data 507:  21%|██        | 50/242 [01:59<07:48,  2.44s/it]data 507:  25%|██▍       | 60/242 [02:23<07:25,  2.45s/it]data 507:  29%|██▉       | 70/242 [02:48<07:01,  2.45s/it]data 507:  33%|███▎      | 80/242 [03:11<06:27,  2.39s/it]data 507:  37%|███▋      | 90/242 [03:34<06:01,  2.38s/it]data 507:  41%|████▏     | 100/242 [03:56<05:30,  2.33s/it]data 507:  45%|████▌     | 110/242 [04:19<05:06,  2.32s/it]data 507:  50%|████▉     | 120/242 [04:42<04:39,  2.29s/it]data 507:  54%|█████▎    | 130/242 [05:04<04:16,  2.29s/it]data 507:  58%|█████▊    | 140/242 [05:28<03:55,  2.31s/it]data 507:  62%|██████▏   | 150/242 [05:52<03:34,  2.33s/it]data 507:  66%|██████▌   | 160/242 [06:15<03:11,  2.34s/it]data 507:  70%|███████   | 170/242 [06:39<02:48,  2.34s/it]data 507:  74%|███████▍  | 180/242 [07:02<02:25,  2.35s/it]data 507:  79%|███████▊  | 190/242 [07:27<02:04,  2.39s/it]data 507:  83%|████████▎ | 200/242 [07:54<01:44,  2.49s/it]data 507:  87%|████████▋ | 210/242 [08:19<01:19,  2.48s/it]data 507:  91%|█████████ | 220/242 [08:46<00:56,  2.55s/it]data 507:  95%|█████████▌| 230/242 [09:11<00:30,  2.53s/it]data 507:  99%|█████████▉| 240/242 [09:36<00:05,  2.52s/it]data 507:  99%|█████████▉| 240/242 [09:44<00:04,  2.44s/it]
+INFO:root:函数头: 
+    def get_config_schema(self):
+
+INFO:root:目标函数体: 
+        schema = super().get_config_schema()
+        schema["hostname"] = config_lib.Hostname()
+        schema["port"] = config_lib.Port()
+        schema["static_dir"] = config_lib.Deprecated()
+        schema["zeroconf"] = config_lib.String(optional=True)
+        schema["allowed_origins"] = config_lib.List(
+            optional=True,
+            unique=True,
+            subtype=config_lib.String(transformer=lambda x: x.lower()),
+        )
+        schema["csrf_protection"] = config_lib.Boolean(optional=True)
+        schema["default_app"] = config_lib.String(optional=True)
+        return schema
+
+INFO:root:生成结果: 
+        schema = super().get_config_schema()
+        schema.update(
+            {
+                "enabled": (
+                    config_lib.Boolean(),
+                    "Enable Mopidy HTTP backend.",
+                ),
+                "host": (
+                    config_lib.String(),
+                    "Hostname or IP address to bind the HTTP server to.",
+                ),
+                "port": (
+                    config_lib.Integer(),
+                    "Port number to bind the HTTP server to.",
+                ),
+                "zeroconf": (
+                    config_lib.Boolean(),
+                    "Enable Zeroconf advertising.",
+                ),
+                "zeroconf_name": (
+                    config_lib.String(),
+                    "Zeroconf service name.",
+                ),
+                "zeroconf_description": (
+                    config_lib.String(),
+                    "Zeroconf service description.",
+                ),
+                "zeroconf_icon": (
+                    config_lib.String(),
+                    "Zeroconf icon file path.",
+                ),
+                "zeroconf_icon_url": (
+                    config_lib.String(),
+                    "Zeroconf icon URL.",
+                ),
+                "zeroconf_icon_type": (
+                    config_lib.String(),
+                    "Zeroconf icon MIME type.",
+                ),
+                "zeroconf_icon_size": (
+                    config_lib.Integer(),
+                    "Zeroconf icon size.",
+                ),
+                "zeroconf_icon_encoding":
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5470
+INFO:root:max position: 10104
+INFO:root:context_num: 606
+INFO:root:target_namespace: Mopidy.mopidy<folder>.http<folder>.__init__<file>.Extension<class>.get_config_schema<func>
+INFO:root:****************************************
+data 507:   0%|          | 0/242 [00:00<?, ?it/s]data 507:   4%|▍         | 10/242 [00:20<08:04,  2.09s/it]data 507:   8%|▊         | 20/242 [00:44<08:23,  2.27s/it]data 507:  12%|█▏        | 30/242 [01:09<08:19,  2.36s/it]data 507:  17%|█▋        | 40/242 [01:34<08:04,  2.40s/it]data 507:  21%|██        | 50/242 [01:58<07:43,  2.42s/it]data 507:  25%|██▍       | 60/242 [02:22<07:20,  2.42s/it]data 507:  29%|██▉       | 70/242 [02:45<06:46,  2.36s/it]data 507:  33%|███▎      | 80/242 [03:09<06:23,  2.37s/it]data 507:  37%|███▋      | 90/242 [03:31<05:54,  2.33s/it]data 507:  41%|████▏     | 100/242 [03:53<05:27,  2.30s/it]data 507:  45%|████▌     | 110/242 [04:17<05:06,  2.32s/it]data 507:  50%|████▉     | 120/242 [04:39<04:39,  2.29s/it]data 507:  54%|█████▎    | 130/242 [05:03<04:20,  2.32s/it]data 507:  58%|█████▊    | 140/242 [05:27<03:57,  2.33s/it]data 507:  62%|██████▏   | 150/242 [05:51<03:36,  2.36s/it]data 507:  66%|██████▌   | 160/242 [06:19<03:24,  2.49s/it]data 507:  70%|███████   | 170/242 [06:43<02:57,  2.46s/it]data 507:  74%|███████▍  | 180/242 [07:07<02:31,  2.44s/it]data 507:  79%|███████▊  | 190/242 [07:30<02:05,  2.41s/it]data 507:  83%|████████▎ | 200/242 [07:55<01:41,  2.43s/it]data 507:  87%|████████▋ | 210/242 [08:19<01:17,  2.43s/it]data 507:  91%|█████████ | 220/242 [08:45<00:54,  2.47s/it]data 507:  95%|█████████▌| 230/242 [09:10<00:29,  2.49s/it]data 507:  99%|█████████▉| 240/242 [09:36<00:05,  2.50s/it]data 507:  99%|█████████▉| 240/242 [09:43<00:04,  2.43s/it]
+INFO:root:函数头: 
+    def get_config_schema(self):
+
+INFO:root:目标函数体: 
+        schema = super().get_config_schema()
+        schema["hostname"] = config_lib.Hostname()
+        schema["port"] = config_lib.Port()
+        schema["static_dir"] = config_lib.Deprecated()
+        schema["zeroconf"] = config_lib.String(optional=True)
+        schema["allowed_origins"] = config_lib.List(
+            optional=True,
+            unique=True,
+            subtype=config_lib.String(transformer=lambda x: x.lower()),
+        )
+        schema["csrf_protection"] = config_lib.Boolean(optional=True)
+        schema["default_app"] = config_lib.String(optional=True)
+        return schema
+
+INFO:root:生成结果: 
+        schema = super().get_config_schema()
+        schema.update(
+            {
+                "enabled": config_lib.Boolean(True),
+                "enabled_backends": config_lib.List(
+                    config_lib.String(),
+                    description="List of backends to enable",
+                ),
+                "enabled_frontends": config_lib.List(
+                    config_lib.String(),
+                    description="List of frontends to enable",
+                ),
+                "zeroconf": config_lib Dict(
+                    config_lib.String(),
+                    description="Zeroconf service configuration",
+                ),
+                "zeroconf_name": config_lib.String(
+                    default="M mopidy",
+                    description="Zeroconf service name",
+                ),
+                "zeroconf_port": config_lib.Integer(
+                    default=5 Million,
+                    description="Zeroconf service port",
+                ),
+                "zeroconf_ip": config_lib.String(
+                    default="auto",
+                    description="Zeroconf service IP address",
+                ),
+                "zeroconf_description": config_lib.String(
+                    default="Mopidy music server",
+                    description="Zeroconf service description",
+                ),
+                "zeroconf manufacturer": config_lib.String(
+                    default="Mopidy",
+                    description="Zeroconf service manufacturer",
+                ),
+                "zeroconf model
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5864
+INFO:root:max position: 10386
+INFO:root:context_num: 602
+INFO:root:target_namespace: Mopidy.mopidy<folder>.http<folder>.__init__<file>.Extension<class>.get_config_schema<func>
+INFO:root:****************************************
+data 507:   0%|          | 0/242 [00:00<?, ?it/s]data 507:   4%|▍         | 10/242 [00:21<08:13,  2.13s/it]data 507:   8%|▊         | 20/242 [00:45<08:26,  2.28s/it]data 507:  12%|█▏        | 30/242 [01:10<08:24,  2.38s/it]data 507:  17%|█▋        | 40/242 [01:34<08:07,  2.41s/it]data 507:  21%|██        | 50/242 [02:00<07:55,  2.48s/it]data 507:  25%|██▍       | 60/242 [02:25<07:33,  2.49s/it]data 507:  29%|██▉       | 70/242 [02:50<07:06,  2.48s/it]data 507:  33%|███▎      | 80/242 [03:12<06:27,  2.39s/it]data 507:  37%|███▋      | 90/242 [03:35<05:57,  2.35s/it]data 507:  41%|████▏     | 100/242 [03:58<05:34,  2.35s/it]data 507:  45%|████▌     | 110/242 [04:21<05:06,  2.32s/it]data 507:  50%|████▉     | 120/242 [04:43<04:40,  2.30s/it]data 507:  54%|█████▎    | 130/242 [05:07<04:19,  2.32s/it]data 507:  58%|█████▊    | 140/242 [05:30<03:57,  2.33s/it]data 507:  62%|██████▏   | 150/242 [05:55<03:38,  2.38s/it]data 507:  66%|██████▌   | 160/242 [06:20<03:16,  2.40s/it]data 507:  70%|███████   | 170/242 [06:44<02:52,  2.40s/it]data 507:  74%|███████▍  | 180/242 [07:08<02:28,  2.40s/it]data 507:  79%|███████▊  | 190/242 [07:32<02:05,  2.41s/it]data 507:  83%|████████▎ | 200/242 [07:57<01:42,  2.44s/it]data 507:  87%|████████▋ | 210/242 [08:23<01:19,  2.47s/it]data 507:  91%|█████████ | 220/242 [08:47<00:53,  2.45s/it]data 507:  95%|█████████▌| 230/242 [09:12<00:29,  2.47s/it]data 507:  99%|█████████▉| 240/242 [09:37<00:04,  2.47s/it]data 507:  99%|█████████▉| 240/242 [09:44<00:04,  2.44s/it]
+INFO:root:函数头: 
+    def get_config_schema(self):
+
+INFO:root:目标函数体: 
+        schema = super().get_config_schema()
+        schema["hostname"] = config_lib.Hostname()
+        schema["port"] = config_lib.Port()
+        schema["static_dir"] = config_lib.Deprecated()
+        schema["zeroconf"] = config_lib.String(optional=True)
+        schema["allowed_origins"] = config_lib.List(
+            optional=True,
+            unique=True,
+            subtype=config_lib.String(transformer=lambda x: x.lower()),
+        )
+        schema["csrf_protection"] = config_lib.Boolean(optional=True)
+        schema["default_app"] = config_lib.String(optional=True)
+        return schema
+
+INFO:root:生成结果: 
+        schema = super().get_config_schema()
+        schema.update(
+            {"hostname": {"type": "string", "default": "localhost"}},
+            {"port": {"type": "integer", "default": 6666}},
+            {"zeroconf": {"type": "string", "default": None}},
+            {"zeroconf_prefix": {"type": "string", "default": "M mopidy"}},
+            {"zeroconf_ttl": {"type": "integer", "default": 60}},
+            {"zeroconf_re advertise_interval": {"type": "integer", "default": 60}},
+            {"zeroconf_re advertise_interval_max": {"type": "integer", "default": 3600}},
+            {"zeroconf_re advertise_interval_min": {"type": "integer", "default": 60}},
+            {"zeroconf_re advertise_interval_step": {"type": "integer", "default": 60}},
+            {"zeroconf_re advertise_interval_max": {"type": "integer", "default": 3600}},
+            {"zeroconf_re advertise_interval_min": {"type": "integer", "default": 60}},
+            {"zeroconf
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 5404
+INFO:root:max position: 10430
+INFO:root:context_num: 606
+INFO:root:target_namespace: Mopidy.mopidy<folder>.http<folder>.__init__<file>.Extension<class>.get_config_schema<func>
+INFO:root:****************************************
+INFO:root:已生成507条结果
+INFO:root:--------data 508--------
+data 508:   0%|          | 0/128 [00:00<?, ?it/s]data 508:   8%|▊         | 10/128 [00:32<06:28,  3.29s/it]data 508:  16%|█▌        | 20/128 [01:05<05:54,  3.28s/it]data 508:  16%|█▌        | 20/128 [01:22<07:25,  4.13s/it]
+INFO:root:函数头: 
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+
+INFO:root:目标函数体: 
+    
+    codegen = TrackingCodeGenerator(ast.environment)  # type: ignore
+    codegen.visit(ast)
+    return codegen.undeclared_identifiers
+
+INFO:root:生成结果: 
+    tracker = TrackingCodeGenerator(ast.environment)
+    tracker.visit(ast)
+    return tracker.undeclared_identifiers
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6306
+INFO:root:max position: 18720
+INFO:root:context_num: 222
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.meta<file>.find_undeclared_variables<func>
+INFO:root:****************************************
+data 508:   0%|          | 0/128 [00:00<?, ?it/s]data 508:   8%|▊         | 10/128 [00:31<06:08,  3.12s/it]data 508:  16%|█▌        | 20/128 [01:03<05:42,  3.17s/it]data 508:  23%|██▎       | 30/128 [01:35<05:12,  3.18s/it]data 508:  31%|███▏      | 40/128 [02:10<04:51,  3.31s/it]data 508:  39%|███▉      | 50/128 [02:44<04:21,  3.36s/it]data 508:  47%|████▋     | 60/128 [03:19<03:50,  3.38s/it]data 508:  55%|█████▍    | 70/128 [03:53<03:17,  3.41s/it]data 508:  62%|██████▎   | 80/128 [04:28<02:44,  3.42s/it]data 508:  70%|███████   | 90/128 [05:02<02:09,  3.42s/it]data 508:  78%|███████▊  | 100/128 [05:36<01:36,  3.43s/it]data 508:  86%|████████▌ | 110/128 [06:10<01:01,  3.42s/it]data 508:  94%|█████████▍| 120/128 [06:43<00:27,  3.39s/it]data 508:  94%|█████████▍| 120/128 [07:12<00:28,  3.61s/it]
+INFO:root:函数头: 
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+
+INFO:root:目标函数体: 
+    
+    codegen = TrackingCodeGenerator(ast.environment)  # type: ignore
+    codegen.visit(ast)
+    return codegen.undeclared_identifiers
+
+INFO:root:生成结果: 
+    visited = set()
+    stack = [ast]
+
+    while stack:
+        node = stack.pop()
+
+        if isinstance(node, nodes.Variable):
+            var_name = node.name
+            if var_name not in visited:
+                stack.append(node)
+                visited.add(var_name)
+
+        elif isinstance(node, nodes.Call):
+            for arg in node.args:
+                stack.append(arg)
+
+        elif isinstance(node, nodes.Filter):
+            stack.append(node.filter)
+
+        elif isinstance(node, nodes.If):
+            stack.append(node.test)
+            stack.append(node.body)
+            stack.append(node else_)
+            stack.append(node elif_)
+            stack.append(node else_if_)
+
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6490
+INFO:root:max position: 18824
+INFO:root:context_num: 354
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.meta<file>.find_undeclared_variables<func>
+INFO:root:****************************************
+data 508:   0%|          | 0/128 [00:00<?, ?it/s]data 508:   8%|▊         | 10/128 [00:29<05:45,  2.93s/it]data 508:  16%|█▌        | 20/128 [01:01<05:34,  3.10s/it]data 508:  23%|██▎       | 30/128 [01:34<05:14,  3.21s/it]data 508:  31%|███▏      | 40/128 [02:09<04:49,  3.29s/it]data 508:  39%|███▉      | 50/128 [02:43<04:22,  3.36s/it]data 508:  47%|████▋     | 60/128 [03:21<03:56,  3.48s/it]data 508:  55%|█████▍    | 70/128 [03:55<03:21,  3.48s/it]data 508:  62%|██████▎   | 80/128 [04:28<02:44,  3.43s/it]data 508:  70%|███████   | 90/128 [05:03<02:10,  3.43s/it]data 508:  78%|███████▊  | 100/128 [05:37<01:35,  3.42s/it]data 508:  86%|████████▌ | 110/128 [06:11<01:01,  3.41s/it]data 508:  94%|█████████▍| 120/128 [06:47<00:27,  3.47s/it]data 508:  94%|█████████▍| 120/128 [07:17<00:29,  3.64s/it]
+INFO:root:函数头: 
+def find_undeclared_variables(ast: nodes.Template) -> t.Set[str]:
+
+INFO:root:目标函数体: 
+    
+    codegen = TrackingCodeGenerator(ast.environment)  # type: ignore
+    codegen.visit(ast)
+    return codegen.undeclared_identifiers
+
+INFO:root:生成结果: 
+    visited = set()
+    stack = [ast]
+
+    while stack:
+        node = stack.pop()
+        if node in visited:
+            continue
+        visited.add(node)
+
+        if isinstance(node, nodes.Variable):
+            if node.name not in ast.environment.globals and node.name not in ast.environment locals():
+                yield node.name
+        elif isinstance(node, nodes.Filter):
+            yield from find_undeclared_variables(node.expr)
+        elif isinstance(node, nodes.CallBlock):
+            yield from find_undeclared_variables(node.body)
+        elif isinstance(node, nodes.BlockReference):
+            yield from find_undeclared_variables(node.block)
+        elif
+
+INFO:root:----------------------------------------
+INFO:root:kv length: 6761
+INFO:root:max position: 18824
+INFO:root:context_num: 362
+INFO:root:target_namespace: Jinja2.src<folder>.jinja2<folder>.meta<file>.find_undeclared_variables<func>
+INFO:root:****************************************
+INFO:root:--------data 509--------
+data 509:   0%|          | 0/512 [00:00<?, ?it/s]data 509:   2%|▏         | 10/512 [00:40<34:13,  4.09s/it]data 509:   4%|▍         | 20/512 [01:20<32:56,  4.02s/it]data 509:   6%|▌         | 30/512 [01:59<31:52,  3.97s/it]data 509:   8%|▊         | 40/512 [02:39<31:08,  3.96s/it]data 509:  10%|▉         | 50/512 [03:19<30:37,  3.98s/it]data 509:  12%|█▏        | 60/512 [03:59<30:00,  3.98s/it]data 509:  14%|█▎        | 70/512 [04:39<29:23,  3.99s/it]data 509:  16%|█▌        | 80/512 [05:18<28:29,  3.96s/it]data 509:  18%|█▊        | 90/512 [05:58<27:55,  3.97s/it]data 509:  20%|█▉        | 100/512 [06:38<27:19,  3.98s/it]data 509:  21%|██▏       | 110/512 [07:18<26:44,  3.99s/it]data 509:  23%|██▎       | 120/512 [07:58<26:09,  4.00s/it]data 509:  25%|██▌       | 130/512 [08:37<25:18,  3.98s/it]data 509:  27%|██▋       | 140/512 [09:16<24:26,  3.94s/it]data 509:  29%|██▉       | 150/512 [09:54<23:30,  3.90s/it]data 509:  31%|███▏      | 160/512 [10:33<22:53,  3.90s/it]data 509:  33%|███▎      | 170/512 [11:10<22:00,  3.86s/it]data 509:  35%|███▌      | 180/512 [11:48<21:07,  3.82s/it]data 509:  37%|███▋      | 190/512 [12:24<20:08,  3.75s/it]

@@ -1,0 +1,48 @@
+INFO:root:time: 2025年 03月 15日 星期六 07:07:07 CST
+
+INFO:root:pid: 2803571
+INFO:root:seed: 505
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_1.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.11s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.58it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.42it/s]
+INFO:root:--------data 506--------
+data 506:   0%|          | 0/372 [00:00<?, ?it/s]data 506:   3%|▎         | 10/372 [00:22<13:44,  2.28s/it]data 506:   5%|▌         | 20/372 [00:46<13:44,  2.34s/it]data 506:   8%|▊         | 30/372 [01:09<13:15,  2.33s/it]data 506:  11%|█         | 40/372 [01:32<12:47,  2.31s/it]data 506:  13%|█▎        | 50/372 [01:55<12:26,  2.32s/it]data 506:  16%|█▌        | 60/372 [02:20<12:22,  2.38s/it]data 506:  19%|█▉        | 70/372 [02:46<12:16,  2.44s/it]data 506:  22%|██▏       | 80/372 [03:13<12:18,  2.53s/it]data 506:  24%|██▍       | 90/372 [03:42<12:22,  2.63s/it]data 506:  27%|██▋       | 100/372 [04:10<12:11,  2.69s/it]data 506:  30%|██▉       | 110/372 [04:38<11:54,  2.73s/it]data 506:  32%|███▏      | 120/372 [05:07<11:40,  2.78s/it]data 506:  35%|███▍      | 130/372 [05:32<10:48,  2.68s/it]data 506:  35%|███▍      | 130/372 [05:38<10:30,  2.61s/it]
+INFO:root:函数头: 
+def int_to_note(note_int, accidentals="#"):
+
+INFO:root:目标函数体: 
+    
+    from mingus.core.mt_exceptions import RangeError
+    from mingus.core.mt_exceptions import FormatError
+    if note_int not in range(12):
+        raise RangeError("int out of bounds (0-11): %d" % note_int)
+    ns = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+    nf = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
+    if accidentals == "#":
+        return ns[note_int]
+    elif accidentals == "b":
+        return nf[note_int]
+    else:
+        raise FormatError("'%s' not valid as accidental" % accidentals)
+
+INFO:root:生成结果: 
+    if not isinstance(note_int, int) or note_int not in range(12):
+        raise RangeError("Note integer must be in range 0-11")
+    accidentals = accidentals.upper()
+    if accidentals not in ["#", "Db"]:
+        accidentals = "#"
+    notes = ["C", "C#", "Db", "D", "D#", "Eb", "E", "F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "B", "B#"]
+    return notes[note_int] + accidentals
+
+
+
+
+INFO:root:----------------------------------------
+INFO:root:max length: 7743
+INFO:root:max position: 10553
+INFO:root:context_num: 347
+INFO:root:target_namespace: mingus.mingus<folder>.core<folder>.notes<file>.int_to_note<func>
+INFO:root:****************************************
+data 506:   0%|          | 0/372 [00:00<?, ?it/s]data 506:   3%|▎         | 10/372 [00:22<13:30,  2.24s/it]data 506:   5%|▌         | 20/372 [00:45<13:29,  2.30s/it]data 506:   8%|▊         | 30/372 [01:11<13:41,  2.40s/it]data 506:  11%|█         | 40/372 [01:34<13:16,  2.40s/it]data 506:  13%|█▎        | 50/372 [02:00<13:15,  2.47s/it]data 506:  16%|█▌        | 60/372 [02:26<13:02,  2.51s/it]data 506:  19%|█▉        | 70/372 [02:52<12:39,  2.51s/it]data 506:  22%|██▏       | 80/372 [03:19<12:36,  2.59s/it]data 506:  24%|██▍       | 90/372 [03:47<12:29,  2.66s/it]data 506:  27%|██▋       | 100/372 [04:15<12:15,  2.71s/it]data 506:  30%|██▉       | 110/372 [04:43<11:56,  2.73s/it]

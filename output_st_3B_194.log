@@ -1,0 +1,19 @@
+INFO:root:time: 2025年 03月 14日 星期五 10:52:07 CST
+
+INFO:root:pid: 2853532
+INFO:root:seed: 135
+INFO:root:model: Qwen2.5-Coder-3B-Instruct
+INFO:root:generate: Structure
+INFO:root:result_path: /home/qikahh/projects/Structured_Code_Context/Datasets/DevEval/Qwen2.5-Coder-3B-Instruct/result_st_0.json
+INFO:accelerate.utils.modeling:We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.47it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.31it/s]
+INFO:root:--------data 194--------
+data 194:   0%|          | 0/512 [00:00<?, ?it/s]data 194:   0%|          | 0/512 [00:01<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/qikahh/projects/Structured_Code_Context/test_hierarchical_model.py", line 286, in <module>
+    info_dict = hierarchical_model.generate_step(target_namespace=target_namespace,input_ids=input_ids, prefix_kv=prefix_kv, init_context_nodes=init_context)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/qikahh/projects/Structured_Code_Context/utils/hierarchical_model.py", line 1027, in generate_step
+    encode_part.extend(node_list)
+    ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'encode_part' where it is not associated with a value
